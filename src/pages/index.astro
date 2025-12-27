@@ -1,0 +1,70 @@
+---
+// This is the "frontmatter" - runs before the page loads
+import '../styles/global.css';
+const siteTitle = "H2E Framework";
+---
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{siteTitle}</title>
+</head>
+<body class="bg-black text-gray-200 font-mono">
+    
+    <!-- Header -->
+    <header class="border-b border-gray-800 p-6">
+        <h1 class="text-2xl text-green-400">// {siteTitle}</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto p-6 mt-12">
+        
+        <!-- Terminal Window -->
+        <div class="border border-gray-700 rounded-lg overflow-hidden">
+            
+            <!-- Terminal Header -->
+            <div class="bg-gray-900 px-4 py-2 flex items-center space-x-2">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <span class="text-gray-500 text-sm ml-4">Terminal 13.7</span>
+            </div>
+
+            <!-- Terminal Content -->
+            <div class="bg-black p-6 space-y-4">
+                <p class="text-green-400">
+                    <span class="text-gray-500">$</span> access /system/about
+                </p>
+                
+                <div class="pl-4 space-y-2 text-gray-300">
+                    <p class="text-xl mb-4">What if existence is simply a program?</p>
+                    <p>In a universe ruled by divine logic, where PreBorn await their fate inside a cosmic Framework, <span class="text-green-400">desmondJohn</span> learns that his mother's imminent suicide will erase him.</p>
+                    <p class="mt-4">The <span class="text-cyan-400">Praetores</span>, enforcers of fate and code, have already determined the outcome.</p>
+                </div>
+
+                <p class="text-green-400 mt-6">
+                    <span class="text-gray-500">$</span> <span class="animate-pulse">_</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-12 text-center">
+            <p class="text-gray-400 mb-4">System Status: <span class="text-yellow-400">Development</span></p>
+            <button class="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded font-bold transition">
+                ACCESS FRAMEWORK
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 mt-24 p-6 text-center text-gray-600 text-sm">
+        <p>© 2025 H2E Framework. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
