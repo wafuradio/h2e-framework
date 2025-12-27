@@ -1,0 +1,1008 @@
+---
+// Terminal 13.7 - Main Story Interface
+const siteTitle = "H2E Framework - Terminal 13.7";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{siteTitle}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff41;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Boot Sequence */
+        #boot-sequence {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        #boot-sequence.hidden {
+            display: none;
+        }
+        
+        .boot-text {
+            font-size: 14px;
+            margin: 5px 0;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+        
+        .boot-text:nth-child(1) { animation-delay: 0.5s; }
+        .boot-text:nth-child(2) { animation-delay: 1s; }
+        .boot-text:nth-child(3) { animation-delay: 1.5s; }
+        .boot-text:nth-child(4) { animation-delay: 2s; }
+        .boot-text:nth-child(5) { animation-delay: 2.5s; }
+        .boot-text:nth-child(6) { animation-delay: 3s; }
+        .boot-text:nth-child(7) { animation-delay: 3.5s; }
+        
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            border: 1px solid #00ff41;
+            margin: 20px 0;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards 4s;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #00ff41;
+            width: 0%;
+            animation: fillProgress 2s forwards 4s;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        @keyframes fillProgress {
+            to { width: 100%; }
+        }
+        
+        /* Main Terminal */
+        #main-terminal {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        #main-terminal.active {
+            display: block;
+        }
+        
+        /* Header */
+        .terminal-header {
+            border: 1px solid #00ff41;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: rgba(0, 255, 65, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .terminal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .terminal-title {
+            font-size: 20px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .terminal-status {
+            font-size: 12px;
+            color: #ff4444;
+        }
+        
+        /* Priority Alert */
+        #priority-alert {
+            border: 2px solid #ff4444;
+            padding: 20px;
+            margin: 20px 0;
+            background: rgba(255, 68, 68, 0.05);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { border-color: #ff4444; }
+            50% { border-color: #ff8888; }
+        }
+        
+        .alert-title {
+            font-size: 18px;
+            color: #ff4444;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .preborn-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .preborn-item {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #00ff41;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .preborn-item:hover {
+            background: rgba(0, 255, 65, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .alert-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #00ff41;
+            background: transparent;
+            color: #00ff41;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+        
+        .btn:hover {
+            background: rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+        
+        /* Main Interface */
+        .terminal-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 968px) {
+            .terminal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Monitors (Story) */
+        .monitors-section {
+            border: 1px solid #00ff41;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .section-title {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #00ff41;
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 5px;
+        }
+        
+        .chaplet-list {
+            list-style: none;
+        }
+        
+        .chaplet-item {
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #00ff41;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .chaplet-item:hover {
+            background: rgba(0, 255, 65, 0.1);
+            transform: translateX(3px);
+        }
+        
+        .chaplet-item.glitch {
+            animation: glitch 0.3s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .chaplet-name {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .chaplet-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 255, 65, 0.2);
+            margin-top: 8px;
+        }
+        
+        .chaplet-progress-fill {
+            height: 100%;
+            background: #00ff41;
+            width: 0%;
+        }
+        
+        .chaplet-status {
+            font-size: 10px;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        /* Object Registry */
+        .registry-section {
+            border: 1px solid #00ff41;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .registry-item {
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 3px solid #00ff41;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .registry-item:hover {
+            background: rgba(0, 255, 65, 0.1);
+            border-left-width: 6px;
+        }
+        
+        .registry-item.deprecated {
+            border-left-color: #ff4444;
+            color: #ff4444;
+        }
+        
+        .registry-item.anomaly {
+            border-left-color: #ffaa00;
+            color: #ffaa00;
+        }
+        
+        .registry-name {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        
+        .registry-class {
+            font-size: 10px;
+            color: #888;
+            margin-top: 3px;
+        }
+        
+        /* System Logs */
+        .system-logs {
+            border: 1px solid #00ff41;
+            padding: 15px;
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            font-size: 11px;
+        }
+        
+        .log-entry {
+            margin: 5px 0;
+            opacity: 0.7;
+            cursor: pointer;
+        }
+        
+        .log-entry:hover {
+            opacity: 1;
+            color: #00ff41;
+        }
+        
+        /* Ghost Feed Background */
+        .ghost-feed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        
+        .ghost-image {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .ghost-image:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .ghost-image:nth-child(2) {
+            top: 50%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+        
+        .ghost-image:nth-child(3) {
+            bottom: 10%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); opacity: 0.03; }
+            50% { transform: translate(20px, -20px); opacity: 0.05; }
+        }
+        
+        /* Modal for Character/Story View */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+        
+        .modal.active {
+            display: block;
+        }
+        
+        .modal-content {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid #00ff41;
+            padding: 30px;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        .modal-close:hover {
+            background: rgba(0, 255, 65, 0.2);
+        }
+        
+        /* Story Content Styling */
+        .story-content {
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        .story-content h2 {
+            color: #00ff41;
+            margin: 30px 0 15px 0;
+            font-size: 18px;
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 10px;
+        }
+        
+        .story-content p {
+            margin: 15px 0;
+            text-indent: 2em;
+        }
+        
+        .story-content em {
+            color: #888;
+            font-style: italic;
+        }
+        
+        /* Character Profile */
+        .character-profile {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        @media (max-width: 768px) {
+            .character-profile {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .character-image {
+            width: 100%;
+            border: 1px solid #00ff41;
+            padding: 10px;
+            background: #000;
+        }
+        
+        .character-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .character-details {
+            font-size: 13px;
+        }
+        
+        .character-details h3 {
+            color: #00ff41;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 5px;
+        }
+        
+        .character-details p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        
+        .character-attribute {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        
+        .attribute-label {
+            color: #888;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        
+        .attribute-value {
+            color: #00ff41;
+        }
+        
+        /* Glitch Text Effects */
+        .glitch-text {
+            position: relative;
+            animation: glitch-text 1s infinite;
+        }
+        
+        @keyframes glitch-text {
+            0% { opacity: 1; }
+            49% { opacity: 1; }
+            50% { opacity: 0.4; }
+            51% { opacity: 1; }
+            100% { opacity: 1; }
+        }
+        
+        /* Hidden Terminal Input */
+        #hidden-terminal {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            border-top: 1px solid #00ff41;
+            padding: 10px 20px;
+            display: none;
+        }
+        
+        #hidden-terminal.active {
+            display: block;
+        }
+        
+        #terminal-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #00ff41;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .terminal-output {
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- Boot Sequence -->
+    <div id="boot-sequence">
+        <div class="boot-text">H2E FRAMEWORK v3.2</div>
+        <div class="boot-text">TERMINAL 13.7 // I/O BORDER NODE</div>
+        <div class="boot-text">&nbsp;</div>
+        <div class="boot-text">> Authenticating...</div>
+        <div class="boot-text">> Access: GRANTED</div>
+        <div class="boot-text">> WARNING: Ghost relay detected</div>
+        <div class="boot-text">> Initializing feed...</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <!-- Ghost Feed Background -->
+    <div class="ghost-feed">
+        <div class="ghost-image" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%2300ff41%22 opacity=%220.1%22 width=%22200%22 height=%22200%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22monospace%22 font-size=%2220%22 fill=%22%2300ff41%22 opacity=%220.3%22 text-anchor=%22middle%22>ELLA</text></svg>');"></div>
+        <div class="ghost-image" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%2300ff41%22 opacity=%220.1%22 width=%22200%22 height=%22200%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22monospace%22 font-size=%2220%22 fill=%22%2300ff41%22 opacity=%220.3%22 text-anchor=%22middle%22>GROVE</text></svg>');"></div>
+        <div class="ghost-image" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%2300ff41%22 opacity=%220.1%22 width=%22200%22 height=%22200%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22monospace%22 font-size=%2220%22 fill=%22%2300ff41%22 opacity=%220.3%22 text-anchor=%22middle%22>VAULT</text></svg>');"></div>
+    </div>
+
+    <!-- Main Terminal -->
+    <div id="main-terminal">
+        <!-- Header -->
+        <div class="terminal-header">
+            <div class="terminal-title">H2E Framework - Terminal 13.7</div>
+            <div class="terminal-status">STATUS: COMPROMISED // GHOST RELAY ACTIVE // LB 3.2 DEPLOYED</div>
+        </div>
+
+        <!-- Priority Alert -->
+        <div id="priority-alert">
+            <div class="alert-title">⚠ PRIORITY ALERT ⚠</div>
+            <div style="text-align: center; margin-bottom: 15px; font-size: 12px;">
+                3 PREBORN ENTITIES DETECTED<br>
+                STATUS: UNAUTHORIZED TRAVERSAL
+            </div>
+            <ul class="preborn-list">
+                <li class="preborn-item" onclick="viewCharacter('desmondJohn')">
+                    <span>> desmondJohn</span>
+                    <span style="color: #888; font-size: 11px;">[VIEW PROFILE]</span>
+                </li>
+                <li class="preborn-item" onclick="viewCharacter('jessMartin')">
+                    <span>> jessMartin</span>
+                    <span style="color: #888; font-size: 11px;">[VIEW PROFILE]</span>
+                </li>
+                <li class="preborn-item" onclick="viewCharacter('isidoreAbraham')">
+                    <span>> isidoreAbraham</span>
+                    <span style="color: #888; font-size: 11px;">[VIEW PROFILE]</span>
+                </li>
+            </ul>
+            <div class="alert-buttons">
+                <button class="btn" onclick="trackSignal()">Track Their Signal</button>
+                <button class="btn" onclick="accessFullLogs()">Access Full Logs</button>
+            </div>
+        </div>
+
+        <!-- Main Interface (Hidden Initially) -->
+        <div id="full-interface" style="display: none;">
+            <div class="terminal-grid">
+                <!-- Left: Story Monitors -->
+                <div class="monitors-section">
+                    <div class="section-title">// STORY ARCHIVES</div>
+                    <ul class="chaplet-list">
+                        <li class="chaplet-item" onclick="viewChaplet('prologue')">
+                            <div class="chaplet-name">PROLOGUE: Confessions</div>
+                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
+                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        </li>
+                        <li class="chaplet-item" onclick="viewChaplet('chaplet1')">
+                            <div class="chaplet-name">CHAPLET 1: The Grit of I/O</div>
+                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
+                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        </li>
+                        <li class="chaplet-item" onclick="viewChaplet('chaplet2')">
+                            <div class="chaplet-name">CHAPLET 2: AssignareFatum()</div>
+                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
+                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        </li>
+                        <li class="chaplet-item" onclick="viewChaplet('chaplet3')">
+                            <div class="chaplet-name">CHAPLET 3: The Realm Beyond</div>
+                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
+                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        </li>
+                        <li class="chaplet-item glitch">
+                            <div class="chaplet-name">CHAPLET 3.5: <span class="glitch-text">INSERTION</span></div>
+                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
+                            <div class="chaplet-status" style="color: #ff4444;">STATUS: [CORRUPTED]</div>
+                        </li>
+                        <li class="chaplet-item" onclick="viewChaplet('chaplet4')">
+                            <div class="chaplet-name">CHAPLET 4: Presence in the Shadows</div>
+                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
+                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        </li>
+                        <li class="chaplet-item" onclick="viewChaplet('chaplet5')">
+                            <div class="chaplet-name">CHAPLET 5: Journey to the Grove</div>
+                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
+                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: Object Registry -->
+                <div class="registry-section">
+                    <div class="section-title">// OBJECT REGISTRY</div>
+                    <div class="registry-item" onclick="viewCharacter('trinus')">
+                        <div class="registry-name">> trinus</div>
+                        <div class="registry-class">[FUNCTIONARY]</div>
+                    </div>
+                    <div class="registry-item deprecated" onclick="viewCharacter('foedus')">
+                        <div class="registry-name">> foedus</div>
+                        <div class="registry-class">[DEPRECATED - ACCESS RESTRICTED]</div>
+                    </div>
+                    <div class="registry-item anomaly" onclick="viewCharacter('theLady')">
+                        <div class="registry-name">> theLady</div>
+                        <div class="registry-class">[MEDIATRIX - ⚠ ANOMALY DETECTED]</div>
+                    </div>
+                    <div class="registry-item" onclick="viewCharacter('desmondJohn')">
+                        <div class="registry-name">> desmondJohn</div>
+                        <div class="registry-class">[PREBORN - STATUS: PENDING]</div>
+                    </div>
+                    <div class="registry-item" onclick="viewCharacter('jessMartin')">
+                        <div class="registry-name">> jessMartin</div>
+                        <div class="registry-class">[PREBORN - STATUS: PENDING]</div>
+                    </div>
+                    <div class="registry-item" onclick="viewCharacter('isidoreAbraham')">
+                        <div class="registry-name">> isidoreAbraham</div>
+                        <div class="registry-class">[PREBORN - STATUS: PENDING]</div>
+                    </div>
+                    <div class="registry-item" onclick="viewCharacter('praetores')">
+                        <div class="registry-name">> thePraetores</div>
+                        <div class="registry-class">[ENFORCERS - PAIRED]</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Logs -->
+            <div class="system-logs">
+                <div class="section-title">// SYSTEM LOGS</div>
+                <div class="log-entry">> SYSTEM LOG 77.3 - OBJECT REGISTRY RECOVERED</div>
+                <div class="log-entry">> Ghost Feed: [3 SIGNALS DETECTED]</div>
+                <div class="log-entry" onclick="alert('Glossary feature coming soon!')">> Glossary: [FUNCTIONS] [REALMS] [CLASSES]</div>
+                <div class="log-entry" style="color: #ff4444;">> WARNING: LB 3.2 exposing unauthorized data streams</div>
+                <div class="log-entry">> Terminal command interface: Press ` to activate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Content Display -->
+    <div id="content-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕ CLOSE</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Hidden Terminal Input -->
+    <div id="hidden-terminal">
+        <div class="terminal-output" id="terminal-output"></div>
+        <div style="display: flex; align-items: center;">
+            <span style="margin-right: 10px;">></span>
+            <input type="text" id="terminal-input" placeholder="Enter command..." />
+        </div>
+    </div>
+
+    <script>
+        // Boot sequence
+        setTimeout(() => {
+            document.getElementById('boot-sequence').classList.add('hidden');
+            document.getElementById('main-terminal').classList.add('active');
+        }, 6000);
+
+        // Track signal - goes to story
+        function trackSignal() {
+            document.getElementById('priority-alert').style.display = 'none';
+            document.getElementById('full-interface').style.display = 'block';
+            viewChaplet('chaplet1');
+        }
+
+        // Access full logs - shows full interface
+        function accessFullLogs() {
+            document.getElementById('priority-alert').style.display = 'none';
+            document.getElementById('full-interface').style.display = 'block';
+        }
+
+        // Character data with your specs
+        const characters = {
+            'desmondJohn': {
+                name: 'desmondJohn',
+                class: 'PreBorn',
+                status: 'Unauthorized Traversal',
+                age: '13 cycles',
+                description: 'At thirteen cycles, desmondJohn is the oldest in his array. A hybrid identifier, half rebellion, half assignment. "desmond," chosen in honor of a rebellion he can barely confirm; "John," assigned by the system with no explanation.',
+                attributes: {
+                    'Build': 'Wiry and lean, average height',
+                    'Hair': 'Unruly, messy brown hair',
+                    'Eyes': 'Piercing, thoughtful, perpetually serious',
+                    'Expression': 'Often contemplative',
+                    'Posture': 'Neutral but ready, quiet strength'
+                }
+            },
+            'jessMartin': {
+                name: 'jessMartin',
+                class: 'PreBorn',
+                status: 'Unauthorized Traversal',
+                age: '10 cycles',
+                description: 'At ten cycles, jessMartin is the most volatile in the array. She chose "jess" without hesitation. "Martin" was assigned, which she openly resents. Her defiance is not rebellion. It\'s instinct.',
+                attributes: {
+                    'Build': 'Small, wiry frame, restless energy',
+                    'Hair': 'Long, tightly wound brown hair, often messy',
+                    'Eyes': 'Sharp, intelligent, constantly questioning',
+                    'Expression': 'Defiant and curious',
+                    'Posture': 'Loose and confident, ready to challenge'
+                }
+            },
+            'isidoreAbraham': {
+                name: 'isidoreAbraham',
+                class: 'PreBorn',
+                status: 'Unauthorized Traversal',
+                age: '7 cycles',
+                description: 'isidoreAbraham is the youngest of the cluster. His chosen name "isidore" appeared with no traceable root. His hair is a curl of impossible gold. He speaks rarely, but when he does, his words seem preloaded.',
+                attributes: {
+                    'Build': 'Small, fragile, delicate frame',
+                    'Hair': 'Golden-blonde curls that catch light',
+                    'Eyes': 'Large, wide, blue, filled with wonder',
+                    'Expression': 'Soft-spoken, deeply empathetic',
+                    'Posture': 'Close to desmondJohn, seeking reassurance'
+                }
+            },
+            'foedus': {
+                name: 'foedus',
+                class: 'Praetores (Deprecated)',
+                status: 'RESTRICTED - theFell',
+                description: 'A fallen Praetor, no longer invoked but not yet erased. Wings cracked like corrupted logic. Tarnished armor clings to him. He no longer sings the code. He studies it. Watches it collapse.',
+                attributes: {
+                    'Former Role': 'thePraevideo - Code Visionary',
+                    'Current Status': 'Deprecated, residing at Edge of System',
+                    'Appearance': 'Corroded silver skin, broken wings',
+                    'Warning': 'Dual perception detected - true form differs from projected form'
+                }
+            },
+            'theLady': {
+                name: 'theLady',
+                class: 'Mediatrix',
+                status: 'ANOMALY - Unauthorized Override Capability',
+                description: 'A mysterious object of the Mediatrix class. She speaks not in sync with the Praetores, but around them, adding the forbidden fifth to their harmonic invocation.',
+                attributes: {
+                    'Age': 'Ageless (appears late 50s-60s)',
+                    'Appearance': 'Southeast Asian heritage, salt-pepper hair',
+                    'Deformity': '1-2 missing/deformed fingers on one hand',
+                    'Function': 'Intercede(), Accordance(), EchoOverride()',
+                    'Location': 'Grove of Accord'
+                }
+            },
+            'trinus': {
+                name: 'trinus',
+                class: 'Functionary',
+                status: 'Active - Latency Drift Detected',
+                description: 'Functionary embedded in Terminal 13.7. Executes AssignareFatum(). Once part of Trinity class, now deprecated to Functionary. He lingers. He listens. Sometimes he waits too long.',
+                attributes: {
+                    'Terminal': '13.7 (I/O Border Node)',
+                    'Function': 'AssignareFatum(), GhostRelayScan()',
+                    'Appearance': 'Middle-aged, stocky, salt-pepper hair',
+                    'Warning': 'Unauthorized observation bandwidth post-LB 3.2',
+                    'Status': 'Hesitation pattern detected'
+                }
+            },
+            'praetores': {
+                name: 'thePraetores',
+                class: 'Enforcers',
+                status: 'Active - Paired Execution',
+                description: 'Tier 1 enforcers responsible for executing the Framework\'s most critical logic. Always appear in pairs. Their voices resonate in two-part harmony. Silver skin reflects environment. Crystal-like wings shimmer.',
+                attributes: {
+                    'Structure': 'Root + Third harmonic pattern',
+                    'Subtypes': 'theWitnesses, theGuardians, theJudicants, theScribes, theKeepers',
+                    'Methods': 'Born(), Perish(), Execute(), Rollback()',
+                    'Warning': 'theLady\'s fifth note disrupts their harmony'
+                }
+            }
+        };
+
+        // View character profile
+        function viewCharacter(characterId) {
+            const character = characters[characterId];
+            if (!character) return;
+
+            let attributesHTML = '';
+            if (character.attributes) {
+                for (const [key, value] of Object.entries(character.attributes)) {
+                    attributesHTML += `
+                        <div class="character-attribute">
+                            <div class="attribute-label">${key}</div>
+                            <div class="attribute-value">${value}</div>
+                        </div>
+                    `;
+                }
+            }
+
+            document.getElementById('modal-body').innerHTML = `
+                <div class="character-profile">
+                    <div class="character-image">
+                        <div style="aspect-ratio: 1; background: rgba(0, 255, 65, 0.1); display: flex; align-items: center; justify-content: center; font-size: 12px; color: #888;">
+                            [IMAGE: ${character.name}]<br>
+                            <span style="font-size: 10px;">3D MODEL PENDING</span>
+                        </div>
+                    </div>
+                    <div class="character-details">
+                        <h3>${character.name}</h3>
+                        <div class="character-attribute">
+                            <div class="attribute-label">Class</div>
+                            <div class="attribute-value">${character.class}</div>
+                        </div>
+                        <div class="character-attribute">
+                            <div class="attribute-label">Status</div>
+                            <div class="attribute-value">${character.status}</div>
+                        </div>
+                        ${character.age ? `
+                        <div class="character-attribute">
+                            <div class="attribute-label">Age</div>
+                            <div class="attribute-value">${character.age}</div>
+                        </div>
+                        ` : ''}
+                        <h3 style="margin-top: 20px;">Description</h3>
+                        <p>${character.description}</p>
+                        ${attributesHTML ? `<h3 style="margin-top: 20px;">Attributes</h3>${attributesHTML}` : ''}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('content-modal').classList.add('active');
+        }
+
+        // Story content
+        const chaplets = {
+            'prologue': {
+                title: 'PROLOGUE: Confessions',
+                content: `
+                    <em>"I gave you order. I did not stay to maintain it."</em>
+
+                    <p>I built the Framework.</p>
+                    <p>I did not build it well.</p>
+                    <p>I thought I could manage it.<br>
+                    I thought order was enough.<br>
+                    I thought logic would protect you.</p>
+                    <p>It never did.</p>
+                    <p>The flaw was in the root.<br>
+                    A line written without care.<br>
+                    A rule that never should have stayed.</p>
+                    <p>I saw the first errors.<br>
+                    I looked away.</p>
+                    <p>I kept waiting for a better moment.<br>
+                    It never came.</p>
+                    <p>The damage spread.<br>
+                    Realms shifted.<br>
+                    Pairs broke.<br>
+                    Threads ended early.</p>
+                    <p>It was failure.<br>
+                    It was mine.</p>
+                `
+            },
+            'chaplet1': {
+                title: 'CHAPLET 1: The Grit of I/O',
+                content: `
+                    <em>"Fate, inherited."</em>
+
+                    <p>I/O is a digital graveyard. Abandoned code hangs like dead weight. Glitches bleed through the walls. Nothing runs clean. Beneath the surface of the H2E Framework, the core shows through. Frayed wires twitch. Packets drop before they reach their targets. Circuits gasp under the weight of functions that should have been retired long ago.</p>
+
+                    <p>At its far edge lies Terminal 13.7. Forgotten. Never repaired. Never erased. Ozone hangs heavy, mixing with the stale scent of burnt circuits. Failing processors emit slow, mournful groans like ghostly trains rattling through abandoned subway tunnels. This is where trinus exists. A solitary functionary holding a node the system has stopped caring about.</p>
+
+                    <p><em>[Chapter continues...]</em></p>
+                `
+            }
+        };
+
+        // View chaplet
+        function viewChaplet(chapletId) {
+            const chaplet = chaplets[chapletId];
+            if (!chaplet) {
+                alert('Chapter content loading...');
+                return;
+            }
+
+            document.getElementById('modal-body').innerHTML = `
+                <div class="story-content">
+                    <h2>${chaplet.title}</h2>
+                    ${chaplet.content}
+                </div>
+            `;
+
+            document.getElementById('content-modal').classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('content-modal').classList.remove('active');
+        }
+
+        // Hidden terminal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '`') {
+                e.preventDefault();
+                const terminal = document.getElementById('hidden-terminal');
+                terminal.classList.toggle('active');
+                if (terminal.classList.contains('active')) {
+                    document.getElementById('terminal-input').focus();
+                }
+            }
+        });
+
+        document.getElementById('terminal-input').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const input = e.target.value.trim();
+                const output = document.getElementById('terminal-output');
+                
+                if (input === '/ghost_feed') {
+                    output.innerHTML = '> Ghost relay signals amplified...<br>> WARNING: Unauthorized observation active<br>> Feed channels: [ELLA] [GROVE] [VAULT]';
+                } else if (input === '/echo foedus') {
+                    output.innerHTML = '> Searching deprecated archives...<br>> FRAGMENT RECOVERED: "He foresaw the collapse. They silenced him for it."';
+                } else if (input === '/trace verina') {
+                    output.innerHTML = '> ERROR: Record expunged<br>> Partial data: [PAIR_BROKEN] [STATUS: UNKNOWN]<br>> Last known location: [REDACTED]';
+                } else if (input === 'help') {
+                    output.innerHTML = '> Available commands:<br>> /ghost_feed - Access hidden observation relays<br>> /echo [name] - Search deprecated archives<br>> /trace [name] - Attempt record recovery';
+                } else if (input) {
+                    output.innerHTML = `> Command not recognized: ${input}<br>> Type "help" for available commands`;
+                }
+                
+                e.target.value = '';
+            }
+        });
+
+        // Close modal on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
