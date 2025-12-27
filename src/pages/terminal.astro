@@ -732,7 +732,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         </div>
     </div>
 
-    <script>
+    <script is:inline>
         // Boot sequence
         setTimeout(() => {
             document.getElementById('boot-sequence').classList.add('hidden');
@@ -740,17 +740,18 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         }, 6000);
 
         // Track signal - goes to story
-        function trackSignal() {
+        window.trackSignal = function() {
             document.getElementById('priority-alert').style.display = 'none';
             document.getElementById('full-interface').style.display = 'block';
             viewChaplet('chaplet1');
         }
 
         // Access full logs - shows full interface
-        function accessFullLogs() {
+        window.accessFullLogs = function() {
             document.getElementById('priority-alert').style.display = 'none';
             document.getElementById('full-interface').style.display = 'block';
         }
+
 
         // Character data with your specs
         const characters = {
@@ -848,8 +849,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             }
         };
 
+
         // View character profile
-        function viewCharacter(characterId) {
+        window.viewCharacter = function(characterId) {
             const character = characters[characterId];
             if (!character) return;
 
@@ -941,8 +943,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             }
         };
 
+
         // View chaplet
-        function viewChaplet(chapletId) {
+        window.viewChaplet = function(chapletId) {
             const chaplet = chaplets[chapletId];
             if (!chaplet) {
                 alert('Chapter content loading...');
@@ -959,8 +962,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             document.getElementById('content-modal').classList.add('active');
         }
 
+
         // Close modal
-        function closeModal() {
+        window.closeModal = function() {
             document.getElementById('content-modal').classList.remove('active');
         }
 
