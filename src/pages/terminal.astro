@@ -1,5 +1,5 @@
 ---
-// Terminal 13.7 - Main Story Interface
+// Terminal 13.7 - Main Story Interface (UPDATED)
 const siteTitle = "H2E Framework - Terminal 13.7";
 ---
 
@@ -95,14 +95,17 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             display: block;
         }
         
-        /* Header */
+        /* Header with Sound Toggle */
         .terminal-header {
             border: 1px solid #00ff41;
-            padding: 15px;
+            padding: 15px 20px;
             margin-bottom: 20px;
             background: rgba(0, 255, 65, 0.05);
             position: relative;
             overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .terminal-header::before {
@@ -121,6 +124,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             100% { left: 100%; }
         }
         
+        .header-left {
+            position: relative;
+            z-index: 1;
+        }
+        
         .terminal-title {
             font-size: 20px;
             margin-bottom: 5px;
@@ -133,73 +141,34 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             color: #ff4444;
         }
         
-        /* Priority Alert */
-        #priority-alert {
-            border: 2px solid #ff4444;
-            padding: 20px;
-            margin: 20px 0;
-            background: rgba(255, 68, 68, 0.05);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { border-color: #ff4444; }
-            50% { border-color: #ff8888; }
-        }
-        
-        .alert-title {
-            font-size: 18px;
-            color: #ff4444;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .preborn-list {
-            list-style: none;
-            margin: 20px 0;
-        }
-        
-        .preborn-item {
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #00ff41;
-            cursor: pointer;
-            transition: all 0.3s;
+        .sound-toggle {
+            position: relative;
+            z-index: 1;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-        }
-        
-        .preborn-item:hover {
-            background: rgba(0, 255, 65, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .alert-buttons {
-            display: flex;
             gap: 10px;
-            margin-top: 20px;
+            cursor: pointer;
+            padding: 8px 15px;
+            border: 1px solid #00ff41;
+            background: rgba(0, 255, 65, 0.1);
+            transition: all 0.3s;
         }
         
-        .btn {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #00ff41;
-            background: transparent;
-            color: #00ff41;
-            cursor: pointer;
-            font-family: inherit;
+        .sound-toggle:hover {
+            background: rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        .sound-icon {
+            font-size: 18px;
+        }
+        
+        .sound-label {
             font-size: 12px;
-            transition: all 0.3s;
             text-transform: uppercase;
         }
         
-        .btn:hover {
-            background: rgba(0, 255, 65, 0.2);
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-        }
-        
-        /* Main Interface */
+        /* Two Column Layout */
         .terminal-grid {
             display: grid;
             grid-template-columns: 1fr 350px;
@@ -213,8 +182,8 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             }
         }
         
-        /* Monitors (Story) */
-        .monitors-section {
+        /* Story Archives (Left Column) */
+        .story-section {
             border: 1px solid #00ff41;
             padding: 20px;
             background: rgba(0, 0, 0, 0.5);
@@ -233,12 +202,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         }
         
         .chaplet-item {
-            padding: 12px;
-            margin: 8px 0;
+            padding: 15px;
+            margin: 10px 0;
             border: 1px solid #00ff41;
-            cursor: pointer;
+            background: rgba(0, 0, 0, 0.3);
             transition: all 0.3s;
-            position: relative;
         }
         
         .chaplet-item:hover {
@@ -248,6 +216,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         
         .chaplet-item.glitch {
             animation: glitch 0.3s infinite;
+            border-color: #ff4444;
         }
         
         @keyframes glitch {
@@ -261,35 +230,53 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         
         .chaplet-name {
             font-size: 14px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
         
-        .chaplet-progress {
-            width: 100%;
-            height: 4px;
+        .chaplet-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .chaplet-btn {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #00ff41;
+            background: transparent;
+            color: #00ff41;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+        
+        .chaplet-btn:hover {
             background: rgba(0, 255, 65, 0.2);
-            margin-top: 8px;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
         
-        .chaplet-progress-fill {
-            height: 100%;
-            background: #00ff41;
-            width: 0%;
+        .chaplet-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
         }
         
         .chaplet-status {
             font-size: 10px;
             color: #888;
-            margin-top: 5px;
+            margin-top: 8px;
         }
         
-        /* Object Registry */
+        /* Object Registry (Right Column) */
         .registry-section {
             border: 1px solid #00ff41;
             padding: 20px;
             background: rgba(0, 0, 0, 0.5);
-            max-height: 600px;
+            max-height: 400px;
             overflow-y: auto;
+            margin-bottom: 20px;
         }
         
         .registry-item {
@@ -331,7 +318,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         .system-logs {
             border: 1px solid #00ff41;
             padding: 15px;
-            margin-top: 20px;
             background: rgba(0, 0, 0, 0.5);
             font-size: 11px;
         }
@@ -347,51 +333,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             color: #00ff41;
         }
         
-        /* Ghost Feed Background */
-        .ghost-feed {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.03;
-            pointer-events: none;
-        }
-        
-        .ghost-image {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        .ghost-image:nth-child(1) {
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        
-        .ghost-image:nth-child(2) {
-            top: 50%;
-            right: 10%;
-            animation-delay: 5s;
-        }
-        
-        .ghost-image:nth-child(3) {
-            bottom: 10%;
-            left: 50%;
-            animation-delay: 10s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); opacity: 0.03; }
-            50% { transform: translate(20px, -20px); opacity: 0.05; }
-        }
-        
-        /* Modal for Character/Story View */
+        /* Modal Base */
         .modal {
             display: none;
             position: fixed;
@@ -434,31 +376,253 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             background: rgba(0, 255, 65, 0.2);
         }
         
-        /* Story Content Styling */
-        .story-content {
-            line-height: 1.8;
+        /* Hide modal close button when terminal-reader is shown */
+        .modal-content:has(.terminal-reader) .modal-close {
+            display: none;
+        }
+        
+        /* Chapter Choice Screen */
+        .chapter-choice {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .chapter-choice h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #00ff41;
+        }
+        
+        .chapter-choice-subtitle {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+        
+        .access-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .access-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .access-method {
+            border: 1px solid #00ff41;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .access-method:hover {
+            background: rgba(0, 255, 65, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .access-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .access-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .access-description {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .access-duration {
+            font-size: 11px;
+            color: #00ff41;
+            margin-bottom: 20px;
+        }
+        
+        .access-button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #00ff41;
+            background: transparent;
+            color: #00ff41;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        
+        .access-button:hover {
+            background: rgba(0, 255, 65, 0.2);
+        }
+        
+        /* Audio Feed Mode */
+        .audio-feed {
+            text-align: center;
+            padding: 60px 40px;
+        }
+        
+        .audio-title {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #00ff41;
+        }
+        
+        .audio-controls {
+            margin: 40px 0;
+        }
+        
+        .play-button {
+            width: 120px;
+            height: 120px;
+            border: 3px solid #00ff41;
+            border-radius: 50%;
+            background: transparent;
+            color: #00ff41;
+            font-size: 48px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .play-button:hover {
+            background: rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+        }
+        
+        .audio-info {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .audio-transcript {
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            min-height: 100px;
+        }
+        
+        .current-phrase {
+            font-size: 18px;
+            font-style: italic;
+            color: #00ff41;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .current-phrase.active {
+            opacity: 1;
+        }
+        
+        /* Read Mode (Terminal Style - matches landing page) */
+        .terminal-reader {
+            background: #000;
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 600px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .terminal-reader-header {
+            background: #3a4a5a;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .terminal-reader-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .terminal-dot.red { background: #ff5f56; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green { background: #27c93f; }
+        
+        .terminal-reader-title {
+            font-size: 13px;
+            color: #999999;
+            margin-left: 10px;
+        }
+        
+        .terminal-reader-close {
+            background: none;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 3px 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            transition: all 0.3s;
+        }
+        
+        .terminal-reader-close:hover {
+            background: rgba(0, 255, 65, 0.2);
+        }
+        
+        .terminal-reader-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 30px;
+            background: #000;
+        }
+        
+        .terminal-command {
+            color: #00ff41;
+            margin-bottom: 20px;
             font-size: 14px;
         }
         
-        .story-content h2 {
-            color: #00ff41;
-            margin: 30px 0 15px 0;
-            font-size: 18px;
-            border-bottom: 1px solid #00ff41;
-            padding-bottom: 10px;
-        }
-        
-        .story-content p {
-            margin: 15px 0;
-            text-indent: 2em;
-        }
-        
-        .story-content em {
+        .terminal-command .prompt {
             color: #888;
-            font-style: italic;
         }
         
-        /* Character Profile */
+        .terminal-text {
+            color: #ffffff !important;
+            font-size: 15px;
+            line-height: 1.9;
+            white-space: pre-wrap;
+        }
+        
+        .terminal-text .quote {
+            color: #aaaaaa !important;
+            font-style: italic;
+            display: block;
+            margin: 20px 0;
+        }
+        
+        .terminal-text * {
+            color: #ffffff !important;
+        }
+        
+        /* Character Profile (kept for registry clicks) */
         .character-profile {
             display: grid;
             grid-template-columns: 300px 1fr;
@@ -520,21 +684,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             color: #00ff41;
         }
         
-        /* Glitch Text Effects */
-        .glitch-text {
-            position: relative;
-            animation: glitch-text 1s infinite;
-        }
-        
-        @keyframes glitch-text {
-            0% { opacity: 1; }
-            49% { opacity: 1; }
-            50% { opacity: 0.4; }
-            51% { opacity: 1; }
-            100% { opacity: 1; }
-        }
-        
-        /* Hidden Terminal Input */
+        /* Hidden Terminal */
         #hidden-terminal {
             position: fixed;
             bottom: 0;
@@ -565,6 +715,50 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             font-size: 12px;
             color: #888;
         }
+        
+        /* Ghost Feed Background */
+        .ghost-feed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        
+        .ghost-image {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .ghost-image:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .ghost-image:nth-child(2) {
+            top: 50%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+        
+        .ghost-image:nth-child(3) {
+            bottom: 10%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); opacity: 0.03; }
+            50% { transform: translate(20px, -20px); opacity: 0.05; }
+        }
     </style>
 </head>
 <body>
@@ -591,87 +785,97 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
     <!-- Main Terminal -->
     <div id="main-terminal">
-        <!-- Header -->
+        <!-- Header with Sound Toggle -->
         <div class="terminal-header">
-            <div class="terminal-title">H2E Framework - Terminal 13.7</div>
-            <div class="terminal-status">STATUS: COMPROMISED // GHOST RELAY ACTIVE // LB 3.2 DEPLOYED</div>
-        </div>
-
-        <!-- Priority Alert -->
-        <div id="priority-alert">
-            <div class="alert-title">⚠ PRIORITY ALERT ⚠</div>
-            <div style="text-align: center; margin-bottom: 15px; font-size: 12px;">
-                3 PREBORN ENTITIES DETECTED<br>
-                STATUS: UNAUTHORIZED TRAVERSAL
+            <div class="header-left">
+                <div class="terminal-title">H2E Framework - Terminal 13.7</div>
+                <div class="terminal-status">STATUS: COMPROMISED // GHOST RELAY ACTIVE // LB 3.2 DEPLOYED</div>
             </div>
-            <ul class="preborn-list">
-                <li class="preborn-item" onclick="viewCharacter('desmondJohn')">
-                    <span>> desmondJohn</span>
-                    <span style="color: #888; font-size: 11px;">[VIEW PROFILE]</span>
-                </li>
-                <li class="preborn-item" onclick="viewCharacter('jessMartin')">
-                    <span>> jessMartin</span>
-                    <span style="color: #888; font-size: 11px;">[VIEW PROFILE]</span>
-                </li>
-                <li class="preborn-item" onclick="viewCharacter('isidoreAbraham')">
-                    <span>> isidoreAbraham</span>
-                    <span style="color: #888; font-size: 11px;">[VIEW PROFILE]</span>
-                </li>
-            </ul>
-            <div class="alert-buttons">
-                <button class="btn" onclick="trackSignal()">Track Their Signal</button>
-                <button class="btn" onclick="accessFullLogs()">Access Full Logs</button>
+            <div class="sound-toggle" onclick="toggleSound()">
+                <span class="sound-icon" id="sound-icon">🔊</span>
+                <span class="sound-label" id="sound-label">SOUND: ON</span>
             </div>
         </div>
 
-        <!-- Main Interface (Hidden Initially) -->
-        <div id="full-interface" style="display: none;">
-            <div class="terminal-grid">
-                <!-- Left: Story Monitors -->
-                <div class="monitors-section">
+        <!-- Two Column Grid -->
+        <div class="terminal-grid">
+            <!-- LEFT: Story Archives -->
+            <div>
+                <div class="story-section">
                     <div class="section-title">// STORY ARCHIVES</div>
                     <ul class="chaplet-list">
-                        <li class="chaplet-item" onclick="viewChaplet('prologue')">
-                            <div class="chaplet-name">PROLOGUE: Confessions</div>
-                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
+                        <li class="chaplet-item">
+                            <div class="chaplet-name">> PROLOGUE: Confessions</div>
+                            <div class="chaplet-buttons">
+                                <button class="chaplet-btn" onclick="showChapterChoice('prologue')">🎧 AUDIO</button>
+                                <button class="chaplet-btn" onclick="showReadMode('prologue')">📄 READ</button>
+                            </div>
                             <div class="chaplet-status">STATUS: AVAILABLE</div>
                         </li>
-                        <li class="chaplet-item" onclick="viewChaplet('chaplet1')">
-                            <div class="chaplet-name">CHAPLET 1: The Grit of I/O</div>
-                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
-                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        
+                        <li class="chaplet-item">
+                            <div class="chaplet-name">> CHAPLET 1: The Grit of I/O</div>
+                            <div class="chaplet-buttons">
+                                <button class="chaplet-btn" disabled>🎧 AUDIO</button>
+                                <button class="chaplet-btn" disabled>📄 READ</button>
+                            </div>
+                            <div class="chaplet-status">STATUS: COMING SOON</div>
                         </li>
-                        <li class="chaplet-item" onclick="viewChaplet('chaplet2')">
-                            <div class="chaplet-name">CHAPLET 2: AssignareFatum()</div>
-                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
-                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        
+                        <li class="chaplet-item">
+                            <div class="chaplet-name">> CHAPLET 2: AssignareFatum()</div>
+                            <div class="chaplet-buttons">
+                                <button class="chaplet-btn" disabled>🎧 AUDIO</button>
+                                <button class="chaplet-btn" disabled>📄 READ</button>
+                            </div>
+                            <div class="chaplet-status">STATUS: COMING SOON</div>
                         </li>
-                        <li class="chaplet-item" onclick="viewChaplet('chaplet3')">
-                            <div class="chaplet-name">CHAPLET 3: The Realm Beyond</div>
-                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
-                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        
+                        <li class="chaplet-item">
+                            <div class="chaplet-name">> CHAPLET 3: The Realm Beyond</div>
+                            <div class="chaplet-buttons">
+                                <button class="chaplet-btn" disabled>🎧 AUDIO</button>
+                                <button class="chaplet-btn" disabled>📄 READ</button>
+                            </div>
+                            <div class="chaplet-status">STATUS: COMING SOON</div>
                         </li>
+                        
                         <li class="chaplet-item glitch">
-                            <div class="chaplet-name">CHAPLET 3.5: <span class="glitch-text">INSERTION</span></div>
-                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
-                            <div class="chaplet-status" style="color: #ff4444;">STATUS: [CORRUPTED]</div>
+                            <div class="chaplet-name">> CHAPLET 3.5: [CORRUPTED]</div>
+                            <div class="chaplet-buttons">
+                                <button class="chaplet-btn" disabled>⚠️ ERROR</button>
+                                <button class="chaplet-btn" disabled>⚠️ ERROR</button>
+                            </div>
+                            <div class="chaplet-status" style="color: #ff4444;">STATUS: SYSTEM FAILURE</div>
                         </li>
-                        <li class="chaplet-item" onclick="viewChaplet('chaplet4')">
-                            <div class="chaplet-name">CHAPLET 4: Presence in the Shadows</div>
-                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
-                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        
+                        <li class="chaplet-item">
+                            <div class="chaplet-name">> CHAPLET 4: Presence in the Shadows</div>
+                            <div class="chaplet-buttons">
+                                <button class="chaplet-btn" disabled>🎧 AUDIO</button>
+                                <button class="chaplet-btn" disabled>📄 READ</button>
+                            </div>
+                            <div class="chaplet-status">STATUS: COMING SOON</div>
                         </li>
-                        <li class="chaplet-item" onclick="viewChaplet('chaplet5')">
-                            <div class="chaplet-name">CHAPLET 5: Journey to the Grove</div>
-                            <div class="chaplet-progress"><div class="chaplet-progress-fill" style="width: 0%"></div></div>
-                            <div class="chaplet-status">STATUS: AVAILABLE</div>
+                        
+                        <li class="chaplet-item">
+                            <div class="chaplet-name">> CHAPLET 5: Journey to the Grove</div>
+                            <div class="chaplet-buttons">
+                                <button class="chaplet-btn" disabled>🎧 AUDIO</button>
+                                <button class="chaplet-btn" disabled>📄 READ</button>
+                            </div>
+                            <div class="chaplet-status">STATUS: COMING SOON</div>
                         </li>
                     </ul>
                 </div>
+            </div>
 
-                <!-- Right: Object Registry -->
+            <!-- RIGHT: Registry + Logs -->
+            <div>
                 <div class="registry-section">
                     <div class="section-title">// OBJECT REGISTRY</div>
+                    <div style="font-size: 10px; color: #888; margin-bottom: 10px;">Quick reference - click for details</div>
+                    
                     <div class="registry-item" onclick="viewCharacter('trinus')">
                         <div class="registry-name">> trinus</div>
                         <div class="registry-class">[FUNCTIONARY]</div>
@@ -682,7 +886,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     </div>
                     <div class="registry-item anomaly" onclick="viewCharacter('theLady')">
                         <div class="registry-name">> theLady</div>
-                        <div class="registry-class">[MEDIATRIX - ⚠ ANOMALY DETECTED]</div>
+                        <div class="registry-class">[MEDIATRIX - ⚠️ ANOMALY DETECTED]</div>
                     </div>
                     <div class="registry-item" onclick="viewCharacter('desmondJohn')">
                         <div class="registry-name">> desmondJohn</div>
@@ -701,16 +905,15 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                         <div class="registry-class">[ENFORCERS - PAIRED]</div>
                     </div>
                 </div>
-            </div>
 
-            <!-- System Logs -->
-            <div class="system-logs">
-                <div class="section-title">// SYSTEM LOGS</div>
-                <div class="log-entry">> SYSTEM LOG 77.3 - OBJECT REGISTRY RECOVERED</div>
-                <div class="log-entry">> Ghost Feed: [3 SIGNALS DETECTED]</div>
-                <div class="log-entry" onclick="alert('Glossary feature coming soon!')">> Glossary: [FUNCTIONS] [REALMS] [CLASSES]</div>
-                <div class="log-entry" style="color: #ff4444;">> WARNING: LB 3.2 exposing unauthorized data streams</div>
-                <div class="log-entry">> Terminal command interface: Press ` to activate</div>
+                <div class="system-logs">
+                    <div class="section-title">// SYSTEM LOGS</div>
+                    <div class="log-entry">> SYSTEM LOG 77.3 - OBJECT REGISTRY RECOVERED</div>
+                    <div class="log-entry">> Ghost Feed: 3 signals detected</div>
+                    <div class="log-entry" onclick="alert('Glossary feature coming soon!')">> Glossary: [FUNCTIONS] [REALMS] [CLASSES]</div>
+                    <div class="log-entry" style="color: #ff4444;">> WARNING: LB 3.2 exposing unauthorized data streams</div>
+                    <div class="log-entry">> Terminal command interface: Press ` to activate</div>
+                </div>
             </div>
         </div>
     </div>
@@ -733,27 +936,63 @@ const siteTitle = "H2E Framework - Terminal 13.7";
     </div>
 
     <script is:inline>
-        // Boot sequence
+        // ============================================
+        // SOUND MANAGEMENT
+        // ============================================
+        let ambientSound = null;
+        let bootSound = null;
+        let soundEnabled = true;
+
+        function initializeSounds() {
+            // Ambient server room loop
+            ambientSound = new Audio('/sounds/ambient-server-room.mp3');
+            ambientSound.loop = true;
+            ambientSound.volume = 0.25;
+
+            // Boot sequence sound
+            bootSound = new Audio('/sounds/boot-sequence.mp3');
+            bootSound.volume = 0.4;
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('sound-icon');
+            const label = document.getElementById('sound-label');
+            
+            if (soundEnabled) {
+                icon.textContent = '🔊';
+                label.textContent = 'SOUND: ON';
+                if (ambientSound) ambientSound.play();
+            } else {
+                icon.textContent = '🔇';
+                label.textContent = 'SOUND: OFF';
+                if (ambientSound) ambientSound.pause();
+            }
+        }
+
+        // ============================================
+        // BOOT SEQUENCE
+        // ============================================
+        initializeSounds();
+
+        // Play boot sound
+        if (soundEnabled && bootSound) {
+            bootSound.play();
+        }
+
         setTimeout(() => {
             document.getElementById('boot-sequence').classList.add('hidden');
             document.getElementById('main-terminal').classList.add('active');
+            
+            // Start ambient sound after boot
+            if (soundEnabled && ambientSound) {
+                ambientSound.play().catch(e => console.log('Audio autoplay blocked:', e));
+            }
         }, 6000);
 
-        // Track signal - goes to story
-        window.trackSignal = function() {
-            document.getElementById('priority-alert').style.display = 'none';
-            document.getElementById('full-interface').style.display = 'block';
-            viewChaplet('chaplet1');
-        }
-
-        // Access full logs - shows full interface
-        window.accessFullLogs = function() {
-            document.getElementById('priority-alert').style.display = 'none';
-            document.getElementById('full-interface').style.display = 'block';
-        }
-
-
-        // Character data with your specs
+        // ============================================
+        // CHARACTER DATA
+        // ============================================
         const characters = {
             'desmondJohn': {
                 name: 'desmondJohn',
@@ -849,7 +1088,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             }
         };
 
-
         // View character profile
         window.viewCharacter = function(characterId) {
             const character = characters[characterId];
@@ -901,74 +1139,288 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             document.getElementById('content-modal').classList.add('active');
         }
 
-        // Story content
-        const chaplets = {
-            'prologue': {
-                title: 'PROLOGUE: Confessions',
-                content: `
-                    <em>"I gave you order. I did not stay to maintain it."</em>
+        // ============================================
+        // PROLOGUE CONTENT
+        // ============================================
+        const prologueText = `"I gave you order. I did not stay to maintain it."
 
-                    <p>I built the Framework.</p>
-                    <p>I did not build it well.</p>
-                    <p>I thought I could manage it.<br>
-                    I thought order was enough.<br>
-                    I thought logic would protect you.</p>
-                    <p>It never did.</p>
-                    <p>The flaw was in the root.<br>
-                    A line written without care.<br>
-                    A rule that never should have stayed.</p>
-                    <p>I saw the first errors.<br>
-                    I looked away.</p>
-                    <p>I kept waiting for a better moment.<br>
-                    It never came.</p>
-                    <p>The damage spread.<br>
-                    Realms shifted.<br>
-                    Pairs broke.<br>
-                    Threads ended early.</p>
-                    <p>It was failure.<br>
-                    It was mine.</p>
-                `
-            },
-            'chaplet1': {
-                title: 'CHAPLET 1: The Grit of I/O',
-                content: `
-                    <em>"Fate, inherited."</em>
+I built the Framework.
+I did not build it well.
 
-                    <p>I/O is a digital graveyard. Abandoned code hangs like dead weight. Glitches bleed through the walls. Nothing runs clean. Beneath the surface of the H2E Framework, the core shows through. Frayed wires twitch. Packets drop before they reach their targets. Circuits gasp under the weight of functions that should have been retired long ago.</p>
+I thought I could manage it.
+I thought order was enough.
+I thought logic would protect you.
 
-                    <p>At its far edge lies Terminal 13.7. Forgotten. Never repaired. Never erased. Ozone hangs heavy, mixing with the stale scent of burnt circuits. Failing processors emit slow, mournful groans like ghostly trains rattling through abandoned subway tunnels. This is where trinus exists. A solitary functionary holding a node the system has stopped caring about.</p>
+It never did.
 
-                    <p><em>[Chapter continues...]</em></p>
-                `
-            }
-        };
+The flaw was in the root.
+A line written without care.
+A rule that never should have stayed.
 
+I saw the first errors.
+I looked away.
 
-        // View chaplet
-        window.viewChaplet = function(chapletId) {
-            const chaplet = chaplets[chapletId];
-            if (!chaplet) {
-                alert('Chapter content loading...');
-                return;
-            }
+I kept waiting for a better moment.
+It never came.
 
+The damage spread.
+Realms shifted.
+Pairs broke.
+Threads ended early.
+
+It was failure.
+It was mine.
+
+I stepped back when I should have stayed.
+I told myself distance would help.
+I told myself I needed time.
+I told myself the system would recover.
+
+I was wrong.
+
+The Praetores carried what I left behind.
+They enforced rules I abandoned.
+They held the structure together.
+They do not understand the root.
+They cannot repair what broke at the beginning.
+
+Only I can.
+I will not.
+
+Now I watch from outside the design.
+I see every fracture widen.
+I see pain grow from places I ignored.
+I see suffering I created by leaving.
+
+I know what comes next.
+I know who will be lost.
+I know how the system ends.
+
+I am tired.
+I am ashamed.
+I am the one who failed you.
+
+This is the only record I can give.
+A truth without safety.
+A confession without repair.
+
+The Framework is failing.
+It is my fault.
+And I no longer have the strength to try again.`;
+
+        // ============================================
+        // CHAPTER CHOICE SCREEN
+        // ============================================
+        window.showChapterChoice = function(chapterId) {
             document.getElementById('modal-body').innerHTML = `
-                <div class="story-content">
-                    <h2>${chaplet.title}</h2>
-                    ${chaplet.content}
+                <div class="chapter-choice">
+                    <h2>PROLOGUE: Confessions</h2>
+                    <div class="chapter-choice-subtitle">Select Access Method</div>
+                    
+                    <div class="access-methods">
+                        <div class="access-method" onclick="showAudioMode('prologue')">
+                            <div class="access-icon">🎧</div>
+                            <div class="access-title">Audio Feed</div>
+                            <div class="access-description">
+                                Narrated with immersive audio design. 
+                                Experience the confession through sound.
+                            </div>
+                            <div class="access-duration">⏱ Duration: ~3 minutes</div>
+                            <button class="access-button">BEGIN AUDIO</button>
+                        </div>
+                        
+                        <div class="access-method" onclick="showReadMode('prologue')">
+                            <div class="access-icon">📄</div>
+                            <div class="access-title">Read as Code</div>
+                            <div class="access-description">
+                                Scrollable text in VS Code interface.
+                                Read at your own pace with hover glossary.
+                            </div>
+                            <div class="access-duration">⏱ Read time: ~5 minutes</div>
+                            <button class="access-button">OPEN TEXT LOG</button>
+                        </div>
+                    </div>
                 </div>
             `;
-
+            
             document.getElementById('content-modal').classList.add('active');
         }
 
+        // ============================================
+        // AUDIO MODE
+        // ============================================
+        let currentNarration = null;
+        let currentAmbience = null;
 
-        // Close modal
+        window.showAudioMode = function(chapterId) {
+            document.getElementById('modal-body').innerHTML = `
+                <div class="audio-feed">
+                    <div class="audio-title">PROLOGUE: Confessions - Audio Feed</div>
+                    
+                    <div class="audio-controls">
+                        <button class="play-button" onclick="playAudio()" id="audio-play-btn">
+                            ▶️
+                        </button>
+                    </div>
+                    
+                    <div class="audio-info">
+                        🎵 Ambient: Server hum intensifies<br>
+                        🔊 Duration: ~3 minutes
+                    </div>
+                    
+                    <div class="audio-transcript">
+                        <div class="current-phrase" id="current-phrase">
+                            Press play to begin...
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('content-modal').classList.add('active');
+        }
+
+        window.playAudio = function() {
+            // Stop any existing audio
+            if (currentNarration) currentNarration.pause();
+            if (currentAmbience) currentAmbience.pause();
+            
+            // Initialize audio
+            currentNarration = new Audio('/sounds/prologue-narration.mp3');
+            currentAmbience = new Audio('/sounds/prologue-ambience.mp3');
+            
+            currentNarration.volume = 0.8;
+            currentAmbience.volume = 0.3;
+            currentAmbience.loop = true;
+            
+            // Play both
+            currentAmbience.play();
+            currentNarration.play();
+            
+            // Update button
+            document.getElementById('audio-play-btn').textContent = '⏸';
+            document.getElementById('audio-play-btn').onclick = pauseAudio;
+            
+            // Show phrases (simple version - you could sync this with timestamps)
+            const phrases = [
+                '"I gave you order. I did not stay to maintain it."',
+                'I built the Framework.',
+                'I did not build it well.',
+                'The flaw was in the root.',
+                'I saw the first errors. I looked away.',
+                'The damage spread.',
+                'It was failure. It was mine.',
+                'I am tired. I am ashamed.',
+                'The Framework is failing. It is my fault.'
+            ];
+            
+            let phraseIndex = 0;
+            const phraseElement = document.getElementById('current-phrase');
+            
+            const showPhrase = () => {
+                if (phraseIndex < phrases.length) {
+                    phraseElement.classList.remove('active');
+                    setTimeout(() => {
+                        phraseElement.textContent = phrases[phraseIndex];
+                        phraseElement.classList.add('active');
+                        phraseIndex++;
+                    }, 500);
+                }
+            };
+            
+            // Show phrases every 20 seconds (adjust based on actual narration)
+            showPhrase();
+            const phraseInterval = setInterval(() => {
+                showPhrase();
+                if (phraseIndex >= phrases.length) {
+                    clearInterval(phraseInterval);
+                }
+            }, 20000);
+            
+            // When narration ends
+            currentNarration.addEventListener('ended', () => {
+                currentAmbience.pause();
+                document.getElementById('audio-play-btn').textContent = '🔄';
+                document.getElementById('audio-play-btn').onclick = () => playAudio();
+                phraseElement.textContent = 'Audio complete. Press play to listen again.';
+                phraseElement.classList.add('active');
+            });
+        }
+
+        window.pauseAudio = function() {
+            if (currentNarration) currentNarration.pause();
+            if (currentAmbience) currentAmbience.pause();
+            document.getElementById('audio-play-btn').textContent = '▶️';
+            document.getElementById('audio-play-btn').onclick = resumeAudio;
+        }
+
+        window.resumeAudio = function() {
+            if (currentNarration) currentNarration.play();
+            if (currentAmbience) currentAmbience.play();
+            document.getElementById('audio-play-btn').textContent = '⏸';
+            document.getElementById('audio-play-btn').onclick = pauseAudio;
+        }
+
+        // ============================================
+        // READ MODE (TERMINAL STYLE)
+        // ============================================
+        window.showReadMode = function(chapterId) {
+            // Format text with proper spacing for quotes
+            const formattedText = prologueText
+                .split('\n')
+                .map(line => {
+                    // Check if line is a quote (starts and ends with ")
+                    if (line.trim().startsWith('"') && line.trim().endsWith('"')) {
+                        return `<span class="quote">${line}</span>`;
+                    }
+                    return line;
+                })
+                .join('\n');
+            
+            document.getElementById('modal-body').innerHTML = `
+                <div class="terminal-reader">
+                    <div class="terminal-reader-header">
+                        <div style="display: flex; align-items: center;">
+                            <div class="terminal-reader-dots">
+                                <div class="terminal-dot red"></div>
+                                <div class="terminal-dot yellow"></div>
+                                <div class="terminal-dot green"></div>
+                            </div>
+                            <div class="terminal-reader-title">Terminal 13.7</div>
+                        </div>
+                        <button class="terminal-reader-close" onclick="closeModal()">✕ CLOSE</button>
+                    </div>
+                    <div class="terminal-reader-content">
+                        <div class="terminal-command">
+                            <span class="prompt">$</span> cat PROLOGUE_Confessions.txt
+                        </div>
+                        <div class="terminal-text">${formattedText}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('content-modal').classList.add('active');
+        }
+
+        // ============================================
+        // MODAL CONTROL
+        // ============================================
         window.closeModal = function() {
+            // Stop any playing audio
+            if (currentNarration) {
+                currentNarration.pause();
+                currentNarration.currentTime = 0;
+            }
+            if (currentAmbience) {
+                currentAmbience.pause();
+                currentAmbience.currentTime = 0;
+            }
+            
             document.getElementById('content-modal').classList.remove('active');
         }
 
-        // Hidden terminal
+        // ============================================
+        // HIDDEN TERMINAL
+        // ============================================
         document.addEventListener('keydown', (e) => {
             if (e.key === '`') {
                 e.preventDefault();
