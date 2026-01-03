@@ -87,48 +87,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             to { width: 100%; }
         }
         
-        /* Audio Gate Overlay - Shows AFTER boot */
-        #audio-gate {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #000;
-            z-index: 9998;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            transition: opacity 0.5s;
-        }
-        
-        #audio-gate.active {
-            display: flex;
-        }
-        
-        #audio-gate.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        #enter-terminal-btn {
-            background: transparent;
-            border: 2px solid #00ff41;
-            color: #00ff41;
-            padding: 20px 40px;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 18px;
-            cursor: pointer;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-        }
-        
-        #enter-terminal-btn:hover {
-            background: rgba(0, 255, 65, 0.1);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
-        }
-
         /* Main Terminal */
         #main-terminal {
             display: none;
@@ -828,21 +786,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         </div>
     </div>
 
-    <!-- Audio Gate Overlay (Shows AFTER boot) -->
-    <div id="audio-gate">
-        <div style="text-align: center;">
-            <div style="font-size: 24px; color: #00ff41; margin-bottom: 30px; letter-spacing: 2px;">
-                TERMINAL 13.7
-            </div>
-            <button id="enter-terminal-btn">
-                ▶ ENTER TERMINAL
-            </button>
-            <div style="font-size: 12px; color: #888; margin-top: 20px;">
-                (Audio will begin)
-            </div>
-        </div>
-    </div>
-
     <!-- Ghost Feed Background -->
     <div class="ghost-feed">
         <div class="ghost-image" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%2300ff41%22 opacity=%220.1%22 width=%22200%22 height=%22200%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22monospace%22 font-size=%2220%22 fill=%22%2300ff41%22 opacity=%220.3%22 text-anchor=%22middle%22>ELLA</text></svg>');"></div>
@@ -1006,7 +949,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         // ============================================
         // VERSION TIMESTAMP - FORCE BROWSER RELOAD
         // ============================================
-        console.log('H2E Terminal Version: 2026-01-02-19:10:00 - Audio Gate Added');
+        console.log('H2E Terminal Version: 2026-01-02-12:10:00');
         
         // ============================================
         // SOUND MANAGEMENT
@@ -1052,28 +995,15 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             bootSound.play();
         }
 
-        // After boot, show audio gate (not main terminal)
         setTimeout(() => {
             document.getElementById('boot-sequence').classList.add('hidden');
-            document.getElementById('audio-gate').classList.add('active');
-        }, 6000);
-
-        // Audio Gate Handler
-        document.getElementById('enter-terminal-btn').addEventListener('click', () => {
-            // Start ambient sound when user clicks
+            document.getElementById('main-terminal').classList.add('active');
+            
+            // Start ambient sound after boot
             if (soundEnabled && ambientSound) {
-                ambientSound.play().catch(e => console.log('Audio play failed:', e));
+                ambientSound.play().catch(e => console.log('Audio autoplay blocked:', e));
             }
-            
-            // Hide audio gate
-            document.getElementById('audio-gate').classList.add('hidden');
-            
-            setTimeout(() => {
-                document.getElementById('audio-gate').style.display = 'none';
-                // Show main terminal
-                document.getElementById('main-terminal').classList.add('active');
-            }, 500);
-        });
+        }, 6000);
 
         // ============================================
         // CHARACTER DATA
