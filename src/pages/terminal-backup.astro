@@ -1,5 +1,6 @@
 ---
-// Terminal 13.7 - Main Story Interface (UPDATED)
+// Terminal 13.7 - Main Story Interface
+// Last Updated: January 5, 2026, 9:50 PM - Added character images
 const siteTitle = "H2E Framework - Terminal 13.7";
 ---
 
@@ -87,6 +88,48 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             to { width: 100%; }
         }
         
+        /* Audio Gate Overlay - Shows AFTER boot */
+        #audio-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 9998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.5s;
+        }
+        
+        #audio-gate.active {
+            display: flex;
+        }
+        
+        #audio-gate.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        #enter-terminal-btn {
+            background: transparent;
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            padding: 20px 40px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 18px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        
+        #enter-terminal-btn:hover {
+            background: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        }
+
         /* Main Terminal */
         #main-terminal {
             display: none;
@@ -786,6 +829,21 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         </div>
     </div>
 
+    <!-- Audio Gate Overlay (Shows AFTER boot) -->
+    <div id="audio-gate">
+        <div style="text-align: center;">
+            <div style="font-size: 24px; color: #00ff41; margin-bottom: 30px; letter-spacing: 2px;">
+                TERMINAL 13.7
+            </div>
+            <button id="enter-terminal-btn">
+                ▶ ENTER TERMINAL
+            </button>
+            <div style="font-size: 12px; color: #888; margin-top: 20px;">
+                (Audio will begin)
+            </div>
+        </div>
+    </div>
+
     <!-- Ghost Feed Background -->
     <div class="ghost-feed">
         <div class="ghost-image" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%2300ff41%22 opacity=%220.1%22 width=%22200%22 height=%22200%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22monospace%22 font-size=%2220%22 fill=%22%2300ff41%22 opacity=%220.3%22 text-anchor=%22middle%22>ELLA</text></svg>');"></div>
@@ -817,7 +875,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                         <li class="chaplet-item">
                             <div class="chaplet-name">> PROLOGUE: Confessions</div>
                             <div class="chaplet-buttons">
-                                <button class="chaplet-btn" onclick="showChapterChoice('prologue')">🎧 AUDIO</button>
+                                <button class="chaplet-btn" onclick="showAudioMode('prologue')">🎧 AUDIO</button>
                                 <button class="chaplet-btn" onclick="showReadMode('prologue')">📄 READ</button>
                             </div>
                             <div class="chaplet-status">STATUS: AVAILABLE</div>
@@ -949,7 +1007,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         // ============================================
         // VERSION TIMESTAMP - FORCE BROWSER RELOAD
         // ============================================
-        console.log('H2E Terminal Version: 2026-01-02-12:10:00');
+        console.log('H2E Terminal Version: 2026-01-05-21:50:00 - Character Images Added');
         
         // ============================================
         // SOUND MANAGEMENT
@@ -995,15 +1053,28 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             bootSound.play();
         }
 
+        // After boot, show audio gate (not main terminal)
         setTimeout(() => {
             document.getElementById('boot-sequence').classList.add('hidden');
-            document.getElementById('main-terminal').classList.add('active');
-            
-            // Start ambient sound after boot
-            if (soundEnabled && ambientSound) {
-                ambientSound.play().catch(e => console.log('Audio autoplay blocked:', e));
-            }
+            document.getElementById('audio-gate').classList.add('active');
         }, 6000);
+
+        // Audio Gate Handler
+        document.getElementById('enter-terminal-btn').addEventListener('click', () => {
+            // Start ambient sound when user clicks
+            if (soundEnabled && ambientSound) {
+                ambientSound.play().catch(e => console.log('Audio play failed:', e));
+            }
+            
+            // Hide audio gate
+            document.getElementById('audio-gate').classList.add('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('audio-gate').style.display = 'none';
+                // Show main terminal
+                document.getElementById('main-terminal').classList.add('active');
+            }, 500);
+        });
 
         // ============================================
         // CHARACTER DATA
@@ -1123,10 +1194,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             document.getElementById('modal-body').innerHTML = `
                 <div class="character-profile">
                     <div class="character-image">
-                        <div style="aspect-ratio: 1; background: rgba(0, 255, 65, 0.1); display: flex; align-items: center; justify-content: center; font-size: 12px; color: #888;">
-                            [IMAGE: ${character.name}]<br>
-                            <span style="font-size: 10px;">3D MODEL PENDING</span>
-                        </div>
+                        <img src="/images/characters/${character.name}.png" alt="${character.name}" />
                     </div>
                     <div class="character-details">
                         <h3>${character.name}</h3>
@@ -1272,20 +1340,39 @@ And I no longer have the strength to try again.`;
                 <div class="audio-feed">
                     <div class="audio-title">PROLOGUE: Confessions - Audio Feed</div>
                     
-                    <div class="audio-controls">
-                        <button class="play-button" onclick="playAudio()" id="audio-play-btn">
-                            ▶️
-                        </button>
+                    <div class="audio-description" style="margin: 20px 0; text-align: center; line-height: 1.8;">
+                        🎧 Audio Feed<br><br>
+                        Narrated with immersive audio design.<br>
+                        Experience the confession through sound.
                     </div>
                     
-                    <div class="audio-info">
-                        🎵 Ambient: Server hum intensifies<br>
-                        🔊 Duration: ~3 minutes
+                    <div class="audio-info" style="text-align: center; color: #888; font-size: 12px; margin: 15px 0;">
+                        ⏱ Duration: ~3 minutes
                     </div>
                     
-                    <div class="audio-transcript">
-                        <div class="current-phrase" id="current-phrase">
-                            Press play to begin...
+                    <div style="max-width: 700px; margin: 0 auto;">
+                        <div id="progress-container" style="display: none;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <button class="play-button" onclick="playAudio()" id="audio-play-btn" style="flex-shrink: 0;">
+                                    ▶️
+                                </button>
+                                <div style="flex: 1;">
+                                    <div style="width: 100%; height: 4px; background: rgba(0, 255, 65, 0.2); cursor: pointer; position: relative;" id="progress-bar">
+                                        <div id="progress-fill" style="height: 100%; background: #00ff41; width: 0%; position: relative;">
+                                            <div id="scrubber-handle" style="position: absolute; right: -6px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; background: #00ff41; border-radius: 50%; cursor: grab; box-shadow: 0 0 4px rgba(0, 255, 65, 0.8);"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="time-display" style="text-align: center; margin-top: 10px; font-size: 11px; color: #888;">
+                                0:00 / 3:24
+                            </div>
+                        </div>
+                        
+                        <div id="initial-play-button" class="audio-controls" style="text-align: center; margin-top: 30px;">
+                            <button class="play-button" onclick="playAudio()">
+                                ▶️
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1293,6 +1380,9 @@ And I no longer have the strength to try again.`;
             
             document.getElementById('content-modal').classList.add('active');
         }
+
+        let progressInterval = null;
+        let isDragging = false;
 
         window.playAudio = function() {
             // Stop any existing audio
@@ -1311,59 +1401,108 @@ And I no longer have the strength to try again.`;
             currentAmbience.play();
             currentNarration.play();
             
-            // Update button
+            // Hide initial play button, show progress container
+            const initialButton = document.getElementById('initial-play-button');
+            if (initialButton) initialButton.style.display = 'none';
+            document.getElementById('progress-container').style.display = 'block';
+            
+            // Update button to pause
             document.getElementById('audio-play-btn').textContent = '⏸';
             document.getElementById('audio-play-btn').onclick = pauseAudio;
             
-            // Show phrases (simple version - you could sync this with timestamps)
-            const phrases = [
-                '"I gave you order. I did not stay to maintain it."',
-                'I built the Framework.',
-                'I did not build it well.',
-                'The flaw was in the root.',
-                'I saw the first errors. I looked away.',
-                'The damage spread.',
-                'It was failure. It was mine.',
-                'I am tired. I am ashamed.',
-                'The Framework is failing. It is my fault.'
-            ];
+            // Setup draggable scrubber
+            setupScrubber();
             
-            let phraseIndex = 0;
-            const phraseElement = document.getElementById('current-phrase');
-            
-            const showPhrase = () => {
-                if (phraseIndex < phrases.length) {
-                    phraseElement.classList.remove('active');
-                    setTimeout(() => {
-                        phraseElement.textContent = phrases[phraseIndex];
-                        phraseElement.classList.add('active');
-                        phraseIndex++;
-                    }, 500);
+            // Update progress bar continuously
+            progressInterval = setInterval(() => {
+                if (!isDragging && currentNarration && currentNarration.duration) {
+                    const progress = (currentNarration.currentTime / currentNarration.duration) * 100;
+                    document.getElementById('progress-fill').style.width = progress + '%';
+                    
+                    // Update time display
+                    const currentMin = Math.floor(currentNarration.currentTime / 60);
+                    const currentSec = Math.floor(currentNarration.currentTime % 60);
+                    const totalMin = Math.floor(currentNarration.duration / 60);
+                    const totalSec = Math.floor(currentNarration.duration % 60);
+                    
+                    document.getElementById('time-display').textContent = 
+                        `${currentMin}:${currentSec.toString().padStart(2, '0')} / ${totalMin}:${totalSec.toString().padStart(2, '0')}`;
                 }
-            };
-            
-            // Show phrases every 20 seconds (adjust based on actual narration)
-            showPhrase();
-            const phraseInterval = setInterval(() => {
-                showPhrase();
-                if (phraseIndex >= phrases.length) {
-                    clearInterval(phraseInterval);
-                }
-            }, 20000);
+            }, 100);
             
             // When narration ends
             currentNarration.addEventListener('ended', () => {
                 currentAmbience.pause();
+                clearInterval(progressInterval);
                 document.getElementById('audio-play-btn').textContent = '🔄';
                 document.getElementById('audio-play-btn').onclick = () => playAudio();
-                phraseElement.textContent = 'Audio complete. Press play to listen again.';
-                phraseElement.classList.add('active');
             });
+        }
+
+        // Setup draggable scrubber
+        function setupScrubber() {
+            const progressBar = document.getElementById('progress-bar');
+            const handle = document.getElementById('scrubber-handle');
+            const progressFill = document.getElementById('progress-fill');
+            
+            // Click anywhere on progress bar to seek
+            progressBar.addEventListener('click', (e) => {
+                if (e.target === handle) return; // Don't trigger if clicking handle
+                seekToPosition(e.clientX, progressBar);
+            });
+            
+            // Drag functionality
+            handle.addEventListener('mousedown', startDrag);
+            
+            function startDrag(e) {
+                isDragging = true;
+                handle.style.cursor = 'grabbing';
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', stopDrag);
+                e.preventDefault();
+            }
+            
+            function drag(e) {
+                if (!isDragging) return;
+                seekToPosition(e.clientX, progressBar);
+            }
+            
+            function stopDrag() {
+                isDragging = false;
+                handle.style.cursor = 'grab';
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', stopDrag);
+            }
+            
+            function seekToPosition(clientX, progressBar) {
+                if (!currentNarration || !currentNarration.duration) return;
+                
+                const rect = progressBar.getBoundingClientRect();
+                const clickX = clientX - rect.left;
+                const width = rect.width;
+                const percentage = Math.max(0, Math.min(1, clickX / width));
+                
+                // Update audio position
+                currentNarration.currentTime = currentNarration.duration * percentage;
+                
+                // Update visual immediately
+                progressFill.style.width = (percentage * 100) + '%';
+                
+                // Update time display
+                const currentMin = Math.floor(currentNarration.currentTime / 60);
+                const currentSec = Math.floor(currentNarration.currentTime % 60);
+                const totalMin = Math.floor(currentNarration.duration / 60);
+                const totalSec = Math.floor(currentNarration.duration % 60);
+                
+                document.getElementById('time-display').textContent = 
+                    `${currentMin}:${currentSec.toString().padStart(2, '0')} / ${totalMin}:${totalSec.toString().padStart(2, '0')}`;
+            }
         }
 
         window.pauseAudio = function() {
             if (currentNarration) currentNarration.pause();
             if (currentAmbience) currentAmbience.pause();
+            clearInterval(progressInterval);
             document.getElementById('audio-play-btn').textContent = '▶️';
             document.getElementById('audio-play-btn').onclick = resumeAudio;
         }
@@ -1371,6 +1510,23 @@ And I no longer have the strength to try again.`;
         window.resumeAudio = function() {
             if (currentNarration) currentNarration.play();
             if (currentAmbience) currentAmbience.play();
+            
+            // Restart progress updates
+            progressInterval = setInterval(() => {
+                if (currentNarration && currentNarration.duration) {
+                    const progress = (currentNarration.currentTime / currentNarration.duration) * 100;
+                    document.getElementById('progress-fill').style.width = progress + '%';
+                    
+                    const currentMin = Math.floor(currentNarration.currentTime / 60);
+                    const currentSec = Math.floor(currentNarration.currentTime % 60);
+                    const totalMin = Math.floor(currentNarration.duration / 60);
+                    const totalSec = Math.floor(currentNarration.duration % 60);
+                    
+                    document.getElementById('time-display').textContent = 
+                        `${currentMin}:${currentSec.toString().padStart(2, '0')} / ${totalMin}:${totalSec.toString().padStart(2, '0')}`;
+                }
+            }, 100);
+            
             document.getElementById('audio-play-btn').textContent = '⏸';
             document.getElementById('audio-play-btn').onclick = pauseAudio;
         }
