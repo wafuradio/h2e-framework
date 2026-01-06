@@ -1,6 +1,6 @@
 ---
 // Terminal 13.7 - Main Story Interface
-// Last Updated: January 5, 2026, 10:05 PM - Inline attribute display
+// Last Updated: January 5, 2026, 11:55 PM - Sound defaults to OFF
 const siteTitle = "H2E Framework - Terminal 13.7";
 ---
 
@@ -836,9 +836,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             <button id="enter-terminal-btn">
                 ▶ ENTER TERMINAL
             </button>
-            <div style="font-size: 12px; color: #888; margin-top: 20px;">
-                (Audio will begin)
-            </div>
         </div>
     </div>
 
@@ -858,8 +855,8 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 <div class="terminal-status">STATUS: COMPROMISED // GHOST RELAY ACTIVE // LB 3.2 DEPLOYED</div>
             </div>
             <div class="sound-toggle" onclick="toggleSound()">
-                <span class="sound-icon" id="sound-icon">🔊</span>
-                <span class="sound-label" id="sound-label">SOUND: ON</span>
+                <span class="sound-icon" id="sound-icon">🔇</span>
+                <span class="sound-label" id="sound-label">SOUND: OFF</span>
             </div>
         </div>
 
@@ -1005,14 +1002,14 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         // ============================================
         // VERSION TIMESTAMP - FORCE BROWSER RELOAD
         // ============================================
-        console.log('H2E Terminal Version: 2026-01-05-22:05:00 - Inline Attributes');
+        console.log('H2E Terminal Version: 2026-01-05-23:55:00 - Sound Defaults to OFF');
         
         // ============================================
         // SOUND MANAGEMENT
         // ============================================
         let ambientSound = null;
         let bootSound = null;
-        let soundEnabled = true;
+        let soundEnabled = false; // Default to OFF - user must enable
 
         function initializeSounds() {
             // Ambient server room loop
@@ -1059,10 +1056,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
         // Audio Gate Handler
         document.getElementById('enter-terminal-btn').addEventListener('click', () => {
-            // Start ambient sound when user clicks
-            if (soundEnabled && ambientSound) {
-                ambientSound.play().catch(e => console.log('Audio play failed:', e));
-            }
+            // Don't auto-play sound - user must enable via sound toggle
+            // This respects user control and follows H2E Interface Rules:
+            // "Audio optional. No autoplay. Ever."
             
             // Hide audio gate
             document.getElementById('audio-gate').classList.add('hidden');

@@ -1,6 +1,6 @@
 ---
 // Terminal 13.7 - Main Story Interface
-// Last Updated: January 5, 2026, 9:50 PM - Added character images
+// Last Updated: January 5, 2026, 10:05 PM - Inline attribute display
 const siteTitle = "H2E Framework - Terminal 13.7";
 ---
 
@@ -720,21 +720,19 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         }
         
         .character-attribute {
-            display: grid;
-            grid-template-columns: 150px 1fr;
-            margin: 8px 0;
-            padding: 8px;
-            background: rgba(0, 255, 65, 0.05);
+            margin: 4px 0;
+            line-height: 1.6;
         }
         
         .attribute-label {
-            color: #888;
-            font-size: 11px;
-            text-transform: uppercase;
+            color: #00ff41;
+            font-size: 13px;
+            display: inline;
         }
         
         .attribute-value {
             color: #00ff41;
+            display: inline;
         }
         
         /* Hidden Terminal */
@@ -1007,7 +1005,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         // ============================================
         // VERSION TIMESTAMP - FORCE BROWSER RELOAD
         // ============================================
-        console.log('H2E Terminal Version: 2026-01-05-21:50:00 - Character Images Added');
+        console.log('H2E Terminal Version: 2026-01-05-22:05:00 - Inline Attributes');
         
         // ============================================
         // SOUND MANAGEMENT
@@ -1184,8 +1182,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 for (const [key, value] of Object.entries(character.attributes)) {
                     attributesHTML += `
                         <div class="character-attribute">
-                            <div class="attribute-label">${key}</div>
-                            <div class="attribute-value">${value}</div>
+                            <span class="attribute-label">${key}:</span> <span class="attribute-value">${value}</span>
                         </div>
                     `;
                 }
@@ -1199,17 +1196,14 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     <div class="character-details">
                         <h3>${character.name}</h3>
                         <div class="character-attribute">
-                            <div class="attribute-label">Class</div>
-                            <div class="attribute-value">${character.class}</div>
+                            <span class="attribute-label">Class:</span> <span class="attribute-value">${character.class}</span>
                         </div>
                         <div class="character-attribute">
-                            <div class="attribute-label">Status</div>
-                            <div class="attribute-value">${character.status}</div>
+                            <span class="attribute-label">Status:</span> <span class="attribute-value">${character.status}</span>
                         </div>
                         ${character.age ? `
                         <div class="character-attribute">
-                            <div class="attribute-label">Age</div>
-                            <div class="attribute-value">${character.age}</div>
+                            <span class="attribute-label">Age:</span> <span class="attribute-value">${character.age}</span>
                         </div>
                         ` : ''}
                         <h3 style="margin-top: 20px;">Description</h3>
