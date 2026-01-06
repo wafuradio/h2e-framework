@@ -1,18 +1,18 @@
 # H2E Framework - Project Status
-*Last Updated: January 5, 2026*
+*Last Updated: January 6, 2026 - 1:00 PM*
 
 ---
 
-## 🌐 Live Site Information
+## ðŸŒ Live Site Information
 
 - **Primary URL:** https://h2eframework.com (custom domain)
 - **Netlify URL:** https://inquisitive-kringle-70d06b.netlify.app
-- **Status:** LIVE ✅
+- **Status:** LIVE âœ…
 - **GitHub Repo:** https://github.com/wafuradio/h2e-framework
 
 ---
 
-## 🛠 Tech Stack
+## ðŸ›  Tech Stack
 
 ### Core Technologies
 - **Astro** (v5.16.6) - Static site framework
@@ -32,36 +32,43 @@
 
 ---
 
-## 📂 Current Site Structure
+## ðŸ“‚ Current Site Structure
 
 ```
 h2e-framework/
-├─ src/
-│  ├─ pages/
-│  │  ├─ index.astro          // Homepage (terminal intro)
-│  │  └─ terminal.astro       // Full interactive interface
-│  └─ styles/
-│     └─ global.css           // Tailwind imports
-├─ public/
-│  ├─ sounds/                 // Audio files
-│  │  ├─ ambient-server-room.mp3
-│  │  ├─ boot-sequence.mp3
-│  │  ├─ prologue-narration.mp3
-│  │  └─ prologue-ambience.mp3
-│  └─ images/
-│     └─ characters/          // Character portraits
-│        ├─ desmondJohn.png
-│        ├─ jessMartin.png
-│        ├─ isidoreAbraham.png
-│        └─ trinus.png
-├─ astro.config.mjs
-├─ tailwind.config.mjs
-└─ package.json
+â”œâ”€ src/
+â”‚  â”œâ”€ pages/
+â”‚  â”‚  â”œâ”€ index.astro          // Homepage (terminal intro)
+â”‚  â”‚  â””â”€ terminal.astro       // Full interactive interface
+â”‚  â””â”€ styles/
+â”‚     â””â”€ global.css           // Tailwind imports
+â”œâ”€ public/
+â”‚  â”œâ”€ sounds/                 // Audio files
+â”‚  â”‚  â”œâ”€ ambient-server-room.mp3
+â”‚  â”‚  â”œâ”€ boot-sequence.mp3
+â”‚  â”‚  â”œâ”€ prologue-narration.mp3
+â”‚  â”‚  â””â”€ prologue-ambience.mp3
+â”‚  â””â”€ images/
+â”‚     â””â”€ characters/          // Character portraits
+â”‚        â”œâ”€ desmondJohn.png
+â”‚        â”œâ”€ jessMartin.png
+â”‚        â”œâ”€ isidoreAbraham.png
+â”‚        â””â”€ trinus.png
+â”œâ”€ H2E_INTERFACE_RULES.md    // Canonical design principles (NEW!)
+â”œâ”€ astro.config.mjs
+â”œâ”€ tailwind.config.mjs
+â””â”€ package.json
 ```
+
+**Important Documentation:**
+- `H2E_INTERFACE_RULES.md` - Canonical design principles established January 5, 2026
+  - Defines diegetic terminal approach
+  - Core rule: "Audio optional. No autoplay. Ever."
+  - All interface decisions measured against these principles
 
 ---
 
-## ✔️ Pages Built
+## âœ”ï¸ Pages Built
 
 ### 1. Homepage (`/`)
 **Purpose:** Landing page with story hook  
@@ -70,11 +77,11 @@ h2e-framework/
 - Green "// H2E Framework" header
 - Terminal window with three colored dots (red/yellow/green)
 - Story premise (3-sentence version)
-- "ACCESS FRAMEWORK" button → links to `/terminal`
+- "ACCESS FRAMEWORK" button â†’ links to `/terminal`
 - Footer
 
 **Content:**
-> "What if existence is simply a program? In a universe ruled by divine logic, desmondJohn learns his mother's suicide will erase him before he's even born. With the Praetores enforcing an irreversible fate, his only hope lies with foedus—a fallen enforcer who knows the system's secrets."
+> "What if existence is simply a program? In a universe ruled by divine logic, desmondJohn learns his mother's suicide will erase him before he's even born. With the Praetores enforcing an irreversible fate, his only hope lies with foedusâ€”a fallen enforcer who knows the system's secrets."
 
 ---
 
@@ -90,20 +97,20 @@ h2e-framework/
 
 #### Audio Gate Screen
 - "ENTER TERMINAL" button appears after boot
-- User clicks → Unlocks audio permission
+- User clicks â†’ Unlocks audio permission
 - Ambient server room sound starts looping
 - Necessary for browser autoplay restrictions
 
 #### Priority Alert Screen
 - 3 PreBorn entities listed (desmondJohn, jessMartin, isidoreAbraham)
-- Clickable character names → opens profiles
-- "Track Their Signal" button → jumps to story
-- "Access Full Logs" button → reveals full interface
+- Clickable character names â†’ opens profiles
+- "Track Their Signal" button â†’ jumps to story
+- "Access Full Logs" button â†’ reveals full interface
 
 #### Full Interface (after Priority Alert)
 **Left Panel - Story Archives:**
-- Prologue: Confessions ✅ (Full dual-mode access)
-- Chaplet 1: The Grit of I/O ✅ (Preview available)
+- Prologue: Confessions âœ… (Full dual-mode access)
+- Chaplet 1: The Grit of I/O âœ… (Preview available)
 - Chaplet 2: AssignareFatum() (coming soon)
 - Chaplet 3: The Realm Beyond (coming soon)
 - Chaplet 3.5: INSERTION [CORRUPTED - glitching]
@@ -112,8 +119,8 @@ h2e-framework/
 
 **Right Panel - Object Registry:**
 - trinus [FUNCTIONARY]
-- foedus [DEPRECATED - ACCESS RESTRICTED] 🔴
-- theLady [MEDIATRIX - ⚠ ANOMALY DETECTED] 🔔
+- foedus [DEPRECATED - ACCESS RESTRICTED] ðŸ”´
+- theLady [MEDIATRIX - âš  ANOMALY DETECTED] ðŸ””
 - desmondJohn [PREBORN - STATUS: PENDING]
 - jessMartin [PREBORN - STATUS: PENDING]
 - isidoreAbraham [PREBORN - STATUS: PENDING]
@@ -127,11 +134,11 @@ h2e-framework/
 
 #### Interactive Features
 
-**🎧 NEW: Streamlined Audio Player** (January 5, 2026)
+**ðŸŽ§ NEW: Streamlined Audio Player** (January 5, 2026)
 Each chapter offers audio mode with professional player:
 
 **Before Playing:**
-- Big centered ▶️ play button
+- Big centered â–¶ï¸ play button
 - Chapter title and description
 - Duration display
 
@@ -142,8 +149,8 @@ Each chapter offers audio mode with professional player:
 - Time display shows current / total (e.g., "0:31 / 3:24")
 - Click anywhere on bar to jump
 - Drag the green handle to scrub through audio
-- Pause/resume with ⏸/▶️ button
-- When finished, shows 🔄 replay button
+- Pause/resume with â¸/â–¶ï¸ button
+- When finished, shows ðŸ”„ replay button
 
 **Audio Features:**
 - Ambient server room sound loops continuously (background)
@@ -152,13 +159,13 @@ Each chapter offers audio mode with professional player:
 - Clean, minimal interface - no distracting elements
 - Status: Framework ready, Prologue audio complete
 
-**📄 Read Mode:**
+**ðŸ“„ Read Mode:**
 - Terminal-style text viewer
-- Gray header bar (#3a4a5a) with colored dots (●●●)
+- Gray header bar (#3a4a5a) with colored dots (â—â—â—)
 - Command prompt: `$ cat PROLOGUE_Confessions.txt`
 - White text (#ffffff) on black background
 - Gray italic quotes (#aaaaaa)
-- Red dot (●) closes window - yellow/green dots decorative
+- Red dot (â—) closes window - yellow/green dots decorative
 - NO close button - clean interface
 - Scrollable content
 - Matches landing page terminal aesthetic
@@ -173,10 +180,10 @@ Each chapter offers audio mode with professional player:
   - Traditional close button (different from Read mode)
 
 **Images:**
-- ✅ desmondJohn.png - 13-year-old PreBorn, oldest sibling
-- ✅ jessMartin.png - 10-year-old PreBorn, rebellious
-- ✅ isidoreAbraham.png - 7-year-old PreBorn, youngest
-- ✅ trinus.png - Functionary, Terminal 13.7 operator
+- âœ… desmondJohn.png - 13-year-old PreBorn, oldest sibling
+- âœ… jessMartin.png - 10-year-old PreBorn, rebellious
+- âœ… isidoreAbraham.png - 7-year-old PreBorn, youngest
+- âœ… trinus.png - Functionary, Terminal 13.7 operator
 - Images automatically load based on character name
 - To add more: Just drop PNG files in `/public/images/characters/` with correct filename
 - No code changes needed for new character images!
@@ -195,7 +202,7 @@ Each chapter offers audio mode with professional player:
 
 ---
 
-## 🎨 Design System
+## ðŸŽ¨ Design System
 
 ### Color Palette
 ```css
@@ -229,10 +236,10 @@ Colored dots:
 
 ---
 
-## 📝 Content Status
+## ðŸ“ Content Status
 
 ### Full Content Available
-✅ **Prologue: Confessions**
+âœ… **Prologue: Confessions**
 - Complete text
 - Available in both Audio and Read modes
 - Formatted with line breaks
@@ -240,28 +247,28 @@ Colored dots:
 - ElevenLabs narration (placeholder for Izaak's final recording)
 - Ambient server room sound
 
-✅ **Chaplet 1: The Grit of I/O**
+âœ… **Chaplet 1: The Grit of I/O**
 - Opening paragraphs
 - Establishes Terminal 13.7
 - Introduces trinus
 - Preview only - full text pending
 
 ### Preview/Placeholder
-⏳ Chaplets 2-5 (listed but not full content)
+â³ Chaplets 2-5 (listed but not full content)
 
 ---
 
-## 👥 Character Profiles (Complete)
+## ðŸ‘¥ Character Profiles (Complete)
 
 All 7 characters have full profiles with attributes:
 
-1. **desmondJohn** (PreBorn, 13 cycles) ✅ Image added
+1. **desmondJohn** (PreBorn, 13 cycles) âœ… Image added
    - Oldest sibling, logical, burdened by responsibility
 
-2. **jessMartin** (PreBorn, 10 cycles) ✅ Image added
+2. **jessMartin** (PreBorn, 10 cycles) âœ… Image added
    - Middle sibling, defiant, questions everything
 
-3. **isidoreAbraham** (PreBorn, 7 cycles) ✅ Image added
+3. **isidoreAbraham** (PreBorn, 7 cycles) âœ… Image added
    - Youngest, empathetic, golden-haired, cherub-like
 
 4. **foedus** (Deprecated Praetor)
@@ -275,7 +282,7 @@ All 7 characters have full profiles with attributes:
    - Adds "forbidden fifth" to Praetores harmony
    - Image: Ready to add (just drop theLady.png in /images/characters/)
 
-6. **trinus** (Functionary) ✅ Image added
+6. **trinus** (Functionary) âœ… Image added
    - Operates Terminal 13.7
    - Middle-aged, stocky, salt-pepper hair
    - **KEY: Deprecated Trinity class - WAS CHRIST**
@@ -288,29 +295,29 @@ All 7 characters have full profiles with attributes:
 
 ---
 
-## 🎯 Major Story Reveals & Decisions
+## ðŸŽ¯ Major Story Reveals & Decisions
 
 ### Confirmed Canon
-✅ **trinus is Christ** - Deprecated Trinity class, memory-wiped, recycled into functionary  
-✅ **foedus gets erased** - Punished for helping the children (Chaplet 9)  
-✅ **foedus returns** - Rollback restores him; he doesn't remember being deleted (Chaplet 13)  
-✅ **The Framework is failing** - Built by a deprecated Creator who abandoned it  
-✅ **ApostasiaVitae() is suicide** - Forbidden function from foreign system (Hell Framework)  
-✅ **Mother = ella** - Her suicide triggers PreBorn erasure  
+âœ… **trinus is Christ** - Deprecated Trinity class, memory-wiped, recycled into functionary  
+âœ… **foedus gets erased** - Punished for helping the children (Chaplet 9)  
+âœ… **foedus returns** - Rollback restores him; he doesn't remember being deleted (Chaplet 13)  
+âœ… **The Framework is failing** - Built by a deprecated Creator who abandoned it  
+âœ… **ApostasiaVitae() is suicide** - Forbidden function from foreign system (Hell Framework)  
+âœ… **Mother = ella** - Her suicide triggers PreBorn erasure  
 
 ### Still Being Decided
-🤔 **Children's final fate:**
+ðŸ¤” **Children's final fate:**
    - Option A: Born with Trisomy 21 (Down syndrome as mutation cost)
    - Option B: Stuck as anomaly in the system while Praetores try to correct
    - Current lean: Leave unresolved in Book 1
 
-🤔 **Ella's outcome:**
+ðŸ¤” **Ella's outcome:**
    - Stranger at checkout interrupts her suicide momentum
    - She lives, but we don't know if permanently or temporarily
 
 ---
 
-## 🎵 Audio Production Notes
+## ðŸŽµ Audio Production Notes
 
 **Studio Available:** Full recording studio ready for:
 - Character voice profiles
@@ -320,10 +327,10 @@ All 7 characters have full profiles with attributes:
 - System sound effects
 
 **Current Audio Files:**
-- ✅ `ambient-server-room.mp3` (2-3min loop, 44.1kHz, 128-192kbps, -18dB mix)
-- ✅ `prologue-narration.mp3` (~3-4min, 192kbps, ElevenLabs placeholder)
-- 🔲 `boot-sequence.mp3` (planned - 6sec, matches visual boot animation)
-- 🔲 `prologue-ambience.mp3` (planned - same duration, -20dB, decay sounds)
+- âœ… `ambient-server-room.mp3` (2-3min loop, 44.1kHz, 128-192kbps, -18dB mix)
+- âœ… `prologue-narration.mp3` (~3-4min, 192kbps, ElevenLabs placeholder)
+- ðŸ”² `boot-sequence.mp3` (planned - 6sec, matches visual boot animation)
+- ðŸ”² `prologue-ambience.mp3` (planned - same duration, -20dB, decay sounds)
 
 **Location:** `/public/sounds/`
 
@@ -338,7 +345,7 @@ All 7 characters have full profiles with attributes:
 
 ---
 
-## 🔄 Workflow Established
+## ðŸ”„ Workflow Established
 
 ### Local Development
 1. Navigate to project: `cd Desktop/h2e-framework`
@@ -373,25 +380,25 @@ Then test in **incognito/private browser window** at `http://localhost:4321`
 
 ---
 
-## 🐛 Known Issues & Fixes
+## ðŸ› Known Issues & Fixes
 
-### FIXED ✅
-- ~~Tailwind CSS not loading~~ → Added `import '../styles/global.css'` to frontmatter
-- ~~JavaScript onclick not working~~ → Changed functions to `window.functionName` with `is:inline` script tag
-- ~~DNS propagation~~ → Custom domain fully connected
-- ~~Browser caching issues~~ → Added version timestamps to force reload
-- ~~CSS inheritance overriding styles~~ → Used inline styles for Read mode
-- ~~Close button appearing on Read mode~~ → Fixed CSS selector to match class name
-- ~~Audio player too many clicks~~ → Streamlined from 4 clicks to 2 clicks
-- ~~Distracting cycling text in audio player~~ → Removed transcript section
-- ~~No progress indicator during playback~~ → Added progress bar with time display
-- ~~Can't scrub through audio~~ → Added draggable scrubber handle (iTunes-style)
-- ~~Play button not aligned with progress bar~~ → Made button inline with scrubber
-- ~~Character profile placeholder images~~ → Added actual character portraits
-- ~~Attributes displaying on separate lines~~ → Changed to inline format with colons
+### FIXED âœ…
+- ~~Tailwind CSS not loading~~ â†’ Added `import '../styles/global.css'` to frontmatter
+- ~~JavaScript onclick not working~~ â†’ Changed functions to `window.functionName` with `is:inline` script tag
+- ~~DNS propagation~~ â†’ Custom domain fully connected
+- ~~Browser caching issues~~ â†’ Added version timestamps to force reload
+- ~~CSS inheritance overriding styles~~ â†’ Used inline styles for Read mode
+- ~~Close button appearing on Read mode~~ â†’ Fixed CSS selector to match class name
+- ~~Audio player too many clicks~~ â†’ Streamlined from 4 clicks to 2 clicks
+- ~~Distracting cycling text in audio player~~ â†’ Removed transcript section
+- ~~No progress indicator during playback~~ â†’ Added progress bar with time display
+- ~~Can't scrub through audio~~ â†’ Added draggable scrubber handle (iTunes-style)
+- ~~Play button not aligned with progress bar~~ â†’ Made button inline with scrubber
+- ~~Character profile placeholder images~~ â†’ Added actual character portraits
+- ~~Attributes displaying on separate lines~~ â†’ Changed to inline format with colons
 
 ### Current Issues
-None reported! 🎉
+None reported! ðŸŽ‰
 
 ### Important Technical Notes
 - **Version Timestamps:** Code includes `console.log('H2E Terminal Version: YYYY-MM-DD-HH:MM:SS')` to force browser cache refresh
@@ -401,7 +408,7 @@ None reported! 🎉
 
 ---
 
-## 📋 Next Steps / Roadmap
+## ðŸ“‹ Next Steps / Roadmap
 
 ### Immediate Priorities
 - [ ] Get final narration from Izaak for Prologue (replace ElevenLabs placeholder)
@@ -437,7 +444,7 @@ None reported! 🎉
 
 ---
 
-## 🎯 Target Audience
+## ðŸŽ¯ Target Audience
 
 **Primary:** Geeks who appreciate:
 - Philosophical sci-fi (The Matrix, The Good Place, Arrival)
@@ -452,19 +459,19 @@ None reported! 🎉
 
 ---
 
-## 💡 Key Insights & Learnings
+## ðŸ’¡ Key Insights & Learnings
 
 ### What's Working
-✅ Terminal aesthetic is **visually striking**  
-✅ Code-as-theology concept is **unique and compelling**  
-✅ Character profiles add **depth without overwhelming**  
-✅ Hidden terminal commands create **engagement/discovery**  
-✅ Iterative development allows **story to evolve**  
-✅ **Dual-mode reading system** gives users agency and choice  
-✅ **Clean terminal UX** (colored dots instead of buttons) feels authentic
-✅ **Streamlined audio player** reduces friction and improves UX
-✅ **Draggable scrubber** provides professional audio control
-✅ **Character images** bring the story to life visually
+âœ… Terminal aesthetic is **visually striking**  
+âœ… Code-as-theology concept is **unique and compelling**  
+âœ… Character profiles add **depth without overwhelming**  
+âœ… Hidden terminal commands create **engagement/discovery**  
+âœ… Iterative development allows **story to evolve**  
+âœ… **Dual-mode reading system** gives users agency and choice  
+âœ… **Clean terminal UX** (colored dots instead of buttons) feels authentic
+âœ… **Streamlined audio player** reduces friction and improves UX
+âœ… **Draggable scrubber** provides professional audio control
+âœ… **Character images** bring the story to life visually
 
 ### Development Philosophy
 - Build as you write (web experience IS part of creative process)
@@ -490,7 +497,7 @@ None reported! 🎉
 
 ---
 
-## 📞 Contact & Credentials
+## ðŸ“ž Contact & Credentials
 
 ### Important Accounts
 - **GitHub Username:** wafuradio
@@ -504,7 +511,7 @@ None reported! 🎉
 
 ---
 
-## 📄 Notes for Future Claude Sessions
+## ðŸ“„ Notes for Future Claude Sessions
 
 When starting a new conversation:
 1. I've been developing H2E for 18 months with ChatGPT
@@ -520,10 +527,11 @@ When starting a new conversation:
 11. **Version timestamps** in code help track what's deployed
 12. **Always test on localhost first** before assuming production is updated
 13. **Character images** can be added without code changes - just drop PNGs in `/public/images/characters/`
+14. **H2E_INTERFACE_RULES.md is CANONICAL** - All interface decisions must align with these principles
 
 ---
 
-## 🎨 Design References
+## ðŸŽ¨ Design References
 
 ### Visual Inspiration
 - Terminal aesthetic: https://term.ooo/
@@ -537,7 +545,7 @@ When starting a new conversation:
 
 ---
 
-## ⚠️ Important Reminders
+## âš ï¸ Important Reminders
 
 1. **Never delete this file** - it's your continuity anchor
 2. **Update after major changes** - keep it current
@@ -552,44 +560,44 @@ When starting a new conversation:
 
 ---
 
-## 🎉 Recent Session Summary (January 5, 2026)
+## ðŸŽ‰ Recent Session Summary (January 5, 2026)
 
 ### Evening Session - Audio Player Streamlining & Character Images
 
 **Major Accomplishments:**
 
-✅ **Streamlined Audio Player Interface**
+âœ… **Streamlined Audio Player Interface**
 - Reduced from 4 clicks to 2 clicks to start audio
 - Removed intermediate "Select Access Method" screen
-- Direct access: Click 🎧 AUDIO → Audio player opens → Click ▶️ → Audio plays
+- Direct access: Click ðŸŽ§ AUDIO â†’ Audio player opens â†’ Click â–¶ï¸ â†’ Audio plays
 
-✅ **Removed Distracting Elements**
+âœ… **Removed Distracting Elements**
 - Eliminated cycling transcript text that showed narration phrases
 - Clean, minimal interface focuses on audio control
 - User can listen without visual distractions
 
-✅ **Added Progress Bar with Scrubber**
+âœ… **Added Progress Bar with Scrubber**
 - Progress bar appears when audio starts playing
 - Green bar fills as audio progresses
 - Time display shows current / total (e.g., "0:31 / 1:54")
 - Updates every 0.1 seconds for smooth animation
 
-✅ **iTunes-Style Draggable Scrubber**
+âœ… **iTunes-Style Draggable Scrubber**
 - Green circular handle at end of progress bar
 - Click and drag to scrub through audio
 - Click anywhere on bar to jump to that position
 - Smooth real-time seeking
-- Cursor changes: "grab" → "grabbing" during drag
+- Cursor changes: "grab" â†’ "grabbing" during drag
 - isDragging flag prevents auto-update conflicts
 
-✅ **Inline Play Button Layout**
-- Initial state: Big centered ▶️ button
+âœ… **Inline Play Button Layout**
+- Initial state: Big centered â–¶ï¸ button
 - After play: Button moves inline to LEFT of progress bar
 - Professional audio player layout (like Spotify/iTunes)
 - Button and scrubber on same horizontal line
 - Time display centered below
 
-✅ **Character Images Added**
+âœ… **Character Images Added**
 - Added actual character portraits for 4 characters:
   - desmondJohn.png
   - jessMartin.png
@@ -599,7 +607,7 @@ When starting a new conversation:
 - Automatic loading based on filename
 - No code changes needed to add more images
 
-✅ **Inline Attribute Display**
+âœ… **Inline Attribute Display**
 - Changed from grid layout to inline format
 - Now displays as: "Class: Functionary" (all on one line)
 - Matches terminal console aesthetic
@@ -628,14 +636,14 @@ When starting a new conversation:
 - Responsive layout with flexbox
 
 **Audio Player Flow:**
-1. User clicks 🎧 AUDIO button
+1. User clicks ðŸŽ§ AUDIO button
 2. Audio player modal opens with description
-3. User sees big centered ▶️ button
-4. Click → Audio starts playing
+3. User sees big centered â–¶ï¸ button
+4. Click â†’ Audio starts playing
 5. Button moves inline with progress bar
 6. Progress bar appears and fills
 7. User can pause, drag scrubber, or click to seek
-8. When finished, 🔄 replay button appears
+8. When finished, ðŸ”„ replay button appears
 
 **Images System:**
 - Images auto-load from `/public/images/characters/${characterName}.png`
@@ -644,16 +652,344 @@ When starting a new conversation:
 - Works for any character: foedus, theLady, praetores, etc.
 
 **Deployment Status:**
-- Ready for production deployment
-- All features tested locally
-- Version: 2026-01-05-22:05:00
-- File ready in /mnt/user-data/outputs/terminal.astro
+- âœ… **DEPLOYED TO PRODUCTION** (January 5, 2026, 11:55 PM)
+- All features tested locally and live
+- Version: 2026-01-05-23:55:00
+- Live at: https://h2eframework.com
 
-**Next Steps:**
-- Deploy to production when ready
-- Add remaining character images (foedus, theLady, praetores)
-- Record final narrations with Izaak
-- Add content for Chaplets 2-5
+---
+
+## ðŸŽ‰ Late Night Session - Interface Rules & Sound Control (January 5, 2026, 11:30 PM - 12:00 AM)
+
+### Discussion with ChatGPT
+Lisa consulted with ChatGPT about the current auto-play sound behavior. ChatGPT recommended:
+1. Sound should default to OFF (no autoplay)
+2. User must explicitly enable sound
+3. Establish canonical H2E Interface Rules document
+
+**Outcome:** Full agreement and implementation of both recommendations.
+
+---
+
+### Major Accomplishments:
+
+âœ… **Created H2E_INTERFACE_RULES.md**
+- Canonical design principles document
+- Established core rule: "Audio optional. No autoplay. Ever."
+- Defines diegetic terminal approach (not a marketing site)
+- Sets tone: Cold. Restrained. Clinical.
+- Motion rules: Minimal motion, slow only, no cute easing
+- Sound rules: Sound is telemetry, not mood
+- UI labels: System language (Access, Retrieve, Invoke) not consumer language (Play, Enjoy)
+- Build discipline: Features must serve Access, Atmosphere, or Canon control
+- **Location:** Project root alongside other documentation
+
+âœ… **Disabled Sound Auto-Play**
+- Changed `soundEnabled` default from `true` to `false`
+- Sound no longer plays when user enters terminal
+- User must explicitly click sound toggle to enable
+
+âœ… **Updated Sound Toggle Display**
+- Now shows ðŸ”‡ SOUND: OFF by default
+- Clicking toggles to ðŸ”Š SOUND: ON and starts ambient
+- Full user control over audio experience
+
+âœ… **Removed Misleading Text**
+- Deleted "(Audio will begin)" from audio gate screen
+- No false promises about sound behavior
+- Clean, honest interface
+
+---
+
+### Code Changes:
+```javascript
+// Before
+let soundEnabled = true;
+// Auto-played on terminal entry
+
+// After  
+let soundEnabled = false; // Default to OFF - user must enable
+// No auto-play - user clicks toggle to start
+```
+
+**HTML Changes:**
+- Sound toggle button: Changed from ðŸ”Š SOUND: ON to ðŸ”‡ SOUND: OFF
+- Audio gate: Removed "(Audio will begin)" text
+
+---
+
+### User Experience Flow (Updated):
+
+1. **Boot sequence** (6 seconds) - Silent
+2. **"ENTER TERMINAL" screen** - No mention of audio
+3. **User clicks button** â†’ Terminal opens **silently**
+4. **Sound toggle shows:** ðŸ”‡ SOUND: OFF
+5. **User clicks toggle** â†’ ðŸ”Š SOUND: ON â†’ Ambient starts
+6. **Full user control** âœ…
+
+---
+
+### Compliance with Interface Rules:
+
+âœ… "Audio optional. No autoplay. Ever."  
+âœ… Default state is quiet, readable, stable  
+âœ… User controls sound, motion, and depth  
+âœ… No misleading microcopy  
+âœ… System language in UI  
+
+---
+
+### Files Modified:
+- `/src/pages/terminal.astro` - Sound defaults and auto-play removal
+- `/H2E_INTERFACE_RULES.md` - New canonical design document (created)
+
+---
+
+### Deployment:
+- âœ… **LIVE** at https://h2eframework.com
+- Version: 2026-01-05-23:55:00 - Sound Defaults to OFF
+- All changes tested and working in production
+
+---
+
+### Next Steps (Morning Review):
+- [ ] Audit all button/link copy against Interface Rules
+- [ ] Review audio player descriptions for system voice
+- [ ] Consider if colored dots (â—â—â—) need justification
+- [ ] Evaluate other interactive elements for diegetic consistency
+- [ ] Add remaining character images (foedus, theLady, praetores)
+- [ ] Record final narrations with Izaak
+- [ ] Add content for Chaplets 2-5
+
+---
+
+## 🎉 Afternoon Session - Terminal Redesign Phase 1 (January 6, 2026, 12:00 PM - 1:00 PM)
+
+### Overview
+Complete terminal interface redesign implementing H2E_INTERFACE_RULES.md principles. Moved from lore-heavy layout to story-first hierarchy.
+
+---
+
+### Major Accomplishments:
+
+✅ **Index Page Copy Refinement**
+- Consulted with ChatGPT about index page being too system-heavy
+- Changed from exposition-heavy copy to inviting mystery:
+  - **Before:** "In a universe ruled by divine logic, desmondJohn learns his mother's suicide will erase him before he's even born..."
+  - **After:** "Before he is born, desmondJohn is caught in a system that does not allow exceptions. Someone inside it knows better."
+- Removed jargon: "Praetores", "foedus", "irreversible fate"
+- Created contrast: Index = invitation (warm), Terminal = system (cold)
+
+✅ **Terminal Layout Redesigned (Option 2 - Story-First)**
+- Implemented completely new layout hierarchy:
+  ```
+  TERMINAL 13.7                    🔇 SOUND: OFF [volume] [Return to index]
+  
+  ACTIVE THREAD: desmondJohn | jessMartin | isidoreAbraham
+  Three PreBorn marked for deletion.
+  
+  ───────────────────────────────────
+  BEGIN READING
+    Prologue: Confessions         🎧 📄
+    Chaplet 1: The Grit of I/O   [disabled]
+    [remaining chapters...]
+  ───────────────────────────────────
+  REFERENCE MATERIALS
+    Object Registry | Glossary | System Logs
+  ───────────────────────────────────
+  Press ` to access terminal
+  ```
+- **Story dominates view** - No longer competing with Object Registry
+- **Object Registry moved to secondary section** - Clearly optional
+- **Character names NOT clickable** in Priority Alert - Prevents lore front-loading
+- **Ghost Feed hidden** - Now a secret terminal command
+
+✅ **Full Audio/Read Mode Integration**
+- Extracted complete audio player from old terminal.astro
+- Extracted complete read mode from old terminal.astro
+- Both modes fully functional with:
+  - Audio player: Draggable scrubber, progress bar, time display
+  - Read mode: Terminal-style text viewer with colored dots
+  - Modal system working perfectly
+  - Prologue content available in both modes
+
+✅ **Audio Player Refinements**
+- Inline play button shrunk 50% (60px → 30px)
+- Added Apple-style volume control:
+  - Hidden by default (only speaker icon visible: 🔊)
+  - Click speaker to reveal slider
+  - Slider auto-hides when mouse leaves (0.5s delay)
+  - Click speaker when visible to mute/unmute
+  - Gray color scheme (#333 track, #888 handle)
+  - 80px horizontal slider
+- Play button + progress bar + volume control all inline
+
+✅ **Chaplet 1 Disabled**
+- Grayed out like other chapters (no content yet)
+- Audio/Read buttons show as disabled
+- Prevents confusion about available content
+
+✅ **localStorage Persistence**
+- Sound ON/OFF state saved per device
+- Volume level saved per device
+- Returns to previous state on page refresh
+
+✅ **Escape Links Positioned**
+- "Return to index" on Enter Terminal screen (below button, low contrast)
+- "Return to index" on full terminal (upper right corner)
+- Always available, no confirmation dialogs
+
+✅ **Hidden Terminal (Backtick Key)**
+- Press ` to open/close
+- Commands implemented:
+  - `help` - Shows available commands
+  - `clear` - Clears output
+  - `/ghost_feed` - Placeholder for Phase 2
+  - `/echo foedus` - Placeholder for Phase 2
+- Escape key closes terminal
+
+---
+
+### Technical Implementation:
+
+**Files Created:**
+- `/home/claude/terminal-phase1.astro` - Complete redesigned terminal
+- Copied to `/mnt/user-data/outputs/terminal-phase1.astro`
+
+**Key Features:**
+- Option 2 layout with story-first hierarchy
+- Volume control inline with sound toggle
+- Sound localStorage persistence (ON/OFF + volume)
+- Hidden terminal with command system
+- Full modal system for audio/read modes
+- Prologue content (text + audio paths)
+- All previous functionality preserved
+
+**Code Structure:**
+- ~1,200 lines total
+- Clean separation: boot → enter → terminal
+- Modal system with proper cleanup
+- Audio player with scrubber + volume
+- Read mode with inline styles
+- localStorage for preferences
+- Event listeners properly managed
+
+---
+
+### Known Issues:
+
+⚠️ **Volume Slider Still Blue** (UNRESOLVED)
+- Browser default styling overriding CSS
+- Attempted fixes:
+  - `::-webkit-slider-thumb` styling
+  - `::-webkit-slider-runnable-track` styling
+  - `::-moz-range-track` and `::-moz-range-progress` styling
+  - Set background: #333 (track), #888 (handle)
+- **Need to investigate further** - May require more aggressive CSS overrides or different approach
+- User wants gray styling like Apple's volume control
+- This is a **cosmetic issue only** - functionality works perfectly
+
+---
+
+### Phase 1 Status: ✅ COMPLETE (except volume slider color)
+
+**What's Working:**
+- ✅ New layout (story-first)
+- ✅ Audio mode with full player
+- ✅ Read mode with terminal styling
+- ✅ Volume control (hidden/reveal on click)
+- ✅ Sound localStorage persistence
+- ✅ Escape links positioned
+- ✅ Hidden terminal commands
+- ✅ Chaplet 1 disabled
+- ✅ Index page copy refined
+
+**What Needs Work:**
+- ⚠️ Volume slider color (blue → gray)
+
+---
+
+### Files Modified:
+- `/mnt/project/index.astro` - Updated copy to be more inviting
+- `/mnt/user-data/outputs/terminal-phase1.astro` - Complete redesign
+
+---
+
+### Next Steps - Phase 2 (Future Session):
+
+**Ghost Feed Implementation:**
+- [ ] Build modal with realm dropdown
+- [ ] 6 realm options from H2E map:
+  - Waiting Quarters
+  - The Array
+  - Grove of Accord
+  - I/O
+  - Realm Beyond
+  - Edge of the System
+- [ ] "Live feed" window for each realm
+- [ ] Signal quality bars
+- [ ] Unauthorized access warning
+
+**Foedus Dossier:**
+- [ ] Build modal for `/echo foedus` command
+- [ ] Basic info + link to full Object Registry
+
+**Reference Materials Pages:**
+- [ ] Create `/registry` page (Object Registry)
+- [ ] Create `/glossary` page
+- [ ] System Logs modal overlay
+
+**Phase 3 Planning:**
+- [ ] Sophisticated ghost feed visuals (animated loops per realm)
+- [ ] Realm-specific ambient sounds
+- [ ] Additional secret commands
+- [ ] More character dossiers
+- [ ] Fix volume slider blue color issue
+
+---
+
+### Technical Notes for Next Session:
+
+**Volume Slider Color Issue:**
+- Current CSS targets: `::-webkit-slider-thumb`, `::-webkit-slider-runnable-track`, `::-moz-range-thumb`, `::-moz-range-track`, `::-moz-range-progress`
+- Browser may be applying default blue gradient to filled portion
+- May need to use `input[type="range"]::-webkit-slider-runnable-track` with `background: linear-gradient()` hack
+- Alternative: Use custom div-based slider instead of native input
+- Worth researching: Safari/Chrome specific overrides
+
+**Audio/Read Modal Code:**
+- Located in terminal-phase1.astro lines ~850-1100
+- Character data and prologue text lines ~780-850
+- Modal styles lines ~380-450
+- All self-contained and working
+
+**localStorage Keys:**
+- `h2e_sound_enabled` - Boolean (true/false)
+- `h2e_volume_level` - Number (0-100)
+- `audio-volume-slider` dataset: `previousVolume` for mute toggle
+
+---
+
+### User Feedback Summary:
+
+**What User Loved:**
+- New layout puts story first ✅
+- Audio player streamlined (2 clicks to play) ✅
+- Volume control concept (hidden until clicked) ✅
+- Everything working smoothly ✅
+
+**What User Wants Fixed:**
+- Volume slider blue color → gray ⚠️
+  - Should match Apple's aesthetic
+  - Gray track, gray handle, no blue anywhere
+
+---
+
+### Deployment Status:
+- ⚠️ **NOT YET DEPLOYED** - Phase 1 complete locally only
+- File ready: `/mnt/user-data/outputs/terminal-phase1.astro`
+- When ready: Replace `/src/pages/terminal.astro` with Phase 1 version
+- Will need to test volume slider color fix before deploying
 
 ---
 
