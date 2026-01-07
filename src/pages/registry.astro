@@ -1,0 +1,240 @@
+---
+// Object Registry Page
+import '../styles/global.css';
+const siteTitle = "H2E Framework - Object Registry";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{siteTitle}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff41;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #00ff41;
+            text-decoration: none;
+            font-size: 12px;
+            border: 1px solid #00ff41;
+            padding: 8px 15px;
+            transition: all 0.3s;
+        }
+        
+        .back-link:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+        
+        .registry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+        
+        .registry-card {
+            border: 1px solid #333;
+            padding: 20px;
+            background: rgba(0, 255, 65, 0.02);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .registry-card:hover {
+            border-color: #00ff41;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-name {
+            font-size: 16px;
+            color: #00ff41;
+        }
+        
+        .card-status {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        .card-class {
+            font-size: 12px;
+            color: #ffaa00;
+            margin-bottom: 10px;
+        }
+        
+        .card-description {
+            font-size: 11px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            color: #ffaa00;
+            margin: 40px 0 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/terminal" class="back-link">← RETURN TO TERMINAL</a>
+        
+        <div class="header">
+            <h1 class="title">OBJECT REGISTRY</h1>
+            <div class="subtitle">Active & Deprecated Entity Database</div>
+        </div>
+        
+        <div class="section-title">→ PreBorn Entities</div>
+        <div class="registry-grid">
+            <div class="registry-card" onclick="showProfile('desmondJohn')">
+                <div class="card-header">
+                    <div class="card-name">desmondJohn</div>
+                    <div class="card-status">● PENDING</div>
+                </div>
+                <div class="card-class">[PREBORN]</div>
+                <div class="card-description">
+                    Eldest of three siblings. 13 cycles. Logical, burdened by responsibility. 
+                    Designated for Perish() pending maternal thread termination.
+                </div>
+            </div>
+            
+            <div class="registry-card" onclick="showProfile('jessMartin')">
+                <div class="card-header">
+                    <div class="card-name">jessMartin</div>
+                    <div class="card-status">● PENDING</div>
+                </div>
+                <div class="card-class">[PREBORN]</div>
+                <div class="card-description">
+                    Middle sibling. 10 cycles. Defiant, questions system logic. 
+                    Refuses standard protocol. Status linked to maternal thread.
+                </div>
+            </div>
+            
+            <div class="registry-card" onclick="showProfile('isidoreAbraham')">
+                <div class="card-header">
+                    <div class="card-name">isidoreAbraham</div>
+                    <div class="card-status">● PENDING</div>
+                </div>
+                <div class="card-class">[PREBORN]</div>
+                <div class="card-description">
+                    Youngest sibling. 7 cycles. Empathetic, quiet. 
+                    Golden-haired. Fate bound to sibling array.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-title">→ System Functionaries</div>
+        <div class="registry-grid">
+            <div class="registry-card" onclick="showProfile('trinus')">
+                <div class="card-header">
+                    <div class="card-name">trinus</div>
+                    <div class="card-status">● ACTIVE</div>
+                </div>
+                <div class="card-class">[FUNCTIONARY]</div>
+                <div class="card-description">
+                    Terminal 13.7 operator. Executes AssignareFatum(). 
+                    Deprecated Trinity designation. Memory fragmented.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-title">→ Deprecated / Restricted</div>
+        <div class="registry-grid">
+            <div class="registry-card" onclick="showProfile('foedus')">
+                <div class="card-header">
+                    <div class="card-name">foedus</div>
+                    <div class="card-status" style="color: #ff4444;">● DEPRECATED</div>
+                </div>
+                <div class="card-class">[PRAETORES - FALLEN]</div>
+                <div class="card-description">
+                    Former Praetor. Subclass: thePraevideo. Expelled from Array. 
+                    Location: Edge of System. Access restricted.
+                </div>
+            </div>
+            
+            <div class="registry-card" onclick="showProfile('theLady')">
+                <div class="card-header">
+                    <div class="card-name">theLady</div>
+                    <div class="card-status" style="color: #ffaa00;">⚠ ANOMALY</div>
+                </div>
+                <div class="card-class">[MEDIATRIX]</div>
+                <div class="card-description">
+                    Exception handler. Grove of Accord operator. 
+                    Invokes Intercede(). Origin: Unknown. Hand malformed.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-title">→ Enforcers</div>
+        <div class="registry-grid">
+            <div class="registry-card" onclick="alert('Full Praetores documentation coming soon')">
+                <div class="card-header">
+                    <div class="card-name">thePraetores</div>
+                    <div class="card-status">● ACTIVE</div>
+                </div>
+                <div class="card-class">[ENFORCERS - PAIRED]</div>
+                <div class="card-description">
+                    System executors. Operate in harmonic pairs. 
+                    Subtypes: Witnesses, Guardians, Judicants, Scribes, Keepers.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script is:inline>
+        function showProfile(characterName) {
+            // For now, just show alert. Later, this will open modal with full profile
+            // Same modal system as terminal.astro character profiles
+            alert(`${characterName} full profile coming soon!\n\nThis will use the same modal system as the terminal, with character images and full dossiers.`);
+        }
+    </script>
+</body>
+</html>

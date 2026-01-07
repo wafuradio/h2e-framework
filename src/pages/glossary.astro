@@ -1,0 +1,146 @@
+---
+// Glossary Page
+import '../styles/global.css';
+const siteTitle = "H2E Framework - Glossary";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{siteTitle}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff41;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #00ff41;
+            text-decoration: none;
+            font-size: 12px;
+            border: 1px solid #00ff41;
+            padding: 8px 15px;
+            transition: all 0.3s;
+        }
+        
+        .back-link:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+        
+        .coming-soon {
+            text-align: center;
+            padding: 100px 20px;
+            color: #666;
+        }
+        
+        .coming-soon-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #ffaa00;
+        }
+        
+        .coming-soon-text {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .glossary-grid {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .glossary-term {
+            border: 1px solid #333;
+            padding: 20px;
+            background: rgba(0, 255, 65, 0.02);
+        }
+        
+        .term-name {
+            font-size: 18px;
+            color: #00ff41;
+            margin-bottom: 10px;
+        }
+        
+        .term-pronunciation {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        
+        .term-definition {
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/terminal" class="back-link">← RETURN TO TERMINAL</a>
+        
+        <div class="header">
+            <h1 class="title">GLOSSARY</h1>
+            <div class="subtitle">System Terminology & Function Definitions</div>
+        </div>
+        
+        <div class="coming-soon">
+            <div class="coming-soon-title">⚠️ CONTENT COMPILATION IN PROGRESS</div>
+            <div class="coming-soon-text">
+                Glossary entries are being migrated from the Immutable Record.<br>
+                Full terminology database will be accessible in a future system update.<br><br>
+                <span style="color: #00ff41;">STATUS: PENDING</span>
+            </div>
+        </div>
+        
+        <!-- PLACEHOLDER FOR FUTURE CONTENT
+        <div class="glossary-grid">
+            <div class="glossary-term">
+                <div class="term-name">AssignareFatum()</div>
+                <div class="term-pronunciation">/ah-sig-NAR-ay fah-TOOM/</div>
+                <div class="term-definition">
+                    System-level function that assigns each PreBorn to one of two fates: Born() or Perish(). 
+                    Once called, the assignment becomes part of the Life Book but does not trigger execution immediately.
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+</body>
+</html>

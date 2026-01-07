@@ -1,7 +1,7 @@
 ---
 // Terminal 13.7 - Main Story Interface
-// Phase 1 Implementation: Option 2 Layout, Volume Control, Escape Links
-// Last Updated: January 6, 2026 - Phase 1 Build
+// Phase 2A Implementation: Ghost Feed Modal System
+// Last Updated: January 6, 2026 - Phase 2A Build
 const siteTitle = "H2E Framework - Terminal 13.7";
 ---
 
@@ -89,6 +89,12 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         
         @keyframes fillProgress {
             to { width: 100%; }
+        }
+        
+        /* Subtle scanline effect for ghost feed */
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
         
         /* ===================================
@@ -512,6 +518,287 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             display: none;
         }
         
+        /* ===================================
+           GHOST FEED MODAL
+           =================================== */
+        .ghost-feed-container {
+            padding: 20px;
+        }
+        
+        .ghost-feed-header {
+            border-left: 3px solid #ffaa00;
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .ghost-feed-title {
+            font-size: 18px;
+            color: #ffaa00;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .ghost-feed-subtitle {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .ghost-feed-warning {
+            background: rgba(255, 170, 0, 0.1);
+            border: 1px solid #ffaa00;
+            padding: 12px 15px;
+            margin-bottom: 30px;
+            font-size: 11px;
+            color: #ffaa00;
+            line-height: 1.6;
+        }
+        
+        .realm-selector {
+            margin-bottom: 30px;
+        }
+        
+        .realm-selector-label {
+            display: block;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Custom Terminal Dropdown */
+        .custom-dropdown {
+            position: relative;
+        }
+        
+        .dropdown-display {
+            width: 100%;
+            background: #000;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 12px 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dropdown-display:hover {
+            background: rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        .dropdown-display.active {
+            border-bottom: none;
+        }
+        
+        .dropdown-arrow {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #000;
+            border: 1px solid #00ff41;
+            border-top: none;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 12px 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid #111;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(0, 255, 65, 0.1);
+            color: #00ff41;
+            padding-left: 20px;
+        }
+        
+        .dropdown-item.selected {
+            color: #00ff41;
+        }
+        
+        .dropdown-item.selected::before {
+            content: '> ';
+            color: #00ff41;
+        }
+        
+        .dropdown-item.highlighted {
+            background: #00ff41;
+            color: #000;
+        }
+        
+        .dropdown-item.highlighted::before {
+            content: '▶ ';
+            color: #000;
+        }
+        
+        .dropdown-item.highlighted:hover {
+            padding-left: 15px; /* Override hover padding when highlighted */
+        }
+        
+        .realm-number {
+            display: inline-block;
+            width: 25px;
+            color: #666;
+        }
+        
+        .dropdown-item.highlighted .realm-number {
+            color: #000;
+        }
+        
+        .feed-window {
+            border: 1px solid #333;
+            background: #000;
+            min-height: 400px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feed-window::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(0, 255, 65, 0.3);
+            animation: scanline 3s linear infinite;
+            pointer-events: none;
+        }
+        
+        .feed-content {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+        
+        .feed-placeholder {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 16/9;
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px dashed #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .feed-placeholder-icon {
+            font-size: 48px;
+            opacity: 0.3;
+        }
+        
+        .feed-placeholder-text {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        
+        .feed-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            display: block;
+            border: 1px solid #333;
+        }
+        
+        .realm-description {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .signal-quality {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+        
+        .signal-quality-label {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .signal-bars {
+            display: flex;
+            gap: 4px;
+            align-items: flex-end;
+            height: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .signal-bar {
+            flex: 1;
+            background: #222;
+            transition: all 0.3s;
+        }
+        
+        .signal-bar.active {
+            background: #00ff41;
+            box-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+        }
+        
+        .signal-bar:nth-child(1) { height: 20%; }
+        .signal-bar:nth-child(2) { height: 40%; }
+        .signal-bar:nth-child(3) { height: 60%; }
+        .signal-bar:nth-child(4) { height: 80%; }
+        .signal-bar:nth-child(5) { height: 100%; }
+        
+        .signal-status {
+            font-size: 11px;
+            color: #888;
+        }
+        
+        .signal-status strong {
+            color: #00ff41;
+        }
+        
+        .signal-status.degraded strong {
+            color: #ffaa00;
+        }
+        
+        .signal-status.critical strong {
+            color: #ff4444;
+        }
+        
         /* Audio Player */
         .audio-feed {
             text-align: center;
@@ -573,6 +860,26 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             cursor: pointer;
             border-radius: 50%;
             border: none;
+        }
+        
+        .volume-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+        }
+        
+        .volume-slider::-moz-range-track {
+            width: 100%;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+        }
+        
+        .volume-slider::-moz-range-progress {
+            background: #555;
+            height: 4px;
+            border-radius: 2px;
         }
     </style>
 </head>
@@ -724,7 +1031,294 @@ const siteTitle = "H2E Framework - Terminal 13.7";
     </div>
 
     <script is:inline>
-        console.log('H2E Terminal Version: 2026-01-06-12:00:00 - Phase 1 Implementation');
+        console.log('H2E Terminal Version: 2026-01-06-13:00:00 - Phase 2A Implementation - Ghost Feed');
+
+        // ========================================
+        // GHOST FEED DATA
+        // ========================================
+        const realmData = {
+            1: {
+                key: 'waiting-quarters',
+                name: 'Waiting Quarters',
+                description: 'PreBorn holding area. Suspended execution state. Rows of bunks. Static lighting. Sterile environment.',
+                signalStrength: 78,
+                status: 'STABLE',
+                statusClass: '',
+                imagePath: '/images/ghost-feed/waiting-quarters.png'
+            },
+            2: {
+                key: 'the-array',
+                name: 'The Array',
+                description: 'Praetores enforcement plane. White space. Mirrored surfaces. Harmonic execution chamber. High security.',
+                signalStrength: 65,
+                status: 'MONITORED - PRAETORES ACTIVE',
+                statusClass: 'degraded',
+                imagePath: '/images/ghost-feed/the-array.png'
+            },
+            3: {
+                key: 'grove-of-accord',
+                name: 'Grove of Accord',
+                description: 'Exception handling layer. theLady\'s domain. Sterile environment. Override negotiation space.',
+                signalStrength: 54,
+                status: 'INTERFERENCE DETECTED',
+                statusClass: 'degraded',
+                imagePath: '/images/ghost-feed/grove-of-accord.png'
+            },
+            4: {
+                key: 'io',
+                name: 'I/O',
+                description: 'Terminal 13.7 home sector. Input/output staging. Fate designation router. Maximum relay strength.',
+                signalStrength: 92,
+                status: 'OPTIMAL',
+                statusClass: '',
+                imagePath: '/images/ghost-feed/io.png'
+            },
+            5: {
+                key: 'realm-beyond',
+                name: 'Realm Beyond',
+                description: 'Unstable instability zone. Deprecated logic fragments. Glitch terrain. Unauthorized PreBorn traversal detected.',
+                signalStrength: 31,
+                status: 'DEGRADED - PARTIAL RECOVERY',
+                statusClass: 'degraded',
+                imagePath: '/images/ghost-feed/realm-beyond.png'
+            },
+            6: {
+                key: 'edge-of-system',
+                name: 'Edge of the System',
+                description: 'foedus sanctuary. Exclusion zone. Deprecated code accumulation. Signal barely readable. Extreme corruption.',
+                signalStrength: 12,
+                status: 'CRITICAL - MINIMAL RECOVERY',
+                statusClass: 'critical',
+                imagePath: '/images/ghost-feed/edge-of-system.png'
+            }
+        };
+        
+        // For easy lookup by key
+        const realmByKey = {};
+        Object.values(realmData).forEach(realm => {
+            realmByKey[realm.key] = realm;
+        });
+
+        // ========================================
+        // GHOST FEED MODAL
+        // ========================================
+        let currentSelectedRealm = null;
+        let highlightedRealmIndex = 0; // For keyboard navigation
+        let dropdownOpen = false;
+        
+        window.showGhostFeed = function(realmNumber) {
+            // Generate dropdown items
+            const dropdownItems = Object.keys(realmData).map(num => {
+                const realm = realmData[num];
+                return `
+                    <div class="dropdown-item" data-realm="${num}" onclick="selectRealm(${num})">
+                        <span class="realm-number">${num}.</span> ${realm.name}
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('modal-body').innerHTML = `
+                <div class="ghost-feed-container">
+                    <div class="ghost-feed-header">
+                        <div class="ghost-feed-title">⚠️ UNAUTHORIZED OBSERVATION RELAY</div>
+                        <div class="ghost-feed-subtitle">Ghost Feed Access - Deprecated Channels</div>
+                    </div>
+                    
+                    <div class="ghost-feed-warning">
+                        WARNING: These observation relays were never decommissioned. Access constitutes protocol violation. 
+                        Praetores monitoring systems may flag unauthorized usage. Proceed with discretion.
+                    </div>
+                    
+                    <div class="realm-selector">
+                        <label class="realm-selector-label">Select Realm</label>
+                        <div class="custom-dropdown">
+                            <div class="dropdown-display" onclick="toggleDropdown()" id="dropdown-display">
+                                <span id="dropdown-selected">-- Choose Observation Target --</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu">
+                                ${dropdownItems}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feed-window">
+                        <div class="feed-content" id="feed-content">
+                            <div class="feed-placeholder">
+                                <div class="feed-placeholder-icon">📡</div>
+                                <div class="feed-placeholder-text">
+                                    Awaiting realm selection...<br>
+                                    Select target from dropdown above
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-quality" id="signal-quality" style="display: none;">
+                        <div class="signal-quality-label">Signal Quality</div>
+                        <div class="signal-bars" id="signal-bars">
+                            <div class="signal-bar"></div>
+                            <div class="signal-bar"></div>
+                            <div class="signal-bar"></div>
+                            <div class="signal-bar"></div>
+                            <div class="signal-bar"></div>
+                        </div>
+                        <div class="signal-status" id="signal-status">
+                            <strong>--</strong> | STATUS: AWAITING CONNECTION
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('content-modal').classList.add('active');
+            
+            // Initialize keyboard navigation
+            if (realmNumber && realmData[realmNumber]) {
+                highlightedRealmIndex = realmNumber - 1; // 0-indexed
+                setTimeout(() => selectRealm(realmNumber), 100);
+            } else {
+                highlightedRealmIndex = 0; // Start at first item
+                updateHighlight();
+            }
+            
+            // Set up keyboard event listener for dropdown navigation
+            setupDropdownKeyboardNav();
+        };
+        
+        window.toggleDropdown = function() {
+            const menu = document.getElementById('dropdown-menu');
+            const display = document.getElementById('dropdown-display');
+            
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                display.classList.remove('active');
+                dropdownOpen = false;
+            } else {
+                menu.classList.add('active');
+                display.classList.add('active');
+                dropdownOpen = true;
+                
+                // Highlight current selection or first item
+                if (currentSelectedRealm) {
+                    highlightedRealmIndex = currentSelectedRealm - 1;
+                } else {
+                    highlightedRealmIndex = 0;
+                }
+                updateHighlight();
+                
+                // Focus the dropdown for keyboard events
+                menu.focus();
+            }
+        };
+        
+        window.selectRealm = function(realmNumber) {
+            currentSelectedRealm = realmNumber;
+            const realm = realmData[realmNumber];
+            
+            // Update dropdown display
+            document.getElementById('dropdown-selected').textContent = realm.name;
+            
+            // Close dropdown
+            document.getElementById('dropdown-menu').classList.remove('active');
+            document.getElementById('dropdown-display').classList.remove('active');
+            dropdownOpen = false;
+            
+            // Update dropdown item styling
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            document.querySelector(`[data-realm="${realmNumber}"]`).classList.add('selected');
+            
+            // Update feed
+            updateGhostFeed(realm);
+        };
+        
+        // Update visual highlight in dropdown
+        function updateHighlight() {
+            const items = document.querySelectorAll('.dropdown-item');
+            items.forEach((item, index) => {
+                if (index === highlightedRealmIndex) {
+                    item.classList.add('highlighted');
+                } else {
+                    item.classList.remove('highlighted');
+                }
+            });
+        }
+        
+        // Keyboard navigation for dropdown
+        function setupDropdownKeyboardNav() {
+            // Remove old listener if exists
+            document.removeEventListener('keydown', handleDropdownKeydown);
+            document.addEventListener('keydown', handleDropdownKeydown);
+        }
+        
+        function handleDropdownKeydown(e) {
+            // Only handle keys when modal is open and dropdown is active
+            if (!document.getElementById('content-modal').classList.contains('active')) {
+                return;
+            }
+            
+            // Only handle arrow keys and Enter when dropdown is visible
+            if (!dropdownOpen) {
+                return;
+            }
+            
+            const items = document.querySelectorAll('.dropdown-item');
+            const maxIndex = items.length - 1;
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                highlightedRealmIndex = Math.min(highlightedRealmIndex + 1, maxIndex);
+                updateHighlight();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                highlightedRealmIndex = Math.max(highlightedRealmIndex - 1, 0);
+                updateHighlight();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                const realmNumber = highlightedRealmIndex + 1; // Convert back to 1-indexed
+                selectRealm(realmNumber);
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                // Close dropdown but keep modal open
+                document.getElementById('dropdown-menu').classList.remove('active');
+                document.getElementById('dropdown-display').classList.remove('active');
+                dropdownOpen = false;
+            }
+        }
+
+        window.updateGhostFeed = function(realm) {
+            // Update feed content
+            document.getElementById('feed-content').innerHTML = `
+                <div class="feed-placeholder">
+                    <div class="feed-placeholder-icon">📡</div>
+                    <div class="feed-placeholder-text">
+                        [Placeholder for animated loop]<br>
+                        ${realm.name}
+                    </div>
+                </div>
+                <div class="realm-description">${realm.description}</div>
+            `;
+            
+            // Show and update signal quality
+            document.getElementById('signal-quality').style.display = 'block';
+            
+            // Update signal bars
+            const bars = document.querySelectorAll('.signal-bar');
+            const activeBars = Math.ceil((realm.signalStrength / 100) * 5);
+            bars.forEach((bar, index) => {
+                if (index < activeBars) {
+                    bar.classList.add('active');
+                } else {
+                    bar.classList.remove('active');
+                }
+            });
+            
+            // Update signal status
+            const statusElement = document.getElementById('signal-status');
+            statusElement.className = `signal-status ${realm.statusClass}`;
+            statusElement.innerHTML = `<strong>${realm.signalStrength}%</strong> | STATUS: ${realm.status}`;
+        };
 
         // ========================================
         // SOUND MANAGEMENT WITH LOCALSTORAGE
@@ -733,7 +1327,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         let soundEnabled = false;
         let volumeLevel = 75;
 
-        // Load saved preferences
         function loadSoundPreferences() {
             const savedSound = localStorage.getItem('h2e_sound_enabled');
             const savedVolume = localStorage.getItem('h2e_volume_level');
@@ -746,7 +1339,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 volumeLevel = parseInt(savedVolume);
             }
             
-            // Update UI to match saved state
             updateSoundUI();
         }
 
@@ -799,7 +1391,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             saveSoundPreferences();
         };
 
-        // Volume slider handling
         document.addEventListener('DOMContentLoaded', () => {
             const volumeSlider = document.getElementById('volume-slider');
             const volumeLabel = document.getElementById('volume-label');
@@ -834,11 +1425,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 document.getElementById('enter-terminal-screen').style.display = 'none';
                 document.getElementById('main-terminal').classList.add('active');
                 
-                // Initialize sound system
                 initializeSounds();
                 loadSoundPreferences();
                 
-                // If user had sound ON previously, start playing
                 if (soundEnabled && ambientSound) {
                     ambientSound.play().catch(e => console.log('Audio play failed:', e));
                 }
@@ -849,6 +1438,68 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         // HIDDEN TERMINAL (BACKTICK KEY)
         // ========================================
         let terminalOpen = false;
+        let commandHistory = [];
+        let historyIndex = -1;
+        
+        // Load command history from localStorage
+        function loadCommandHistory() {
+            const saved = localStorage.getItem('h2e_terminal_history');
+            if (saved) {
+                try {
+                    commandHistory = JSON.parse(saved);
+                } catch (e) {
+                    commandHistory = [];
+                }
+            }
+        }
+        
+        // Save command history to localStorage
+        function saveCommandHistory() {
+            // Keep only last 20 commands
+            if (commandHistory.length > 20) {
+                commandHistory = commandHistory.slice(-20);
+            }
+            localStorage.setItem('h2e_terminal_history', JSON.stringify(commandHistory));
+        }
+        
+        // Add command to history
+        function addToHistory(command) {
+            if (command.trim() === '') return;
+            
+            // Don't add duplicate of last command
+            if (commandHistory.length > 0 && commandHistory[commandHistory.length - 1] === command) {
+                return;
+            }
+            
+            commandHistory.push(command);
+            saveCommandHistory();
+            historyIndex = commandHistory.length; // Reset to end
+        }
+        
+        // Navigate history with arrow keys
+        function navigateHistory(direction) {
+            if (commandHistory.length === 0) return '';
+            
+            if (direction === 'up') {
+                if (historyIndex > 0) {
+                    historyIndex--;
+                }
+            } else if (direction === 'down') {
+                if (historyIndex < commandHistory.length) {
+                    historyIndex++;
+                }
+            }
+            
+            // Return command at current index, or empty string if at end
+            if (historyIndex < commandHistory.length) {
+                return commandHistory[historyIndex];
+            } else {
+                return '';
+            }
+        }
+        
+        // Load history on page load
+        loadCommandHistory();
         
         document.addEventListener('keydown', (e) => {
             if (e.key === '`') {
@@ -859,6 +1510,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 if (terminalOpen) {
                     terminal.classList.add('active');
                     document.getElementById('terminal-input').focus();
+                    historyIndex = commandHistory.length; // Reset to end when opening
                 } else {
                     terminal.classList.remove('active');
                 }
@@ -871,34 +1523,80 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         });
 
         document.getElementById('terminal-input').addEventListener('keydown', (e) => {
+            // Handle up/down arrow for command history
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const command = navigateHistory('up');
+                e.target.value = command;
+                // Move cursor to end
+                setTimeout(() => {
+                    e.target.selectionStart = e.target.selectionEnd = e.target.value.length;
+                }, 0);
+                return;
+            }
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const command = navigateHistory('down');
+                e.target.value = command;
+                // Move cursor to end
+                setTimeout(() => {
+                    e.target.selectionStart = e.target.selectionEnd = e.target.value.length;
+                }, 0);
+                return;
+            }
+            
             if (e.key === 'Enter') {
                 const input = e.target.value.trim();
                 const output = document.getElementById('terminal-output');
                 
-                // Add command to output
+                // Add to history before processing
+                if (input !== '') {
+                    addToHistory(input);
+                }
+                
                 const commandLine = document.createElement('div');
                 commandLine.textContent = '$ ' + input;
                 commandLine.style.color = '#00ff41';
                 output.appendChild(commandLine);
                 
-                // Process command
                 if (input === 'help') {
                     const helpText = document.createElement('div');
                     helpText.innerHTML = `
 AVAILABLE COMMANDS:<br>
-  /ghost_feed  - Access unauthorized observation relays<br>
-  /echo foedus - Search deprecated archives<br>
-  help         - Display this message<br>
-  clear        - Clear terminal<br>
+  /ghost_feed [1-6]  - Access observation relays<br>
+  /echo foedus       - Search deprecated archives<br>
+  help               - Display this message<br>
+  clear              - Clear terminal<br>
                     `;
                     output.appendChild(helpText);
                 } else if (input === 'clear') {
                     output.innerHTML = '';
-                } else if (input === '/ghost_feed') {
-                    const response = document.createElement('div');
-                    response.textContent = '[COMING SOON] Ghost Feed system initializing...';
-                    response.style.color = '#ffaa00';
-                    output.appendChild(response);
+                } else if (input.startsWith('/ghost_feed')) {
+                    const parts = input.split(' ');
+                    const realmNumber = parts[1] ? parseInt(parts[1]) : null;
+                    
+                    if (realmNumber && (realmNumber < 1 || realmNumber > 6)) {
+                        const errorText = document.createElement('div');
+                        errorText.textContent = `Invalid realm number: ${realmNumber}. Valid range: 1-6`;
+                        errorText.style.color = '#ff4444';
+                        output.appendChild(errorText);
+                    } else {
+                        const response = document.createElement('div');
+                        if (realmNumber) {
+                            response.textContent = `Initializing Ghost Feed relay system... Direct access to realm ${realmNumber}`;
+                        } else {
+                            response.textContent = 'Initializing Ghost Feed relay system...';
+                        }
+                        response.style.color = '#00ff41';
+                        output.appendChild(response);
+                        
+                        setTimeout(() => {
+                            terminalOpen = false;
+                            document.getElementById('hidden-terminal').classList.remove('active');
+                            showGhostFeed(realmNumber);
+                        }, 500);
+                    }
                 } else if (input === '/echo foedus') {
                     const response = document.createElement('div');
                     response.textContent = '[COMING SOON] Searching deprecated archives...';
@@ -911,10 +1609,7 @@ AVAILABLE COMMANDS:<br>
                     output.appendChild(errorText);
                 }
                 
-                // Scroll to bottom
                 output.scrollTop = output.scrollHeight;
-                
-                // Clear input
                 e.target.value = '';
             }
         });
@@ -1086,11 +1781,10 @@ And I no longer have the strength to try again.`;
                 document.getElementById('audio-play-btn').onclick = () => playAudio();
             });
             
-            // Setup volume control
             const volumeSlider = document.getElementById('audio-volume-slider');
             volumeSlider.addEventListener('input', (e) => {
                 const volume = e.target.value / 100;
-                if (currentNarration) currentNarration.volume = volume * 0.8; // Keep relative balance
+                if (currentNarration) currentNarration.volume = volume * 0.8;
                 if (currentAmbience) currentAmbience.volume = volume * 0.3;
             });
         };
@@ -1179,7 +1873,6 @@ And I no longer have the strength to try again.`;
             document.getElementById('audio-play-btn').onclick = pauseAudio;
         };
 
-        // Volume slider toggle (Apple-style)
         let volumeSliderVisible = false;
         let volumeHideTimeout = null;
         
@@ -1189,24 +1882,18 @@ And I no longer have the strength to try again.`;
             const icon = document.getElementById('audio-volume-icon');
             
             if (!volumeSliderVisible) {
-                // Show slider
                 slider.style.display = 'block';
                 volumeSliderVisible = true;
-                
-                // Setup mouse leave to hide slider
                 wrapper.addEventListener('mouseleave', hideVolumeSlider);
             } else {
-                // Toggle mute if clicking icon when slider is visible
                 const currentVolume = slider.value;
                 if (currentVolume > 0) {
-                    // Mute
                     slider.dataset.previousVolume = currentVolume;
                     slider.value = 0;
                     if (currentNarration) currentNarration.volume = 0;
                     if (currentAmbience) currentAmbience.volume = 0;
                     icon.textContent = '🔇';
                 } else {
-                    // Unmute
                     const previousVolume = slider.dataset.previousVolume || 80;
                     slider.value = previousVolume;
                     const volume = previousVolume / 100;
@@ -1221,7 +1908,6 @@ And I no longer have the strength to try again.`;
             const slider = document.getElementById('audio-volume-slider');
             const wrapper = document.getElementById('volume-control-wrapper');
             
-            // Delay hiding to allow for adjustment
             volumeHideTimeout = setTimeout(() => {
                 slider.style.display = 'none';
                 volumeSliderVisible = false;
@@ -1229,7 +1915,6 @@ And I no longer have the strength to try again.`;
             }, 500);
         }
         
-        // Cancel hide if mouse returns to wrapper
         document.addEventListener('DOMContentLoaded', () => {
             const wrapper = document.getElementById('volume-control-wrapper');
             if (wrapper) {
@@ -1303,10 +1988,24 @@ And I no longer have the strength to try again.`;
             document.getElementById('content-modal').classList.remove('active');
         };
 
-        // Close modal on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && document.getElementById('content-modal').classList.contains('active')) {
                 closeModal();
+            }
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('dropdown-menu');
+            const display = document.getElementById('dropdown-display');
+            
+            if (dropdown && display && 
+                !dropdown.contains(e.target) && 
+                !display.contains(e.target) &&
+                dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+                display.classList.remove('active');
+                dropdownOpen = false;
             }
         });
 
