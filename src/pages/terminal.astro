@@ -1,7 +1,7 @@
 ---
 // Terminal 13.7 - Main Story Interface
-// Phase 2A Implementation: Ghost Feed Modal System
-// Last Updated: January 6, 2026 - Phase 2A Build
+// Session-based boot skip implementation
+// Last Updated: January 9, 2026
 const siteTitle = "H2E Framework - Terminal 13.7";
 ---
 
@@ -1031,7 +1031,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
     </div>
 
     <script is:inline>
-        console.log('H2E Terminal Version: 2026-01-06-13:00:00 - Phase 2A Implementation - Ghost Feed');
+        console.log('H2E Terminal Version: 2026-01-09-10:30:00 - Session-based boot skip implemented');
         console.log('🚀 JavaScript loaded successfully');
 
         // ========================================
@@ -1431,17 +1431,49 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         });
 
         // ========================================
-        // BOOT SEQUENCE
+        // BOOT SEQUENCE WITH SESSION CHECK
         // ========================================
-        setTimeout(() => {
-            document.getElementById('boot-sequence').classList.add('hidden');
-            document.getElementById('enter-terminal-screen').classList.add('active');
-        }, 6000);
+        
+        // Check if user has already booted this session
+        function checkBootStatus() {
+            const hasBooted = sessionStorage.getItem('h2e_terminal_booted');
+            
+            if (hasBooted === 'true') {
+                console.log('🔄 Returning user - skipping boot sequence');
+                // Skip boot and audio gate, go directly to terminal
+                document.getElementById('boot-sequence').style.display = 'none';
+                document.getElementById('enter-terminal-screen').style.display = 'none';
+                document.getElementById('main-terminal').classList.add('active');
+                
+                // Initialize sounds with saved preferences
+                initializeSounds();
+                loadSoundPreferences();
+                
+                // Start ambient sound if enabled
+                if (soundEnabled && ambientSound) {
+                    ambientSound.play().catch(e => console.log('Audio play failed:', e));
+                }
+            } else {
+                console.log('👋 First visit - showing boot sequence');
+                // Show normal boot sequence
+                setTimeout(() => {
+                    document.getElementById('boot-sequence').classList.add('hidden');
+                    document.getElementById('enter-terminal-screen').classList.add('active');
+                }, 6000);
+            }
+        }
+        
+        // Run boot check on page load
+        checkBootStatus();
 
         // ========================================
         // ENTER TERMINAL HANDLER
         // ========================================
         document.getElementById('enter-terminal-btn').addEventListener('click', () => {
+            // Mark that boot has completed this session
+            sessionStorage.setItem('h2e_terminal_booted', 'true');
+            console.log('✅ Boot completed - session flag set');
+            
             document.getElementById('enter-terminal-screen').classList.add('hidden');
             
             setTimeout(() => {

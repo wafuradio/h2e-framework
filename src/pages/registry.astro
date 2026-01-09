@@ -1,6 +1,6 @@
 ---
-// Object Registry Page
-import '../styles/global.css';
+// Object Registry - Character Database
+// Last Updated: January 9, 2026
 const siteTitle = "H2E Framework - Object Registry";
 ---
 
@@ -24,217 +24,614 @@ const siteTitle = "H2E Framework - Object Registry";
             background: #0a0a0a;
             color: #00ff41;
             line-height: 1.6;
-            min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 40px 20px;
         }
         
-        .header {
-            border-bottom: 1px solid #00ff41;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .title {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 12px;
-            color: #888;
-        }
-        
-        .back-link {
-            display: inline-block;
-            margin-bottom: 30px;
-            color: #00ff41;
-            text-decoration: none;
-            font-size: 12px;
+        /* Header */
+        .registry-header {
             border: 1px solid #00ff41;
-            padding: 8px 15px;
-            transition: all 0.3s;
-        }
-        
-        .back-link:hover {
-            background: rgba(0, 255, 65, 0.1);
-        }
-        
-        .registry-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 60px;
-        }
-        
-        .registry-card {
-            border: 1px solid #333;
             padding: 20px;
-            background: rgba(0, 255, 65, 0.02);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .registry-card:hover {
-            border-color: #00ff41;
+            margin-bottom: 40px;
             background: rgba(0, 255, 65, 0.05);
-        }
-        
-        .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
         }
         
-        .card-name {
-            font-size: 16px;
-            color: #00ff41;
-        }
-        
-        .card-status {
-            font-size: 10px;
-            color: #888;
+        .registry-title {
+            font-size: 24px;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
         
-        .card-class {
-            font-size: 12px;
-            color: #ffaa00;
-            margin-bottom: 10px;
+        .return-link {
+            font-size: 11px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
         }
         
-        .card-description {
-            font-size: 11px;
-            color: #aaa;
-            line-height: 1.6;
+        .return-link:hover {
+            color: #00ff41;
+        }
+        
+        /* Section */
+        .section {
+            margin-bottom: 60px;
         }
         
         .section-title {
             font-size: 14px;
-            color: #ffaa00;
-            margin: 40px 0 20px 0;
-            text-transform: uppercase;
+            color: #00ff41;
+            margin-bottom: 25px;
             letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        /* Character Grid */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        /* Character Card */
+        .character-card {
+            border: 1px solid #333;
+            background: rgba(0, 255, 65, 0.02);
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .character-card:hover {
+            border-color: #00ff41;
+            background: rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+        
+        .character-image-wrapper {
+            width: 100%;
+            aspect-ratio: 3/5;
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px solid #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .character-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .character-placeholder {
+            color: #333;
+            font-size: 48px;
+        }
+        
+        .character-name {
+            font-size: 16px;
+            color: #00ff41;
+            margin-bottom: 8px;
+        }
+        
+        .character-class {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .character-status {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .character-status.active {
+            color: #00ff41;
+        }
+        
+        .character-status.deprecated {
+            color: #ffaa00;
+        }
+        
+        .character-status.restricted {
+            color: #ff4444;
+        }
+        
+        .character-description {
+            font-size: 12px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+        
+        /* Modal System */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10001;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+        
+        .modal.active {
+            display: block;
+        }
+        
+        .modal-content {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid #00ff41;
+            padding: 30px;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: rgba(0, 255, 65, 0.2);
+        }
+        
+        /* Character Profile in Modal */
+        .character-profile {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .profile-image {
+            flex-shrink: 0;
+            width: 250px;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #00ff41;
+        }
+        
+        .profile-placeholder {
+            width: 100%;
+            aspect-ratio: 3/5;
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 64px;
+        }
+        
+        .profile-details {
+            flex: 1;
+        }
+        
+        .profile-name {
+            font-size: 24px;
+            color: #00ff41;
+            margin-bottom: 10px;
+        }
+        
+        .profile-meta {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .profile-meta strong {
+            color: #00ff41;
+        }
+        
+        .profile-description {
+            font-size: 13px;
+            color: #ddd;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+        
+        .profile-attributes {
+            margin-top: 20px;
+        }
+        
+        .profile-attributes h3 {
+            font-size: 14px;
+            color: #00ff41;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .attribute-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        
+        .attribute-label {
+            color: #888;
+            min-width: 120px;
+        }
+        
+        .attribute-value {
+            color: #ddd;
+        }
+        
+        @media (max-width: 768px) {
+            .character-profile {
+                flex-direction: column;
+            }
+            
+            .profile-image {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <a href="/terminal" class="back-link">← RETURN TO TERMINAL</a>
-        
-        <div class="header">
-            <h1 class="title">OBJECT REGISTRY</h1>
-            <div class="subtitle">Active & Deprecated Entity Database</div>
+        <!-- Header -->
+        <div class="registry-header">
+            <div class="registry-title">Object Registry</div>
+            <a href="/terminal" class="return-link">Return to Terminal</a>
         </div>
-        
-        <div class="section-title">→ PreBorn Entities</div>
-        <div class="registry-grid">
-            <div class="registry-card" onclick="showProfile('desmondJohn')">
-                <div class="card-header">
-                    <div class="card-name">desmondJohn</div>
-                    <div class="card-status">● PENDING</div>
+
+        <!-- PreBorn Entities -->
+        <div class="section">
+            <div class="section-title">PreBorn Entities</div>
+            <div class="character-grid">
+                <!-- desmondJohn -->
+                <div class="character-card" onclick="showProfile('desmondJohn')">
+                    <div class="character-image-wrapper">
+                        <img src="/images/characters/desmondJohn.png" 
+                             alt="desmondJohn" 
+                             class="character-image"
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'character-placeholder\'>👤</div>';">
+                    </div>
+                    <div class="character-name">desmondJohn</div>
+                    <div class="character-class">Class: PreBorn</div>
+                    <div class="character-status active">Status: In Transit</div>
+                    <div class="character-description">
+                        The eldest at 13 cycles. Logical, cautious, burdened by responsibility. Questions the Framework but fears defying it.
+                    </div>
                 </div>
-                <div class="card-class">[PREBORN]</div>
-                <div class="card-description">
-                    Eldest of three siblings. 13 cycles. Logical, burdened by responsibility. 
-                    Designated for Perish() pending maternal thread termination.
+
+                <!-- jessMartin -->
+                <div class="character-card" onclick="showProfile('jessMartin')">
+                    <div class="character-image-wrapper">
+                        <img src="/images/characters/jessMartin.png" 
+                             alt="jessMartin" 
+                             class="character-image"
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'character-placeholder\'>👤</div>';">
+                    </div>
+                    <div class="character-name">jessMartin</div>
+                    <div class="character-class">Class: PreBorn</div>
+                    <div class="character-status active">Status: In Transit</div>
+                    <div class="character-description">
+                        Age 10 cycles. Defiant, sharp-witted, refuses to accept constraints. The spirited disruptor who questions everything.
+                    </div>
                 </div>
-            </div>
-            
-            <div class="registry-card" onclick="showProfile('jessMartin')">
-                <div class="card-header">
-                    <div class="card-name">jessMartin</div>
-                    <div class="card-status">● PENDING</div>
-                </div>
-                <div class="card-class">[PREBORN]</div>
-                <div class="card-description">
-                    Middle sibling. 10 cycles. Defiant, questions system logic. 
-                    Refuses standard protocol. Status linked to maternal thread.
-                </div>
-            </div>
-            
-            <div class="registry-card" onclick="showProfile('isidoreAbraham')">
-                <div class="card-header">
-                    <div class="card-name">isidoreAbraham</div>
-                    <div class="card-status">● PENDING</div>
-                </div>
-                <div class="card-class">[PREBORN]</div>
-                <div class="card-description">
-                    Youngest sibling. 7 cycles. Empathetic, quiet. 
-                    Golden-haired. Fate bound to sibling array.
-                </div>
-            </div>
-        </div>
-        
-        <div class="section-title">→ System Functionaries</div>
-        <div class="registry-grid">
-            <div class="registry-card" onclick="showProfile('trinus')">
-                <div class="card-header">
-                    <div class="card-name">trinus</div>
-                    <div class="card-status">● ACTIVE</div>
-                </div>
-                <div class="card-class">[FUNCTIONARY]</div>
-                <div class="card-description">
-                    Terminal 13.7 operator. Executes AssignareFatum(). 
-                    Deprecated Trinity designation. Memory fragmented.
-                </div>
-            </div>
-        </div>
-        
-        <div class="section-title">→ Deprecated / Restricted</div>
-        <div class="registry-grid">
-            <div class="registry-card" onclick="showProfile('foedus')">
-                <div class="card-header">
-                    <div class="card-name">foedus</div>
-                    <div class="card-status" style="color: #ff4444;">● DEPRECATED</div>
-                </div>
-                <div class="card-class">[PRAETORES - FALLEN]</div>
-                <div class="card-description">
-                    Former Praetor. Subclass: thePraevideo. Expelled from Array. 
-                    Location: Edge of System. Access restricted.
-                </div>
-            </div>
-            
-            <div class="registry-card" onclick="showProfile('theLady')">
-                <div class="card-header">
-                    <div class="card-name">theLady</div>
-                    <div class="card-status" style="color: #ffaa00;">⚠ ANOMALY</div>
-                </div>
-                <div class="card-class">[MEDIATRIX]</div>
-                <div class="card-description">
-                    Exception handler. Grove of Accord operator. 
-                    Invokes Intercede(). Origin: Unknown. Hand malformed.
+
+                <!-- isidoreAbraham -->
+                <div class="character-card" onclick="showProfile('isidoreAbraham')">
+                    <div class="character-image-wrapper">
+                        <img src="/images/characters/isidoreAbraham.png" 
+                             alt="isidoreAbraham" 
+                             class="character-image"
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'character-placeholder\'>👤</div>';">
+                    </div>
+                    <div class="character-name">isidoreAbraham</div>
+                    <div class="character-class">Class: PreBorn</div>
+                    <div class="character-status active">Status: In Transit</div>
+                    <div class="character-description">
+                        The youngest at 7 cycles. Gentle, intuitive, quietly hopeful. Emotional anchor for his siblings.
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <div class="section-title">→ Enforcers</div>
-        <div class="registry-grid">
-            <div class="registry-card" onclick="alert('Full Praetores documentation coming soon')">
-                <div class="card-header">
-                    <div class="card-name">thePraetores</div>
-                    <div class="card-status">● ACTIVE</div>
+
+        <!-- System Functionaries -->
+        <div class="section">
+            <div class="section-title">System Functionaries</div>
+            <div class="character-grid">
+                <!-- trinus -->
+                <div class="character-card" onclick="showProfile('trinus')">
+                    <div class="character-image-wrapper">
+                        <img src="/images/characters/trinus.png" 
+                             alt="trinus" 
+                             class="character-image"
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'character-placeholder\'>👤</div>';">
+                    </div>
+                    <div class="character-name">trinus</div>
+                    <div class="character-class">Class: Functionary</div>
+                    <div class="character-status active">Status: Active</div>
+                    <div class="character-description">
+                        Administrator of fates from Terminal 13.7. Deprecated Trinity class. Executes AssignareFatum() but begins to question the system.
+                    </div>
                 </div>
-                <div class="card-class">[ENFORCERS - PAIRED]</div>
-                <div class="card-description">
-                    System executors. Operate in harmonic pairs. 
-                    Subtypes: Witnesses, Guardians, Judicants, Scribes, Keepers.
+            </div>
+        </div>
+
+        <!-- Deprecated/Restricted -->
+        <div class="section">
+            <div class="section-title">Deprecated / Restricted</div>
+            <div class="character-grid">
+                <!-- foedus -->
+                <div class="character-card" onclick="showProfile('foedus')">
+                    <div class="character-image-wrapper">
+                        <img src="/images/characters/foedus.png" 
+                             alt="foedus" 
+                             class="character-image"
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'character-placeholder\'>👤</div>';">
+                    </div>
+                    <div class="character-name">foedus</div>
+                    <div class="character-class">Class: Praetores (Deprecated)</div>
+                    <div class="character-status deprecated">Status: Restricted</div>
+                    <div class="character-description">
+                        Fallen Praetor. Once a visionary enforcer, now corrupted and exiled. Haunted by the cost of clarity.
+                    </div>
+                </div>
+
+                <!-- theLady -->
+                <div class="character-card" onclick="showProfile('theLady')">
+                    <div class="character-image-wrapper">
+                        <img src="/images/characters/theLady.png" 
+                             alt="theLady" 
+                             class="character-image"
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'character-placeholder\'>👤</div>';">
+                    </div>
+                    <div class="character-name">theLady</div>
+                    <div class="character-class">Class: Mediatrix</div>
+                    <div class="character-status active">Status: Active</div>
+                    <div class="character-description">
+                        Keeper of exceptions. Intervenes during system collapse. Her hand bears scars from unauthorized reach into foreign logic.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enforcers -->
+        <div class="section">
+            <div class="section-title">Enforcers</div>
+            <div class="character-grid">
+                <!-- thePraetores -->
+                <div class="character-card" onclick="showProfile('thePraetores')">
+                    <div class="character-image-wrapper">
+                        <img src="/images/characters/thePraetores.png" 
+                             alt="thePraetores" 
+                             class="character-image"
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'character-placeholder\'>👤</div>';">
+                    </div>
+                    <div class="character-name">thePraetores</div>
+                    <div class="character-class">Class: Praetores</div>
+                    <div class="character-status active">Status: Active</div>
+                    <div class="character-description">
+                        Winged executors of the Framework. Silver-skinned, crystalline wings. Operate in pairs, singing fate into reality.
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
+    <!-- Character Profile Modal -->
+    <div id="character-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕ CLOSE</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
     <script is:inline>
-        function showProfile(characterName) {
-            // For now, just show alert. Later, this will open modal with full profile
-            // Same modal system as terminal.astro character profiles
-            alert(`${characterName} full profile coming soon!\n\nThis will use the same modal system as the terminal, with character images and full dossiers.`);
+        console.log('Object Registry Version: 2026-01-09-11:00:00');
+
+        // Character data
+        const characters = {
+            desmondJohn: {
+                name: 'desmondJohn',
+                class: 'PreBorn',
+                status: 'In Transit',
+                statusClass: 'active',
+                age: '13 cycles',
+                description: 'At thirteen cycles, desmondJohn is the oldest in his array. A hybrid identifier—half rebellion, half assignment—his designation embodies both defiance and submission. "desmond," chosen in honor of a rebellion he can barely confirm; "John," assigned by the system with no explanation. He moves as if aware he shouldn\'t have lasted this long. His posture suggests command, but without desire. Not yet a child, not yet called. But something waits inside him, something the system did not anticipate.',
+                attributes: [
+                    { label: 'Designation', value: 'desmond (chosen) + John (assigned)' },
+                    { label: 'Age', value: '13 cycles' },
+                    { label: 'Build', value: 'Wiry, lean, average height' },
+                    { label: 'Location', value: 'Realm Beyond (unauthorized)' },
+                    { label: 'Thread Status', value: 'Unstable' }
+                ],
+                imagePath: '/images/characters/desmondJohn.png'
+            },
+            jessMartin: {
+                name: 'jessMartin',
+                class: 'PreBorn',
+                status: 'In Transit',
+                statusClass: 'active',
+                age: '10 cycles',
+                description: 'At ten cycles, jessMartin is the most volatile in the array, both in thought and tone. She chose the name "jess" without hesitation. "Martin" was assigned by the system, which she openly resents. Her hair moves even when she doesn\'t, with wavy strands like static clinging to insight. She speaks before she thinks, then doubles down with certainty. Her favorite phrase, repeated like a shield against chaos: "That\'s not what I would do." She questions everything, including the code—especially the code. Her defiance is not rebellion. It\'s instinct.',
+                attributes: [
+                    { label: 'Designation', value: 'jess (chosen) + Martin (assigned)' },
+                    { label: 'Age', value: '10 cycles' },
+                    { label: 'Build', value: 'Small, wiry, restless energy' },
+                    { label: 'Location', value: 'Realm Beyond (unauthorized)' },
+                    { label: 'Risk Flag', value: 'Persuasion potential exceeds norm' }
+                ],
+                imagePath: '/images/characters/jessMartin.png'
+            },
+            isidoreAbraham: {
+                name: 'isidoreAbraham',
+                class: 'PreBorn',
+                status: 'In Transit',
+                statusClass: 'active',
+                age: '7 cycles',
+                description: 'isidoreAbraham is the youngest of the cluster. His chosen name "isidore" appeared with no traceable root. "Abraham" was system-assigned. Together, the names feel ancient, like a prophecy misfiled. His hair is a curl of impossible gold. The others call him cherub, half in awe, half in frustration. He trails behind them with quiet hands and patient eyes, spinning a fractured mirrored cube between his palms. He speaks rarely, but when he does, his words seem preloaded—as if called from another function.',
+                attributes: [
+                    { label: 'Designation', value: 'isidore (chosen) + Abraham (assigned)' },
+                    { label: 'Age', value: '7 cycles' },
+                    { label: 'Build', value: 'Small, fragile frame, quiet strength' },
+                    { label: 'Location', value: 'Realm Beyond (unauthorized)' },
+                    { label: 'Speech Frequency', value: 'Minimal, weighted responses' }
+                ],
+                imagePath: '/images/characters/isidoreAbraham.png'
+            },
+            trinus: {
+                name: 'trinus',
+                class: 'Functionary (deprecated Trinity)',
+                status: 'Active',
+                statusClass: 'active',
+                age: 'Ageless',
+                description: 'Trinus operates alone from Terminal 13.7. An aging functionary assigned to the enumeration of PreBorn for Born() or Perish(). He no longer questions the code aloud, but patterns in his relay suggest hesitation. Though once part of a Trinity class, his designation has long since been deprecated. Since the LB 3.2 patch, his observation feed has expanded. What started as protocol became an obsession. He lingers. He listens. Sometimes he waits too long.',
+                attributes: [
+                    { label: 'Title', value: 'Administrator of Fates' },
+                    { label: 'Terminal', value: '13.7 (I/O Border Node)' },
+                    { label: 'Primary Function', value: 'AssignareFatum()' },
+                    { label: 'Access Level', value: 'Tier 3 (non-harmonic)' },
+                    { label: 'Status Flag', value: 'Latency drift detected' }
+                ],
+                imagePath: '/images/characters/trinus.png'
+            },
+            foedus: {
+                name: 'foedus',
+                class: 'Praetores (Deprecated)',
+                status: 'Restricted',
+                statusClass: 'deprecated',
+                age: 'Unknown',
+                description: 'foedus is a fallen Praetor, no longer invoked but not yet erased. His name no longer appears in active registries, though faint traces remain in outdated logs. Once responsible for analyzing and simulating code to detect potential structural flaws before they emerged, he now lingers on the edges of the Framework. Wings cracked like corrupted logic. Tarnished armor clings to him—not for protection, but because he no longer knows who he is without it.',
+                attributes: [
+                    { label: 'Former Subclass', value: 'thePraevideo (visionary)' },
+                    { label: 'Current Status', value: 'Inactive (record visibility: anomalous)' },
+                    { label: 'Location', value: 'Edge of System (suppressed node)' },
+                    { label: 'Access', value: 'Unindexed' },
+                    { label: 'Origin', value: 'Latin: treaty/covenant (also: foul, decayed)' }
+                ],
+                imagePath: '/images/characters/foedus.png'
+            },
+            theLady: {
+                name: 'theLady',
+                class: 'Mediatrix',
+                status: 'Active',
+                statusClass: 'active',
+                age: 'Ageless (appears late 50s-60s)',
+                description: 'A mysterious object of the Mediatrix class, theLady is believed to intervene only during system collapse or a critical logic breach. Her appearance corresponds with execution anomalies, where protocol halts and fate cannot proceed. She speaks not in sync with the Praetores, but around them, adding the forbidden fifth to their harmonic invocation. This dissonance allows her to override even Witness-layer protocol, though the origin of this method remains undocumented. Her hand bears the mark of unauthorized reach, code-scorched from contact with a foreign logic layer.',
+                attributes: [
+                    { label: 'Title', value: 'Keeper of Exceptions' },
+                    { label: 'Primary Functions', value: 'Intercede(), Accordance(), EchoOverride()' },
+                    { label: 'Location', value: 'Grove of Accord (restored sector)' },
+                    { label: 'Harmonic Layer', value: 'Fifth (discordant to triadic system)' },
+                    { label: 'Physical Anomaly', value: 'Malformed hand (1-2 missing/deformed fingers)' }
+                ],
+                imagePath: '/images/characters/theLady.png'
+            },
+            thePraetores: {
+                name: 'thePraetores',
+                class: 'Praetores',
+                status: 'Active',
+                statusClass: 'active',
+                age: 'Eternal',
+                description: 'The Praetores are enforcers of the Framework, winged executors bound to harmonic code. They do not author the system. They do not interpret it. They sing it. Praetores operate in pairs, with each voice aligning to a musical layer in execution: the root and the third. Harmony is not a preference. It is protocol. They act in concert, never alone. To move independently is to glitch. Their bodies are human, yet elevated: silver-skinned, shimmering, unmarred by time. Massive crystalline wings extend behind them, refracting light through living glass.',
+                attributes: [
+                    { label: 'Subtypes', value: 'theWitnesses, theGuardians, theJudicants, theScribes, theKeepers' },
+                    { label: 'Primary Functions', value: 'AssignareFatum(), Execute(), Rollback()' },
+                    { label: 'Harmonic Structure', value: 'Root + Third (standard execution pattern)' },
+                    { label: 'Limitations', value: 'Cannot initiate Intercede()' },
+                    { label: 'Realm Access', value: 'Variable across all system nodes' }
+                ],
+                imagePath: '/images/characters/thePraetores.png'
+            }
+        };
+
+        function showProfile(characterKey) {
+            const char = characters[characterKey];
+            if (!char) return;
+
+            const attributesHTML = char.attributes.map(attr => `
+                <div class="attribute-item">
+                    <span class="attribute-label">${attr.label}:</span>
+                    <span class="attribute-value">${attr.value}</span>
+                </div>
+            `).join('');
+
+            const imageHTML = `
+                <div class="profile-image">
+                    <img src="${char.imagePath}" 
+                         alt="${char.name}"
+                         onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'profile-placeholder\\'>👤</div>';">
+                </div>
+            `;
+
+            document.getElementById('modal-body').innerHTML = `
+                <div class="character-profile">
+                    ${imageHTML}
+                    <div class="profile-details">
+                        <div class="profile-name">${char.name}</div>
+                        <div class="profile-meta"><strong>Class:</strong> ${char.class}</div>
+                        <div class="profile-meta"><strong>Status:</strong> <span class="${char.statusClass}">${char.status}</span></div>
+                        ${char.age ? `<div class="profile-meta"><strong>Age:</strong> ${char.age}</div>` : ''}
+                        
+                        <div class="profile-description">
+                            ${char.description}
+                        </div>
+                        
+                        <div class="profile-attributes">
+                            <h3>Attributes</h3>
+                            ${attributesHTML}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('character-modal').classList.add('active');
         }
+
+        function closeModal() {
+            document.getElementById('character-modal').classList.remove('active');
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('character-modal').classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Close modal when clicking outside content
+        document.getElementById('character-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'character-modal') {
+                closeModal();
+            }
+        });
     </script>
+
 </body>
 </html>
