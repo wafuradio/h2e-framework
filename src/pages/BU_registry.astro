@@ -49,23 +49,15 @@ const siteTitle = "H2E Framework - Object Registry";
             text-transform: uppercase;
         }
         
-        .nav-button {
-            display: inline-block;
-            padding: 10px 20px;
-            border: 1px solid #00ff41;
-            background: transparent;
-            color: #00ff41;
+        .return-link {
+            font-size: 11px;
+            color: #666;
             text-decoration: none;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            font-family: 'Share Tech Mono', monospace;
+            transition: color 0.3s;
         }
         
-        .nav-button:hover {
-            background: rgba(0, 255, 65, 0.1);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        .return-link:hover {
+            color: #00ff41;
         }
         
         /* Section */
@@ -312,7 +304,7 @@ const siteTitle = "H2E Framework - Object Registry";
         <!-- Header -->
         <div class="registry-header">
             <div class="registry-title">Object Registry</div>
-            <a href="/terminal" class="nav-button">← RETURN TO TERMINAL</a>
+            <a href="/terminal" class="return-link">Return to Terminal</a>
         </div>
 
         <!-- PreBorn Entities -->

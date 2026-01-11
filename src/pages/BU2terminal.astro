@@ -1,12 +1,7 @@
 ---
-// =============================================================================
-// TERMINAL 13.7 - MAIN STORY INTERFACE
-// =============================================================================
-// This is the main terminal page where users read the story
+// Terminal 13.7 - Main Story Interface
 // Session-based boot skip implementation
 // Last Updated: January 9, 2026
-// =============================================================================
-
 const siteTitle = "H2E Framework - Terminal 13.7";
 ---
 
@@ -20,34 +15,25 @@ const siteTitle = "H2E Framework - Terminal 13.7";
     <meta http-equiv="Expires" content="0">
     <title>{siteTitle}</title>
     <style>
-        /* =================================================================
-           FONTS & GLOBAL RESETS
-           ================================================================= */
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&display=swap');
         
-        /* Remove default browser spacing and set consistent box-sizing */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
-        /* =================================================================
-           BODY - BASE STYLING FOR ENTIRE PAGE
-           ================================================================= */
         body {
             font-family: 'Share Tech Mono', 'Courier New', monospace;
-            background: #0a0a0a;  /* Very dark background */
-            color: #00ff41;  /* Terminal green text */
-            overflow-x: hidden;  /* Prevent horizontal scrolling */
+            background: #0a0a0a;
+            color: #00ff41;
+            overflow-x: hidden;
             line-height: 1.6;
         }
         
-        /* =================================================================
-           BOOT SEQUENCE SCREEN
-           This is the first thing users see when they visit
-           Shows "H2E FRAMEWORK v3.2" loading text
-           ================================================================= */
+        /* ===================================
+           BOOT SEQUENCE
+           =================================== */
         #boot-sequence {
             position: fixed;
             top: 0;
@@ -55,19 +41,17 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             width: 100%;
             height: 100vh;
             background: #000;
-            z-index: 9999;  /* Sits on top of everything */
+            z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
         }
         
-        /* Hide the boot sequence when .hidden class is added */
         #boot-sequence.hidden {
             display: none;
         }
         
-        /* Individual boot text lines that fade in */
         .boot-text {
             font-size: 14px;
             margin: 5px 0;
@@ -75,7 +59,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             animation: fadeIn 0.5s forwards;
         }
         
-        /* Stagger the fade-in timing for each line */
         .boot-text:nth-child(1) { animation-delay: 0.5s; }
         .boot-text:nth-child(2) { animation-delay: 1s; }
         .boot-text:nth-child(3) { animation-delay: 1.5s; }
@@ -84,7 +67,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         .boot-text:nth-child(6) { animation-delay: 3s; }
         .boot-text:nth-child(7) { animation-delay: 3.5s; }
         
-        /* Progress bar during boot */
         .progress-bar {
             width: 300px;
             height: 20px;
@@ -94,7 +76,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             animation: fadeIn 0.5s forwards 4s;
         }
         
-        /* The green fill inside the progress bar */
         .progress-fill {
             height: 100%;
             background: #00ff41;
@@ -102,12 +83,10 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             animation: fillProgress 2s forwards 4s;
         }
         
-        /* Fade in animation */
         @keyframes fadeIn {
             to { opacity: 1; }
         }
         
-        /* Progress bar fill animation */
         @keyframes fillProgress {
             to { width: 100%; }
         }
@@ -118,11 +97,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             100% { transform: translateY(100%); }
         }
         
-        /* =================================================================
+        /* ===================================
            ENTER TERMINAL SCREEN
-           This shows after boot sequence completes
-           Has the big "ENTER TERMINAL" button
-           ================================================================= */
+           =================================== */
         #enter-terminal-screen {
             position: fixed;
             top: 0;
@@ -130,33 +107,29 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             width: 100%;
             height: 100vh;
             background: #000;
-            z-index: 9998;  /* Just below boot sequence */
-            display: none;  /* Hidden by default */
+            z-index: 9998;
+            display: none;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             transition: opacity 0.5s;
         }
         
-        /* Show the enter terminal screen when .active is added */
         #enter-terminal-screen.active {
             display: flex;
         }
         
-        /* Fade out when .hidden is added */
         #enter-terminal-screen.hidden {
             opacity: 0;
             pointer-events: none;
         }
         
-        /* "TERMINAL 13.7" title text */
         .enter-terminal-title {
             font-size: 36px;
             margin-bottom: 40px;
             letter-spacing: 4px;
         }
         
-        /* The main "ENTER TERMINAL" button */
         #enter-terminal-btn {
             background: transparent;
             border: 2px solid #00ff41;
@@ -170,13 +143,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             margin-bottom: 30px;
         }
         
-        /* Button hover effect */
         #enter-terminal-btn:hover {
             background: rgba(0, 255, 65, 0.1);
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
         }
         
-        /* "Return to index" link below button */
         .escape-link {
             font-size: 12px;
             color: #666;
@@ -188,27 +159,22 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             color: #888;
         }
 
-        /* =================================================================
-           MAIN TERMINAL INTERFACE
-           This is where all the story content lives
-           ================================================================= */
+        /* ===================================
+           MAIN TERMINAL
+           =================================== */
         #main-terminal {
-            display: none;  /* Hidden until user enters */
+            display: none;
             min-height: 100vh;
             padding: 60px;
             max-width: 1400px;
             margin: 0 auto;
         }
         
-        /* Show main terminal when .active is added */
         #main-terminal.active {
             display: block;
         }
         
-        /* =================================================================
-           TERMINAL HEADER
-           Top section with title, status, and controls
-           ================================================================= */
+        /* Header */
         .terminal-header {
             border: 1px solid #00ff41;
             padding: 15px 20px;
@@ -219,12 +185,10 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             align-items: flex-start;
         }
         
-        /* Left side of header - title and status */
         .header-left {
             flex: 1;
         }
         
-        /* "H2E Framework - Terminal 13.7" title */
         .terminal-title {
             font-size: 24px;
             margin-bottom: 5px;
@@ -232,13 +196,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             letter-spacing: 2px;
         }
         
-        /* "STATUS: COMPROMISED" text */
         .terminal-status {
             font-size: 16px;
-            color: #ff4444;  /* Red for warning */
+            color: #ff4444;
         }
         
-        /* Right side of header - sound and exit buttons */
         .header-right {
             display: flex;
             flex-direction: column;
@@ -246,16 +208,12 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             gap: 10px;
         }
         
-        /* =================================================================
-           SOUND CONTROLS (in header)
-           ================================================================= */
         .sound-control {
             display: flex;
             align-items: center;
             gap: 12px;
         }
         
-        /* Sound on/off toggle button */
         .sound-toggle {
             display: flex;
             align-items: center;
@@ -273,19 +231,16 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
         }
         
-        /* Volume slider container - hidden until sound is on */
         .volume-control {
             display: none;
             align-items: center;
             gap: 8px;
         }
         
-        /* Show volume control when sound is enabled */
         .volume-control.visible {
             display: flex;
         }
         
-        /* Volume slider styling */
         .volume-slider {
             width: 100px;
             height: 4px;
@@ -296,7 +251,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             border-radius: 2px;
         }
         
-        /* Volume slider thumb (the draggable circle) - Chrome/Safari */
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -307,7 +261,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             border-radius: 50%;
         }
         
-        /* Volume slider thumb - Firefox */
         .volume-slider::-moz-range-thumb {
             width: 12px;
             height: 12px;
@@ -317,19 +270,15 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             border: none;
         }
         
-        /* Volume percentage label */
         .volume-label {
             font-size: 14px;
             color: #888;
             min-width: 35px;
         }
         
-        /* =================================================================
-           EXIT SYSTEM BUTTON (in header)
-           ================================================================= */
         .exit-system-btn {
             background: transparent;
-            border: 1px solid #ff4444;  /* Red border */
+            border: 1px solid #ff4444;
             color: #ff4444;
             padding: 8px 16px;
             font-family: 'Share Tech Mono', monospace;
@@ -345,10 +294,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             box-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
         }
         
-        /* =================================================================
-           EXIT CONFIRMATION MODAL
-           Appears when user clicks EXIT SYSTEM
-           ================================================================= */
+        /* Exit Confirmation Modal */
         .exit-confirmation {
             display: none;
             position: fixed;
@@ -357,17 +303,15 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
-            z-index: 10002;  /* Above everything except unload screen */
+            z-index: 10002;
             align-items: center;
             justify-content: center;
         }
         
-        /* Show confirmation when .active is added */
         .exit-confirmation.active {
             display: flex;
         }
         
-        /* The modal box content */
         .exit-modal-content {
             border: 1px solid #ff4444;
             padding: 40px;
@@ -376,7 +320,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             text-align: center;
         }
         
-        /* "CONFIRM SYSTEM EXIT" title */
         .exit-modal-title {
             font-size: 24px;
             color: #ff4444;
@@ -384,7 +327,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             letter-spacing: 2px;
         }
         
-        /* Warning message text */
         .exit-modal-message {
             font-size: 16px;
             color: #888;
@@ -392,14 +334,12 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             line-height: 1.6;
         }
         
-        /* Container for CANCEL and EXIT buttons */
         .exit-modal-buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
         }
         
-        /* Both CANCEL and EXIT buttons */
         .exit-modal-btn {
             padding: 12px 30px;
             border: 1px solid #00ff41;
@@ -412,7 +352,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             transition: all 0.3s;
         }
         
-        /* EXIT button (red) */
         .exit-modal-btn.danger {
             border-color: #ff4444;
             color: #ff4444;
@@ -428,10 +367,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             box-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
         }
         
-        /* =================================================================
-           UNLOAD PROGRESS SCREEN
-           Shows when exiting - "UNLOADING TERMINAL 13.7..."
-           ================================================================= */
+        /* Unload Progress Bar */
         .unload-screen {
             display: none;
             position: fixed;
@@ -440,7 +376,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             width: 100%;
             height: 100vh;
             background: #000;
-            z-index: 10003;  /* Above everything */
+            z-index: 10003;
             align-items: center;
             justify-content: center;
             flex-direction: column;
@@ -450,21 +386,18 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             display: flex;
         }
         
-        /* "UNLOADING TERMINAL 13.7..." text */
         .unload-text {
             font-size: 18px;
             margin-bottom: 20px;
             color: #ff4444;
         }
         
-        /* Progress bar during unload */
         .unload-bar {
             width: 300px;
             height: 20px;
             border: 1px solid #ff4444;
         }
         
-        /* Red fill for unload progress bar */
         .unload-fill {
             height: 100%;
             background: #ff4444;
@@ -477,10 +410,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         }
         
         
-        /* =================================================================
-           PRIORITY ALERT BOX
-           "ACTIVE THREAD" warning about the three PreBorn
-           ================================================================= */
+        /* Priority Alert */
         .priority-alert {
             margin-bottom: 40px;
             padding: 20px;
@@ -488,7 +418,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             background: rgba(255, 68, 68, 0.05);
         }
         
-        /* "ACTIVE THREAD" title */
         .alert-title {
             font-size: 16px;
             color: #ff4444;
@@ -496,32 +425,24 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             letter-spacing: 1px;
         }
         
-        /* Alert message text */
         .alert-text {
             font-size: 16px;
             color: #ddd;
             line-height: 1.8;
         }
         
-        /* The PreBorn names in green */
         .thread-names {
             color: #00ff41;
         }
         
-        /* =================================================================
-           SECTION DIVIDERS
-           Thin horizontal lines separating content sections
-           ================================================================= */
+        /* Section Divider */
         .section-divider {
             height: 1px;
             background: #333;
             margin: 40px 0;
         }
         
-        /* =================================================================
-           SECTION HEADERS
-           Like "Begin Reading" and "Reference Materials"
-           ================================================================= */
+        /* Section Headers */
         .section-header {
             font-size: 14px;
             color: #00ff41;
@@ -530,16 +451,12 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             text-transform: uppercase;
         }
         
-        /* =================================================================
-           STORY LIST
-           List of all story chapters (Prologue, Chaplet 1, etc.)
-           ================================================================= */
+        /* Story List */
         .story-list {
             list-style: none;
             margin-bottom: 40px;
         }
         
-        /* Each story chapter row */
         .story-item {
             padding: 12px 0;
             border-bottom: 1px solid #222;
@@ -549,36 +466,30 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             transition: all 0.3s;
         }
         
-        /* Hover effect - indent and add left border */
         .story-item:hover {
             padding-left: 10px;
             border-left: 2px solid #00ff41;
         }
         
-        /* Story chapter title text */
         .story-title {
             color: #ddd;
             font-size: 16px;
         }
         
-        /* Available chapters (green) */
         .story-title.available {
             color: #00ff41;
         }
         
-        /* Corrupted/unavailable chapters (red strikethrough) */
         .story-title.corrupted {
             color: #ff4444;
             text-decoration: line-through;
         }
         
-        /* Container for AUDIO and READ buttons */
         .story-actions {
             display: flex;
             gap: 15px;
         }
         
-        /* AUDIO and READ buttons */
         .story-btn {
             background: transparent;
             border: 1px solid #00ff41;
@@ -595,16 +506,12 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             box-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
         }
         
-        /* Disabled buttons (grayed out) */
         .story-btn:disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
         
-        /* =================================================================
-           REFERENCE MATERIALS LINKS
-           Object Registry, Glossary, System Logs
-           ================================================================= */
+        /* Reference Links */
         .reference-links {
             display: flex;
             gap: 20px;
@@ -625,10 +532,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
         }
         
-        /* =================================================================
-           TERMINAL HINT
-           "Press ` to access terminal" at bottom of page
-           ================================================================= */
+        /* Terminal Hint */
         .terminal-hint {
             text-align: center;
             padding: 30px;
@@ -637,10 +541,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             border-top: 1px solid #222;
         }
         
-        /* =================================================================
-           HIDDEN TERMINAL (BACKTICK KEY)
-           Command line interface that appears when pressing `
-           ================================================================= */
+        /* Hidden Terminal */
         #hidden-terminal {
             position: fixed;
             bottom: 0;
@@ -653,12 +554,10 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             z-index: 10000;
         }
         
-        /* Show terminal when .active is added */
         #hidden-terminal.active {
             display: block;
         }
         
-        /* Command output area */
         .terminal-output {
             max-height: 200px;
             overflow-y: auto;
@@ -667,19 +566,16 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             color: #ddd;
         }
         
-        /* Input line with $ prompt */
         .terminal-input-line {
             display: flex;
             gap: 10px;
             align-items: center;
         }
         
-        /* The $ prompt symbol */
         .terminal-prompt {
             color: #00ff41;
         }
         
-        /* Command input field */
         #terminal-input {
             flex: 1;
             background: transparent;
@@ -690,10 +586,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             outline: none;
         }
         
-        /* =================================================================
-           MODAL SYSTEM
-           Generic modal for displaying content (story, audio, ghost feed)
-           ================================================================= */
+        /* Modal System */
         .modal {
             display: none;
             position: fixed;
@@ -707,29 +600,25 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             padding: 40px 20px;
         }
         
-        /* Show modal when .active is added */
         .modal.active {
             display: block;
         }
         
-        /* Modal content box */
         .modal-content {
             max-width: 900px;
             margin: 0 auto;
             border: 1px solid #00ff41;
             padding: 30px;
-            background: #0a0a0a;  /* Dark background */
+            background: #0a0a0a;
             position: relative;
         }
         
-        /* Special case: terminal reader has no border/padding */
         .modal-content:has(.terminal-reader-wrapper) {
             border: none;
             padding: 0;
             background: transparent;
         }
         
-        /* Close button in top right of modal */
         .modal-close {
             position: absolute;
             top: 10px;
@@ -748,22 +637,19 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             background: rgba(0, 255, 65, 0.2);
         }
         
-        /* Hide close button for terminal reader */
         .modal-content:has(.terminal-reader-wrapper) .modal-close {
             display: none;
         }
         
-        /* =================================================================
+        /* ===================================
            GHOST FEED MODAL
-           Observation relay system for viewing different realms
-           ================================================================= */
+           =================================== */
         .ghost-feed-container {
             padding: 20px;
         }
         
-        /* Header with warning symbol and title */
         .ghost-feed-header {
-            border-left: 3px solid #ffaa00;  /* Orange accent */
+            border-left: 3px solid #ffaa00;
             padding-left: 15px;
             margin-bottom: 30px;
         }
@@ -780,7 +666,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             color: #888;
         }
         
-        /* Warning message box */
         .ghost-feed-warning {
             background: rgba(255, 170, 0, 0.1);
             border: 1px solid #ffaa00;
@@ -791,76 +676,124 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             line-height: 1.6;
         }
         
-        /* Realm navigation section */
-        .realm-navigation {
+        .realm-selector {
             margin-bottom: 30px;
-            border: 1px solid #333;
-            padding: 20px;
-            background: rgba(0, 255, 65, 0.02);
         }
         
-        /* "Use ↑↓ arrow keys" instruction */
-        .nav-instruction {
-            font-size: 11px;
+        .realm-selector-label {
+            display: block;
+            font-size: 12px;
             color: #888;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 15px;
-            text-align: center;
-            padding: 8px;
-            border: 1px solid #333;
-            background: rgba(0, 0, 0, 0.5);
         }
         
-        /* "Currently observing: X" display */
-        .current-realm-display {
-            margin-bottom: 15px;
-            padding: 12px 15px;
+        /* Custom Terminal Dropdown */
+        .custom-dropdown {
+            position: relative;
+        }
+        
+        .dropdown-display {
+            width: 100%;
             background: #000;
             border: 1px solid #00ff41;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .realm-label {
-            font-size: 11px;
-            color: #666;
-            text-transform: uppercase;
-        }
-        
-        .realm-name {
-            font-size: 14px;
             color: #00ff41;
-            font-weight: bold;
-        }
-        
-        /* List of all realms */
-        .realm-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-        
-        /* Individual realm item in list */
-        .realm-list .dropdown-item {
-            padding: 10px 15px;
+            padding: 12px 15px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
-            color: #666;
-            border: 1px solid #222;
-            background: #000;
-            transition: all 0.2s;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        /* Realm number (1., 2., etc.) */
+        .dropdown-display:hover {
+            background: rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        .dropdown-display.active {
+            border-bottom: none;
+        }
+        
+        .dropdown-arrow {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #000;
+            border: 1px solid #00ff41;
+            border-top: none;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 12px 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid #111;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(0, 255, 65, 0.1);
+            color: #00ff41;
+            padding-left: 20px;
+        }
+        
+        .dropdown-item.selected {
+            color: #00ff41;
+        }
+        
+        .dropdown-item.selected::before {
+            content: '> ';
+            color: #00ff41;
+        }
+        
+        .dropdown-item.highlighted {
+            background: #00ff41 !important;
+            color: #000 !important;
+        }
+        
+        .dropdown-item.highlighted::before {
+            content: '▶ ' !important;
+            color: #000 !important;
+        }
+        
+        .dropdown-item.highlighted:hover {
+            padding-left: 15px !important; /* Override hover padding when highlighted */
+        }
+        
         .realm-number {
             display: inline-block;
             width: 25px;
-            color: #444;
+            color: #666;
         }
         
-        /* Video/image viewing window */
+        .dropdown-item.highlighted .realm-number {
+            color: #000 !important;
+        }
+        
         .feed-window {
             border: 1px solid #333;
             background: #000;
@@ -870,7 +803,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             overflow: hidden;
         }
         
-        /* Scanline effect moving down the screen */
         .feed-window::before {
             content: '';
             position: absolute;
@@ -883,7 +815,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             pointer-events: none;
         }
         
-        /* Content inside feed window */
         .feed-content {
             padding: 40px;
             display: flex;
@@ -893,7 +824,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             min-height: 400px;
         }
         
-        /* Placeholder shown before selecting a realm */
         .feed-placeholder {
             width: 100%;
             max-width: 500px;
@@ -908,7 +838,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             margin-bottom: 20px;
         }
         
-        /* Antenna icon in placeholder */
         .feed-placeholder-icon {
             font-size: 48px;
             opacity: 0.3;
@@ -920,7 +849,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             text-align: center;
         }
         
-        /* Actual realm image */
         .feed-image {
             width: 100%;
             max-width: 500px;
@@ -929,7 +857,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             border: 1px solid #333;
         }
         
-        /* Description text below video/image */
         .realm-description {
             font-size: 13px;
             color: #888;
@@ -939,7 +866,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             margin: 0 auto;
         }
         
-        /* Signal quality section at bottom */
         .signal-quality {
             border-top: 1px solid #333;
             padding-top: 20px;
@@ -954,7 +880,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             letter-spacing: 1px;
         }
         
-        /* Container for 5 signal bars */
         .signal-bars {
             display: flex;
             gap: 4px;
@@ -963,53 +888,44 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             margin-bottom: 10px;
         }
         
-        /* Individual signal bar */
         .signal-bar {
             flex: 1;
-            background: #222;  /* Inactive gray */
+            background: #222;
             transition: all 0.3s;
         }
         
-        /* Active signal bar (lit up green) */
         .signal-bar.active {
             background: #00ff41;
             box-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
         }
         
-        /* Different heights for each bar */
         .signal-bar:nth-child(1) { height: 20%; }
         .signal-bar:nth-child(2) { height: 40%; }
         .signal-bar:nth-child(3) { height: 60%; }
         .signal-bar:nth-child(4) { height: 80%; }
         .signal-bar:nth-child(5) { height: 100%; }
         
-        /* Signal percentage and status text */
         .signal-status {
             font-size: 11px;
             color: #888;
         }
         
         .signal-status strong {
-            color: #00ff41;  /* Default green */
+            color: #00ff41;
         }
         
-        /* Orange text for degraded signal */
         .signal-status.degraded strong {
             color: #ffaa00;
         }
         
-        /* Red text for critical signal */
         .signal-status.critical strong {
             color: #ff4444;
         }
         
-        /* =================================================================
-           AUDIO PLAYER (for prologue narration)
-           ================================================================= */
+        /* Audio Player */
         .audio-feed {
             text-align: center;
             padding: 60px 40px;
-            background: #000;  /* Black background */
         }
         
         .audio-title {
@@ -1018,7 +934,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             color: #00ff41;
         }
         
-        /* Large circular play button */
         .play-button {
             width: 120px;
             height: 120px;
@@ -1040,9 +955,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
         }
         
-        /* =================================================================
-           VOLUME SLIDER (used in multiple places)
-           ================================================================= */
+        /* Volume Slider */
         .volume-slider {
             -webkit-appearance: none;
             appearance: none;
@@ -1053,7 +966,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             transition: opacity 0.2s;
         }
         
-        /* Slider thumb - Chrome/Safari */
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -1064,7 +976,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             border-radius: 50%;
         }
         
-        /* Slider thumb - Firefox */
         .volume-slider::-moz-range-thumb {
             width: 12px;
             height: 12px;
@@ -1074,7 +985,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             border: none;
         }
         
-        /* Slider track - Chrome/Safari */
         .volume-slider::-webkit-slider-runnable-track {
             width: 100%;
             height: 4px;
@@ -1082,7 +992,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             border-radius: 2px;
         }
         
-        /* Slider track - Firefox */
         .volume-slider::-moz-range-track {
             width: 100%;
             height: 4px;
@@ -1090,7 +999,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             border-radius: 2px;
         }
         
-        /* Progress indicator - Firefox only */
         .volume-slider::-moz-range-progress {
             background: #555;
             height: 4px;
@@ -1100,11 +1008,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 </head>
 <body>
 
-    <!-- =================================================================
-         BOOT SEQUENCE SCREEN
-         First screen users see when visiting the page
-         Shows loading text and progress bar
-         ================================================================= -->
+    <!-- Boot Sequence -->
     <div id="boot-sequence">
         <div class="boot-text">H2E FRAMEWORK v3.2</div>
         <div class="boot-text">TERMINAL 13.7 // I/O BORDER NODE</div>
@@ -1117,31 +1021,22 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         </div>
     </div>
 
-    <!-- =================================================================
-         ENTER TERMINAL SCREEN
-         Shows after boot sequence completes
-         Has the "ENTER TERMINAL" button
-         ================================================================= -->
+    <!-- Enter Terminal Screen -->
     <div id="enter-terminal-screen">
         <div class="enter-terminal-title">TERMINAL 13.7</div>
         <button id="enter-terminal-btn">▶ ENTER TERMINAL</button>
         <a href="/" class="escape-link">Return to index</a>
     </div>
 
-    <!-- =================================================================
-         MAIN TERMINAL INTERFACE
-         The actual story interface with chapters and navigation
-         ================================================================= -->
+    <!-- Main Terminal -->
     <div id="main-terminal">
-        
-        <!-- HEADER: Title, status, sound controls, exit button -->
+        <!-- Header -->
         <div class="terminal-header">
             <div class="header-left">
                 <div class="terminal-title">H2E Framework - Terminal 13.7</div>
                 <div class="terminal-status">STATUS: COMPROMISED // LB 3.2 DEPLOYED</div>
             </div>
             <div class="header-right">
-                <!-- Sound toggle and volume slider -->
                 <div class="sound-control">
                     <div class="sound-toggle" onclick="toggleSound()">
                         <span id="sound-icon">🔇</span>
@@ -1152,12 +1047,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                         <span class="volume-label" id="volume-label">75%</span>
                     </div>
                 </div>
-                <!-- Exit system button -->
                 <button class="exit-system-btn" onclick="confirmExit()">⏻ EXIT SYSTEM</button>
             </div>
         </div>
 
-        <!-- PRIORITY ALERT: Warning about the three PreBorn -->
+        <!-- Priority Alert -->
         <div class="priority-alert">
             <div class="alert-title">ACTIVE THREAD</div>
             <div class="alert-text">
@@ -1170,10 +1064,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
         <div class="section-divider"></div>
 
-        <!-- STORY ARCHIVES: List of all chapters -->
+        <!-- Story Archives -->
         <div class="section-header">Begin Reading</div>
         <ul class="story-list">
-            <!-- Each story item has title and AUDIO/READ buttons -->
             <li class="story-item">
                 <span class="story-title available">Prologue: Confessions</span>
                 <div class="story-actions">
@@ -1227,7 +1120,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
         <div class="section-divider"></div>
 
-        <!-- REFERENCE MATERIALS: Links to supplementary content -->
+        <!-- Reference Materials -->
         <div class="section-header">Reference Materials</div>
         <div class="reference-links">
             <a href="/registry" class="reference-link">Object Registry</a>
@@ -1237,17 +1130,13 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
         <div class="section-divider"></div>
 
-        <!-- TERMINAL HINT: Instructions for hidden terminal -->
+        <!-- Terminal Hint -->
         <div class="terminal-hint">
             Press ` to access terminal
         </div>
     </div>
 
-    <!-- =================================================================
-         HIDDEN TERMINAL (BACKTICK KEY)
-         Command line interface activated by pressing `
-         Allows special commands like /ghost_feed
-         ================================================================= -->
+    <!-- Hidden Terminal -->
     <div id="hidden-terminal">
         <div class="terminal-output" id="terminal-output"></div>
         <div class="terminal-input-line">
@@ -1256,14 +1145,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         </div>
     </div>
 
-    <!-- =================================================================
-         CONTENT MODAL
-         Generic modal container used for:
-         - Audio player
-         - Text reader
-         - Ghost feed
-         - System logs
-         ================================================================= -->
+    <!-- Content Modal -->
     <div id="content-modal" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">✕ CLOSE</button>
@@ -1271,18 +1153,13 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         </div>
     </div>
 
-    <!-- =================================================================
-         JAVASCRIPT SECTION
-         All interactive functionality is below
-         ================================================================= -->
     <script is:inline>
         console.log('H2E Terminal Version: 2026-01-09-10:30:00 - Session-based boot skip implemented');
         console.log('🚀 JavaScript loaded successfully');
 
-        // =================================================================
+        // ========================================
         // GHOST FEED DATA
-        // Information about each observable realm
-        // =================================================================
+        // ========================================
         const realmData = {
             1: {
                 key: 'waiting-quarters',
@@ -1341,78 +1218,70 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             }
         };
         
-        // Create lookup object by realm key (e.g., "io", "grove-of-accord")
+        // For easy lookup by key
         const realmByKey = {};
         Object.values(realmData).forEach(realm => {
             realmByKey[realm.key] = realm;
         });
 
-        // =================================================================
-        // GHOST FEED MODAL FUNCTIONS
-        // Handles the observation relay interface
-        // =================================================================
+        // ========================================
+        // GHOST FEED MODAL
+        // ========================================
+        let currentSelectedRealm = null;
+        let highlightedRealmIndex = 0; // For keyboard navigation
+        let dropdownOpen = false;
         
-        let currentSelectedRealm = null;  // Currently selected realm number
-        let highlightedRealmIndex = 0;  // For keyboard navigation (0-indexed)
-        
-        /**
-         * Opens the Ghost Feed modal
-         * @param {number} realmNumber - Optional realm to select immediately (1-6)
-         */
         window.showGhostFeed = function(realmNumber) {
-            console.log('🌐 showGhostFeed called with realmNumber:', realmNumber);
+            console.log('🌐 showGhostFeed called with realmNumber:', realmNumber);
             console.log('realmData:', realmData);
             
-            // Generate HTML for all realm options in dropdown
+            // Generate dropdown items
             const dropdownItems = Object.keys(realmData).map(num => {
                 const realm = realmData[num];
                 return `
-                    <div class="dropdown-item" data-realm="${num}">
+                    <div class="dropdown-item" data-realm="${num}" onclick="selectRealm(${num}, false)">
                         <span class="realm-number">${num}.</span> ${realm.name}
                     </div>
                 `;
             }).join('');
 
-            // Build the entire Ghost Feed interface
             document.getElementById('modal-body').innerHTML = `
                 <div class="ghost-feed-container">
-                    <!-- Header with warning -->
                     <div class="ghost-feed-header">
                         <div class="ghost-feed-title">⚠️ UNAUTHORIZED OBSERVATION RELAY</div>
                         <div class="ghost-feed-subtitle">Ghost Feed Access - Deprecated Channels</div>
                     </div>
                     
-                    <!-- Warning message -->
                     <div class="ghost-feed-warning">
                         WARNING: These observation relays were never decommissioned. Access constitutes protocol violation. 
                         Praetores monitoring systems may flag unauthorized usage. Proceed with discretion.
                     </div>
                     
-                    <!-- Realm navigation -->
-                    <div class="realm-navigation">
-                        <div class="nav-instruction">NAVIGATION: Use ↑↓ arrow keys to switch realms</div>
-                        <div class="current-realm-display" id="current-realm-display">
-                            <span class="realm-label">Currently observing:</span>
-                            <span class="realm-name" id="current-realm-name">Awaiting selection...</span>
-                        </div>
-                        <div class="realm-list" id="realm-list">
-                            ${dropdownItems}
+                    <div class="realm-selector">
+                        <label class="realm-selector-label">Select Realm</label>
+                        <div class="custom-dropdown">
+                            <div class="dropdown-display" onclick="toggleDropdown()" id="dropdown-display">
+                                <span id="dropdown-selected">-- Choose Observation Target --</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu">
+                                ${dropdownItems}
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Video/image viewing window -->
                     <div class="feed-window">
                         <div class="feed-content" id="feed-content">
                             <div class="feed-placeholder">
                                 <div class="feed-placeholder-icon">📡</div>
                                 <div class="feed-placeholder-text">
-                                    Press → or ↓ to begin observation
+                                    Awaiting realm selection...<br>
+                                    Select target from dropdown above
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Signal quality indicator -->
                     <div class="signal-quality" id="signal-quality" style="display: none;">
                         <div class="signal-quality-label">Signal Quality</div>
                         <div class="signal-bars" id="signal-bars">
@@ -1429,85 +1298,111 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 </div>
             `;
             
-            // Show the modal
             document.getElementById('content-modal').classList.add('active');
             
-            // Initialize keyboard navigation after DOM is ready
+            // Initialize keyboard navigation AFTER modal DOM is ready
             setTimeout(() => {
                 if (realmNumber && realmData[realmNumber]) {
-                    highlightedRealmIndex = realmNumber - 1; // Convert to 0-indexed
+                    highlightedRealmIndex = realmNumber - 1; // 0-indexed
                     selectRealm(realmNumber);
                 } else {
                     highlightedRealmIndex = 0; // Start at first item
                     console.log('No realm number provided, highlighting first item (index 0)');
-                    updateHighlight(); // Highlight first item
+                    updateHighlight(); // Call this for default case!
                 }
                 
-                // Set up keyboard event listener
+                // Set up keyboard event listener for dropdown navigation
                 setupDropdownKeyboardNav();
             }, 50); // Small delay to ensure DOM is rendered
         };
         
-        /**
-         * Selects a specific realm and displays its content
-         * @param {number} realmNumber - Realm to select (1-6)
-         */
-        window.selectRealm = function(realmNumber) {
+        window.toggleDropdown = function() {
+            console.log('🔽 toggleDropdown called');
+            const menu = document.getElementById('dropdown-menu');
+            const display = document.getElementById('dropdown-display');
+            
+            if (menu.classList.contains('active')) {
+                console.log('Closing dropdown');
+                menu.classList.remove('active');
+                display.classList.remove('active');
+                dropdownOpen = false;
+            } else {
+                console.log('Opening dropdown');
+                menu.classList.add('active');
+                display.classList.add('active');
+                dropdownOpen = true;
+                
+                // Highlight current selection or first item AFTER dropdown is visible
+                setTimeout(() => {
+                    if (currentSelectedRealm) {
+                        highlightedRealmIndex = currentSelectedRealm - 1;
+                    } else {
+                        highlightedRealmIndex = 0;
+                    }
+                    console.log('About to call updateHighlight from toggleDropdown');
+                    updateHighlight();
+                }, 10);
+            }
+        };
+        
+        window.selectRealm = function(realmNumber, keepDropdownOpen = false) {
             currentSelectedRealm = realmNumber;
             const realm = realmData[realmNumber];
             
-            // Update "Currently observing" display
-            const realmNameDisplay = document.getElementById('current-realm-name');
-            if (realmNameDisplay) {
-                realmNameDisplay.textContent = `→ ${realm.name} [${realm.signalStrength}% ${realm.status}]`;
+            // Update dropdown display
+            document.getElementById('dropdown-selected').textContent = realm.name;
+            
+            // Close dropdown only if not navigating with keyboard
+            if (!keepDropdownOpen) {
+                document.getElementById('dropdown-menu').classList.remove('active');
+                document.getElementById('dropdown-display').classList.remove('active');
+                dropdownOpen = false;
             }
             
-            // Update the video/image feed
+            // Update dropdown item styling
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            document.querySelector(`[data-realm="${realmNumber}"]`).classList.add('selected');
+            
+            // Update feed
             updateGhostFeed(realm);
         };
         
-        /**
-         * Updates visual highlight in dropdown list
-         */
+        // Update visual highlight in dropdown
         function updateHighlight() {
-            const items = document.querySelectorAll('.realm-list .dropdown-item');
+            const items = document.querySelectorAll('.dropdown-item');
             console.log('updateHighlight called - highlightedRealmIndex:', highlightedRealmIndex);
-            console.log('Found realm items:', items.length);
+            console.log('Found dropdown items:', items.length);
             
             items.forEach((item, index) => {
                 if (index === highlightedRealmIndex) {
-                    // Highlight this item
+                    // Use inline styles instead of CSS classes (wins specificity war)
                     item.style.backgroundColor = '#00ff41';
                     item.style.color = '#000';
-                    item.style.borderColor = '#00ff41';
+                    item.style.paddingLeft = '15px';
                     console.log('Highlighted item', index, ':', item.textContent.trim());
                 } else {
-                    // Clear highlight
+                    // Clear inline styles for non-highlighted items
                     item.style.backgroundColor = '';
                     item.style.color = '';
-                    item.style.borderColor = '';
+                    item.style.paddingLeft = '';
                 }
             });
             
-            // Auto-select the highlighted realm
+            // Auto-select the highlighted realm (update video immediately)
             const realmNumber = highlightedRealmIndex + 1; // Convert to 1-indexed
             console.log('Auto-selecting realm:', realmNumber);
-            selectRealm(realmNumber);
+            selectRealm(realmNumber, true); // Keep dropdown open during keyboard nav
         }
         
-        /**
-         * Sets up keyboard navigation (arrow keys)
-         */
+        // Keyboard navigation for dropdown
         function setupDropdownKeyboardNav() {
             // Remove old listener if exists
             document.removeEventListener('keydown', handleDropdownKeydown);
             document.addEventListener('keydown', handleDropdownKeydown);
         }
         
-        /**
-         * Handles keyboard input for dropdown navigation
-         * @param {KeyboardEvent} e - The keyboard event
-         */
         function handleDropdownKeydown(e) {
             // Only handle keys when modal is open
             if (!document.getElementById('content-modal').classList.contains('active')) {
@@ -1516,7 +1411,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             
             console.log('handleDropdownKeydown - key pressed:', e.key);
             
-            const items = document.querySelectorAll('.realm-list .dropdown-item');
+            const items = document.querySelectorAll('.dropdown-item');
             const maxIndex = items.length - 1;
             
             if (e.key === 'ArrowDown') {
@@ -1538,10 +1433,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             }
         }
 
-        /**
-         * Updates the Ghost Feed display with realm content
-         * @param {object} realm - Realm data object
-         */
         window.updateGhostFeed = function(realm) {
             // Build media content based on type
             let mediaHTML = '';
@@ -1562,7 +1453,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     </video>
                 `;
             } else {
-                // Placeholder for images (real images would go here)
+                // Placeholder for images or missing media
                 mediaHTML = `
                     <div class="feed-placeholder">
                         <div class="feed-placeholder-icon">📡</div>
@@ -1580,10 +1471,10 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 <div class="realm-description">${realm.description}</div>
             `;
             
-            // Show and update signal quality section
+            // Show and update signal quality
             document.getElementById('signal-quality').style.display = 'block';
             
-            // Update signal bars (light up based on signal strength)
+            // Update signal bars
             const bars = document.querySelectorAll('.signal-bar');
             const activeBars = Math.ceil((realm.signalStrength / 100) * 5);
             bars.forEach((bar, index) => {
@@ -1594,24 +1485,19 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 }
             });
             
-            // Update signal status text
+            // Update signal status
             const statusElement = document.getElementById('signal-status');
             statusElement.className = `signal-status ${realm.statusClass}`;
             statusElement.innerHTML = `<strong>${realm.signalStrength}%</strong> | STATUS: ${realm.status}`;
         };
 
-        // =================================================================
+        // ========================================
         // SOUND MANAGEMENT WITH LOCALSTORAGE
-        // Saves user preferences between sessions
-        // =================================================================
-        
-        let ambientSound = null;  // Background server room sound
-        let soundEnabled = false;  // Is sound currently on?
-        let volumeLevel = 75;  // Volume percentage (0-100)
+        // ========================================
+        let ambientSound = null;
+        let soundEnabled = false;
+        let volumeLevel = 75;
 
-        /**
-         * Loads sound preferences from localStorage
-         */
         function loadSoundPreferences() {
             const savedSound = localStorage.getItem('h2e_sound_enabled');
             const savedVolume = localStorage.getItem('h2e_volume_level');
@@ -1627,26 +1513,17 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             updateSoundUI();
         }
 
-        /**
-         * Saves sound preferences to localStorage
-         */
         function saveSoundPreferences() {
             localStorage.setItem('h2e_sound_enabled', soundEnabled.toString());
             localStorage.setItem('h2e_volume_level', volumeLevel.toString());
         }
 
-        /**
-         * Creates audio objects for ambient sound
-         */
         function initializeSounds() {
             ambientSound = new Audio('/sounds/ambient-server-room.mp3');
             ambientSound.loop = true;
             ambientSound.volume = volumeLevel / 100;
         }
 
-        /**
-         * Updates sound UI elements to reflect current state
-         */
         function updateSoundUI() {
             const icon = document.getElementById('sound-icon');
             const label = document.getElementById('sound-label');
@@ -1668,9 +1545,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             volumeLabel.textContent = volumeLevel + '%';
         }
 
-        /**
-         * Toggles sound on/off when user clicks sound button
-         */
         window.toggleSound = function() {
             soundEnabled = !soundEnabled;
             
@@ -1688,7 +1562,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             saveSoundPreferences();
         };
 
-        // Set up volume slider event listener when page loads
         document.addEventListener('DOMContentLoaded', () => {
             const volumeSlider = document.getElementById('volume-slider');
             const volumeLabel = document.getElementById('volume-label');
@@ -1705,16 +1578,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             });
         });
 
-        // =================================================================
+        // ========================================
         // BOOT SEQUENCE WITH SESSION CHECK
-        // Skips boot animation if user already visited this session
-        // =================================================================
+        // ========================================
         
-        /**
-         * Checks if user has already seen boot sequence this session
-         * If yes, skips directly to terminal
-         * If no, shows boot sequence
-         */
+        // Check if user has already booted this session
         function checkBootStatus() {
             const hasBooted = sessionStorage.getItem('h2e_terminal_booted');
             
@@ -1739,30 +1607,27 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 setTimeout(() => {
                     document.getElementById('boot-sequence').classList.add('hidden');
                     document.getElementById('enter-terminal-screen').classList.add('active');
-                }, 6000);  // 6 seconds for boot animation
+                }, 6000);
             }
         }
         
-        // Run boot check when page loads
+        // Run boot check on page load
         checkBootStatus();
 
-        // =================================================================
+        // ========================================
         // ENTER TERMINAL HANDLER
-        // Handles clicking the "ENTER TERMINAL" button
-        // =================================================================
+        // ========================================
         document.getElementById('enter-terminal-btn').addEventListener('click', () => {
             // Mark that boot has completed this session
             sessionStorage.setItem('h2e_terminal_booted', 'true');
             console.log('✅ Boot completed - session flag set');
             
-            // Fade out enter screen
             document.getElementById('enter-terminal-screen').classList.add('hidden');
             
             setTimeout(() => {
                 document.getElementById('enter-terminal-screen').style.display = 'none';
                 document.getElementById('main-terminal').classList.add('active');
                 
-                // Initialize and start ambient sound
                 initializeSounds();
                 loadSoundPreferences();
                 
@@ -1772,18 +1637,14 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             }, 500);
         });
 
-        // =================================================================
+        // ========================================
         // HIDDEN TERMINAL (BACKTICK KEY)
-        // Command line interface activated by pressing `
-        // =================================================================
+        // ========================================
+        let terminalOpen = false;
+        let commandHistory = [];
+        let historyIndex = -1;
         
-        let terminalOpen = false;  // Is terminal currently visible?
-        let commandHistory = [];  // Array of previous commands
-        let historyIndex = -1;  // Current position in history
-        
-        /**
-         * Loads command history from localStorage
-         */
+        // Load command history from localStorage
         function loadCommandHistory() {
             const saved = localStorage.getItem('h2e_terminal_history');
             if (saved) {
@@ -1795,21 +1656,16 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             }
         }
         
-        /**
-         * Saves command history to localStorage
-         * Keeps only last 20 commands
-         */
+        // Save command history to localStorage
         function saveCommandHistory() {
+            // Keep only last 20 commands
             if (commandHistory.length > 20) {
                 commandHistory = commandHistory.slice(-20);
             }
             localStorage.setItem('h2e_terminal_history', JSON.stringify(commandHistory));
         }
         
-        /**
-         * Adds a command to history
-         * @param {string} command - The command to add
-         */
+        // Add command to history
         function addToHistory(command) {
             if (command.trim() === '') return;
             
@@ -1823,11 +1679,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             historyIndex = commandHistory.length; // Reset to end
         }
         
-        /**
-         * Navigates command history with arrow keys
-         * @param {string} direction - 'up' or 'down'
-         * @returns {string} Command at current history position
-         */
+        // Navigate history with arrow keys
         function navigateHistory(direction) {
             if (commandHistory.length === 0) return '';
             
@@ -1841,7 +1693,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 }
             }
             
-            // Return command at current index, or empty if at end
+            // Return command at current index, or empty string if at end
             if (historyIndex < commandHistory.length) {
                 return commandHistory[historyIndex];
             } else {
@@ -1852,7 +1704,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
         // Load history on page load
         loadCommandHistory();
         
-        // Listen for backtick key to toggle terminal
         document.addEventListener('keydown', (e) => {
             if (e.key === '`') {
                 e.preventDefault();
@@ -1868,14 +1719,12 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 }
             }
             
-            // Close terminal with Escape key
             if (e.key === 'Escape' && terminalOpen) {
                 terminalOpen = false;
                 document.getElementById('hidden-terminal').classList.remove('active');
             }
         });
 
-        // Handle command input and execution
         document.getElementById('terminal-input').addEventListener('keydown', (e) => {
             // Handle up/down arrow for command history
             if (e.key === 'ArrowUp') {
@@ -1900,7 +1749,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 return;
             }
             
-            // Execute command on Enter
             if (e.key === 'Enter') {
                 const input = e.target.value.trim();
                 const output = document.getElementById('terminal-output');
@@ -1910,15 +1758,12 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     addToHistory(input);
                 }
                 
-                // Display the command in output
                 const commandLine = document.createElement('div');
                 commandLine.textContent = '$ ' + input;
                 commandLine.style.color = '#00ff41';
                 output.appendChild(commandLine);
                 
-                // Process the command
                 if (input === 'help') {
-                    // Show available commands
                     const helpText = document.createElement('div');
                     helpText.innerHTML = `
 AVAILABLE COMMANDS:<br>
@@ -1929,23 +1774,19 @@ AVAILABLE COMMANDS:<br>
                     `;
                     output.appendChild(helpText);
                 } else if (input === 'clear') {
-                    // Clear terminal output
                     output.innerHTML = '';
                 } else if (input.startsWith('/ghost_feed')) {
-                    // Ghost feed command
                     console.log('📡 /ghost_feed command detected');
                     const parts = input.split(' ');
                     const realmNumber = parts[1] ? parseInt(parts[1]) : null;
                     console.log('Parsed realm number:', realmNumber);
                     
                     if (realmNumber && (realmNumber < 1 || realmNumber > 6)) {
-                        // Invalid realm number
                         const errorText = document.createElement('div');
                         errorText.textContent = `Invalid realm number: ${realmNumber}. Valid range: 1-6`;
                         errorText.style.color = '#ff4444';
                         output.appendChild(errorText);
                     } else {
-                        // Valid command - show loading message
                         const response = document.createElement('div');
                         if (realmNumber) {
                             response.textContent = `Initializing Ghost Feed relay system... Direct access to realm ${realmNumber}`;
@@ -1955,7 +1796,6 @@ AVAILABLE COMMANDS:<br>
                         response.style.color = '#00ff41';
                         output.appendChild(response);
                         
-                        // Close terminal and open ghost feed
                         setTimeout(() => {
                             terminalOpen = false;
                             document.getElementById('hidden-terminal').classList.remove('active');
@@ -1963,29 +1803,25 @@ AVAILABLE COMMANDS:<br>
                         }, 500);
                     }
                 } else if (input === '/echo foedus') {
-                    // Coming soon command
                     const response = document.createElement('div');
                     response.textContent = '[COMING SOON] Searching deprecated archives...';
                     response.style.color = '#ffaa00';
                     output.appendChild(response);
                 } else if (input !== '') {
-                    // Unknown command
                     const errorText = document.createElement('div');
                     errorText.textContent = `Command not found: ${input}`;
                     errorText.style.color = '#ff4444';
                     output.appendChild(errorText);
                 }
                 
-                // Scroll to bottom and clear input
                 output.scrollTop = output.scrollHeight;
                 e.target.value = '';
             }
         });
 
-        // =================================================================
+        // ========================================
         // PROLOGUE CONTENT
-        // The actual text of the prologue story
-        // =================================================================
+        // ========================================
         const prologueText = `"I gave you order. I did not stay to maintain it."
 
 I built the Framework.
@@ -2052,20 +1888,14 @@ The Framework is failing.
 It is my fault.
 And I no longer have the strength to try again.`;
 
-        // =================================================================
+        // ========================================
         // AUDIO MODE
-        // Shows audio player for prologue narration
-        // =================================================================
-        
-        let currentNarration = null;  // Audio object for narration
-        let currentAmbience = null;  // Audio object for ambient sound
-        let progressInterval = null;  // Interval for updating progress bar
-        let isDragging = false;  // Is user dragging scrubber?
+        // ========================================
+        let currentNarration = null;
+        let currentAmbience = null;
+        let progressInterval = null;
+        let isDragging = false;
 
-        /**
-         * Shows audio player modal for a chapter
-         * @param {string} chapter - Chapter identifier (e.g., 'prologue')
-         */
         window.showAudioMode = function(chapter) {
             document.getElementById('modal-body').innerHTML = `
                 <div class="audio-feed">
@@ -2076,39 +1906,32 @@ And I no longer have the strength to try again.`;
                         Duration: ~3 minutes
                     </div>
                     
-                    <!-- Audio player controls -->
                     <div style="max-width: 700px; margin: 0 auto;">
                         <div id="progress-container" style="display: none;">
                             <div style="display: flex; align-items: center; gap: 15px;">
-                                <!-- Play/pause button -->
                                 <button class="play-button" onclick="playAudio()" id="audio-play-btn" style="flex-shrink: 0; width: 30px; height: 30px; font-size: 14px; border-width: 2px;">
-                                    ▶️
+                                    ▶️
                                 </button>
-                                <!-- Progress bar -->
                                 <div style="flex: 1;">
                                     <div style="width: 100%; height: 4px; background: rgba(0, 255, 65, 0.2); cursor: pointer; position: relative;" id="progress-bar">
                                         <div id="progress-fill" style="height: 100%; background: #00ff41; width: 0%; position: relative;">
-                                            <!-- Scrubber handle -->
                                             <div id="scrubber-handle" style="position: absolute; right: -6px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; background: #00ff41; border-radius: 50%; cursor: grab; box-shadow: 0 0 4px rgba(0, 255, 65, 0.8);"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Volume control -->
                                 <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0; position: relative;" id="volume-control-wrapper">
                                     <input type="range" id="audio-volume-slider" class="volume-slider" min="0" max="100" value="80" style="width: 80px; display: none;">
                                     <span style="font-size: 18px; cursor: pointer;" onclick="toggleVolumeSlider()" id="audio-volume-icon">🔊</span>
                                 </div>
                             </div>
-                            <!-- Time display -->
                             <div id="time-display" style="text-align: center; margin-top: 10px; font-size: 11px; color: #888;">
                                 0:00 / 3:24
                             </div>
                         </div>
                         
-                        <!-- Initial big play button -->
                         <div id="initial-play-button" style="text-align: center; margin-top: 30px;">
                             <button class="play-button" onclick="playAudio()">
-                                ▶️
+                                ▶️
                             </button>
                         </div>
                     </div>
@@ -2118,46 +1941,34 @@ And I no longer have the strength to try again.`;
             document.getElementById('content-modal').classList.add('active');
         };
 
-        /**
-         * Plays prologue audio (narration + ambience)
-         */
         window.playAudio = function() {
-            // Stop any currently playing audio
             if (currentNarration) currentNarration.pause();
             if (currentAmbience) currentAmbience.pause();
             
-            // Create new audio objects
             currentNarration = new Audio('/sounds/prologue-narration.mp3');
             currentAmbience = new Audio('/sounds/prologue-ambience.mp3');
             
-            // Set volumes
             currentNarration.volume = 0.8;
             currentAmbience.volume = 0.3;
             currentAmbience.loop = true;
             
-            // Start playing
             currentAmbience.play();
             currentNarration.play();
             
-            // Hide initial play button, show progress bar
             const initialButton = document.getElementById('initial-play-button');
             if (initialButton) initialButton.style.display = 'none';
             document.getElementById('progress-container').style.display = 'block';
             
-            // Change button to pause
-            document.getElementById('audio-play-btn').textContent = '⏸️';
+            document.getElementById('audio-play-btn').textContent = '⏻¸';
             document.getElementById('audio-play-btn').onclick = pauseAudio;
             
-            // Set up scrubber functionality
             setupScrubber();
             
-            // Update progress bar every 100ms
             progressInterval = setInterval(() => {
                 if (!isDragging && currentNarration && currentNarration.duration) {
                     const progress = (currentNarration.currentTime / currentNarration.duration) * 100;
                     document.getElementById('progress-fill').style.width = progress + '%';
                     
-                    // Update time display
                     const currentMin = Math.floor(currentNarration.currentTime / 60);
                     const currentSec = Math.floor(currentNarration.currentTime % 60);
                     const totalMin = Math.floor(currentNarration.duration / 60);
@@ -2168,7 +1979,6 @@ And I no longer have the strength to try again.`;
                 }
             }, 100);
             
-            // When narration ends
             currentNarration.addEventListener('ended', () => {
                 currentAmbience.pause();
                 clearInterval(progressInterval);
@@ -2176,7 +1986,6 @@ And I no longer have the strength to try again.`;
                 document.getElementById('audio-play-btn').onclick = () => playAudio();
             });
             
-            // Volume slider control
             const volumeSlider = document.getElementById('audio-volume-slider');
             volumeSlider.addEventListener('input', (e) => {
                 const volume = e.target.value / 100;
@@ -2185,21 +1994,16 @@ And I no longer have the strength to try again.`;
             });
         };
 
-        /**
-         * Sets up scrubber functionality (seeking through audio)
-         */
         function setupScrubber() {
             const progressBar = document.getElementById('progress-bar');
             const handle = document.getElementById('scrubber-handle');
             const progressFill = document.getElementById('progress-fill');
             
-            // Click anywhere on progress bar to seek
             progressBar.addEventListener('click', (e) => {
                 if (e.target === handle) return;
                 seekToPosition(e.clientX, progressBar);
             });
             
-            // Drag handle to seek
             handle.addEventListener('mousedown', startDrag);
             
             function startDrag(e) {
@@ -2222,11 +2026,6 @@ And I no longer have the strength to try again.`;
                 document.removeEventListener('mouseup', stopDrag);
             }
             
-            /**
-             * Seeks to a position in the audio
-             * @param {number} clientX - Mouse X position
-             * @param {HTMLElement} progressBar - Progress bar element
-             */
             function seekToPosition(clientX, progressBar) {
                 if (!currentNarration || !currentNarration.duration) return;
                 
@@ -2235,11 +2034,9 @@ And I no longer have the strength to try again.`;
                 const width = rect.width;
                 const percentage = Math.max(0, Math.min(1, clickX / width));
                 
-                // Update audio position
                 currentNarration.currentTime = currentNarration.duration * percentage;
                 progressFill.style.width = (percentage * 100) + '%';
                 
-                // Update time display
                 const currentMin = Math.floor(currentNarration.currentTime / 60);
                 const currentSec = Math.floor(currentNarration.currentTime % 60);
                 const totalMin = Math.floor(currentNarration.duration / 60);
@@ -2250,25 +2047,18 @@ And I no longer have the strength to try again.`;
             }
         }
 
-        /**
-         * Pauses audio playback
-         */
         window.pauseAudio = function() {
             if (currentNarration) currentNarration.pause();
             if (currentAmbience) currentAmbience.pause();
             clearInterval(progressInterval);
-            document.getElementById('audio-play-btn').textContent = '▶️';
+            document.getElementById('audio-play-btn').textContent = '▶️';
             document.getElementById('audio-play-btn').onclick = resumeAudio;
         };
 
-        /**
-         * Resumes audio playback
-         */
         window.resumeAudio = function() {
             if (currentNarration) currentNarration.play();
             if (currentAmbience) currentAmbience.play();
             
-            // Restart progress updates
             progressInterval = setInterval(() => {
                 if (currentNarration && currentNarration.duration) {
                     const progress = (currentNarration.currentTime / currentNarration.duration) * 100;
@@ -2284,28 +2074,23 @@ And I no longer have the strength to try again.`;
                 }
             }, 100);
             
-            document.getElementById('audio-play-btn').textContent = '⏸️';
+            document.getElementById('audio-play-btn').textContent = '⏻¸';
             document.getElementById('audio-play-btn').onclick = pauseAudio;
         };
 
         let volumeSliderVisible = false;
         let volumeHideTimeout = null;
         
-        /**
-         * Toggles volume slider visibility and mute/unmute
-         */
         window.toggleVolumeSlider = function() {
             const slider = document.getElementById('audio-volume-slider');
             const wrapper = document.getElementById('volume-control-wrapper');
             const icon = document.getElementById('audio-volume-icon');
             
             if (!volumeSliderVisible) {
-                // Show slider
                 slider.style.display = 'block';
                 volumeSliderVisible = true;
                 wrapper.addEventListener('mouseleave', hideVolumeSlider);
             } else {
-                // Mute/unmute
                 const currentVolume = slider.value;
                 if (currentVolume > 0) {
                     slider.dataset.previousVolume = currentVolume;
@@ -2324,9 +2109,6 @@ And I no longer have the strength to try again.`;
             }
         };
         
-        /**
-         * Hides volume slider after mouse leaves
-         */
         function hideVolumeSlider() {
             const slider = document.getElementById('audio-volume-slider');
             const wrapper = document.getElementById('volume-control-wrapper');
@@ -2338,7 +2120,6 @@ And I no longer have the strength to try again.`;
             }, 500);
         }
         
-        // Keep slider visible while hovering
         document.addEventListener('DOMContentLoaded', () => {
             const wrapper = document.getElementById('volume-control-wrapper');
             if (wrapper) {
@@ -2351,24 +2132,15 @@ And I no longer have the strength to try again.`;
             }
         });
 
-        // =================================================================
+        // ========================================
         // READ MODE
-        // Shows text-based reader for prologue
-        // =================================================================
-        
-        /**
-         * Shows terminal-style text reader for a chapter
-         * @param {string} chapter - Chapter identifier (e.g., 'prologue')
-         */
+        // ========================================
         window.showReadMode = function(chapter) {
-            // Split text into paragraphs
             const paragraphs = prologueText.split('\n\n').filter(p => p.trim());
             
-            // Format each paragraph
             let formattedHTML = '';
             paragraphs.forEach(para => {
                 const lines = para.split('\n');
-                // Check if it's a quoted paragraph
                 if (lines[0].trim().startsWith('"') && lines[lines.length - 1].trim().endsWith('"')) {
                     formattedHTML += `<div style="color: #aaaaaa; font-style: italic; margin: 25px 0; line-height: 1.9;">${para}</div>`;
                 } else {
@@ -2376,11 +2148,9 @@ And I no longer have the strength to try again.`;
                 }
             });
             
-            // Build terminal reader interface
             document.getElementById('modal-body').innerHTML = `
                 <div class="terminal-reader-wrapper" style="border: 1px solid #3a4a5a; border-radius: 8px; overflow: hidden; background: #000; max-width: 900px; margin: 0 auto;">
                     <div style="background: #000; border-radius: 8px; overflow: hidden; min-height: 600px; max-height: 80vh; display: flex; flex-direction: column;">
-                        <!-- Terminal window controls (mac-style) -->
                         <div style="background: #3a4a5a; padding: 12px 15px; display: flex; align-items: center;">
                             <div style="display: flex; gap: 8px; align-items: center;">
                                 <div onclick="closeModal()" style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56; cursor: pointer;" title="Close"></div>
@@ -2390,7 +2160,6 @@ And I no longer have the strength to try again.`;
                             <div style="font-size: 13px; color: #999999; margin-left: 10px;">Terminal 13.7</div>
                         </div>
                         
-                        <!-- Text content area -->
                         <div style="flex: 1; overflow-y: auto; padding: 30px 40px; background: #000;">
                             <div style="color: #00ff41; margin-bottom: 25px; font-size: 14px;">
                                 <span style="color: #888;">$</span> cat PROLOGUE_Confessions.txt
@@ -2407,16 +2176,10 @@ And I no longer have the strength to try again.`;
             document.getElementById('content-modal').classList.add('active');
         };
 
-        // =================================================================
+        // ========================================
         // MODAL CONTROL
-        // Functions for opening/closing modals
-        // =================================================================
-        
-        /**
-         * Closes the content modal and stops any playing audio
-         */
+        // ========================================
         window.closeModal = function() {
-            // Stop audio
             if (currentNarration) {
                 currentNarration.pause();
                 currentNarration.currentTime = 0;
@@ -2427,52 +2190,48 @@ And I no longer have the strength to try again.`;
             }
             clearInterval(progressInterval);
             
-            // Hide modal
             document.getElementById('content-modal').classList.remove('active');
         };
 
-        // Close modal when pressing Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && document.getElementById('content-modal').classList.contains('active')) {
                 closeModal();
             }
         });
-
-        // =================================================================
-        // STORY MODE FUNCTIONS (PLACEHOLDER)
-        // These will be implemented later
-        // =================================================================
         
-        /**
-         * Shows system logs modal (not yet implemented)
-         */
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('dropdown-menu');
+            const display = document.getElementById('dropdown-display');
+            
+            if (dropdown && display && 
+                !dropdown.contains(e.target) && 
+                !display.contains(e.target) &&
+                dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+                display.classList.remove('active');
+                dropdownOpen = false;
+            }
+        });
+
+        // ========================================
+        // STORY MODE FUNCTIONS (PLACEHOLDER)
+        // ========================================
         window.showSystemLogs = function() {
             alert('System Logs - Coming soon!');
         };
         
-        // =================================================================
+        // ========================================
         // EXIT SYSTEM CONFIRMATION
-        // Handles the exit process with confirmation
-        // =================================================================
-        
-        /**
-         * Shows exit confirmation modal
-         */
+        // ========================================
         window.confirmExit = function() {
             document.getElementById('exit-confirmation').classList.add('active');
         };
         
-        /**
-         * Cancels exit and closes confirmation modal
-         */
         window.cancelExit = function() {
             document.getElementById('exit-confirmation').classList.remove('active');
         };
         
-        /**
-         * Actually exits the terminal
-         * Shows unload animation and navigates to index
-         */
         window.executeExit = function() {
             // Hide confirmation modal
             document.getElementById('exit-confirmation').classList.remove('active');
@@ -2504,9 +2263,7 @@ And I no longer have the strength to try again.`;
         };
     </script>
 
-    <!-- =================================================================
-         EXIT CONFIRMATION MODAL
-         ================================================================= -->
+    <!-- Exit Confirmation Modal -->
     <div id="exit-confirmation" class="exit-confirmation">
         <div class="exit-modal-content">
             <div class="exit-modal-title">⚠️ CONFIRM SYSTEM EXIT</div>
@@ -2522,10 +2279,7 @@ And I no longer have the strength to try again.`;
         </div>
     </div>
 
-    <!-- =================================================================
-         UNLOAD SCREEN
-         Shows when exiting terminal
-         ================================================================= -->
+    <!-- Unload Screen -->
     <div id="unload-screen" class="unload-screen">
         <div class="unload-text">UNLOADING TERMINAL 13.7...</div>
         <div class="unload-bar">

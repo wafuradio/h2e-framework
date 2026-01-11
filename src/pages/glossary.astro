@@ -49,15 +49,23 @@ const siteTitle = "H2E Framework - Glossary";
             text-transform: uppercase;
         }
         
-        .return-link {
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 1px solid #00ff41;
+            background: transparent;
+            color: #00ff41;
             font-size: 11px;
-            color: #666;
             text-decoration: none;
-            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            font-family: 'Share Tech Mono', monospace;
         }
         
-        .return-link:hover {
-            color: #00ff41;
+        .nav-button:hover {
+            background: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
         }
         
         /* Search & Filters */
@@ -369,7 +377,7 @@ const siteTitle = "H2E Framework - Glossary";
         <!-- Header -->
         <div class="glossary-header">
             <div class="glossary-title">Glossary</div>
-            <a href="/terminal" class="return-link">Return to Terminal</a>
+            <a href="/terminal" class="nav-button">← Return to Terminal</a>
         </div>
 
         <!-- Search & Filters -->
@@ -424,7 +432,7 @@ const siteTitle = "H2E Framework - Glossary";
     </div>
 
     <script is:inline>
-        console.log('Glossary Version: 2026-01-09-18:45:00 - GLOBAL STYLES');
+        console.log('Glossary Version: 2026-01-09-19:10:00 - NAV POLISH');
         console.log('Script loading...');
 
         // ==========================================
@@ -851,7 +859,10 @@ function Perish(entity) {
             // Remove all button highlighting
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             
-            // Show empty state
+            // Clear grid content
+            document.getElementById('term-grid').innerHTML = '';
+            
+            // Show empty state, hide grid and no-results
             document.getElementById('empty-state').style.display = 'block';
             document.getElementById('term-grid').style.display = 'none';
             document.getElementById('no-results').style.display = 'none';

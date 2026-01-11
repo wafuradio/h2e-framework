@@ -10,7 +10,7 @@ const siteTitle = "H2E Framework - Glossary";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{siteTitle}</title>
-    <style>
+    <style is:global>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&display=swap');
         
         * {
@@ -128,10 +128,36 @@ const siteTitle = "H2E Framework - Glossary";
         
         /* Term Grid */
         .term-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+            gap: 25px;
             margin-bottom: 40px;
+        }
+        
+        /* Section Headers (like Registry) */
+        .section-divider {
+            grid-column: 1 / -1;
+            margin: 30px 0 20px 0;
+            padding-left: 5px;
+            border-left: 3px solid #ffaa00;
+        }
+        
+        .section-divider:first-child {
+            margin-top: 0;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            color: #ffaa00;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+        
+        .section-count {
+            font-size: 11px;
+            color: #666;
+            margin-left: 10px;
         }
         
         /* Term Card */
@@ -142,6 +168,7 @@ const siteTitle = "H2E Framework - Glossary";
             cursor: pointer;
             transition: all 0.3s;
             position: relative;
+            min-height: 120px;
         }
         
         .term-card:hover {
@@ -163,22 +190,31 @@ const siteTitle = "H2E Framework - Glossary";
         
         .term-category {
             font-size: 10px;
-            color: #666;
+            color: #ffaa00;
+            background: rgba(255, 170, 0, 0.1);
+            border: 1px solid rgba(255, 170, 0, 0.3);
+            padding: 4px 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            display: inline-block;
         }
         
         .term-name {
-            font-size: 16px;
+            font-size: 18px;
             color: #00ff41;
             margin-bottom: 12px;
         }
         
         .term-short {
-            font-size: 13px;
-            color: #aaa;
-            line-height: 1.6;
+            font-size: 12px;
+            color: #888;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .coming-soon-badge {
@@ -347,11 +383,12 @@ const siteTitle = "H2E Framework - Glossary";
             >
             
             <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">All</button>
                 <button class="filter-btn" data-category="function">Functions</button>
                 <button class="filter-btn" data-category="terminology">Terminology</button>
                 <button class="filter-btn" data-category="praetores">Praetores</button>
                 <button class="filter-btn" data-category="concept">Concepts</button>
+                <button class="filter-btn" data-category="all">All</button>
+                <button id="clear-btn" style="background: transparent; border: 1px solid #ff4444; color: #ff4444; padding: 8px 16px; font-family: 'Share Tech Mono', monospace; font-size: 12px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; margin-left: 10px;">CLEAR</button>
             </div>
         </div>
 
@@ -359,9 +396,15 @@ const siteTitle = "H2E Framework - Glossary";
         <div class="results-info" id="results-info">
             Showing <span class="count" id="results-count">0</span> entries
         </div>
+        
+        <!-- Empty State -->
+        <div id="empty-state" style="text-align: center; padding: 80px 40px; color: #666; display: block;">
+            <div style="font-size: 14px; margin-bottom: 15px; color: #888;">Use search or select a category above to view glossary entries</div>
+            <div style="font-size: 12px;">23 terms available across 4 categories</div>
+        </div>
 
         <!-- Term Grid -->
-        <div class="term-grid" id="term-grid">
+        <div class="term-grid" id="term-grid" style="display: none;">
             <!-- Terms will be rendered here by JavaScript -->
         </div>
 
@@ -381,7 +424,7 @@ const siteTitle = "H2E Framework - Glossary";
     </div>
 
     <script is:inline>
-        console.log('Glossary Version: 2026-01-09-11:35:00');
+        console.log('Glossary Version: 2026-01-09-19:00:00 - CLEAR FIX');
         console.log('Script loading...');
 
         // ==========================================
@@ -606,6 +649,7 @@ function Perish(entity) {
         // ==========================================
         let currentFilter = 'all';
         let currentSearch = '';
+        let hasInteracted = false; // Track if user has searched or filtered
 
         // ==========================================
         // RENDER FUNCTIONS
@@ -614,10 +658,24 @@ function Perish(entity) {
             console.log('renderTerms called');
             const grid = document.getElementById('term-grid');
             const noResults = document.getElementById('no-results');
+            const emptyState = document.getElementById('empty-state');
             
             console.log('Grid element:', grid);
             console.log('Current filter:', currentFilter);
             console.log('Current search:', currentSearch);
+            console.log('Has interacted:', hasInteracted);
+            
+            // Show empty state if no interaction yet
+            if (!hasInteracted) {
+                grid.style.display = 'none';
+                noResults.style.display = 'none';
+                emptyState.style.display = 'block';
+                document.getElementById('results-count').textContent = 0;
+                return;
+            }
+            
+            // Hide empty state once user interacts
+            emptyState.style.display = 'none';
             
             // Filter data - keep track of original indices
             let filtered = glossaryData.map((term, index) => ({ term, index }));
@@ -649,30 +707,95 @@ function Perish(entity) {
                 noResults.style.display = 'block';
                 return;
             } else {
-                grid.style.display = 'grid';
+                grid.removeAttribute('style'); // Completely remove inline style
                 noResults.style.display = 'none';
+                
+                // DEBUG: Log computed styles
+                console.log('📊 Grid display after removing style attribute');
+                const computedStyle = window.getComputedStyle(grid);
+                console.log('📊 Computed display:', computedStyle.display);
+                console.log('📊 Computed grid-template-columns:', computedStyle.gridTemplateColumns);
+                console.log('📊 Window width:', window.innerWidth);
             }
             
-            // Render cards
-            grid.innerHTML = filtered.map(item => {
-                const term = item.term;
-                const index = item.index;
-                const comingSoonClass = term.comingSoon ? 'coming-soon' : '';
-                const comingSoonBadge = term.comingSoon ? '<div class="coming-soon-badge">Coming Soon</div>' : '';
-                const codeBadge = term.codeSnippet ? '<span class="has-code-badge">Code</span>' : '';
-                const dataIndex = term.comingSoon ? '' : `data-term-index="${index}"`;
-                
-                return `
-                    <div class="term-card ${comingSoonClass}" ${dataIndex}>
-                        ${comingSoonBadge}
-                        <div class="term-category">${term.category}</div>
-                        <div class="term-name">${term.term}${codeBadge}</div>
-                        <div class="term-short">${term.shortDef}</div>
-                    </div>
-                `;
-            }).join('');
+            // Group by category if showing ALL
+            if (currentFilter === 'all' && !currentSearch) {
+                renderGroupedSections(filtered);
+            } else {
+                renderCards(filtered);
+            }
+        }
+        
+        // Render with section headers (Registry style)
+        function renderGroupedSections(filtered) {
+            const grid = document.getElementById('term-grid');
             
-            // Add click handlers via event delegation
+            const categories = {
+                'function': { title: 'FUNCTIONS', items: [] },
+                'terminology': { title: 'TERMINOLOGY', items: [] },
+                'praetores': { title: 'PRAETORES', items: [] },
+                'concept': { title: 'CONCEPTS', items: [] }
+            };
+            
+            // Group items by category
+            filtered.forEach(item => {
+                const cat = item.term.category;
+                if (categories[cat]) {
+                    categories[cat].items.push(item);
+                }
+            });
+            
+            // Build HTML with sections - headers span full row
+            let html = '';
+            Object.keys(categories).forEach(catKey => {
+                const cat = categories[catKey];
+                if (cat.items.length > 0) {
+                    html += `
+                        <div class="section-divider">
+                            <span class="section-title">→ ${cat.title}</span>
+                            <span class="section-count">(${cat.items.length} entries)</span>
+                        </div>
+                    `;
+                    
+                    cat.items.forEach(item => {
+                        html += buildCardHTML(item);
+                    });
+                }
+            });
+            
+            grid.innerHTML = html;
+            attachCardListeners();
+        }
+        
+        // Render flat list of cards
+        function renderCards(filtered) {
+            const grid = document.getElementById('term-grid');
+            grid.innerHTML = filtered.map(item => buildCardHTML(item)).join('');
+            attachCardListeners();
+        }
+        
+        // Build card HTML
+        function buildCardHTML(item) {
+            const term = item.term;
+            const index = item.index;
+            const comingSoonClass = term.comingSoon ? 'coming-soon' : '';
+            const comingSoonBadge = term.comingSoon ? '<div class="coming-soon-badge">Coming Soon</div>' : '';
+            const codeBadge = term.codeSnippet ? '<span class="has-code-badge">Code</span>' : '';
+            const dataIndex = term.comingSoon ? '' : `data-term-index="${index}"`;
+            
+            return `
+                <div class="term-card ${comingSoonClass}" ${dataIndex}>
+                    ${comingSoonBadge}
+                    <div class="term-category">[${term.category.toUpperCase()}]</div>
+                    <div class="term-name">${term.term}${codeBadge}</div>
+                    <div class="term-short">${term.shortDef}</div>
+                </div>
+            `;
+        }
+        
+        // Attach event listeners to cards
+        function attachCardListeners() {
+            const grid = document.getElementById('term-grid');
             grid.querySelectorAll('.term-card[data-term-index]').forEach(card => {
                 card.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-term-index'));
@@ -717,9 +840,31 @@ function Perish(entity) {
         // EVENT LISTENERS
         // ==========================================
         
+        // Clear button
+        document.getElementById('clear-btn').addEventListener('click', () => {
+            console.log('🧹 CLEAR clicked');
+            document.getElementById('search-input').value = '';
+            currentSearch = '';
+            currentFilter = 'all';
+            hasInteracted = false;
+            
+            // Remove all button highlighting
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            
+            // Clear grid content
+            document.getElementById('term-grid').innerHTML = '';
+            
+            // Show empty state, hide grid and no-results
+            document.getElementById('empty-state').style.display = 'block';
+            document.getElementById('term-grid').style.display = 'none';
+            document.getElementById('no-results').style.display = 'none';
+            document.getElementById('results-count').textContent = '0';
+        });
+        
         // Search
         document.getElementById('search-input').addEventListener('input', (e) => {
             currentSearch = e.target.value;
+            hasInteracted = true;
             renderTerms();
         });
 
@@ -732,6 +877,7 @@ function Perish(entity) {
                 
                 // Update filter
                 currentFilter = btn.dataset.category;
+                hasInteracted = true;
                 renderTerms();
             });
         });
@@ -753,7 +899,8 @@ function Perish(entity) {
         // ==========================================
         // INITIALIZE
         // ==========================================
-        renderTerms();
+        // Start with empty state - wait for user interaction
+        renderTerms(); // Will show empty state since hasInteracted = false
     </script>
 
 </body>
