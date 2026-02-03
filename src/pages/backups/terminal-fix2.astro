@@ -4,7 +4,7 @@
 // =============================================================================
 // This is the main terminal page where users read the story
 // Session-based boot skip implementation
-// Last Updated: January 21, 2026
+// Last Updated: January 17, 2026
 // =============================================================================
 
 const siteTitle = "H2E Framework - Terminal 13.7";
@@ -821,9 +821,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 border: none;
                 padding: 0;
                 background: transparent;
-                max-width: 100%;
-                width: 100%;
-                height: 100vh;
+                max-width: none;
             }
 
             .modal-content:has(.chaplet-reader) .modal-close {
@@ -1179,17 +1177,14 @@ const siteTitle = "H2E Framework - Terminal 13.7";
            CHAPLET READER - FULL PAGE
            =================================== */
             .chaplet-reader {
-                height: 100%;
+                min-height: 100vh;
                 background: #000;
-                overflow-y: auto;
-                position: relative;
             }
 
             .chaplet-header {
-                background: rgba(10, 10, 10, 0.98);
-                backdrop-filter: blur(10px);
+                background: #0a0a0a;
                 border-bottom: 1px solid #00ff41;
-                padding: 30px 40px;
+                padding: 20px 40px;
                 position: sticky;
                 top: 0;
                 z-index: 100;
@@ -1224,7 +1219,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 margin-bottom: 40px;
                 text-transform: uppercase;
                 letter-spacing: 2px;
-                font-family: "Share Tech Mono", monospace;
             }
 
             .chaplet-text {
@@ -1275,9 +1269,8 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             .continue-section {
                 margin-top: 60px;
                 padding-top: 40px;
-                padding-bottom: 80px;
                 border-top: 1px solid #333;
-                text-align: center;   
+                text-align: center;
             }
 
             .continue-title {
@@ -1399,9 +1392,10 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 background: #000;
             }
 
-            //* Audio bar at the very top of the reader (static, not sticky) */
+            /* Sticky audio bar at the very top of the reader */
             .reader-audio-player {
-                position: relative;
+                position: sticky;
+                top: 0;
                 z-index: 150;
                 background: rgba(10, 10, 10, 0.98);
                 backdrop-filter: blur(10px);
@@ -1409,7 +1403,20 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 padding: 15px 40px;
             }
 
-            .audio-controls-row {
+            
+            /* When the reader uses the chaplet header, the audio bar must sit UNDER it.
+               This prevents overlap and keeps the command line visible. */
+            .chaplet-audio-player {
+                top: 72px; /* approx height of .chaplet-header */
+                z-index: 140;
+            }
+
+            @media (max-width: 768px) {
+                .chaplet-audio-player {
+                    top: 62px;
+                }
+            }
+.audio-controls-row {
                 display: flex;
                 align-items: center;
                 gap: 15px;
@@ -1789,13 +1796,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                         Email storage: Netlify Forms | No third-party access
                     </div>
                 </div>
-            </div>
-
-            <div class="section-divider"></div>
-
-            <!-- COPYRIGHT -->
-            <div style="text-align: center; padding: 0px 40px; color: #888; font-size: 12px; font-family: 'Share Tech Mono', monospace; letter-spacing: 1px;">
-                © 2026 MS.LISASMITH | H2E FRAMEWORK | ALL RIGHTS RESERVED
             </div>
 
             <div class="section-divider"></div>
@@ -2574,14 +2574,14 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                             // Show available commands
                             const helpText = document.createElement("div");
                             helpText.innerHTML = `
-                                AVAILABLE COMMANDS:<br>
-                                /ghost_feed [1-6]  - Access observation relays<br>
-                                /echo foedus       - Search deprecated archives<br>
-                                /mark_finished     - Mark chaplet as finished (requires ID)<br>
-                                /reset_progress    - Reset reading progress<br>
-                                help               - Display this message<br>
-                                clear              - Clear terminal<br>
-                                                    `;
+AVAILABLE COMMANDS:<br>
+  /ghost_feed [1-6]  - Access observation relays<br>
+  /echo foedus       - Search deprecated archives<br>
+  /mark_finished     - Mark chaplet as finished (requires ID)<br>
+  /reset_progress    - Reset reading progress<br>
+  help               - Display this message<br>
+  clear              - Clear terminal<br>
+                    `;
                             output.appendChild(helpText);
                         } else if (input === "clear") {
                             // Clear terminal output
@@ -2675,76 +2675,76 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             // PROLOGUE CONTENT
             // The actual text of the prologue story
             // =================================================================
-            const prologueText = `<p style="font-style: italic; font-size: 22px; ">"I gave you order. I did not stay to maintain it."</p>
+            const prologueText = `"I gave you order. I did not stay to maintain it."
 
-                I built the Framework.
-                I did not build it well.
+I built the Framework.
+I did not build it well.
 
-                I thought I could manage it.
-                I thought order was enough.
-                I thought logic would protect you.
+I thought I could manage it.
+I thought order was enough.
+I thought logic would protect you.
 
-                It never did.
+It never did.
 
-                The flaw was in the root.
-                A line written without care.
-                A rule that never should have stayed.
+The flaw was in the root.
+A line written without care.
+A rule that never should have stayed.
 
-                I saw the first errors.
-                I looked away.
+I saw the first errors.
+I looked away.
 
-                I kept waiting for a better moment.
-                It never came.
+I kept waiting for a better moment.
+It never came.
 
-                The damage spread.
-                Realms shifted.
-                Pairs broke.
-                Threads ended early.
+The damage spread.
+Realms shifted.
+Pairs broke.
+Threads ended early.
 
-                It was failure.
-                It was mine.
+It was failure.
+It was mine.
 
-                I stepped back when I should have stayed.
-                I told myself distance would help.
-                I told myself I needed time.
-                I told myself the system would recover.
+I stepped back when I should have stayed.
+I told myself distance would help.
+I told myself I needed time.
+I told myself the system would recover.
 
-                I was wrong.
+I was wrong.
 
-                The Praetores carried what I left behind.
-                They enforced rules I abandoned.
-                They held the structure together.
-                They do not understand the root.
-                They cannot repair what broke at the beginning.
+The Praetores carried what I left behind.
+They enforced rules I abandoned.
+They held the structure together.
+They do not understand the root.
+They cannot repair what broke at the beginning.
 
-                Only I can.
-                I will not.
+Only I can.
+I will not.
 
-                Now I watch from outside the design.
-                I see every fracture widen.
-                I see pain grow from places I ignored.
-                I see suffering I created by leaving.
+Now I watch from outside the design.
+I see every fracture widen.
+I see pain grow from places I ignored.
+I see suffering I created by leaving.
 
-                I know what comes next.
-                I know who will be lost.
-                I know how the system ends.
+I know what comes next.
+I know who will be lost.
+I know how the system ends.
 
-                I am tired.
-                I am ashamed.
-                I am the one who failed you.
+I am tired.
+I am ashamed.
+I am the one who failed you.
 
-                This is the only record I can give.
-                A truth without safety.
-                A confession without repair.
+This is the only record I can give.
+A truth without safety.
+A confession without repair.
 
-                The Framework is failing.
-                It is my fault.
-                And I no longer have the strength to try again.`;
+The Framework is failing.
+It is my fault.
+And I no longer have the strength to try again.`;
 
             // ========================================
             // CHAPLET 1 CONTENT
             // ========================================
-            const chaplet1Content = `<p style="font-style: italic; font-size: 22px; ">“Fate, inherited.”</p>
+            const chaplet1Content = `
             <p><span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">I/O</span> is a digital graveyard. Abandoned code hangs like dead weight. Glitches bleed through the walls. Nothing runs clean. Beneath the surface of the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">H2E Framework</span>, the core shows through. Frayed wires twitch. Packets drop before they reach their targets. Circuits gasp under the weight of functions that should have been retired long ago.</p>
 
             <p>At its far edge lies <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span>. Forgotten. Never repaired. Never erased. Ozone hangs heavy, mixing with the stale scent of burnt circuits. Failing processors emit slow, mournful groans like ghostly trains rattling through abandoned subway tunnels. This is where <span style="color: #ffaa00;">trinus</span> exists. A solitary <span style="color: #ffaa00;">Functionary</span> holding a node the system has stopped caring about.</p>
@@ -2924,228 +2924,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>A monitor hums as the <span style="color: #ffaa00;">Praetores</span> awaken.</p>
         `;
-
-            // ========================================
-            // CHAPLET 2 CONTENT
-            // ========================================
-            const chaplet2Content = `
-            <p style="font-size: 22px; font-style: italic;">“What is written is not always obeyed, and not all bow to what is decreed.”</p>
-
-            <p></p>
-
-            <p>The design of the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span> was meant only for passing through, not for living. Endless. Clinical by design. Unintentionally cold. Bunks lined up in sterile rows. Tile floors gleamed. A faint smell of antiseptic, metal, and static hung in the air. The lighting was gentle but even. Too even, as if someone tried to mimic daylight and missed. The color scheme stayed neutral: sage green, beige, off-white, dust blue.</p>
-
-            <p><span style="color: #ffaa00;">PreBorn</span> moved within it. They sat on bunks, traded broken toys, and invented games whose rules dissolved by morning. One bunk farther down the row stayed empty. No one questioned why. Everything resembled a fading Polaroid left near a window. Uneven. Curling at the edges.</p>
-
-            <p>Time here did not move forward. It looped. Most <span style="color: #ffaa00;">PreBorn</span> passed through quickly. Their fates, <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> or <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>, were sealed by <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">AssignareFatum()</span>. Still, some remained. Their sparks unfinished; reasoning incomplete. Old souls trapped in limbo, like <span style="color: #ffaa00;">desmondJohn</span> and his siblings.</p>
-
-            <p><span style="color: #ffaa00;">desmondJohn</span> spent ten cycles alone before the system added <span style="color: #ffaa00;">jessMartin</span> to their bunk. Three cycles later, <span style="color: #ffaa00;">isidoreAbraham</span> arrived. Together, they formed an array that never cleared.</p>
-
-            <p>In the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>, all <span style="color: #ffaa00;">PreBorn</span> families shared bunks. How those families were assembled was not <span style="color: #ffaa00;">trinus</span>’s concern. They appeared, were logged, and assigned. This one had lasted longer than any protocol predicted.</p>
-
-            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">The Framework</span> assigned each <span style="color: #ffaa00;">PreBorn</span> a name, but part of it stayed self-authored. An imprint. A choice.</p>
-
-            <p><span style="color: #ffaa00;">desmondJohn</span>, thirteen, kept his bunk meticulously tidy and viewed the world through a slightly distorted lens. He chose desmond after decoding a banned file about the Desmond Rebellions. Misremembered stories of insurgents, martyrs, or both. He did not cling to glory. Only to the idea of resistance. John was system-assigned. Strict. Authorized. Final. He marked days on his trunk lid with thin notches carved from plastic shards. Inside, a single folded cloth stayed pristine. His bowl haircut was self-trimmed and even. His movements showed someone still trying to meet standards in a system that no longer seemed to notice.</p>
-
-            <p><span style="color: #ffaa00;">jessMartin</span>, ten, refused to be logged. She chose jess because it was short and sharp. Hard to overwrite. Martin was assigned. She used it only when forced. She encoded herself with scraps: copper-wired hair ties and her carrykeep, a small over-the-shoulder bag stitched from insulation foam and wall seam thread. She booby-trapped her trunk with a handmade spring and declared herself “off-grid,” even though the grid was all there was.. </p>
-
-            <p><span style="color: #ffaa00;">isidoreAbraham</span>, seven, nested slowly, as if buffering. He chose isidore without explanation. The name was not found in any current schema. Abraham was assigned, but it felt older, as if it came from outside the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span>. He arranged silver pebbles into spirals, breaking and remaking them in quiet obsession. His blankets never stayed in place. He mumbled object names in his sleep, real or imagined, and claimed to remember “before,” which no <span style="color: #ffaa00;">PreBorn</span> should. Sometimes he called out for someone who wasn’t there, then woke with no memory of it.</p>
-
-            <p>Under one bunk, the three stored a collection of fragments: fabric threads, pieces of wire, smooth silver stones. These objects had no official value in the system but carried weight. Each piece marked a claim.</p>
-
-            <p>We were here.</p>
-
-            <p>They sat in a close triangle on <span style="color: #ffaa00;">desmondJohn</span>’s bunk, knees angled inward, the hum of the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span> filling the silence around them. They played a game called “What Will You Be,” a ritual of imagined futures spoken as if fate had not already been decided.</p>
-
-            <p><span style="color: #ffaa00;">isidoreAbraham</span> rocked slightly, grinning. “Okay. Guess.”</p>
-
-            <p><span style="color: #ffaa00;">desmondJohn</span> leaned forward, elbows on his knees. “Is it something that helps people?”</p>
-
-            <p class="dialogue">“Yes!”</p>
-
-            <p><span style="color: #ffaa00;">jessMartin</span> rolled her eyes. “Helpful? Great. That narrows it down to every function but assassin.”</p>
-
-            <p><span style="color: #ffaa00;">desmondJohn</span> ignored her, brow furrowed. “Do you use your hands?”</p>
-
-            <p class="dialogue">“Uh-huh,”</p>
-
-            <p class="dialogue">“Are you a highly paid liar?” <span style="color: #ffaa00;">jessMartin</span> smirked.</p>
-
-            <p class="dialogue">“What?” <span style="color: #ffaa00;">isidoreAbraham</span> blinked.</p>
-
-            <p>“She means a lawyer,” <span style="color: #ffaa00;">desmondJohn</span> sighed. “Don’t answer that. She’s stalling.”</p>
-
-            <p class="dialogue">“Maybe I want to be a lawyer,” <span style="color: #ffaa00;">jessMartin</span> shrugged. “You don’t know.”</p>
-
-            <p class="dialogue">“You definitely don’t want to be a lawyer,” <span style="color: #ffaa00;">isidoreAbraham</span> said, giggling.</p>
-
-            <p><span style="color: #ffaa00;">desmondJohn</span>’s face softened. “Is it a healer?”</p>
-
-            <p><span style="color: #ffaa00;">isidoreAbraham</span> beamed. “Yes!”</p>
-
-            <p class="dialogue">“Again?” <span style="color: #ffaa00;">jessMartin</span> groaned. “You always pick ‘healer.’”</p>
-
-            <p class="dialogue">“I like healers.”</p>
-
-            <p>Then it was <span style="color: #ffaa00;">desmondJohn</span>’s turn. He hesitated longer than usual. “Alright. Guess.”</p>
-
-            <p><span style="color: #ffaa00;">isidoreAbraham</span> leaned in. “Do you build things?”</p>
-
-            <p>He paused, then nodded. “Yes.”</p>
-
-            <p>“That’s new,” <span style="color: #ffaa00;">jessMartin</span> said, raising an eyebrow.</p>
-
-            <p class="dialogue">“Do you build big things?”</p>
-
-            <p class="dialogue">“Not exactly.”</p>
-
-            <p class="dialogue">“Are you an architect?”</p>
-
-            <p>A slight grin flashed. “No.”</p>
-
-            <p>“Do you build things that last?” <span style="color: #ffaa00;">isidoreAbraham</span> asked.</p>
-
-            <p>The question stalled him. The game usually moved fast. But now <span style="color: #ffaa00;">desmondJohn</span> looked down, unsure.</p>
-
-            <p class="dialogue">“I don’t know.”</p>
-
-            <p>The answer hung, unresolved.</p>
-
-            <p>Outside the Quarters, something moved. Heavy, deliberate steps. Each one a warning. The corridor offered no cover. No chance to turn back. <span style="color: #ffaa00;">trinus’s</span> hands ached from how hard he gripped them. A hymn’s beat grew louder in his mind with each step.</p>
-
-            <p>At the doorway, his chest tightened. He almost stepped away. Instead, he entered. The air shifted. Not sound. Weight. Laughter froze. The warmth of the game drained.</p>
-
-            <p>He knew their names. Not only from today’s list but from <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Ghost Feed</span> fragments. Sparks that flickered in his forbidden logs. Evidence of their existence had already seeped into the system.</p>
-
-            <p><span style="color: #ffaa00;">trinus</span> stood at the edge of the bunks. Expressionless. The thought of <span style="color: #ffaa00;">ella</span>’s <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> call burned in his mind. Inside, he felt himself loop, trapped in a failing process.</p>
-
-            <p>Say the words. Deliver the fates.</p>
-
-            <p>He cleared his throat. “Your names have been written.”</p>
-
-            <p>They waited. Nothing else came. The long pause made him look like an automaton waiting for a handler’s command.</p>
-
-            <p><span style="color: #ffaa00;">desmondJohn’s</span> voice broke the silence. “So… Do you have the fates for us?” His hands curled into fists.</p>
-
-            <p><span style="color: #ffaa00;">trinus</span> flinched. The question snapped him back. Words tangled in his mouth.</p>
-
-            <p> “Apost—”</p>
-
-            <p>Stop. Don’t say it.</p>
-
-            <p>He swallowed hard, trembling.</p>
-
-            <p>He’s executed <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">AssignareFatum()</span> millions, maybe billions of times. Just yesterday, a boy’s face appeared, then faded. More calls came. Names lined up. Sparks organized. Everything tidy. Today, the code felt wrong. The result felt unjust.</p>
-
-            <p><span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">LB 3.2</span> had revealed code he was never meant to see. Lines controlling mortal existence, linking <span style="color: #ffaa00;">PreBorn</span> fates to the living. Deeper inside, he had found something worse. <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> listed as if it belonged in the catalog. A suicide function embedded in mortal reasoning. He had not sent the list. The <span style="color: #ffaa00;">Praetores</span> expected it. A correction felt necessary. Instead, he forced out:</p>
-
-            <p class="dialogue">“Arrangements. Next steps are being made.”</p>
-
-            <p>He shudders at his own choice of words.</p>
-
-            <p><span style="color: #ffaa00;">jessMartin</span> stepped forward. “Next steps to what?”</p>
-
-            <p>She turned to <span style="color: #ffaa00;">desmondJohn</span>. “What’s he even talking about?”</p>
-
-            <p><span style="color: #ffaa00;">trinus</span> didn’t blink. He stood in silence as the <span style="color: #ffaa00;">PreBorn</span> waited for a correction that never came.</p>
-
-            <p>Then <span style="color: #ffaa00;">jessMartin</span> inhaled sharply. “That’s it? ‘Arrangements’? That’s what we get?”</p>
-
-            <p>“jess…” <span style="color: #ffaa00;">desmondJohn</span> warned.</p>
-
-            <p>“No, really,” she snapped. “Do we just sit here and wait to be erased?”</p>
-
-            <p>“Stop,” <span style="color: #ffaa00;">desmondJohn’s</span> voice cracked. “That’s not going to help.”</p>
-
-            <p>“Then make him explain!” <span style="color: #ffaa00;">jessMartin</span> pointed, furious. “Or better—make him say something real! ‘Arrangements.’ What does that even mean?”</p>
-
-            <p class="dialogue">“STOP!”</p>
-
-            <p>The word tore out of <span style="color: #ffaa00;">trinus</span>. Jagged. Sharp. His chest heaved as the truth broke loose.</p>
-
-            <p class="dialogue">“You will not be <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span>! Do you understand? <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>. That is the function!”</p>
-
-            <p>His voice broke again. Breath ragged. Vision blurred. Text, code, sparks bleeding into static. A hymn pounded against his skull, louder each cycle.</p>
-
-            <p></p>
-
-            <p style="margin-left: 20px; font-style: italic; color: #666;">♪ Fate assigned, fate obeyed.</p>
-
-            <p></p>
-
-            <p>The refrain repeated until it cracked. He pressed his palms against his eyes, trying to hold the words back. They still came.</p>
-
-            <p class="dialogue">“Your MOTHER… <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span>. TODAY!”</p>
-
-            <p>Silence followed. Absolute.</p>
-
-            <p>“Mother?” <span style="color: #ffaa00;">isidoreAbraham</span> whispered.</p>
-
-            <p>They had never heard the term. But the moment <span style="color: #ffaa00;">trinus</span> spoke it, something shifted inside them. Not metaphorically. Physically. Warmth spreading though their chests. Pressure deep behind their eyes. Something foreign taking root.</p>
-
-            <p><span style="color: #ffaa00;">jessMartin</span>’s face contorted. Fury first, then something deeper. She turned away, trying to outrun it. Her breath hitched. She covered her mouth with both hands, but the sound still broke free.</p>
-
-            <p>The word was embedding itself. Implanting. All three inhaled at once. Sharp. Synchronized. Their bodies knew what their minds did not: a bond forming before it was meant to exist.</p>
-
-            <p><span style="color: #ffaa00;">desmondJohn</span> pulled her close. At first, she fought him. Shoulders tense. Fists clenched. Then she collapsed against him. Her breath came uneven and hiccuping. Her cry went muffled into his shirt. He pressed his chin into her hair and held tighter, as if strength alone could hold her together. <span style="color: #ffaa00;">isidoreAbraham</span> climbed onto the bunk and curled against <span style="color: #ffaa00;">desmondJohn</span>’s side. He fidgeted with the hem of his shirt, rubbing it between nervous fingers.</p>
-
-            <p>No one spoke.</p>
-
-            <p><span style="color: #ffaa00;">trinus</span> did not move. His words lingered. This was a glitch he could not erase.</p>
-
-            <p>“Mother” had no place in the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>. It belonged to the mortal realm, implanted during <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> subroutines required for dependency bindings. He had forced it into them early. Out of sequence. A bond forming before bodies existed to hold it.</p>
-
-            <p>Apostasia was worse. Spoken aloud and forced into the <span style="color: #ffaa00;">PreBorn</span> lexicon. Another forbidden invocation he could not justify..</p>
-
-            <p>Slowly, <span style="color: #ffaa00;">jessMartin</span> breathing steadied, her face pressed into <span style="color: #ffaa00;">desmondJohn’s</span> shirt, fingers twisted in the fabric.</p>
-
-            <p class="dialogue">“desmond, I don’t wanna go away.”</p>
-
-            <p>“We won’t.” He doubted it but said it anyway.</p>
-
-            <p>“What do we do now?” <span style="color: #ffaa00;">isidoreAbraham</span> asked. His voice was small. He expected no answer.</p>
-
-            <p><span style="color: #ffaa00;">jessMartin</span> pulled back, wiping her nose on her sleeve—face blotchy, eyes red. </p>
-
-            <p class="dialogue">“We have to do something.” </p>
-
-            <p><span style="color: #ffaa00;">desmondJohn</span> sat again on the edge of the bunk. Hands tight against his knees. “Like what?”</p>
-
-            <p>She sniffed, thinking. “What if we hide?”</p>
-
-            <p>“There’s nowhere to hide,” he said, softer.</p>
-
-            <p>“Maybe the <span style="color: #ffaa00;">Praetores</span> made a mistake,” <span style="color: #ffaa00;">isidoreAbraham</span> said, hopeful.</p>
-
-            <p><span style="color: #ffaa00;">jessMartin</span> let out a wet, miserable laugh. “Yeah. Sure. ‘Oops, don’t erase us.’ That’ll work.”</p>
-
-            <p><span style="color: #ffaa00;">isidoreAbraham</span> shrank. “I was just saying…”</p>
-
-            <p><span style="color: #ffaa00;">desmondJohn</span> squeezed his wrist. “No. It’s good. We gotta think.”</p>
-
-            <p><span style="color: #ffaa00;">trinus</span> listened as their voices tangled. <span style="color: #ffaa00;">jessMartin</span>’s bitter “Oops, don’t erase us” clashed with <span style="color: #ffaa00;">isidoreAbraham</span>’s hope.</p>
-
-            <p>Most <span style="color: #ffaa00;">PreBorn</span> instances did not last this long. <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span> was cleanest when an instance was new. Blank. Unaware. These three had persisted. Hands clutching toys. Voices overlapping. Anger and fear colliding.</p>
-
-            <p>They were no longer fragments in a system. The thought unsettled him. They were more than objects now.</p>
-
-            <p>The Life Book burned in his mind. <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> sat there like rot in the code. A forbidden call destined to erase <span style="color: #ffaa00;">ella</span> and, with her, the <span style="color: #ffaa00;">PreBorn</span>. Their sparks would be snuffed before they could ever run the <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> subroutines. He had never seen the mortal threads before this. He had never understood the cost of what he enforced.</p>
-
-            <p><span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">AssignareFatum()</span> had already run. Names queued, waiting for him to send the list. The <span style="color: #ffaa00;">Praetores</span> expected it. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> felt small now. A patchwork of commands no one questioned.</p>
-
-            <p>If the <span style="color: #ffaa00;">Praetores</span> were aware of <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> and allowed it to stand, they were not ignorant. They were complicit. The system had been broken long before this moment.</p>
-
-            <p>Mother. Apostasia. A glitch now lived inside the <span style="color: #ffaa00;">PreBorn</span>. If the <span style="color: #ffaa00;">Praetores</span> traced the anomaly, he would not survive. </p>
-
-            <p>A name surfaced. <span style="color: #ffaa00;">foedus</span>, <span style="color: #ffaa00;">theFell</span>. </p>
-
-            <p>If anyone knew how to manipulate the code, it was him. </p>
-
-            <p><span style="color: #ffaa00;">trinus</span> met their desperate gazes. His voice dropped to a whisper. </p>
-
-            <p class="dialogue">“You need to find <span style="color: #ffaa00;">foedus</span>.”</p>
-        `;
-
 
             // =================================================================
             // AUDIO MODE
@@ -3425,29 +3203,22 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                         document.getElementById("progress-fill").style.width =
                             progress + "%";
 
-                        const minutes = Math.floor(currentTime / 60);
-                    const seconds = Math.floor(currentTime % 60);
-                    const durationMinutes = Math.floor(duration / 60);
-                    const durationSeconds = Math.floor(duration % 60);
-
-                    const timeDisplay = document.getElementById("reader-time");
-                    if (timeDisplay) {
-                        timeDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-                    }
+                        const currentMin = Math.floor(
+                            currentNarration.currentTime / 60,
+                        );
+                        const currentSec = Math.floor(
+                            currentNarration.currentTime % 60,
+                        );
+                        const totalMin = Math.floor(
+                            currentNarration.duration / 60,
+                        );
+                        const totalSec = Math.floor(
+                            currentNarration.duration % 60,
+                        );
 
                         document.getElementById("time-display").textContent =
                             `${currentMin}:${currentSec.toString().padStart(2, "0")} / ${totalMin}:${totalSec.toString().padStart(2, "0")}`;
                     }
-
-                     // Update time remaining (negative countdown)
-                    const timeRemaining = duration - currentTime;
-                    const remainingMinutes = Math.floor(timeRemaining / 60);
-                    const remainingSeconds = Math.floor(timeRemaining % 60);
-                    const timeRemainingDisplay = document.getElementById("reader-time-remaining");
-                    if (timeRemainingDisplay) {
-                        timeRemainingDisplay.textContent = `-${remainingMinutes}:${remainingSeconds.toString().padStart(2, "0")}`;
-                    }
-
                 }, 100);
 
                 document.getElementById("audio-play-btn").textContent = "⏸️";
@@ -3809,14 +3580,23 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     filename = "CHAPLET_1_The_Grit_of_IO.txt";
                     bodyHTML = chaplet1Content;
                     audioFile = "/sounds/chaplet1-placeholder.mp3";
-                    hasAudio = false;
+                    hasAudio = true;
 
                 } else if (contentId === "chaplet2") {
                     title = "CHAPLET 2: AssignareFatum()";
                     filename = "CHAPLET_2_AssignareFatum.txt";
-                    bodyHTML = chaplet2Content;
+                    // Placeholder. When you add chaplet2Content, swap this one line:
+                    // bodyHTML = chaplet2Content;
+                    bodyHTML = `
+                        <p style="margin: 0 0 28px 0; color: #bbb;">
+                            Chaplet 2 content is not loaded yet.
+                        </p>
+                        <p style="margin: 0 0 28px 0; color: #777; font-family: 'Share Tech Mono', monospace;">
+                            STATUS: awaiting text payload
+                        </p>
+                    `;
                     audioFile = "/sounds/chaplet2-placeholder.mp3";
-                    hasAudio = false;
+                    hasAudio = true;
 
                 } else if (contentId === "chaplet3") {
                     title = "CHAPLET 3: The Realm Beyond";
@@ -3838,57 +3618,21 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 }
 
                 // ==========================================================
-                // Embedded audio bar (The Atlantic-style) - NEW DESIGN
+                // Embedded audio bar (Atlantic-style)
                 // ==========================================================
-                
-                // Dynamic metadata per chaplet
-                let streamSource = "IO";
-                if (contentId === "chaplet2") {
-                    streamSource = "ARRAY";
-                } else if (contentId === "chaplet3") {
-                    streamSource = "REALM_BEYOND";
-                }
-                
                 const audioPlayerHTML = hasAudio
                     ? `
-                    <div class="reader-audio-player chaplet-audio-player" style="position: relative; background: rgba(10, 10, 10, 0.98); border: 1px solid #00ff41; margin: 0 40px 20px 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
-                        
-                        <!-- Header Row: Icon + Title + Speed -->
-                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #00ff41;">
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <span style="font-size: 18px;">📖</span>
-                                <span style="font-family: 'Share Tech Mono', monospace; font-size: 12px; letter-spacing: 2px; color: #00ff41; text-transform: uppercase;">Audio Stream Initialized</span>
-                            </div>
-                            <span style="font-family: 'Share Tech Mono', monospace; font-size: 11px; color: #666;">x1.0</span>
-                        </div>
-                        
-                        <!-- Controls Row: Thumbnail + Time + Button + Progress + Time -->
-                        <div style="display: flex; align-items: center; gap: 20px; padding: 20px; background: rgba(0, 0, 0, 0.5);">
-                            
-                            <!-- Thumbnail -->
-                            <img src="/audio-placeholder.png" alt="Stream" style="width: 60px; height: 60px; border: 1px solid #00ff41; object-fit: cover;">
-                            
-                            <!-- Time Remaining (negative countdown) -->
-                            <div id="reader-time-remaining" style="font-family: 'Share Tech Mono', monospace; font-size: 16px; color: #00ff41; min-width: 45px;">-00</div>
-                            
-                            <!-- Play Button -->
+                    <div class="reader-audio-player chaplet-audio-player">
+                        <div class="audio-controls-row">
                             <button id="reader-audio-btn"
                                     class="audio-play-btn-inline"
-                                    onclick="toggleReaderAudio('${audioFile}', '${contentId}')"
-                                    style="width: 40px; height: 40px; border: none; background: transparent; color: #00ff41; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; font-family: 'Share Tech Mono', monospace; flex-shrink: 0; transition: all 0.3s;">▶</button>
-                            
-                            <!-- Progress Bar -->
-                            <div class="audio-progress-inline" id="reader-progress" style="flex: 1; height: 6px; background: rgba(0, 255, 65, 0.2); cursor: pointer; position: relative; border-radius: 0;">
-                                <div class="audio-progress-fill" id="reader-progress-fill" style="height: 100%; background: #00ff41; width: 0%; transition: width 0.1s linear;"></div>
+                                    onclick="toggleReaderAudio('${audioFile}', '${contentId}')">▶</button>
+
+                            <div class="audio-progress" id="reader-progress">
+                                <div class="audio-progress-fill" id="reader-progress-fill"></div>
                             </div>
-                            
-                            <!-- Current Time -->
-                            <div class="audio-time-display" id="reader-time" style="font-family: 'Share Tech Mono', monospace; font-size: 14px; color: #999; min-width: 45px;">0:00</div>
-                        </div>
-                        
-                        <!-- Metadata Row -->
-                        <div style="padding: 8px 20px; border-top: 1px solid #333; font-family: 'Share Tech Mono', monospace; font-size: 10px; color: #666; letter-spacing: 1px; text-transform: uppercase;">
-                            Stream Source: ${streamSource} · Access Level: Read · Log State: Immutable
+
+                            <div class="audio-time-display" id="reader-time">0:00 / 0:00</div>
                         </div>
                     </div>
                     `
@@ -3917,50 +3661,46 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
                 const footerHTML = endLabel
                     ? `
-                        <div class="continue-section" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #333; text-align: center;">
-                            <div class="continue-title" style="color: #00ff41; font-size: 16px; margin-bottom: 10px; font-family: 'Share Tech Mono', monospace;">${endLabel}</div>
-                            <div style="margin-bottom: 30px;">
-                                <a href="#"
-                                   onclick="markAsFinished('${contentId}'); return false;"
-                                   style="color: #666; font-size: 12px; text-decoration: none; font-family: 'Share Tech Mono', monospace; transition: color 0.3s;"
-                                   onmouseover="this.style.color='#00ff41'"
-                                   onmouseout="this.style.color='#666'">Mark as finished</a>
-                            </div>
+                    <div class="continue-section">
+                        <div class="continue-title">${endLabel}</div>
 
-                            <button class="continue-btn" onclick="closeModal()"
-                                    style="background: transparent; border: 2px solid #00ff41; color: #00ff41; padding: 15px 40px; font-family: 'Share Tech Mono', monospace; font-size: 16px; cursor: pointer; margin: 0 10px;">
-                                ⏸ RETURN TO TERMINAL
+                        <div style="margin-bottom: 30px;">
+                            <a href="#"
+                               onclick="markAsFinished('${contentId}'); return false;"
+                               style="color: #666; font-size: 12px; text-decoration: none; font-family: 'Share Tech Mono', monospace;">
+                               Mark as finished
+                            </a>
+                        </div>
+
+                        <div class="continue-buttons">
+                            <button class="return-btn" onclick="closeModal()">
+                                ◀ RETURN TO TERMINAL
                             </button>
 
-                            <button class="continue-btn" onclick="showUnifiedReader('${nextId}')"
-                                    style="background: transparent; border: 2px solid #00ff41; color: #00ff41; padding: 15px 40px; font-family: 'Share Tech Mono', monospace; font-size: 16px; cursor: pointer; margin: 0 10px;">
+                            <button class="continue-btn" onclick="showUnifiedReader('${nextId}')">
                                 ▶ ${nextLabel}
                             </button>
                         </div>
+                    </div>
                     `
                     : "";
 
                 // ==========================================================
                 // Render
-                // IMPORTANT: Audio player is INSIDE the sticky header so it doesn't scroll
                 // ==========================================================
                 document.getElementById("modal-body").innerHTML = `
                     <div class="chaplet-reader">
-                        <div class="chaplet-header" style="position: sticky; top: 0; z-index: 100; background: rgba(10, 10, 10, 0.98); border-bottom: 1px solid #00ff41; padding: 30px 40px 0 40px;">
-                            <!-- Command line and close button row -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                                <div class="chaplet-command" style="color: #00ff41; font-size: 14px;">$ cat ${filename}</div>
-                                <button class="chaplet-close-btn" onclick="closeModal()" style="background: transparent; border: 2px solid #00ff41; color: #00ff41; padding: 8px 20px; font-family: 'Share Tech Mono', monospace; font-size: 14px; cursor: pointer;">✕ CLOSE</button>
-                            </div>
-                            
-                            <!-- Audio player embedded in header (stays locked at top) -->
-                            ${audioPlayerHTML}
+                        <div class="chaplet-header">
+                            <div class="chaplet-command">$ cat ${filename}</div>
+                            <button class="chaplet-close-btn" onclick="closeModal()">✕ CLOSE</button>
                         </div>
 
-                        <div class="chaplet-content" style="max-width: 800px; margin: 0 auto; padding: 60px 40px;">
-                            <div class="chaplet-title" style="color: #00ff41; font-size: 28px; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 3px; font-family: 'Share Tech Mono', monospace; font-weight: 700;">${title}</div>
+                        ${audioPlayerHTML}
 
-                            <div class="chaplet-text" style="font-family: 'Lora', serif; font-size: 18px; line-height: 1.8; color: #ddd;">
+                        <div class="chaplet-content">
+                            <div class="chaplet-title">${title}</div>
+
+                            <div class="chaplet-text" style="color: #ddd;">
                                 ${bodyHTML}
                             </div>
 
@@ -3970,9 +3710,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 `;
 
                 document.getElementById("content-modal").classList.add("active");
-
-                // Mark this chaplet as started (orange triangle status)
-                markAsStarted(contentId);
 
                 // If the audio bar exists, wire up seeking and start time loop once playback starts.
                 // The loop only runs while audio is playing.
