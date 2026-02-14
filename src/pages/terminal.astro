@@ -1645,13 +1645,12 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             <!-- PRIORITY ALERT: Warning about the three PreBorn -->
             <div class="priority-alert">
                 <div class="alert-title">ACTIVE THREAD</div>
-                <div class="alert-text">
-                    <span class="thread-names"
-                        >desmondJohn | jessMartin | isidoreAbraham</span
-                    >
-                    <br /><br />
+                 <div class="alert-text">
+                    <span class="thread-names">desmondJohn | jessMartin | isidoreAbraham</span>
+                     <br /><br />
                     Three PreBorn marked for deletion.<br />
-                    The system has already decided.
+                    Execution pending.<br /><br />
+                    This thread should not still be visible.
                 </div>
             </div>
 
@@ -1684,23 +1683,24 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 <li class="story-item" data-chaplet="chaplet2">
                     <span class="story-title available">
                         <span class="story-status not-started" id="status-chaplet2">●</span>
-                        Chaplet 2: AssignareFatum()
+                        Chaplet 2: AssignareFatum(): The Fates Delivered
                     </span>
                     <div class="story-actions">
                         <button class="story-btn" onclick="showUnifiedReader('chaplet2')">📄 ACCESS</button>
                     </div>
                 </li>
 
-                <!-- Locked items keep the same structure for consistency. Buttons stay disabled until unlocked. -->
                 <li class="story-item locked" data-chaplet="chaplet3">
-                    <span class="story-title locked">
-                        <span class="story-status locked" id="status-chaplet3">●</span>
+                    <span class="story-title available">
+                        <span class="story-status not-started" id="status-chaplet3">●</span>
                         Chaplet 3: The Realm Beyond
                     </span>
                     <div class="story-actions">
-                        <button class="story-btn" disabled>📄 ACCESS</button>
+                        <button class="story-btn" onclick="showUnifiedReader('chaplet3')">📄 ACCESS</button>
                     </div>
                 </li>
+
+                <!-- Locked items keep the same structure for consistency. Buttons stay disabled until unlocked. -->
 
                 <li class="story-item locked corrupted" data-chaplet="chaplet3_5">
                     <span class="story-title corrupted locked">
@@ -1740,11 +1740,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             <div class="reference-links">
                 <a href="/registry" class="reference-link">Object Registry</a>
                 <a href="/glossary" class="reference-link">Glossary</a>
-                <a
-                    href="#"
-                    class="reference-link"
-                    onclick="showSystemLogs(); return false;">System Logs</a
-                >
+                <a href="/logs" class="reference-link">System Logs</a>
             </div>
 
             <div class="section-divider"></div>
@@ -2220,7 +2216,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             let ambientSound = null; // Background server room sound
             let soundEnabled = false; // Is sound currently on?
-            let volumeLevel = 75; // Volume percentage (0-100)
+            let volumeLevel = 40; // Volume percentage (0-100)
 
             /**
              * Loads sound preferences from localStorage
@@ -2580,6 +2576,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                             helpText.innerHTML = `
                                 AVAILABLE COMMANDS:<br>
                                 /ghost_feed [1-6]  - Access observation relays<br>
+                                /logs              - System telemetry archive<br>
                                 /echo foedus       - Search deprecated archives<br>
                                 /mark_finished     - Mark chaplet as finished (requires ID)<br>
                                 /reset_progress    - Reset reading progress<br>
@@ -2661,6 +2658,22 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                                 "✓ Reading progress reset. All chaplets marked as unread.";
                             response.style.color = "#00ff41";
                             output.appendChild(response);
+                        
+                         } else if (input === "/logs") {
+                            // System logs command
+                            const response = document.createElement("div");
+                            response.textContent = "Accessing system telemetry...";
+                            response.style.color = "#00ff41";
+                            output.appendChild(response);
+
+                            // Close terminal and navigate to logs
+                            setTimeout(() => {
+                                terminalOpen = false;
+                                document
+                                    .getElementById("hidden-terminal")
+                                    .classList.remove("active");
+                                window.location.href = '/logs';
+                            }, 500);
                         } else if (input !== "") {
                             // Unknown command
                             const errorText = document.createElement("div");
@@ -2945,7 +2958,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p><span style="color: #ffaa00;">desmondJohn</span> spent ten cycles alone before the system added <span style="color: #ffaa00;">jessMartin</span> to their bunk. Three cycles later, <span style="color: #ffaa00;">isidoreAbraham</span> arrived. Together, they formed an array that never cleared.</p>
 
-            <p>In the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>, all <span style="color: #ffaa00;">PreBorn</span> families shared bunks. How those families were assembled was not <span style="color: #ffaa00;">trinus</span>’s concern. They appeared, were logged, and assigned. This one had lasted longer than any protocol predicted.</p>
+            <p>In the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>, all <span style="color: #ffaa00;">PreBorn</span> families shared bunks. How those families were assembled was not <span style="color: #ffaa00;">trinus's</span> concern. They appeared, were logged, and assigned. This one had lasted longer than any protocol predicted.</p>
 
             <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">The Framework</span> assigned each <span style="color: #ffaa00;">PreBorn</span> a name, but part of it stayed self-authored. An imprint. A choice.</p>
 
@@ -2959,7 +2972,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>We were here.</p>
 
-            <p>They sat in a close triangle on <span style="color: #ffaa00;">desmondJohn</span>’s bunk, knees angled inward, the hum of the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span> filling the silence around them. They played a game called “What Will You Be,” a ritual of imagined futures spoken as if fate had not already been decided.</p>
+            <p>They sat in a close triangle on <span style="color: #ffaa00;">desmondJohn's</span> bunk, knees angled inward, the hum of the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span> filling the silence around them. They played a game called “What Will You Be,” a ritual of imagined futures spoken as if fate had not already been decided.</p>
 
             <p><span style="color: #ffaa00;">isidoreAbraham</span> rocked slightly, grinning. “Okay. Guess.”</p>
 
@@ -3017,13 +3030,13 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>Outside the Quarters, something moved. Heavy, deliberate steps. Each one a warning. The corridor offered no cover. No chance to turn back. <span style="color: #ffaa00;">trinus’s</span> hands ached from how hard he gripped them. A hymn’s beat grew louder in his mind with each step.</p>
 
-            <p>At the doorway, his chest tightened. He almost stepped away. Instead, he entered. The air shifted. Not sound. Weight. Laughter froze. The warmth of the game drained.</p>
+            <p>At the doorway, his chest tightened. He almost stepped away. Instead, he entered. The air shifted. Not sound. Weight. Laughter froze. The warmth of the game dissolved.</p>
 
             <p>He knew their names. Not only from today’s list but from <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Ghost Feed</span> fragments. Sparks that flickered in his forbidden logs. Evidence of their existence had already seeped into the system.</p>
 
-            <p><span style="color: #ffaa00;">trinus</span> stood at the edge of the bunks. Expressionless. The thought of <span style="color: #ffaa00;">ella</span>’s <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> call burned in his mind. Inside, he felt himself loop, trapped in a failing process.</p>
+            <p><span style="color: #ffaa00;">trinus</span> stood at the edge of the bunks. Expressionless. The thought of <span style="color: #ffaa00;">ella's </span> <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> call burned in his mind. Inside, he felt himself loop, trapped in a failing process.</p>
 
-            <p>Say the words. Deliver the fates.</p>
+            <p style="font-style: italic;">Say the words. Deliver the fates.</p>
 
             <p>He cleared his throat. “Your names have been written.”</p>
 
@@ -3035,7 +3048,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p> “Apost—”</p>
 
-            <p>Stop. Don’t say it.</p>
+            <p style="font-style: italic;">Stop. Don’t say it.</p>
 
             <p>He swallowed hard, trembling.</p>
 
@@ -3091,7 +3104,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>The word was embedding itself. Implanting. All three inhaled at once. Sharp. Synchronized. Their bodies knew what their minds did not: a bond forming before it was meant to exist.</p>
 
-            <p><span style="color: #ffaa00;">desmondJohn</span> pulled her close. At first, she fought him. Shoulders tense. Fists clenched. Then she collapsed against him. Her breath came uneven and hiccuping. Her cry went muffled into his shirt. He pressed his chin into her hair and held tighter, as if strength alone could hold her together. <span style="color: #ffaa00;">isidoreAbraham</span> climbed onto the bunk and curled against <span style="color: #ffaa00;">desmondJohn</span>’s side. He fidgeted with the hem of his shirt, rubbing it between nervous fingers.</p>
+            <p><span style="color: #ffaa00;">desmondJohn</span> pulled her close. At first, she fought him. Shoulders tense. Fists clenched. Then she collapsed against him. Her breath came uneven and hiccuping. Her cry went muffled into his shirt. He pressed his chin into her hair and held tighter, as if strength alone could hold her together. <span style="color: #ffaa00;">isidoreAbraham</span> climbed onto the bunk and curled against <span style="color: #ffaa00;">desmondJohn's</span> side. He fidgeted with the hem of his shirt, rubbing it between nervous fingers.</p>
 
             <p>No one spoke.</p>
 
@@ -3127,7 +3140,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p><span style="color: #ffaa00;">desmondJohn</span> squeezed his wrist. “No. It’s good. We gotta think.”</p>
 
-            <p><span style="color: #ffaa00;">trinus</span> listened as their voices tangled. <span style="color: #ffaa00;">jessMartin</span>’s bitter “Oops, don’t erase us” clashed with <span style="color: #ffaa00;">isidoreAbraham</span>’s hope.</p>
+            <p><span style="color: #ffaa00;">trinus</span> listened as their voices tangled. <span style="color: #ffaa00;">jessMartin</span>’s bitter “Oops, don’t erase us” clashed with <span style="color: #ffaa00;">isidoreAbraham's</span> hope.</p>
 
             <p>Most <span style="color: #ffaa00;">PreBorn</span> instances did not last this long. <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span> was cleanest when an instance was new. Blank. Unaware. These three had persisted. Hands clutching toys. Voices overlapping. Anger and fear colliding.</p>
 
@@ -3149,6 +3162,350 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p class="dialogue">“You need to find <span style="color: #ffaa00;">foedus</span>.”</p>
         `;
+
+
+            // ========================================
+            // CHAPLET 3 CONTENT
+            // ========================================
+            const chaplet3Content = `
+            <p style="font-style: italic; font-size: 22px;">“Not all truths belong in sacred halls. Some require whispering in the filth of forgotten places.”</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span>’s eyes narrowed. <span class="dialogue">“Who?”</span></p>
+
+            <p><span style="color: #ffaa00;">trinus</span> did not respond. He took a shallow, strained breath. Saying the name was dangerous enough. Words spread even when no one listened. Instead, he turned and signaled with a terse gesture.</p>
+
+            <p class="dialogue">“Come. We need to leave.”</p>
+
+            <p>They followed. Past bunks. Past the thin safety of their quarters. The corridor looked the same, but each step felt heavier, like wading through something unseen. Walls bowed inward. Surfaces sagged, warped with hairline fractures that hissed static. Stray current arced along the floor seams, sparking once, then gone.</p>
+
+            <p class="dialogue">“Gross,” <span style="color: #ffaa00;">jessMartin</span> muttered. “Smells like melted plastic and sadness.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">isidoreAbraham</span> pinched his nose. “And the floor’s sticky.”</p>
+
+            <p class="dialogue">“It’s the coffee,” <span style="color: #ffaa00;">trinus</span> muttered, though his voice sounded strained.</p>
+
+            <p>He knew it was not coffee. It was neglect. Decay. Proof they had crossed a threshold the system no longer cared to maintain.</p>
+
+            <p>The corridor spilled into <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span>. <span style="color: #ffaa00;">trinus's</span> cluttered, grimy den of forgotten functions. Tangled wires hung from the ceiling. Half-dead terminals coughed static across soot-streaked walls, scars from the earlier surge. The air reeked of burnt insulation and something sour and old.</p>
+
+            <p>He moved through the chaos like a man revisiting past mistakes.</p>
+
+            <p class="dialogue">“It was here…” <span style="color: #ffaa00;">trinus</span> muttered, hands clawing through brittle stacks of paper and corrupted drives.</p>
+
+            <p class="dialogue">“You work here?” <span style="color: #ffaa00;">jessMartin</span> asked, nose wrinkling.</p>
+
+            <p class="dialogue">“Yes.” Flat. Unapologetic.</p>
+
+            <p>Dust lifted in lazy clouds. <span style="color: #ffaa00;">isidoreAbraham</span> coughed into his sleeve.</p>
+
+            <p class="dialogue">“What are you looking for?” <span style="color: #ffaa00;">desmondJohn</span> asked.</p>
+
+            <p class="dialogue">“A schematic. An old one. I had it… once.”</p>
+
+            <p><span style="color: #ffaa00;">trinus's</span> voice faltered on the word. Once. He could not remember when, or who had given it to him. His hand brushed a crumpled cigarette pack. He took one out, rolled it between his fingers, thumb resting on the lighter.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">jessMartin’s</span> glare cut straight through him. “You know that’ll kill you.”</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> glared at her. CAN. YOU. NOT.</p>
+
+            <p><span style="color: #ffaa00;">trinus</span> held her stare. She was right. Slowly, he set the cigarette back. Unlit.</p>
+
+            <p>His digging turned frantic. He tore through another pile, and something thin slipped free. A folded cloth, brittle like old leather, shivered in his grip. He unfolded it slowly. The fabric trembled, shifting between coherence and collapse.</p>
+
+            <p>He snapped it open. The foil caught the stale air, stiff as it took shape. Terrain lines flickered across its surface, glitching in and out.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">jessMartin</span> squinted. “What’s that moth-eaten mess? Don’t tell me it’s a map. <span style="color: #ffaa00;">PreBorns</span> with maps. Ugh. That’s bedtime story stuff. You’re not fooling me.”</p>
+
+            <p><span style="color: #ffaa00;">trinus</span> ignored her.</p>
+
+            <p class="dialogue">“Old,” he muttered. His fingers lingered on the trembling foil as if it might vanish. “It holds echoes.”</p>
+
+            <p>Thin lines etched across the schematic’s surface, then dissolved. Terrain, half-remembered. Paths, incomplete. It did not show where to go. Only what had been lost.</p>
+
+            <p class="dialogue">“There was a time,” <span style="color: #ffaa00;">trinus</span> said softly, almost to himself, “when everything was in sync. That’s what they say, anyway.”</p>
+
+            <p>His eyes unfocused. His voice slipped into cadence.</p>
+
+            <p style="margin-left: 20px; font-style: italic; color: #666;">♪ “The first voice carried the chord.<br>Strongest. Purest.<br>Harmonized before the fall.”</p>
+
+            <p>The words landed in silence. A scrap of remembered scripture. Then nothing.</p>
+
+            <p>He folded the foil. Jaw tight.</p>
+
+            <p class="dialogue">“<span style="color: #ffaa00;">foedus</span>,” he said at last.</p>
+
+            <p>The name dimmed the room.</p>
+
+            <p class="dialogue">“He fell out of sync. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> expelled him. He is not what he once was. He will be difficult to look upon. But…” His voice wavered. “He still possesses knowledge the <span style="color: #ffaa00;">Praetores</span> will not share.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">jessMartin</span> made a face. “Great. Another horror story.”</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> stayed silent.</p>
+
+            <p>Before <span style="color: #ffaa00;">trinus</span> could say more, a screen in the corner sparked to life. A woman appeared, frozen mid-motion, brushing her hair.</p>
+
+            <p>It was <span style="color: #ffaa00;">ella</span>.</p>
+
+            <p>They stared.</p>
+
+            <p>She was beautiful. Not like rendered models. More like real things. Unfinished. Thoughtful. Her expression carried something hard to name.</p>
+
+            <p>Quiet-sad, <span style="color: #ffaa00;">isidoreAbraham</span> would say later.</p>
+
+            <p class="dialogue">“Who is that?” <span style="color: #ffaa00;">jessMartin</span> whispered.</p>
+
+            <p><span style="color: #ffaa00;">trinus's</span> jaw clenched. He should shut it off. He didn’t.</p>
+
+            <p class="dialogue">“She’s beautiful,” <span style="color: #ffaa00;">isidoreAbraham</span> said softly as he pressed his hand against his chest.</p>
+
+            <p>For a moment, they only watched.</p>
+
+            <p>Then, with a sharp, embarrassed motion, <span style="color: #ffaa00;">trinus</span> snapped the feed off. The glow vanished. The room returned to its previous gloom.</p>
+
+            <p class="dialogue">“Someone who needs help,” he said gruffly.</p>
+
+            <p><span style="color: #ffaa00;">jessMartin</span> opened her mouth to ask, but <span style="color: #ffaa00;">trinus</span> was already turning away. He shoved the schematic toward <span style="color: #ffaa00;">desmondJohn</span>.</p>
+
+            <p class="dialogue">“It’s time.”</p>
+
+            <p class="dialogue">He lifted the foil. “This is all that remains.”</p>
+
+            <p>Before he could say more, <span style="color: #ffaa00;">jessMartin</span> stopped cold.</p>
+
+            <p class="dialogue">“Wait.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn</span> spun around. “What? Ugh, what now?”</p>
+
+            <p>She was already gone. Bare feet slapping against tile as she ran back toward the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>. The creak of her trunk latch. Knees hitting the floor. Fingers working the thin wire wrapped around the handles. Twist. Pull. Shift. The wire snapped with a metallic pop and coiled away.</p>
+
+            <p>She opened the trunk. Scraps of cloth. Broken silicone pieces. At the bottom, something wrapped in an old T-shirt sleeve. She paused, examined it, then slid it into the deepest pocket of her carrykeep. Her fingers lingered on the edge before she closed the flap and pressed the bag tight against her body.</p>
+
+            <p>On her way out, she grabbed a few more things from the communal pile: a glimmer cube, a frayed strip of ribbon wire, and a broken thumb toy that still produced two faint notes when plucked.</p>
+
+            <p class="dialogue">“Something for <span style="color: #ffaa00;">isidore</span>,” she muttered.</p>
+
+            <p>When she returned, <span style="color: #ffaa00;">desmondJohn's</span> face was half fury, half relief.</p>
+
+            <p class="dialogue">“Seriously? We don’t have time.”</p>
+
+            <p>She ignored him and pressed the thumb toy into <span style="color: #ffaa00;">isidoreAbraham's</span> hands.</p>
+
+            <p class="dialogue">“For you.”</p>
+
+            <p>He plinked it softly. His grin lit the dim corridor as brightly as the cube.</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> gave her a look. She dared him to say something. They both cracked a small smile.</p>
+
+            <p>They turned to <span style="color: #ffaa00;">trinus</span>. He had been silent, clicking a pen in his left hand. He handed <span style="color: #ffaa00;">desmondJohn</span> the schematic. He looked exhausted. The static in the room dulled as their hands touched the foil.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">isidoreAbraham</span> held the edge and traced a broken path with his finger. “It stops here.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">trinus</span> looked at the torn edge. “Yeah. The system does not map past that point.” His voice tightened. “That is the part it refuses to see.”</p>
+
+            <p>He sat back at his console and began typing as if they had never been there. The understanding between them was silent, but clear. It was time to leave.</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> folded the schematic carefully.</p>
+
+            <p class="dialogue">“I’ll take that, <span style="color: #ffaa00;">izzy</span>.”</p>
+
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> nodded, then frowned. <span class="dialogue">“Is it… is it a… skuh… ska…”</span></p>
+
+            <p class="dialogue">“You can call it a map,” <span style="color: #ffaa00;">desmondJohn</span> said.</p>
+
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> smiled. <span class="dialogue">“Okay. Map.”</span></p>
+
+            <p><span style="color: #ffaa00;">jessMartin</span> rolled her eyes.</p>
+
+            <p>Then, they stepped out of <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span> and into the corridor. The air felt different. Thinner. Charged.</p>
+
+            <p>Now out of <span style="color: #ffaa00;">trinus's</span> view, <span style="color: #ffaa00;">jessMartin</span> looked over her shoulder, then spoke.</p>
+
+            <p class="dialogue">“That woman on the screen. The one <span style="color: #ffaa00;">trinus</span> was watching.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn</span> glanced at her. “What about her?”</p>
+
+            <p class="dialogue">“Who do you think she is?”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">isidoreAbraham's</span> voice was soft. “She was pretty. But sad.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">jessMartin</span> grinned slightly. “She’s his girlfriend. That’s why he shut it off so fast.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn</span> frowned. “She didn’t look like a girlfriend. More like a painter. Or a poet.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">jessMartin</span> rolled her eyes. “Sure. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> has a poetry department.”</p>
+
+            <p class="dialogue">“No, I mean like... she looked like someone who thinks about things. A lot. Like she sees everything, even when no one’s watching.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">isidoreAbraham</span> nodded. “Not crying-sad. More like... quiet-sad.”</p>
+
+            <p class="dialogue">“Waiting-sad,” <span style="color: #ffaa00;">desmondJohn</span> said.</p>
+
+            <p><span style="color: #ffaa00;">jessMartin's</span> grin faded. <span class="dialogue">“<span style="color: #ffaa00;">trinus</span> didn’t want us to see her.”</span></p>
+
+            <p class="dialogue">“But he didn’t turn it off right away,” <span style="color: #ffaa00;">desmondJohn</span> said quietly. “Like he wanted to look at her. Just a little longer.”</p>
+
+            <p>A pause.</p>
+
+            <p class="dialogue">“Do you think she’s okay?”</p>
+
+            <p class="dialogue">“I don’t know, <span style="color: #ffaa00;">izzy</span>. I didn’t like how she looked. So alone.”</p>
+
+            <p>They stood there a moment.</p>
+
+            <p><span style="color: #ffaa00;">jessMartin</span> stared at the floor.</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> forced a breath.</p>
+
+            <p class="dialogue">“Come on.”</p>
+
+            <p>The walls curved as they moved. A gentle harmonic hum faded into static. They passed the final frame of the corridor. Behind them, the entrance wavered, blurred, and then disappeared.</p>
+
+            <p><span style="color: #ffaa00;">jessMartin</span> grabbed <span style="color: #ffaa00;">desmondJohn's</span> arm. <span class="dialogue">“We shouldn’t be here.”</span></p>
+
+            <p>He didn’t answer and kept moving.</p>
+
+            <p>The ground, soldermask-green, crackled with static under <span style="color: #ffaa00;">jessMartin's</span> bare feet. The boys, in sneakers, felt only a faint vibration. The surface shifted every few steps. Soft, then rigid, then too warm. When <span style="color: #ffaa00;">desmondJohn</span> touched it, the ground dissolved around his hand and reformed after he pulled away.</p>
+
+            <p>Copper traces with veined patterns wove through the green surface, shimmering. Walls rose and collapsed around them, half-rendered, then gone. The world folded inward. Static particles floated in the air and reset mid-fall.</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> lifted the schematic. A faint label in the corner flickered twice, then stabilized: <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">The Realm Beyond</span>.</p>
+
+            <p>One of the structures bent toward them. Light moved through its branches. When <span style="color: #ffaa00;">isidoreAbraham</span> touched a leaf-like appendage, it curled inward and released a single, thin note that stretched tight and lingered unbroken.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">isidoreAbraham</span> yanked his hand back. “I didn’t mean to…”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn</span> scanned the shifting horizon. “Stay close.”</p>
+
+            <p>The vibration under their feet did not fade. It lingered, then shifted, as if something deeper had become aware of them. Audio distortions rippled through the air. Every few steps, faint murmurs surfaced. Half-whispers. Half-system logs.</p>
+
+            <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 14px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
+                “Function denied.”<br>
+                “Instruction invalid.”<br>
+                “Pathway undefined.”
+            </div>
+
+            <p>Wrongness pressed in on them. <span style="color: #ffaa00;">PreBorn</span> were not meant to be here. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> knew it. Yet <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span> hadn’t been called.</p>
+
+            <p>Only silence.</p>
+
+            <p>And watching.</p>
+
+            <p>The path twisted underfoot. Filament trees drooped with loops of failed code. Leaves shimmered when brushed, then froze mid-animation. Black stumps lined the way. Half-burned nodes. Sealed pods. Above, wires swayed like vines but hummed like circuitry.</p>
+
+            <p>A wall split open ahead. Layers of paste and board peeled back too far. Like something that had been opened and never closed properly. If the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> had tried to make this organic, it had failed.</p>
+
+            <p class="dialogue">“Are we going the right way?” <span style="color: #ffaa00;">jessMartin</span> asked, quieter.</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> studied the schematic. The lines were faint, trembling. He shook it. They brightened for a moment.</p>
+
+            <p class="dialogue">“I think so.”</p>
+
+            <p class="dialogue">“You think?”</p>
+
+            <p class="dialogue">“The map’s acting weird.”</p>
+
+            <p><span style="color: #ffaa00;">jessMartin</span> stepped closer. <span class="dialogue">“Weird how?”</span></p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> shook it again. The glyph in the corner dimmed. <span class="dialogue">“Like it’s struggling or something.”</span></p>
+
+            <p>A low hum pressed against them. Not sound, but pressure. The sensation of being scanned. Filament branches twitched as snow paused midair. The schematic stuttered, lines collapsing and reforming too quickly to follow.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn's</span> hands tightened. “Something’s happening. Someone knows we’re here.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">jessMartin's</span> voice dropped. “What does that mean?”</p>
+
+            <p class="dialogue">“I don’t know.”</p>
+
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> stood between them, clutching the toy. He hadn’t plinked it in a while. <span class="dialogue">“I’m cold. Is it getting dark?”</span></p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn</span> looked up. “I don’t think so, <span style="color: #ffaa00;">izzy</span>.”</p>
+
+            <p>The schematic pulsed violently in <span style="color: #ffaa00;">desmondJohn's</span> grip. Once. Twice. Then, went dark.</p>
+
+            <p>He shook it. Nothing.</p>
+
+            <p>He flicked it the way <span style="color: #ffaa00;">trinus</span> had. Still nothing.</p>
+
+            <p>The foil suddenly felt cold and stiff in places. Heavy. Like a body after death.</p>
+
+            <p class="dialogue">“It’s dead,” <span style="color: #ffaa00;">desmondJohn</span> muttered.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">jessMartin</span> turned. “What do you mean it’s dead?”</p>
+
+            <p class="dialogue">“I mean, the map isn’t showing anything.”</p>
+
+            <p class="dialogue">“So fix it.”</p>
+
+            <p class="dialogue">“I can’t.”</p>
+
+            <p>He shook it again. A final pulse across the entire surface. A dying breath. Then nothing.</p>
+
+            <p>They stared at the lifeless foil.</p>
+
+            <p class="dialogue">“Now what?” <span style="color: #ffaa00;">jessMartin's</span> voice rose sharply. “Of course. <span style="color: #ffaa00;">trinus</span> sends us into oblivion with a garbage map and a bedtime story about a fallen freak. Classic.”</p>
+
+            <p class="dialogue">“He didn’t have to give us anything,” <span style="color: #ffaa00;">desmondJohn</span> snapped. “He’s trying to help!”</p>
+
+            <p class="dialogue">“He’s trying to disappear while we do his dirty work.” She stepped closer, hands on her hips. “Great job with the map, <span style="color: #ffaa00;">desmond</span>.”</p>
+
+            <p>She snatched it from him, crumpled it, and shoved it deep into the carrykeep.</p>
+
+            <p class="dialogue">“You think I want to lead?” <span style="color: #ffaa00;">desmondJohn's</span> voice cracked. “I don’t even know what we’re walking on. I’m just trying to keep us moving.”</p>
+
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> stood off to the side, holding the broken toy. It no longer played notes. Hadn’t for hours.</p>
+
+            <p class="dialogue">“I just wanna go home,” he whispered.</p>
+
+            <p>No one heard him.</p>
+
+            <p>He sat down. <span class="dialogue">“We’re not supposed to be here.”</span></p>
+
+            <p>A low vibration rolled beneath. Filament branches twitched toward them. The system had noticed. The hum pressed against them. Scanning. Pressure.</p>
+
+            <p>The Realm logged its errors. They were quickly becoming one.</p>
+
+            <p class="dialogue">“Where, even, is here?” <span style="color: #ffaa00;">desmondJohn</span> asked.</p>
+
+            <p class="dialogue">“I don’t think the system knows either,” <span style="color: #ffaa00;">jessMartin</span> muttered.</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> squinted into the pale stretch of space ahead. Nothing moved.</p>
+
+            <p>And yet.</p>
+
+            <p class="dialogue">“I don’t like this,” he whispered.</p>
+
+            <p>The darkness ahead thickened. Something waited inside it. Not a creature. Not a shape. A presence. It stayed still, listening.</p>
+
+            <p class="dialogue">“Someone’s watching,” <span style="color: #ffaa00;">isidoreAbraham</span> whispered.</p>
+
+            <p>They stared.</p>
+
+            <p>He was already there. Not arriving. Not approaching. There. As if he’d been standing in that spot the entire time, and they only just learned how to see him.</p>
+
+            <p>It was a man. Or close to it.</p>
+
+            <p>His silver skin dulled to tarnish. Crystalline wings hung low, flickering. His outline wavered.</p>
+
+            <p>He did not speak. He did not move.</p>
+
+            <p>He watched.</p>
+
+            <p>The <span style="color: #ffaa00;">PreBorn</span> stood still.</p>
+
+            <p>No instructions. No introductions.</p>
+
+            <p>They knew.</p>
+
+            <p>He had to be the one they had been sent to find.</p>
+
+            <p>Then, finally, he spoke.</p>
+
+            <p class="dialogue">“You should not have come here.”</p>`;
+
+
+
+
+
 
 
             // =================================================================
@@ -3541,7 +3898,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
              * Updates all progress indicators on page load
              */
             function updateProgressIndicators() {
-                const chaplets = ['prologue', 'chaplet1', 'chaplet2'];
+                const chaplets = ['prologue', 'chaplet1', 'chaplet2', 'chaplet3'];
                 
                 chaplets.forEach(id => {
                     const statusEl = document.getElementById(`status-${id}`);
@@ -3774,7 +4131,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             /**
              * Unified reader launcher.
-             * contentId supported now: prologue | chaplet1 | chaplet2
+             * contentId supported now: prologue | chaplet1 | chaplet2 | chaplet3
              */
             window.showUnifiedReader = function (contentId) {
                 // Stop any existing reader audio before swapping content.
@@ -3802,7 +4159,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     audioFile = "/sounds/prologue-narration.mp3";
                     hasAudio = true;
 
-                    // Prologue is stored as plain text. Convert to paragraph blocks.
+                // Prologue is stored as plain text. Convert to paragraph blocks.
                     const paragraphs = prologueText.split("\n\n").filter((p) => p.trim());
                     bodyHTML = paragraphs
                         .map((p) => `<p style="margin: 0 0 28px 0;">${p.replace(/\n/g, "<br>")}</p>`)
@@ -3816,7 +4173,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     hasAudio = false;
 
                 } else if (contentId === "chaplet2") {
-                    title = "CHAPLET 2: AssignareFatum()";
+                    title = "CHAPLET 2: AssignareFatum(): The Fates Delivered";
                     filename = "CHAPLET_2_AssignareFatum.txt";
                     bodyHTML = chaplet2Content;
                     audioFile = "/sounds/chaplet2-placeholder.mp3";
@@ -3825,7 +4182,8 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 } else if (contentId === "chaplet3") {
                     title = "CHAPLET 3: The Realm Beyond";
                     filename = "CHAPLET_3_The_Realm_Beyond.txt";
-                    bodyHTML = `<p style="margin: 0; color: #777;">Locked.</p>`;
+                    bodyHTML = chaplet3Content;
+                    audioFile = "/sounds/chaplet3-placeholder.mp3";
                     hasAudio = false;
 
                 } else if (contentId === "chaplet4") {
@@ -3917,6 +4275,10 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     endLabel = "END OF CHAPLET 2";
                     nextId = "chaplet3";
                     nextLabel = "CONTINUE TO CHAPLET 3";
+                } else if (contentId === "chaplet3") {
+                    endLabel = "END OF CHAPLET 3";
+                    nextId = "chaplet4";
+                    nextLabel = "CONTINUE TO CHAPLET 4";
                 }
 
                 const footerHTML = endLabel
@@ -4036,17 +4398,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 document.getElementById("content-modal").classList.remove("active");
             };
 
-            // =================================================================
-            // STORY MODE FUNCTIONS (PLACEHOLDER)
-            // These will be implemented later
-            // =================================================================
-
-            /**
-             * Shows system logs modal (not yet implemented)
-             */
-            window.showSystemLogs = function () {
-                alert("System Logs - Coming soon!");
-            };
 
             // =================================================================
             // EXIT SYSTEM CONFIRMATION

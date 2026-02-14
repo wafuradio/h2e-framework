@@ -1,0 +1,746 @@
+---
+// =============================================================================
+// SYSTEM_LOGS_13.7 - LOG ARCHIVE INTERFACE
+// =============================================================================
+// Simple single-line row structure with working expansion
+// Last Updated: February 13, 2026
+// =============================================================================
+
+const siteTitle = "H2E Framework - System Logs 13.7";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{siteTitle}</title>
+
+        <!-- Cloudflare Web Analytics -->
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c17e7ed80ead4b1580e4eb1e42fc29fa"}'></script>
+        
+        <style is:global>
+            @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Share Tech Mono", "Courier New", monospace;
+                background: #0a0a0a;
+                color: #00ff41;
+                line-height: 1.6;
+                padding: 20px;
+                min-height: 100vh;
+            }
+
+            /* =================================================================
+               HEADER
+               ================================================================= */
+            .header {
+                max-width: 1200px;
+                margin: 40px auto 30px;
+                padding: 0 20px;
+                border-bottom: 1px solid #00ff41;
+                padding-bottom: 15px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+                letter-spacing: 2px;
+                margin-bottom: 5px;
+                color: #00ff41;
+            }
+
+            .header .subtitle {
+                font-size: 12px;
+                color: #00ff4188;
+            }
+
+            /* =================================================================
+               CONTROLS
+               ================================================================= */
+            .controls {
+                max-width: 1200px;
+                margin: 0 auto 30px;
+                padding: 0 20px;
+                display: flex;
+                gap: 20px;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+
+            .filter-group {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .filter-btn {
+                background: transparent;
+                border: 1px solid #00ff41;
+                color: #00ff41;
+                padding: 8px 16px;
+                font-family: "Share Tech Mono", monospace;
+                font-size: 12px;
+                cursor: pointer;
+                transition: all 0.2s;
+                text-transform: uppercase;
+            }
+
+            .filter-btn:hover {
+                background: #00ff4122;
+            }
+
+            .filter-btn.active {
+                background: #00ff41;
+                color: #000;
+            }
+
+            .search-box {
+                flex: 1;
+                min-width: 250px;
+                max-width: 400px;
+            }
+
+            .search-box input {
+                width: 100%;
+                background: #000;
+                border: 1px solid #00ff41;
+                color: #00ff41;
+                padding: 8px 12px;
+                font-family: "Share Tech Mono", monospace;
+                font-size: 12px;
+                outline: none;
+            }
+
+            .search-box input:focus {
+                border-color: #00ff41;
+                box-shadow: 0 0 5px #00ff4144;
+            }
+
+            .search-box input::placeholder {
+                color: #00ff4166;
+            }
+
+            .results-count {
+                font-size: 12px;
+                color: #00ff4188;
+            }
+
+            /* =================================================================
+               LOGS LIST
+               ================================================================= */
+            .logs-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            .logs-list {
+                list-style: none;
+            }
+
+            .log-row {
+                padding: 12px 0;
+                border-bottom: 1px solid #222;
+                cursor: pointer;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                font-size: 12px;
+            }
+
+            .log-row:hover {
+                padding-left: 10px;
+                border-left: 2px solid #00ff41;
+            }
+
+            /* Severity badge - colored dot */
+            .severity-badge {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                flex-shrink: 0;
+            }
+
+            .severity-badge.info { background: #00ff41 !important; }
+            .severity-badge.warn { background: #ffaa00 !important; }
+            .severity-badge.alert { background: #ff0000 !important; }
+            .severity-badge.flagged { background: #00ffff !important; }
+
+            .log-timestamp {
+                color: #00ff4199;
+                white-space: nowrap;
+                min-width: 180px;
+            }
+
+            .log-source {
+                color: #00ff41cc;
+                min-width: 120px;
+            }
+
+            .log-message {
+                color: #00ff41;
+                flex: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .log-indicator {
+                color: #00ffff;
+                flex-shrink: 0;
+            }
+
+            /* Expanded details */
+            .log-expanded {
+                display: none !important;
+                background: #000;
+                border: 1px solid #00ff4133;
+                border-left: 2px solid #00ff41;
+                padding: 20px;
+                margin: 10px 0 10px 23px;
+            }
+
+            .log-expanded.visible {
+                display: block !important;
+            }
+
+            .expanded-label {
+                color: #00ffff;
+                font-size: 11px;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+            }
+
+            .expanded-message {
+                color: #00ff41;
+                line-height: 1.8;
+                margin-bottom: 15px;
+            }
+
+            .view-trace-btn {
+                background: transparent;
+                border: 1px solid #00ffff;
+                color: #00ffff;
+                padding: 8px 20px;
+                font-family: "Share Tech Mono", monospace;
+                font-size: 11px;
+                cursor: pointer;
+                transition: all 0.2s;
+                text-transform: uppercase;
+            }
+
+            .view-trace-btn:hover {
+                background: #00ffff;
+                color: #000;
+            }
+
+            /* =================================================================
+               VIDEO MODAL
+               ================================================================= */
+            .modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.85);
+                z-index: 10000;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .modal.visible {
+                display: flex;
+            }
+
+            .modal-content {
+                background: #000;
+                border: 2px solid #00ff41;
+                padding: 30px;
+                max-width: 540px;
+                width: 90%;
+                position: relative;
+            }
+
+            .modal-close-x {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: transparent;
+                border: 1px solid #00ff41;
+                color: #00ff41;
+                width: 28px;
+                height: 28px;
+                font-size: 20px;
+                cursor: pointer;
+                transition: all 0.2s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+                line-height: 1;
+                font-weight: normal;
+            }
+
+            .modal-close-x:hover {
+                background: #00ff41;
+                color: #000;
+            }
+
+            .video-container {
+                margin: 0 0 15px 0;
+                background: #000;
+            }
+
+            .video-container video {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .video-container video::-webkit-media-controls {
+                display: none !important;
+            }
+
+            .custom-controls {
+                background: #000;
+                border: 1px solid #00ff4133;
+                padding: 10px;
+                margin-top: 10px;
+            }
+
+            .controls-row {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .play-pause-btn {
+                background: transparent;
+                border: 1px solid #00ff41;
+                color: #00ff41;
+                padding: 8px 16px;
+                font-family: "Share Tech Mono", monospace;
+                font-size: 11px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+
+            .play-pause-btn:hover {
+                background: #00ff41;
+                color: #000;
+            }
+
+            .progress-container {
+                flex: 1;
+                height: 6px;
+                background: #111;
+                border: 1px solid #00ff4133;
+                cursor: pointer;
+            }
+
+            .progress-bar {
+                height: 100%;
+                background: #00ff41;
+                width: 0%;
+            }
+
+            .time-display {
+                font-size: 11px;
+                color: #00ff41;
+                min-width: 80px;
+                text-align: right;
+            }
+
+            .integrity-display {
+                margin: 15px 0 0 0;
+                font-family: "Share Tech Mono", monospace;
+                font-size: 11px;
+                color: #00ff41;
+                padding: 10px;
+                background: #0a0a0a;
+                border-left: 2px solid #00ff41;
+            }
+
+            /* =================================================================
+               FOOTER
+               ================================================================= */
+            .footer {
+                max-width: 1200px;
+                margin: 40px auto 20px;
+                padding: 0 20px;
+                text-align: center;
+            }
+
+            .exit-btn {
+                background: transparent;
+                border: 1px solid #00ff41;
+                color: #00ff41;
+                padding: 12px 40px;
+                font-family: "Share Tech Mono", monospace;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all 0.2s;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            .exit-btn:hover {
+                background: #00ff41;
+                color: #000;
+            }
+
+            /* =================================================================
+               EMPTY STATE
+               ================================================================= */
+            .empty-state {
+                text-align: center;
+                padding: 60px 20px;
+                color: #00ff4166;
+                font-size: 14px;
+            }
+
+            /* =================================================================
+               MOBILE
+               ================================================================= */
+            @media (max-width: 768px) {
+                .log-row {
+                    flex-wrap: wrap;
+                    gap: 8px;
+                }
+
+                .log-timestamp {
+                    min-width: auto;
+                    width: 100%;
+                    order: 1;
+                }
+
+                .severity-badge {
+                    order: 2;
+                }
+
+                .log-source {
+                    min-width: auto;
+                    order: 3;
+                }
+
+                .log-message {
+                    width: 100%;
+                    order: 4;
+                }
+
+                .log-indicator {
+                    order: 5;
+                }
+
+                .modal-content {
+                    padding: 20px;
+                }
+
+                .modal-meta {
+                    flex-direction: column;
+                    gap: 8px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Header -->
+        <div class="header">
+            <h1>SYSTEM_LOGS_13.7</h1>
+            <div class="subtitle">TELEMETRY & TRACE ARCHIVE</div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all">ALL</button>
+                <button class="filter-btn" data-filter="info">INFO</button>
+                <button class="filter-btn" data-filter="warn">WARN</button>
+                <button class="filter-btn" data-filter="alert">ALERT</button>
+                <button class="filter-btn" data-filter="flagged">FLAGGED</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="SEARCH_LOGS" />
+            </div>
+            <div class="results-count" id="resultsCount">10 ENTRIES FOUND</div>
+        </div>
+
+        <!-- Logs List -->
+        <div class="logs-container">
+            <ul class="logs-list" id="logsList">
+                <!-- Populated by JavaScript -->
+            </ul>
+
+            <div class="empty-state" id="emptyState" style="display: none;">
+                NO ENTRIES MATCH CURRENT FILTERS
+            </div>
+        </div>
+
+        <!-- Video Modal -->
+        <div class="modal" id="videoModal">
+            <div class="modal-content">
+                <button class="modal-close-x" onclick="closeVideoModal()" aria-label="Close">×</button>
+
+                <div class="video-container">
+                    <video id="traceVideo" playsinline>
+                        <source id="videoSource" src="" type="video/mp4" />
+                        Your browser does not support video playback.
+                    </video>
+                </div>
+
+                <div class="custom-controls">
+                    <div class="controls-row">
+                        <button class="play-pause-btn" id="playPauseBtn">▶ PLAY</button>
+                        <div class="progress-container" id="progressContainer">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+                    </div>
+                </div>
+
+                <div class="integrity-display" id="integrityDisplay" style="display: none;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <a href="/terminal" class="exit-btn">[EXIT_LOGS]</a>
+        </div>
+
+        <script>
+            // Global state
+            let allLogs = [];
+            let filteredLogs = [];
+            let currentFilter = 'all';
+            let currentSearch = '';
+            let expandedIndex = null;
+
+            // Load logs on page load
+            window.addEventListener('DOMContentLoaded', loadLogs);
+
+            async function loadLogs() {
+                try {
+                    const response = await fetch('/data/logs.json');
+                    allLogs = await response.json();
+                    filteredLogs = [...allLogs];
+                    renderLogs();
+                } catch (error) {
+                    console.error('Error loading logs:', error);
+                    document.getElementById('emptyState').style.display = 'block';
+                    document.getElementById('emptyState').textContent = 'ERROR LOADING LOGS';
+                }
+            }
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.getAttribute('data-filter');
+                    applyFilters();
+                });
+            });
+
+            // Search input
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                currentSearch = e.target.value.toLowerCase();
+                applyFilters();
+            });
+
+            function applyFilters() {
+                filteredLogs = allLogs.filter(log => {
+                    const severityMatch = currentFilter === 'all' || 
+                                         log.severity.toLowerCase() === currentFilter;
+                    
+                    const searchMatch = currentSearch === '' ||
+                                       log.timestamp.toLowerCase().includes(currentSearch) ||
+                                       log.source.toLowerCase().includes(currentSearch) ||
+                                       log.message.toLowerCase().includes(currentSearch);
+                    
+                    return severityMatch && searchMatch;
+                });
+
+                renderLogs();
+            }
+
+            function renderLogs() {
+                const container = document.getElementById('logsList');
+                const emptyState = document.getElementById('emptyState');
+
+                if (filteredLogs.length === 0) {
+                    container.style.display = 'none';
+                    emptyState.style.display = 'block';
+                } else {
+                    container.style.display = 'block';
+                    emptyState.style.display = 'none';
+                    container.innerHTML = '';
+
+                    filteredLogs.forEach((log, index) => {
+                        const li = document.createElement('li');
+                        
+                        // Main row
+                        const row = document.createElement('div');
+                        row.className = 'log-row';
+                        row.innerHTML = `
+                            <div class="severity-badge ${log.severity.toLowerCase()}"></div>
+                            <div class="log-timestamp">${formatTimestamp(log.timestamp)}</div>
+                            <div class="log-source">${log.source}</div>
+                            <div class="log-message">${log.message}</div>
+                            ${log.attachment ? '<div class="log-indicator">▶</div>' : ''}
+                        `;
+
+                        row.addEventListener('click', () => toggleExpanded(index));
+
+                        // Expanded section
+                        const expanded = document.createElement('div');
+                        expanded.className = 'log-expanded';
+                        expanded.id = `expanded-${index}`;
+                        
+                        let expandedHTML = `
+                            <div class="expanded-label">FULL MESSAGE:</div>
+                            <div class="expanded-message">${log.message}</div>
+                        `;
+
+                        if (log.attachment) {
+                            expandedHTML += `<button class="view-trace-btn" onclick="openVideoModal(${index})">VIEW_TRACE</button>`;
+                        }
+
+                        expanded.innerHTML = expandedHTML;
+
+                        li.appendChild(row);
+                        li.appendChild(expanded);
+                        container.appendChild(li);
+                    });
+                }
+
+                // Update count
+                document.getElementById('resultsCount').textContent = 
+                    `${filteredLogs.length} ${filteredLogs.length === 1 ? 'ENTRY' : 'ENTRIES'} FOUND`;
+            }
+
+            function toggleExpanded(index) {
+                const expandedDiv = document.getElementById(`expanded-${index}`);
+                
+                // Close previously expanded
+                if (expandedIndex !== null && expandedIndex !== index) {
+                    const prevExpanded = document.getElementById(`expanded-${expandedIndex}`);
+                    if (prevExpanded) {
+                        prevExpanded.classList.remove('visible');
+                    }
+                }
+
+                // Toggle current
+                if (expandedDiv) {
+                    expandedDiv.classList.toggle('visible');
+                    expandedIndex = expandedDiv.classList.contains('visible') ? index : null;
+                }
+            }
+
+            function openVideoModal(index) {
+                const log = filteredLogs[index];
+                const modal = document.getElementById('videoModal');
+                const video = document.getElementById('traceVideo');
+                const source = document.getElementById('videoSource');
+                const playPauseBtn = document.getElementById('playPauseBtn');
+
+                // Set video source
+                source.src = log.attachment;
+                video.load();
+
+                // Set integrity
+                if (log.integrity !== undefined && log.integrity !== null) {
+                    const integrityDisplay = document.getElementById('integrityDisplay');
+                    const percentage = Math.round(log.integrity * 100);
+                    const status = percentage < 90 ? 'DEGRADED' : 'NOMINAL';
+                    
+                    const totalBars = 10;
+                    const filledBars = Math.round((percentage / 100) * totalBars);
+                    const emptyBars = totalBars - filledBars;
+                    const barDisplay = '█'.repeat(filledBars) + '▓'.repeat(emptyBars);
+                    
+                    integrityDisplay.textContent = `INTEGRITY: ${percentage}% [${barDisplay}] ${status}`;
+                    integrityDisplay.style.display = 'block';
+                } else {
+                    document.getElementById('integrityDisplay').style.display = 'none';
+                }
+
+                // Video controls
+                playPauseBtn.onclick = function() {
+                    if (video.paused) {
+                        video.play();
+                        playPauseBtn.textContent = '⏸ PAUSE';
+                    } else {
+                        video.pause();
+                        playPauseBtn.textContent = '▶ PLAY';
+                    }
+                };
+
+                video.ontimeupdate = function() {
+                    const progress = (video.currentTime / video.duration) * 100;
+                    document.getElementById('progressBar').style.width = progress + '%';
+                    document.getElementById('timeDisplay').textContent = 
+                        formatTime(video.currentTime) + ' / ' + formatTime(video.duration);
+                };
+
+                document.getElementById('progressContainer').onclick = function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const pos = (e.clientX - rect.left) / rect.width;
+                    video.currentTime = pos * video.duration;
+                };
+
+                video.oncontextmenu = function(e) {
+                    e.preventDefault();
+                    return false;
+                };
+
+                modal.classList.add('visible');
+            }
+
+            function closeVideoModal() {
+                const modal = document.getElementById('videoModal');
+                const video = document.getElementById('traceVideo');
+                const playPauseBtn = document.getElementById('playPauseBtn');
+                
+                video.pause();
+                playPauseBtn.textContent = '▶ PLAY';
+                modal.classList.remove('visible');
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeVideoModal();
+                }
+            });
+
+            function formatTimestamp(isoString) {
+                const date = new Date(isoString);
+                const year = date.getUTCFullYear();
+                const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+                const day = String(date.getUTCDate()).padStart(2, '0');
+                const hours = String(date.getUTCHours()).padStart(2, '0');
+                const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+                const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+                
+                return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} UTC`;
+            }
+
+            function formatTime(seconds) {
+                if (isNaN(seconds)) return '0:00';
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return mins + ':' + (secs < 10 ? '0' : '') + secs;
+            }
+        </script>
+    </body>
+</html>
