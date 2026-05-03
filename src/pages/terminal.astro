@@ -691,8 +691,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
    
 
 
-
-
             /* =================================================================
            TERMINAL HINT
            "Press ` to access terminal" at bottom of page
@@ -1276,6 +1274,28 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 background: rgba(0, 255, 65, 0.05);
             }
 
+            .chaplet-text .record-block {
+            font-family: "Share Tech Mono", "Courier New", monospace !important;
+            color: #00ff41 !important;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 32px 0;
+            padding: 18px 20px;
+            border: 1px solid rgba(0, 255, 65, 0.35);
+            border-left: 4px solid #00ff41;
+            background: rgba(0, 255, 65, 0.06);
+            white-space: pre-line;
+            }
+
+            .chaplet-text .section-header {
+            font-family: "Share Tech Mono", monospace !important;
+            color: #00d4ff !important;
+            font-size: 16px;
+            margin-top: 42px;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+             }
+
             .continue-section {
                 margin-top: 60px;
                 padding-top: 40px;
@@ -1659,6 +1679,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             <!-- STORY ARCHIVES: List of all chapters -->
             <div class="section-header">Begin Reading</div>
             <ul class="story-list" id="story-list">
+
                 <!-- One button per item. ACCESS opens the unified reader with embedded audio at top. -->
                 <li class="story-item" data-chaplet="prologue">
                     <span class="story-title available">
@@ -1670,6 +1691,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     </div>
                 </li>
 
+
                 <li class="story-item" data-chaplet="chaplet1">
                     <span class="story-title available">
                         <span class="story-status not-started" id="status-chaplet1">●</span>
@@ -1680,17 +1702,31 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     </div>
                 </li>
 
+
                 <li class="story-item" data-chaplet="chaplet2">
                     <span class="story-title available">
                         <span class="story-status not-started" id="status-chaplet2">●</span>
-                        Chaplet 2: AssignareFatum(): The Fates Delivered
+                        Chaplet 2: AssignareFatum(): Propagation Delayed
                     </span>
                     <div class="story-actions">
                         <button class="story-btn" onclick="showUnifiedReader('chaplet2')">📄 ACCESS</button>
                     </div>
                 </li>
 
-                <li class="story-item locked" data-chaplet="chaplet3">
+<!-- Locked items keep the same structure for consistency. Buttons stay disabled until unlocked. -->
+
+                <li class="story-item locked corrupted" data-chaplet="chaplet3_5">
+                    <span class="story-title corrupted locked">
+                        <span class="story-status locked" id="status-chaplet3_5">●</span>
+                        Chaplet 2.5: INSERTION [CORRUPTED]
+                    </span>
+                    <div class="story-actions">
+                        <button class="story-btn" disabled>📄 ACCESS</button>
+                    </div>
+                </li>
+
+
+                <li class="story-item" data-chaplet="chaplet3">
                     <span class="story-title available">
                         <span class="story-status not-started" id="status-chaplet3">●</span>
                         Chaplet 3: The Realm Beyond
@@ -1700,27 +1736,39 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     </div>
                 </li>
 
-                <!-- Locked items keep the same structure for consistency. Buttons stay disabled until unlocked. -->
 
-                <li class="story-item locked corrupted" data-chaplet="chaplet3_5">
-                    <span class="story-title corrupted locked">
-                        <span class="story-status locked" id="status-chaplet3_5">●</span>
-                        Chaplet 3.5: INSERTION [CORRUPTED]
+                <li class="story-item" data-chaplet="chaplet35">
+                    <span class="story-title available">
+                        <span class="story-status not-started" id="status-chaplet35">●</span>
+                        Chaplet 3.5: INSERTION: TRACE//Terminal 13.7
                     </span>
                     <div class="story-actions">
-                        <button class="story-btn" disabled>📄 ACCESS</button>
+                        <button class="story-btn" onclick="showUnifiedReader('chaplet35')">📄 ACCESS</button>
                     </div>
                 </li>
 
-                <li class="story-item locked" data-chaplet="chaplet4">
-                    <span class="story-title locked">
-                        <span class="story-status locked" id="status-chaplet4">●</span>
+
+                <li class="story-item" data-chaplet="chaplet4">
+                    <span class="story-title available">
+                        <span class="story-status not-started" id="status-chaplet4">●</span>
                         Chaplet 4: Presence in the Shadows
                     </span>
                     <div class="story-actions">
-                        <button class="story-btn" disabled>📄 ACCESS</button>
+                        <button class="story-btn" onclick="showUnifiedReader('chaplet4')">📄 ACCESS</button>
                     </div>
                 </li>
+
+
+                <li class="story-item" data-chaplet="chaplet45">
+                    <span class="story-title available">
+                        <span class="story-status not-started" id="status-chaplet45">●</span>
+                        Chaplet 4.5: INSERTION. BREACH EVENT
+                    </span>
+                    <div class="story-actions">
+                        <button class="story-btn" onclick="showUnifiedReader('chaplet45')">📄 ACCESS</button>
+                    </div>
+                </li>
+
 
                 <li class="story-item locked" data-chaplet="chaplet5">
                     <span class="story-title locked">
@@ -2692,8 +2740,8 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             // PROLOGUE CONTENT
             // The actual text of the prologue story
             // =================================================================
-            const prologueText = `<p style="font-style: italic; font-size: 22px; ">"I gave you order. I did not stay to maintain it."</p>
-
+            const prologueText = `<p style="font-style: italic; font-size: 22px; ">“I gave you order. I did not stay to maintain it.”</p>
+               
                 I built the Framework.
                 I did not build it well.
 
@@ -2756,27 +2804,30 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
                 The Framework is failing.
                 It is my fault.
-                And I no longer have the strength to try again.`;
+                And I no longer have the strength to try again.
+                `;
+
 
             // ========================================
             // CHAPLET 1 CONTENT
             // ========================================
-            const chaplet1Content = `<p style="font-style: italic; font-size: 22px; ">“Fate, inherited.”</p>
+            const chaplet1Content = `<p style="font-style: italic; font-size: 22px;">“Fate is inherited.”</p>
+
             <p><span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">I/O</span> is a digital graveyard. Abandoned code hangs like dead weight. Glitches bleed through the walls. Nothing runs clean. Beneath the surface of the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">H2E Framework</span>, the core shows through. Frayed wires twitch. Packets drop before they reach their targets. Circuits gasp under the weight of functions that should have been retired long ago.</p>
 
             <p>At its far edge lies <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span>. Forgotten. Never repaired. Never erased. Ozone hangs heavy, mixing with the stale scent of burnt circuits. Failing processors emit slow, mournful groans like ghostly trains rattling through abandoned subway tunnels. This is where <span style="color: #ffaa00;">trinus</span> exists. A solitary <span style="color: #ffaa00;">Functionary</span> holding a node the system has stopped caring about.</p>
 
             <p><span style="color: #ffaa00;">trinus</span> wakes as always, scrolling through the woes of the world. The lag is worse today. <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">LB 3.2</span> deployed earlier, a patch pushed by the <span style="color: #ffaa00;">Praetores</span>. Its changelog flashes once. Minor fixes. Re-enabled functions. Nothing useful.</p>
 
-            <p class="dialogue">"<span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">LB 3.2</span>," he mutters. "Another patch to keep this thing running. Or pretend to."</p>
+            <p class="dialogue">“<span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">LB 3.2</span>,” he mutters. “Another patch to keep this thing running. Or pretend to.”</p>
 
             <p>Monitors crowd him in a crooked semi-circle. Some flicker. Some buzz. A few pulse irregularly, as if trying to stay alive. Most barely respond. One stands out among the junk. A sleek, responsive touchscreen the <span style="color: #ffaa00;">Praetores</span> installed after a surge burned out half the terminal. Their presence in the lower tiers was never welcome. New hardware always felt like an intrusion, not support.</p>
 
-            <p>He remembers no beginning. Only transfer requests that vanish into the void. <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">The Framework</span> never erased him. It left him here. He stayed. Solitude made it easier to watch the slow collapse from inside.</p>
+            <p>He remembers no beginning. Only transfer requests that vanish into the void. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> never erased him. It left him here. He stayed. Solitude made it easier to watch the slow collapse from inside.</p>
 
             <p>He sits still for a moment. Heat rises behind his eyes. A faint pressure spreads through his hands and feet. Sharp. Distant. Like something piercing through him. Then, a memory of a crowd shouting his name. He tries to hold onto it. Something important, something he should remember, but it slips away. Only numbness remains.</p>
 
-            <p>The faint whine of overworked circuits fills the silence. His <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Ghost Feed</span> hums in the background, pulling fragments from hidden relays. The streams show flickers from <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">The Grove of Accord</span>, <span style="color: #ffaa00;">Praetores</span> with silver skin reflecting cold light, and brief shots from the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Edge of the System</span>. The feeds are illegal. He keeps them alive anyway. Some part of him needs to see what the <span style="color: #ffaa00;">Praetores</span> avoid.</p>
+            <p>The faint whine of overworked circuits fills the silence. His <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Ghost Feed</span> hums in the background, pulling fragments from hidden relays. The streams show flickers from <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">The Grove of Accord</span>, <span style="color: #ffaa00;">Praetores</span> with silver skin reflecting cold light, and brief shots from the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Edge of the System</span>. The feeds are illegal. He does not care. Some part of him needs to see what the <span style="color: #ffaa00;">Praetores</span> avoid.</p>
 
             <p>Corrupted loops bleed across the screens. Nodes collapse and rebuild. Geometry drifts at the margins. He watches because he has nothing else. Rumors circle about a sealed class near the Edge. <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">DeprecatedVault</span>, some say. No logs confirm it. Still, something stutters. Out of sync. Forbidden. He keeps the streams alive. His quiet act of defiance. He collects every image and every whisper the system wants buried.</p>
 
@@ -2784,9 +2835,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>He drags on his cigarette and steadies his hand. The nausea that rises has nothing to do with the smoke. Something in the system presses at him, like a name he cannot remember.</p>
 
-            <p>Soon, he will compile the list. Names queued for <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> or <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>. To him, it's just data shifting across glass.</p>
+            <p>Soon, he will compile the list. Names queued for <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> or <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>. To him, it’s just data shifting across glass.</p>
 
-            <p>He turns back to the screens. Detached. Mechanical. Lost in routine. Then a face appears. He blinks. She isn't stunning, but she stands out against the dullness of the other images. Beautiful. He pulls his chair closer.</p>
+            <p>He turns back to the screens. Detached. Mechanical. Lost in routine. Then a face appears. He blinks. She isn’t stunning, but she stands out against the dullness of the other images. Beautiful. He pulls his chair closer.</p>
 
             <p>He touches the screen and zooms in on her as she moves through her routine. Clearing dishes. Sorting clothes. Writing a list that means nothing and everything: cat food, stamps, pay bills, tape, garden hose. Her simplicity draws him forward. He stares too long.</p>
 
@@ -2799,9 +2850,21 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 <span>NEW! View Life Book (v. LB 3.2)</span>
             </div>
 
-            <p>He stares at it. This wasn't here before. He hesitates. Then taps.</p>
+            <p>He stares at it. This wasn’t here before. He hesitates. Then taps.</p>
 
-            <p>The screen shifts. A <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Book</span> opens. Data lines run alongside her image. Indexed. Weighed. Assigned. His eyes widen. He reads the feed, lips shaping the words.</p>
+            <p>The screen shifts. A <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Book</span> opens.</p>
+
+            <p>He expected a single thread.</p>
+
+            <p>This was not a single thread.</p>
+
+            <p>The structure did not resolve flat. It branched. Not visually. Not in any way the interface was designed to show. But he could feel it in the way the data refused to isolate. Every line he followed carried something else with it. Dependencies he had never been allowed to see. Objects that did not belong to this view surfacing alongside it.</p>
+
+            <p>He did not understand what he was looking at.</p>
+
+            <p>Only that it should not be visible like this.</p>
+
+            <p>Data lines run alongside her image. Indexed. Weighed. Assigned. His eyes widen. He reads the feed, lips shaping the words.</p>
 
             <p>Then her name: <span style="color: #ffaa00;">ella.</span></p>
 
@@ -2820,18 +2883,15 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 Status: Pending
             </div>
 
-            <p class="dialogue">"Apostasia?"</p>
+            <p class="dialogue">“Apostasia?”</p>
 
-            <p>The word left his mouth before he could stop it. Not a question. Something older than that. His hands went still on the desk.</p>
-
-            <p>He knew that name. Not from any manual. Not from the registry. From the stories the system never officially told. The ones traded quietly between nodes. Passed through the lower tiers like contraband.</p>
+            <p>His hands went still on the desk. He knew that word. Not from any manual. Not from the registry. From the stories the system never officially told. The ones traded quietly between nodes. Passed through the lower tiers like contraband.</p>
 
             <p>An ancient catastrophe. A word that was never supposed to surface again.</p>
 
             <p>He had heard it years ago. Cycles ago. Long enough to believe it was legend.</p>
-            
-            <p>It wasn't.</p>
 
+            <p>It wasn’t.</p>
 
             <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
                 ApostasiaVitae()<br>
@@ -2841,15 +2901,15 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p><span style="color: #ffaa00;">trinus</span> gasps. Spins. Rummages through the debris on his desk. Ashtray. Cold coffee. Stacks of paper. Crumpled lists.</p>
 
-            <p class="dialogue">"Where is it? It's here somewhere!"</p>
+            <p class="dialogue">“Where is it? It’s here somewhere!”</p>
 
             <p>Nothing.</p>
 
             <p>He shoves piles aside. Broken switches. Coils of unused wire. Fried circuit boards. Bins of tech debris. He lifts another box.</p>
 
-            <p class="dialogue">"Ah. There."</p>
+            <p class="dialogue">“Ah. There.”</p>
 
-            <p>It's an old training manual:<span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;"> Functions()</span>. Large, with hundreds of thin, delicate pages. Dog-eared. Coffee-stained. Margins full of scribbles. Slips of paper tucked inside. He flips through it. The index lists <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">AssignareFatum()</span>, <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">MortalExpire()</span>, and other usual protocols. All gatekeepers for tallying <span style="color: #ffaa00;">PreBorn</span> for life.</p>
+            <p>It’s an old training manual: <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Functions()</span>. Large, with hundreds of thin, delicate pages. Dog-eared. Coffee-stained. Margins full of scribbles. Slips of paper tucked inside. He flips through it. The index lists <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">AssignareFatum()</span>, <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">MortalExpire()</span>, and other usual protocols. All gatekeepers for tallying <span style="color: #ffaa00;">PreBorn</span> for life.</p>
 
             <p>No <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span>.</p>
 
@@ -2859,14 +2919,15 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 INTERNAL MEMO // UNVERIFIED DISTRIBUTION // [FRAGMENT]<br><br>
                 FUNCTION CLASS: ApostasiaVitae()<br><br>
                 INVOCATION:<br>
-                -- Manual Consent Required<br>
-                -- Bypasses Standard Lifecycle Execution<br><br>
+                – Manual Consent Required<br>
+                – Invocation Origin: Mortal Object<br>
+                – Not callable by Framework processes<br><br>
                 EFFECT:<br>
-                -- Willful severance from active Framework<br><br>
+                – Willful severance from active Framework<br><br>
                 STATUS:<br>
-                -- NOT sanctioned for mortal use<br>
-                -- NOT in Function registry<br>
-                -- NOT traceable<br><br>
+                – NOT registered for Framework execution<br>
+                – NOT in Function registry<br>
+                – Origin can not be traced<br><br>
                 ⚠ WARNING:<br>
                 THIS FUNCTION WAS NOT AUTHORED BY THIS SYSTEM.<br><br>
                 IF ENCOUNTERED: ISOLATE • NULLIFY • DO NOT EXECUTE<br><br>
@@ -2879,7 +2940,13 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>He sets down the memo. The words linger.</p>
 
-            <p>The feed refreshes. New names appear.</p>
+            <p>The feed refreshes. The thread did not terminate at her.</p>
+
+            <p>It continued.</p>
+
+            <p>Not forward.</p>
+
+            <p>Downstream.</p>
 
             <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
                 PreBorn: desmondJohn<br>
@@ -2890,7 +2957,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 Status: Pending
             </div>
 
-            <p>Recognition. His heart sinks. Names from the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Ghost Feed.</span></p>
+            <p>Recognition. His heart sinks. Names from the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Ghost Feed</span>.</p>
 
             <p>Siblings.</p>
 
@@ -2898,21 +2965,29 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>Bound to her result.</p>
 
-            <p class="dialogue">"When her function runs, they collapse with her."</p>
+            <p class="dialogue">“When this resolves…”</p>
+
+            <p>He stopped. The word didn’t fit.</p>
+
+            <p>The system did not feel stable around it.</p>
+
+            <p class="dialogue">“They don’t… continue.”</p>
 
             <p>His fist slams the desk. The chair crashes backwards. Blood drains from his face. He steadies himself with a palm on the desk.</p>
 
             <p>He has executed this logic billions of times. He never cared. Execute. Assign. Move on. But this is different. Personal. The system has bound a mother and her children to a function that should not exist.</p>
 
-            <p class="dialogue">"I never understood. Not really."</p>
+            <p class="dialogue">“I never understood. Not really.”</p>
 
-            <p>He stares at the screens. Endless log entries scroll by like pages in a book he'll never read. Uninteresting. Wrong genre. Bargain rack. How did he not notice it earlier? Something feels withheld. His memory feels fragile.</p>
+            <p>He stares at the screens. Endless log entries scroll by like pages in a book he’ll never read. Uninteresting. Wrong genre. Bargain rack. How did he not notice it earlier? Something feels withheld. His memory feels fragile.</p>
 
-            <p class="dialogue">"Was I ever mortal? Did they erase everything?"</p>
+            <p class="dialogue">“Was I ever mortal? Did they erase everything?”</p>
 
             <p>The questions feel urgent, like something he should already know the answer to.</p>
 
-            <p>He should not have access to mortal <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Books</span>. <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">LB 3.2</span> opened something it should not. <span style="color: #ffaa00;">ella's</span> life is now exposed. Her children's fate sits beside it. And the suicide call that never belonged is locked in place.</p>
+            <p>He should not have access to mortal <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Books</span>. And even if he did, it would not look like this. Threads were meant to be isolated. Clean. Self-contained. This was none of those things.</p>
+
+            <p><span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">LB 3.2</span> opened something it should not have. <span style="color: #ffaa00;">ella’s</span> life is now exposed. Her children’s fate sits beside it. And the suicide call that never belonged is locked in place.</p>
 
             <p>His hands tremble. The <span style="color: #ffaa00;">Praetores</span> could be watching. He stills them before the tremor becomes a signal. He forces his breath to slow. A hymn rises on instinct.</p>
 
@@ -2920,7 +2995,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>He closes his eyes. The words echo. Not comfort. Programming.</p>
 
-            <p class="dialogue">"<span style="color: #ffaa00;">ella</span>."</p>
+            <p class="dialogue">“<span style="color: #ffaa00;">ella</span>.”</p>
 
             <p>Her name drifts through the dark of <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span>. He pauses. This must stay hidden. If anyone notices:</p>
 
@@ -2930,11 +3005,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p><span style="color: #ffaa00;">trinus</span> clutches the desk. Unsure. He must not end up like <span style="color: #ffaa00;">foedus</span>. Doubt is the entry point.</p>
 
-            <p>He bites his lip. Wipes his face. Pulls at the skin under his eyes. Forces himself to focus. Fists clenched. Spine erect. He becomes mechanical again. He settles into his chair and places his hands on the keyboard.</p>
+            <p>He bites his lip. Wipes his face. Pulls at the skin under his eyes. Forces himself to focus. Fists clenched. Spine erect. He becomes mechanical again. He settles into his chair and rests his hands on the keyboard.</p>
 
             <p class="dialogue" style="font-style: italic;">Just confirm the assignments.</p>
 
-            <p>Then, in a soft, trembling sing-song voice, he recites the refrain shaped by the <span style="color: #ffaa00;">Praetores'</span> melodies. He does not know where he learned them. They soothe anyway.</p>
+            <p>Then, in a soft, trembling sing-song voice, he recites the refrain shaped by the <span style="color: #ffaa00;">Praetores’</span> melodies. He does not know where he learned them. They soothe anyway.</p>
 
             <p style="margin-left: 20px; font-style: italic; color: #666;">♪ Each PreBorn belongs to a name on the list.<br>The list is written; the fate is assigned.</p>
 
@@ -2942,46 +3017,43 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>The cursor blinks. His fingers linger longer than protocol permits. Once, his strokes were quick. Now, every command requires a pause.</p>
 
-            <p>The terminal glows as he reviews the logs. Fate designations: some <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span>---destined to pursue mortal life through fragile subroutines; others <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>---deleted to free system memory. The Framework has decided. He presses his palm to the screen. Data shimmers beneath his fingers.</p>
+            <p>The terminal glows as he reviews the logs. Fate designations: some <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span>—destined to pursue mortal life through fragile subroutines; others <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>—deleted to free system memory. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> has decided. He presses his palm to the screen. Data shimmers beneath his fingers.</p>
 
             <p>He should send the list. The <span style="color: #ffaa00;">Praetores</span> expect it. He cannot. The list is bloodstained and personal. Thoughts of <span style="color: #ffaa00;">ella</span> linger. Not code. Real. Her death will tear a family apart.</p>
 
-            <p class="dialogue">"I refuse."</p>
+            <p class="dialogue">“I refuse.”</p>
 
             <p>A monitor hums as the <span style="color: #ffaa00;">Praetores</span> awaken.</p>
-        `;
+            `;
 
             // ========================================
             // CHAPLET 2 CONTENT
             // ========================================
-            const chaplet2Content = `
-            <p style="font-size: 22px; font-style: italic;">“What is written is not always obeyed, and not all bow to what is decreed.”</p>
-
-            <p></p>
+            const chaplet2Content = `<p style="font-style: italic; font-size: 22px;">“What is assigned must be resolved.”</p>
 
             <p>The design of the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span> was meant only for passing through, not for living. Endless. Clinical by design. Unintentionally cold. Bunks lined up in sterile rows. Tile floors gleamed. A faint smell of antiseptic, metal, and static hung in the air. The lighting was gentle but even. Too even, as if someone tried to mimic daylight and missed. The color scheme stayed neutral: sage green, beige, off-white, dust blue.</p>
 
             <p><span style="color: #ffaa00;">PreBorn</span> moved within it. They sat on bunks, traded broken toys, and invented games whose rules dissolved by morning. One bunk farther down the row stayed empty. No one questioned why. Everything resembled a fading Polaroid left near a window. Uneven. Curling at the edges.</p>
 
-            <p>Time here did not move forward. It looped. Most <span style="color: #ffaa00;">PreBorn</span> passed through quickly. Their fates, <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> or <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>, were sealed by <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">AssignareFatum()</span>. Still, some remained. Their sparks unfinished; reasoning incomplete. Old souls trapped in limbo, like <span style="color: #ffaa00;">desmondJohn</span> and his siblings.</p>
+            <p>Time here did not move forward. It looped. Most <span style="color: #ffaa00;">PreBorn</span> passed through quickly. Their fates, <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> or <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>, were sealed by <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">AssignareFatum()</span>. They were never told which. Still, some remained. Their sparks unfinished; reasoning incomplete. Old souls trapped in limbo, like <span style="color: #ffaa00;">desmondJohn</span> and his siblings.</p>
 
-            <p><span style="color: #ffaa00;">desmondJohn</span> spent ten cycles alone before the system added <span style="color: #ffaa00;">jessMartin</span> to their bunk. Three cycles later, <span style="color: #ffaa00;">isidoreAbraham</span> arrived. Together, they formed an array that never cleared.</p>
+            <p><span style="color: #ffaa00;">desmondJohn</span> spent three cycles alone before the system added <span style="color: #ffaa00;">jessMartin</span> to their bunk. Seven cycles later, <span style="color: #ffaa00;">isidoreAbraham</span> arrived. Together, they formed an array that never cleared.</p>
 
-            <p>In the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>, all <span style="color: #ffaa00;">PreBorn</span> families shared bunks. How those families were assembled was not <span style="color: #ffaa00;">trinus's</span> concern. They appeared, were logged, and assigned. This one had lasted longer than any protocol predicted.</p>
+            <p>In the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>, all <span style="color: #ffaa00;">PreBorn</span> families shared bunks. How those families were assembled was not <span style="color: #ffaa00;">trinus’s</span> concern. They appeared, were logged, and assigned. This one had lasted longer than any protocol predicted.</p>
 
-            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">The Framework</span> assigned each <span style="color: #ffaa00;">PreBorn</span> a name, but part of it stayed self-authored. An imprint. A choice.</p>
+            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> assigned each <span style="color: #ffaa00;">PreBorn</span> a name, but part of it stayed self-authored. An imprint. A choice.</p>
 
             <p><span style="color: #ffaa00;">desmondJohn</span>, thirteen, kept his bunk meticulously tidy and viewed the world through a slightly distorted lens. He chose desmond after decoding a banned file about the Desmond Rebellions. Misremembered stories of insurgents, martyrs, or both. He did not cling to glory. Only to the idea of resistance. John was system-assigned. Strict. Authorized. Final. He marked days on his trunk lid with thin notches carved from plastic shards. Inside, a single folded cloth stayed pristine. His bowl haircut was self-trimmed and even. His movements showed someone still trying to meet standards in a system that no longer seemed to notice.</p>
 
-            <p><span style="color: #ffaa00;">jessMartin</span>, ten, refused to be logged. She chose jess because it was short and sharp. Hard to overwrite. Martin was assigned. She used it only when forced. She encoded herself with scraps: copper-wired hair ties and her carrykeep, a small over-the-shoulder bag stitched from insulation foam and wall seam thread. She booby-trapped her trunk with a handmade spring and declared herself “off-grid,” even though the grid was all there was. </p>
+            <p><span style="color: #ffaa00;">jessMartin</span>, ten, refused to be logged. She chose jess because it was short and sharp. Hard to overwrite. Martin was assigned. She used it only when forced. She encoded herself with scraps: copper-wired hair ties and her carrykeep, a small over-the-shoulder bag stitched from insulation foam and wall seam thread. She booby-trapped her trunk with a handmade spring and declared herself “off-grid,” even though the grid was all there was.</p>
 
             <p><span style="color: #ffaa00;">isidoreAbraham</span>, seven, nested slowly, as if buffering. He chose isidore without explanation. The name was not found in any current schema. Abraham was assigned, but it felt older, as if it came from outside the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span>. He arranged silver pebbles into spirals, breaking and remaking them in quiet obsession. His blankets never stayed in place. He mumbled object names in his sleep, real or imagined, and claimed to remember “before,” which no <span style="color: #ffaa00;">PreBorn</span> should. Sometimes he called out for someone who wasn’t there, then woke with no memory of it.</p>
 
             <p>Under one bunk, the three stored a collection of fragments: fabric threads, pieces of wire, smooth silver stones. These objects had no official value in the system but carried weight. Each piece marked a claim.</p>
 
-            <p>We were here.</p>
+            <p style="font-style: italic;">We were here.</p>
 
-            <p>They sat in a close triangle on <span style="color: #ffaa00;">desmondJohn's</span> bunk, knees angled inward, the hum of the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span> filling the silence around them. They played a game called “What Will You Be,” a ritual of imagined futures spoken as if fate had not already been decided.</p>
+            <p>They sat in a close triangle on <span style="color: #ffaa00;">desmondJohn’s</span> bunk, knees angled inward, the hum of the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span> filling the silence around them. They played a game called “What Will You Be,” a ritual of imagined futures spoken as if fate had not already been decided.</p>
 
             <p><span style="color: #ffaa00;">isidoreAbraham</span> rocked slightly, grinning. “Okay. Guess.”</p>
 
@@ -2999,27 +3071,27 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p class="dialogue">“What?” <span style="color: #ffaa00;">isidoreAbraham</span> blinked.</p>
 
-            <p>“She means a lawyer,” <span style="color: #ffaa00;">desmondJohn</span> sighed. “Don’t answer that. She’s stalling.”</p>
+            <p class="dialogue">“She means a lawyer,” <span style="color: #ffaa00;">desmondJohn</span> sighed. “Don’t answer that. She’s stalling.”</p>
 
             <p class="dialogue">“Maybe I want to be a lawyer,” <span style="color: #ffaa00;">jessMartin</span> shrugged. “You don’t know.”</p>
 
             <p class="dialogue">“You definitely don’t want to be a lawyer,” <span style="color: #ffaa00;">isidoreAbraham</span> said, giggling.</p>
 
-            <p><span style="color: #ffaa00;">desmondJohn</span>’s face softened. “Is it a healer?”</p>
+            <p><span style="color: #ffaa00;">desmondJohn’s</span> face softened. “Is it a healer?”</p>
 
             <p><span style="color: #ffaa00;">isidoreAbraham</span> beamed. “Yes!”</p>
 
-            <p class="dialogue">“Again?” <span style="color: #ffaa00;">jessMartin</span> groaned. “You always pick 'healer.’”</p>
+            <p class="dialogue">“Again?” <span style="color: #ffaa00;">jessMartin</span> groaned. “You always pick ‘healer.’”</p>
 
             <p class="dialogue">“I like healers.”</p>
 
-            <p>Then it was <span style="color: #ffaa00;">desmondJohn</span>’s turn. He hesitated longer than usual. “Alright. Guess.”</p>
+            <p>Then it was <span style="color: #ffaa00;">desmondJohn’s</span> turn. He hesitated longer than usual. “Alright. Guess.”</p>
 
             <p><span style="color: #ffaa00;">isidoreAbraham</span> leaned in. “Do you build things?”</p>
 
             <p>He paused, then nodded. “Yes.”</p>
 
-            <p>“That’s new,” <span style="color: #ffaa00;">jessMartin</span> said, raising an eyebrow.</p>
+            <p class="dialogue">“That’s new,” <span style="color: #ffaa00;">jessMartin</span> said, raising an eyebrow.</p>
 
             <p class="dialogue">“Do you build big things?”</p>
 
@@ -3029,7 +3101,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>A slight grin flashed. “No.”</p>
 
-            <p>“Do you build things that last?” <span style="color: #ffaa00;">isidoreAbraham</span> asked.</p>
+            <p class="dialogue">“Do you build things that last?” <span style="color: #ffaa00;">isidoreAbraham</span> asked.</p>
 
             <p>The question stalled him. The game usually moved fast. But now <span style="color: #ffaa00;">desmondJohn</span> looked down, unsure.</p>
 
@@ -3037,165 +3109,200 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>The answer hung, unresolved.</p>
 
-            <p>Outside the Quarters, something moved. Heavy, deliberate steps. Each one a warning. The corridor offered no cover. No chance to turn back. <span style="color: #ffaa00;">trinus’s</span> hands ached from how hard he gripped them. A hymn’s beat grew louder in his mind with each step.</p>
+            <p>A figure appeared in the doorway.</p>
 
-            <p>At the doorway, his chest tightened. He almost stepped away. Instead, he entered. The air shifted. Not sound. Weight. Laughter froze. The warmth of the game dissolved.</p>
+            <p>He did not announce himself. Did not move. Just stood there, gripping the frame as if the corridor behind him demanded something he wasn’t sure he could give.</p>
 
-            <p>He knew their names. Not only from today’s list but from <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Ghost Feed</span> fragments. Sparks that flickered in his forbidden logs. Evidence of their existence had already seeped into the system.</p>
+            <p>The game stopped, not because anyone said so, but because the air changed.</p>
 
-            <p><span style="color: #ffaa00;">trinus</span> stood at the edge of the bunks. Expressionless. The thought of <span style="color: #ffaa00;">ella's </span> <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> call burned in his mind. Inside, he felt himself loop, trapped in a failing process.</p>
+            <p><span style="color: #ffaa00;">desmondJohn</span> saw him first. A man, worn and out of place. Not in the same way the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span> felt wrong, which was familiar, but in a different sense. <span style="color: #ffaa00;">Functionaries</span> existed; everyone knew that. They operated the system from elsewhere and didn’t come here.</p>
 
-            <p style="font-style: italic;">Say the words. Deliver the fates.</p>
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> froze.</p>
 
-            <p>He cleared his throat. “Your names have been written.”</p>
+            <p><span style="color: #ffaa00;">jessMartin</span> stepped in front of her brothers.</p>
 
-            <p>They waited. Nothing else came. The long pause made him look like an automaton waiting for a handler’s command.</p>
+            <p class="dialogue">“Who are you?”</p>
 
-            <p><span style="color: #ffaa00;">desmondJohn’s</span> voice broke the silence. “So… Do you have the fates for us?” His hands curled into fists.</p>
+            <p><span style="color: #ffaa00;">trinus</span> did not answer. He looked at them the way someone looks at something they already know they cannot fix. The thought of <span style="color: #ffaa00;">ella’s</span> <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> call burned behind his eyes. The list he had not sent. The names queued on a screen he had walked away from. He felt himself loop. The same failing process, cycling without resolution.</p>
 
-            <p><span style="color: #ffaa00;">trinus</span> flinched. The question snapped him back. Words tangled in his mouth.</p>
+            <p class="dialogue" style="font-style: italic;">You came here. Say something.</p>
 
-            <p> “Apost—”</p>
+            <p>He said nothing.</p>
 
-            <p style="font-style: italic;">Stop. Don’t say it.</p>
+            <p class="dialogue">“Why are you here?” <span style="color: #ffaa00;">jessMartin’s</span> voice sharpened. “<span style="color: #ffaa00;">Functionaries</span> don’t come here.”</p>
 
-            <p>He swallowed hard, trembling.</p>
+            <p><span style="color: #ffaa00;">desmondJohn’s</span> hands curled at his sides. He was doing the math. The wrong kind of math. The kind with only one answer.</p>
 
-            <p>He’s executed <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">AssignareFatum()</span> millions, maybe billions of times. Just yesterday, a boy’s face appeared, then faded. More calls came. Names lined up. Sparks organized. Everything tidy. Today, the code felt wrong. The result felt unjust.</p>
+            <p><span style="color: #ffaa00;">trinus</span> stared at the floor. Millions of executions. Billions, maybe. Names lined up. Sparks organized. Everything tidy. He had never come to any of them. No protocol existed for this. No function.</p>
 
-            <p><span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">LB 3.2</span> had revealed code he was never meant to see. Lines controlling mortal existence, linking <span style="color: #ffaa00;">PreBorn</span> fates to the living. Deeper inside, he had found something worse: <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> listed as if it belonged in the catalog. A suicide function embedded in mortal reasoning. He had not sent the list. The <span style="color: #ffaa00;">Praetores</span> expected it. A correction felt necessary. Instead, he forced out:</p>
+            <p>He was here because the list had not been submitted.</p>
 
-            <p class="dialogue">“Arrangements. Next steps are being made.”</p>
+            <p>Because the system had paused where it was not built to pause.</p>
 
-            <p>He shudders at his own choice of words.</p>
+            <p>Because these three were still present when they should have already resolved.</p>
 
-            <p><span style="color: #ffaa00;">jessMartin</span> stepped forward. “Next steps to what?”</p>
+            <p>He had no script. Only the weight of what he knew.</p>
 
-            <p>She turned to <span style="color: #ffaa00;">desmondJohn</span>. “What’s he even talking about?”</p>
-
-            <p><span style="color: #ffaa00;">trinus</span> didn’t blink. He stood in silence as the <span style="color: #ffaa00;">PreBorn</span> waited for a correction that never came.</p>
-
-            <p>Then <span style="color: #ffaa00;">jessMartin</span> inhaled sharply. “That’s it? 'Arrangements’? That’s what we get?”</p>
-
-            <p>“jess…” <span style="color: #ffaa00;">desmondJohn</span> warned.</p>
-
-            <p>“No, really,” she snapped. “Do we just sit here and wait to be erased?”</p>
-
-            <p>“Stop,” <span style="color: #ffaa00;">desmondJohn’s</span> voice cracked. “That’s not going to help.”</p>
-
-            <p>“Then make him explain!” <span style="color: #ffaa00;">jessMartin</span> pointed, furious. “Or better—make him say something real! 'Arrangements.’ What does that even mean?”</p>
+            <p><span style="color: #ffaa00;">jessMartin</span> stepped closer. “Say something. Or get out.”</p>
 
             <p class="dialogue">“STOP!”</p>
 
             <p>The word tore out of <span style="color: #ffaa00;">trinus</span>. Jagged. Sharp. His chest heaved as the truth broke loose.</p>
 
-            <p class="dialogue">“You will not be <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span>! Do you understand? <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>. That is the function!”</p>
+            <p class="dialogue">“It’s already assigned!”</p>
+
+            <p class="dialogue">“You were not selected for <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span>. You were marked <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>.”</p>
+
+            <p>The words hit the air wrong.</p>
+
+            <p>Like it had not been meant to be spoken there.</p>
 
             <p>His voice broke again. Breath ragged. Vision blurred. Text, code, sparks bleeding into static. A hymn pounded against his skull, louder each cycle.</p>
 
-            <p></p>
-
             <p style="margin-left: 20px; font-style: italic; color: #666;">♪ Fate assigned, fate obeyed.</p>
-
-            <p></p>
 
             <p>The refrain repeated until it cracked. He pressed his palms against his eyes, trying to hold the words back. They still came.</p>
 
             <p class="dialogue">“Your MOTHER… <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span>. TODAY!”</p>
 
+            <p>The second word passed through them.</p>
+
+            <p>The first did not.</p>
+
             <p>Silence followed. Absolute.</p>
 
-            <p>“Mother?” <span style="color: #ffaa00;">isidoreAbraham</span> whispered.</p>
+            <p>Then.</p>
+
+            <p class="dialogue">“Mother?” <span style="color: #ffaa00;">isidoreAbraham</span> whispered.</p>
 
             <p>They had never heard the term. But the moment <span style="color: #ffaa00;">trinus</span> spoke it, something shifted inside them. Not metaphorically. Physically. Warmth spreading through their chests. Pressure deep behind their eyes. Something foreign taking root.</p>
 
-            <p><span style="color: #ffaa00;">jessMartin</span>’s face contorted. Fury first, then something deeper. She turned away, trying to outrun it. Her breath hitched. She covered her mouth with both hands, but the sound still broke free.</p>
+            <p><span style="color: #ffaa00;">jessMartin’s</span> face contorted. Fury first, then something deeper. She turned away, trying to outrun it. Her breath hitched. She covered her mouth with both hands, but the sound still broke free.</p>
 
-            <p>The word was embedding itself. Implanting. All three inhaled at once. Sharp. Synchronized. Their bodies knew what their minds did not: a bond forming before it was meant to exist.</p>
+            <p>The word was embedding itself. Implanting.</p>
 
-            <p><span style="color: #ffaa00;">desmondJohn</span> pulled her close. At first, she fought him. Shoulders tense. Fists clenched. Then she collapsed against him. Her breath came uneven and hiccuping. Her cry went muffled into his shirt. He pressed his chin into her hair and held tighter, as if strength alone could hold her together. <span style="color: #ffaa00;">isidoreAbraham</span> climbed onto the bunk and curled against <span style="color: #ffaa00;">desmondJohn's</span> side. He fidgeted with the hem of his shirt, rubbing it between nervous fingers.</p>
+            <p>Something in them was reorganizing to hold it.</p>
+
+            <p>Not understanding.</p>
+
+            <p>Capacity.</p>
+
+            <p>Their bodies knew what their minds did not.</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> pulled her close. At first, she fought him. Shoulders tense. Fists clenched. Then she collapsed against him. Her breath came uneven and hiccuping. Her cry went muffled into his shirt. He pressed his chin into her hair and held tighter, as if strength alone could hold her together. <span style="color: #ffaa00;">isidoreAbraham</span> climbed onto the bunk and curled against <span style="color: #ffaa00;">desmondJohn’s</span> side. He fidgeted with the hem of his shirt, rubbing it between nervous fingers.</p>
 
             <p>No one spoke.</p>
 
             <p><span style="color: #ffaa00;">trinus</span> did not move. His words lingered. This was a glitch he could not erase.</p>
 
-            <p>“Mother” had no place in the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>. It belonged to the mortal realm, implanted during <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> subroutines required for dependency bindings. He had forced it into them early. Out of sequence. A bond forming before bodies existed to hold it.</p>
+            <p>“Mother” had no place in the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>. It belonged to the mortal realm, implanted during <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> subroutines required for dependency bindings.</p>
 
-            <p>Apostasia was worse. Spoken aloud and forced into the <span style="color: #ffaa00;">PreBorn</span> lexicon. Another forbidden invocation he could not justify.</p>
+            <p>He had forced it into them early.</p>
 
-            <p>Slowly, <span style="color: #ffaa00;">jessMartin</span> breathing steadied, her face pressed into <span style="color: #ffaa00;">desmondJohn’s</span> shirt, fingers twisted in the fabric.</p>
+            <p>Out of sequence.</p>
+
+            <p>Before designation could complete.</p>
+
+            <p>Before the system could prepare them to hold it.</p>
+
+            <p><span style="color: #ffaa00;">PreBorn</span> were not meant to understand termination. They were meant to resolve. Once understood, resolution could not return to its prior state.</p>
+
+            <p><span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Apostasia</span> was worse. Spoken aloud and forced into the <span style="color: #ffaa00;">PreBorn</span> lexicon. Another forbidden invocation he could not justify.</p>
+
+            <p>Slowly, <span style="color: #ffaa00;">jessMartin’s</span> breathing steadied, her face pressed into <span style="color: #ffaa00;">desmondJohn’s</span> shirt, fingers twisted in the fabric.</p>
 
             <p class="dialogue">“desmond, I don’t wanna go away.”</p>
 
-            <p>“We won’t.” He doubted it but said it anyway.</p>
+            <p class="dialogue">“We won’t.” He doubted it but said it anyway.</p>
 
-            <p>“What do we do now?” <span style="color: #ffaa00;">isidoreAbraham</span> asked. His voice was small. He expected no answer.</p>
+            <p class="dialogue">“What do we do now?” <span style="color: #ffaa00;">isidoreAbraham</span> asked. His voice was small. He expected no answer.</p>
 
-            <p><span style="color: #ffaa00;">jessMartin</span> pulled back, wiping her nose on her sleeve—face blotchy, eyes red. </p>
+            <p><span style="color: #ffaa00;">jessMartin</span> pulled back, wiping her nose on her sleeve—face blotchy, eyes red.</p>
 
-            <p class="dialogue">“We have to do something.” </p>
+            <p class="dialogue">“We have to do something.”</p>
 
             <p><span style="color: #ffaa00;">desmondJohn</span> sat again on the edge of the bunk. Hands tight against his knees. “Like what?”</p>
 
             <p>She sniffed, thinking. “What if we hide?”</p>
 
-            <p>“There’s nowhere to hide,” he said, softer.</p>
+            <p class="dialogue">“There’s nowhere to hide,” he said, softer.</p>
 
-            <p>“Maybe the <span style="color: #ffaa00;">Praetores</span> made a mistake,” <span style="color: #ffaa00;">isidoreAbraham</span> said, hopeful.</p>
+            <p class="dialogue">“Maybe the <span style="color: #ffaa00;">Praetores</span> made a mistake,” <span style="color: #ffaa00;">isidoreAbraham</span> said, hopeful.</p>
 
-            <p><span style="color: #ffaa00;">jessMartin</span> let out a wet, miserable laugh. “Yeah. Sure. 'Oops, don’t erase us.’ That’ll work.”</p>
+            <p><span style="color: #ffaa00;">jessMartin</span> let out a wet, miserable laugh. “Yeah. Sure. ‘Oops, don’t erase us.’ That’ll work.”</p>
 
             <p><span style="color: #ffaa00;">isidoreAbraham</span> shrank. “I was just saying…”</p>
 
             <p><span style="color: #ffaa00;">desmondJohn</span> squeezed his wrist. “No. It’s good. We gotta think.”</p>
 
-            <p><span style="color: #ffaa00;">trinus</span> listened as their voices tangled. <span style="color: #ffaa00;">jessMartin</span>’s bitter “Oops, don’t erase us” clashed with <span style="color: #ffaa00;">isidoreAbraham's</span> hope.</p>
+            <p><span style="color: #ffaa00;">trinus</span> listened as their voices tangled. <span style="color: #ffaa00;">jessMartin’s</span> bitter “Oops, don’t erase us” clashed with <span style="color: #ffaa00;">isidoreAbraham’s</span> hope.</p>
 
             <p>Most <span style="color: #ffaa00;">PreBorn</span> instances did not last this long. <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span> was cleanest when an instance was new. Blank. Unaware. These three had persisted. Hands clutching toys. Voices overlapping. Anger and fear colliding.</p>
 
-            <p>They were no longer fragments in a system. The thought unsettled him. They were more than objects now.</p>
+            <p>They were no longer fragments in a system. The thought unsettled him. They were no longer resolving cleanly.</p>
 
-            <p>The Life Book burned in his mind. <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> sat there like rot in the code. A forbidden call destined to erase <span style="color: #ffaa00;">ella</span> and, with her, the <span style="color: #ffaa00;">PreBorn</span>. Their sparks would be snuffed before they could ever run the <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> subroutines. He had never seen the mortal threads before this. He had never understood the cost of what he enforced.</p>
+            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Book</span> burned in his mind. <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> sat there like rot in the code. A forbidden call destined to erase <span style="color: #ffaa00;">ella</span> and, with her, the <span style="color: #ffaa00;">PreBorn</span>. Their sparks would be snuffed before they could ever run the <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Born()</span> subroutines.</p>
+
+            <p>He had seen threads.</p>
+
+            <p>He had never seen what depended on them.</p>
 
             <p><span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">AssignareFatum()</span> had already run. Names queued, waiting for him to send the list. The <span style="color: #ffaa00;">Praetores</span> expected it. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> felt small now. A patchwork of commands no one questioned.</p>
 
             <p>If the <span style="color: #ffaa00;">Praetores</span> were aware of <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">ApostasiaVitae()</span> and allowed it to stand, they were not ignorant. They were complicit. The system had been broken long before this moment.</p>
 
-            <p>Mother. Apostasia. A glitch now lived inside the <span style="color: #ffaa00;">PreBorn</span>. If the <span style="color: #ffaa00;">Praetores</span> traced the anomaly, he would not survive. </p>
+            <p>Mother. Apostasia. A glitch now lived inside the <span style="color: #ffaa00;">PreBorn</span>. If the <span style="color: #ffaa00;">Praetores</span> traced the anomaly, he would not survive.</p>
 
-            <p>A name surfaced. <span style="color: #ffaa00;">foedus</span>, <span style="color: #ffaa00;">theFell</span>. </p>
+            <p>A name surfaced. <span style="color: #ffaa00;">foedus</span>, <span style="color: #ffaa00;">theFell</span>.</p>
 
-            <p>If anyone knew how to manipulate the code, it was him. </p>
+            <p>If anyone knew how to manipulate the code, it was him.</p>
 
-            <p><span style="color: #ffaa00;">trinus</span> met their desperate gazes. His voice dropped to a whisper. </p>
+            <p><span style="color: #ffaa00;">trinus</span> met their desperate gazes. His voice dropped to a whisper.</p>
 
             <p class="dialogue">“You need to find <span style="color: #ffaa00;">foedus</span>.”</p>
-        `;
+
+            <p>A pause.</p>
+
+            <p class="dialogue">“He knows what the system hides.”</p>
+            `;
 
 
             // ========================================
             // CHAPLET 3 CONTENT
             // ========================================
-            const chaplet3Content = `
-            <p style="font-style: italic; font-size: 22px;">“Not all truths belong in sacred halls. Some require whispering in the filth of forgotten places.”</p>
+            const chaplet3Content = `<p style="font-style: italic; font-size: 22px;">“Undefined paths are not prohibited.”</p>
 
-            <p><span style="color: #ffaa00;">desmondJohn</span>’s eyes narrowed. <span class="dialogue">“Who?”</span></p>
+            <p><span style="color: #ffaa00;">desmondJohn’s</span> eyes narrowed. “Who?”</p>
 
             <p><span style="color: #ffaa00;">trinus</span> did not respond. He took a shallow, strained breath. Saying the name was dangerous enough. Words spread even when no one listened. Instead, he turned and signaled with a terse gesture.</p>
 
             <p class="dialogue">“Come. We need to leave.”</p>
 
+            <p>No one argued.</p>
+
+            <p>The word he had said still sat with them.</p>
+
+            <p><span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>.</p>
+
             <p>They followed. Past bunks. Past the thin safety of their quarters. The corridor looked the same, but each step felt heavier, like wading through something unseen. Walls bowed inward. Surfaces sagged, warped with hairline fractures that hissed static. Stray current arced along the floor seams, sparking once, then gone.</p>
 
             <p class="dialogue">“Gross,” <span style="color: #ffaa00;">jessMartin</span> muttered. “Smells like melted plastic and sadness.”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">isidoreAbraham</span> pinched his nose. “And the floor’s sticky.”</p>
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> pinched his nose. “And the floor’s sticky.”</p>
+
+            <p>He didn’t let go of <span style="color: #ffaa00;">desmondJohn’s</span> sleeve.</p>
 
             <p class="dialogue">“It’s the coffee,” <span style="color: #ffaa00;">trinus</span> muttered, though his voice sounded strained.</p>
 
             <p>He knew it was not coffee. It was neglect. Decay. Proof they had crossed a threshold the system no longer cared to maintain.</p>
 
-            <p>The corridor spilled into <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span>. <span style="color: #ffaa00;">trinus's</span> cluttered, grimy den of forgotten functions. Tangled wires hung from the ceiling. Half-dead terminals coughed static across soot-streaked walls, scars from the earlier surge. The air reeked of burnt insulation and something sour and old.</p>
+            <p class="dialogue">“Does <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span> hurt?”</p>
+
+            <p>The question came out small.</p>
+
+            <p><span style="color: #ffaa00;">trinus</span> didn’t answer.</p>
+
+            <p>The corridor spilled into <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span>. <span style="color: #ffaa00;">trinus’s</span> cluttered, grimy den of forgotten functions. Tangled wires hung from the ceiling. Half-dead terminals coughed static across soot-streaked walls, scars from the earlier surge. The air reeked of burnt insulation and something sour and old.</p>
 
             <p>He moved through the chaos like a man revisiting past mistakes.</p>
 
@@ -3211,9 +3318,13 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p class="dialogue">“A schematic. An old one. I had it… once.”</p>
 
-            <p><span style="color: #ffaa00;">trinus's</span> voice faltered on the word. Once. He could not remember when, or who had given it to him. His hand brushed a crumpled cigarette pack. He took one out, rolled it between his fingers, thumb resting on the lighter.</p>
+            <p>He did not look at them.</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">jessMartin’s</span> glare cut straight through him. “You know that’ll kill you.”</p>
+            <p>The list was still waiting.</p>
+
+            <p><span style="color: #ffaa00;">trinus’s</span> voice faltered on the word. Once. He could not remember when, or who had given it to him. His hand brushed a crumpled cigarette pack. He took one out, rolled it between his fingers, thumb resting on the lighter.</p>
+
+            <p><span style="color: #ffaa00;">jessMartin’s</span> glare cut straight through him. “You know that’ll kill you.”</p>
 
             <p><span style="color: #ffaa00;">desmondJohn</span> glared at her. CAN. YOU. NOT.</p>
 
@@ -3223,7 +3334,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>He snapped it open. The foil caught the stale air, stiff as it took shape. Terrain lines flickered across its surface, glitching in and out.</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">jessMartin</span> squinted. “What’s that moth-eaten mess? Don’t tell me it’s a map. <span style="color: #ffaa00;">PreBorns</span> with maps. Ugh. That’s bedtime story stuff. You’re not fooling me.”</p>
+            <p><span style="color: #ffaa00;">jessMartin</span> squinted. “What’s that moth-eaten mess? Don’t tell me it’s a map. PreBorns with maps. Ugh. That’s bedtime story stuff. You’re not fooling me.”</p>
 
             <p><span style="color: #ffaa00;">trinus</span> ignored her.</p>
 
@@ -3247,11 +3358,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p class="dialogue">“He fell out of sync. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> expelled him. He is not what he once was. He will be difficult to look upon. But…” His voice wavered. “He still possesses knowledge the <span style="color: #ffaa00;">Praetores</span> will not share.”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">jessMartin</span> made a face. “Great. Another horror story.”</p>
+            <p><span style="color: #ffaa00;">jessMartin</span> made a face. “Great. Another horror story.”</p>
 
             <p><span style="color: #ffaa00;">desmondJohn</span> stayed silent.</p>
 
-            <p>Before <span style="color: #ffaa00;">trinus</span> could say more, a screen in the corner sparked to life. A woman appeared, frozen mid-motion, brushing her hair.</p>
+            <p>Before <span style="color: #ffaa00;">trinus</span> could say more, a screen in the corner sparked to life. A woman appeared, frozen mid-motion, hairbrush raised.</p>
 
             <p>It was <span style="color: #ffaa00;">ella</span>.</p>
 
@@ -3263,9 +3374,17 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p class="dialogue">“Who is that?” <span style="color: #ffaa00;">jessMartin</span> whispered.</p>
 
-            <p><span style="color: #ffaa00;">trinus's</span> jaw clenched. He should shut it off. He didn’t.</p>
+            <p><span style="color: #ffaa00;">trinus’s</span> jaw clenched. He should shut it off. He didn’t.</p>
 
-            <p class="dialogue">“She’s beautiful,” <span style="color: #ffaa00;">isidoreAbraham</span> said softly as he pressed his hand against his chest.</p>
+            <p>The feed should not have been accessible from here.</p>
+
+            <p>It should not have been connected to them at all.</p>
+
+            <p class="dialogue">“She’s beautiful,” <span style="color: #ffaa00;">isidoreAbraham</span> said softly.</p>
+
+            <p>His hand pressed against his chest.</p>
+
+            <p>Like before.</p>
 
             <p>For a moment, they only watched.</p>
 
@@ -3277,13 +3396,15 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p class="dialogue">“It’s time.”</p>
 
-            <p class="dialogue">He lifted the foil. “This is all that remains.”</p>
+            <p>Nothing had been resolved.</p>
+
+            <p>He lifted the foil. “This is all that remains. I can’t go with you.”</p>
 
             <p>Before he could say more, <span style="color: #ffaa00;">jessMartin</span> stopped cold.</p>
 
             <p class="dialogue">“Wait.”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn</span> spun around. “What? Ugh, what now?”</p>
+            <p><span style="color: #ffaa00;">desmondJohn</span> spun around. “What? Ugh, what now?”</p>
 
             <p>She was already gone. Bare feet slapping against tile as she ran back toward the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>. The creak of her trunk latch. Knees hitting the floor. Fingers working the thin wire wrapped around the handles. Twist. Pull. Shift. The wire snapped with a metallic pop and coiled away.</p>
 
@@ -3291,13 +3412,13 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>On her way out, she grabbed a few more things from the communal pile: a glimmer cube, a frayed strip of ribbon wire, and a broken thumb toy that still produced two faint notes when plucked.</p>
 
-            <p class="dialogue">“Something for <span style="color: #ffaa00;">isidore</span>,” she muttered.</p>
+            <p class="dialogue">“Something for isidore,” she muttered.</p>
 
-            <p>When she returned, <span style="color: #ffaa00;">desmondJohn's</span> face was half fury, half relief.</p>
+            <p>When she returned, <span style="color: #ffaa00;">desmondJohn’s</span> face was half fury, half relief.</p>
 
             <p class="dialogue">“Seriously? We don’t have time.”</p>
 
-            <p>She ignored him and pressed the thumb toy into <span style="color: #ffaa00;">isidoreAbraham's</span> hands.</p>
+            <p>She ignored him and pressed the thumb toy into <span style="color: #ffaa00;">isidoreAbraham’s</span> hands.</p>
 
             <p class="dialogue">“For you.”</p>
 
@@ -3307,49 +3428,49 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>They turned to <span style="color: #ffaa00;">trinus</span>. He had been silent, clicking a pen in his left hand. He handed <span style="color: #ffaa00;">desmondJohn</span> the schematic. He looked exhausted. The static in the room dulled as their hands touched the foil.</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">isidoreAbraham</span> held the edge and traced a broken path with his finger. “It stops here.”</p>
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> held the edge and traced a broken path with his finger. “It stops here.”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">trinus</span> looked at the torn edge. “Yeah. The system does not map past that point.” His voice tightened. “That is the part it refuses to see.”</p>
+            <p><span style="color: #ffaa00;">trinus</span> looked at the torn edge. “Yeah. The system does not map past that point.” His voice tightened. “That is the part it refuses to see.”</p>
 
-            <p>He sat back at his console and began typing as if they had never been there. The understanding between them was silent, but clear. It was time to leave.</p>
+            <p>Then, he sat back at his console and began typing without looking at them again. Their understanding was silent but clear. It was time to leave.</p>
 
             <p><span style="color: #ffaa00;">desmondJohn</span> folded the schematic carefully.</p>
 
-            <p class="dialogue">“I’ll take that, <span style="color: #ffaa00;">izzy</span>.”</p>
+            <p class="dialogue">“I’ll take that, izzy.”</p>
 
-            <p><span style="color: #ffaa00;">isidoreAbraham</span> nodded, then frowned. <span class="dialogue">“Is it… is it a… skuh… ska…”</span></p>
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> nodded, then frowned. “Is it… is it a… skuh… ska…”</p>
 
             <p class="dialogue">“You can call it a map,” <span style="color: #ffaa00;">desmondJohn</span> said.</p>
 
-            <p><span style="color: #ffaa00;">isidoreAbraham</span> smiled. <span class="dialogue">“Okay. Map.”</span></p>
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> smiled. “Okay. Map.”</p>
 
             <p><span style="color: #ffaa00;">jessMartin</span> rolled her eyes.</p>
 
             <p>Then, they stepped out of <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span> and into the corridor. The air felt different. Thinner. Charged.</p>
 
-            <p>Now out of <span style="color: #ffaa00;">trinus's</span> view, <span style="color: #ffaa00;">jessMartin</span> looked over her shoulder, then spoke.</p>
+            <p>Now out of <span style="color: #ffaa00;">trinus’s</span> view, <span style="color: #ffaa00;">jessMartin</span> looked over her shoulder, then spoke.</p>
 
             <p class="dialogue">“That woman on the screen. The one <span style="color: #ffaa00;">trinus</span> was watching.”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn</span> glanced at her. “What about her?”</p>
+            <p><span style="color: #ffaa00;">desmondJohn</span> glanced at her. “What about her?”</p>
 
             <p class="dialogue">“Who do you think she is?”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">isidoreAbraham's</span> voice was soft. “She was pretty. But sad.”</p>
+            <p><span style="color: #ffaa00;">isidoreAbraham’s</span> voice was soft. “She was pretty. But sad.”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">jessMartin</span> grinned slightly. “She’s his girlfriend. That’s why he shut it off so fast.”</p>
+            <p><span style="color: #ffaa00;">jessMartin</span> grinned slightly. “She’s his girlfriend. That’s why he shut it off so fast.”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn</span> frowned. “She didn’t look like a girlfriend. More like a painter. Or a poet.”</p>
+            <p><span style="color: #ffaa00;">desmondJohn</span> frowned. “She didn’t look like a girlfriend. More like a painter. Or a poet.”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">jessMartin</span> rolled her eyes. “Sure. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> has a poetry department.”</p>
+            <p><span style="color: #ffaa00;">jessMartin</span> rolled her eyes. “Sure. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> has a poetry department.”</p>
 
             <p class="dialogue">“No, I mean like... she looked like someone who thinks about things. A lot. Like she sees everything, even when no one’s watching.”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">isidoreAbraham</span> nodded. “Not crying-sad. More like... quiet-sad.”</p>
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> nodded. “Not crying-sad. More like... quiet-sad.”</p>
 
             <p class="dialogue">“Waiting-sad,” <span style="color: #ffaa00;">desmondJohn</span> said.</p>
 
-            <p><span style="color: #ffaa00;">jessMartin's</span> grin faded. <span class="dialogue">“<span style="color: #ffaa00;">trinus</span> didn’t want us to see her.”</span></p>
+            <p><span style="color: #ffaa00;">jessMartin’s</span> grin faded. “<span style="color: #ffaa00;">trinus</span> didn’t want us to see her.”</p>
 
             <p class="dialogue">“But he didn’t turn it off right away,” <span style="color: #ffaa00;">desmondJohn</span> said quietly. “Like he wanted to look at her. Just a little longer.”</p>
 
@@ -3357,9 +3478,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p class="dialogue">“Do you think she’s okay?”</p>
 
-            <p class="dialogue">“I don’t know, <span style="color: #ffaa00;">izzy</span>. I didn’t like how she looked. So alone.”</p>
+            <p class="dialogue">“I don’t know, izzy. I didn’t like how she looked. So alone.”</p>
 
             <p>They stood there a moment.</p>
+
+            <p class="dialogue">“Do you think we are?” <span style="color: #ffaa00;">isidoreAbraham</span> asked.</p>
 
             <p><span style="color: #ffaa00;">jessMartin</span> stared at the floor.</p>
 
@@ -3369,11 +3492,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>The walls curved as they moved. A gentle harmonic hum faded into static. They passed the final frame of the corridor. Behind them, the entrance wavered, blurred, and then disappeared.</p>
 
-            <p><span style="color: #ffaa00;">jessMartin</span> grabbed <span style="color: #ffaa00;">desmondJohn's</span> arm. <span class="dialogue">“We shouldn’t be here.”</span></p>
+            <p><span style="color: #ffaa00;">jessMartin</span> grabbed <span style="color: #ffaa00;">desmondJohn’s</span> arm. “We shouldn’t be here.”</p>
 
             <p>He didn’t answer and kept moving.</p>
 
-            <p>The ground, soldermask-green, crackled with static under <span style="color: #ffaa00;">jessMartin's</span> bare feet. The boys, in sneakers, felt only a faint vibration. The surface shifted every few steps. Soft, then rigid, then too warm. When <span style="color: #ffaa00;">desmondJohn</span> touched it, the ground dissolved around his hand and reformed after he pulled away.</p>
+            <p>The ground, soldermask-green, crackled with static under <span style="color: #ffaa00;">jessMartin’s</span> bare feet. The boys, in sneakers, felt only a faint vibration. The surface shifted every few steps. Soft, then rigid, then too warm. When <span style="color: #ffaa00;">desmondJohn</span> touched it, the ground dissolved around his hand and reformed after he pulled away.</p>
 
             <p>Copper traces with veined patterns wove through the green surface, shimmering. Walls rose and collapsed around them, half-rendered, then gone. The world folded inward. Static particles floated in the air and reset mid-fall.</p>
 
@@ -3381,21 +3504,21 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>One of the structures bent toward them. Light moved through its branches. When <span style="color: #ffaa00;">isidoreAbraham</span> touched a leaf-like appendage, it curled inward and released a single, thin note that stretched tight and lingered unbroken.</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">isidoreAbraham</span> yanked his hand back. “I didn’t mean to…”</p>
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> yanked his hand back. “I didn’t mean to…”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn</span> scanned the shifting horizon. “Stay close.”</p>
+            <p><span style="color: #ffaa00;">desmondJohn</span> scanned the shifting horizon. “Stay close.”</p>
 
-            <p>The vibration under their feet did not fade. It lingered, then shifted, as if something deeper had become aware of them. Audio distortions rippled through the air. Every few steps, faint murmurs surfaced. Half-whispers. Half-system logs.</p>
+            <p>The vibrations under their feet did not fade. They lingered, then shifted, as if something deeper had become aware of them. Audio distortions rippled through the air. Every few steps, faint murmurs surfaced. Half-whispers. Half-system logs.</p>
 
-            <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 14px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
-                “Function denied.”<br>
-                “Instruction invalid.”<br>
-                “Pathway undefined.”
-            </div>
+            <p class="dialogue">“Function denied.”</p>
 
-            <p>Wrongness pressed in on them. <span style="color: #ffaa00;">PreBorn</span> were not meant to be here. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> knew it. Yet <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span> hadn’t been called.</p>
+            <p class="dialogue">“Instruction invalid.”</p>
 
-            <p>Only silence.</p>
+            <p class="dialogue">“Pathway undefined.”</p>
+
+            <p>Wrongness pressed in on them. <span style="color: #ffaa00;">PreBorn</span> were not meant to be here. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> knew it. Yet <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span> hadn’t been called. They still remained.</p>
+
+            <p>There was only silence.</p>
 
             <p>And watching.</p>
 
@@ -3413,23 +3536,23 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p class="dialogue">“The map’s acting weird.”</p>
 
-            <p><span style="color: #ffaa00;">jessMartin</span> stepped closer. <span class="dialogue">“Weird how?”</span></p>
+            <p>She stepped closer. “Weird how?”</p>
 
-            <p><span style="color: #ffaa00;">desmondJohn</span> shook it again. The glyph in the corner dimmed. <span class="dialogue">“Like it’s struggling or something.”</span></p>
+            <p>He shook it again. The glyph in the corner dimmed. “Like it’s struggling or something.”</p>
 
             <p>A low hum pressed against them. Not sound, but pressure. The sensation of being scanned. Filament branches twitched as snow paused midair. The schematic stuttered, lines collapsing and reforming too quickly to follow.</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn's</span> hands tightened. “Something’s happening. Someone knows we’re here.”</p>
+            <p><span style="color: #ffaa00;">desmondJohn’s</span> hands tightened. “Something’s happening. Someone knows we’re here.”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">jessMartin's</span> voice dropped. “What does that mean?”</p>
+            <p><span style="color: #ffaa00;">jessMartin’s</span> voice dropped. “What does that mean?”</p>
 
             <p class="dialogue">“I don’t know.”</p>
 
-            <p><span style="color: #ffaa00;">isidoreAbraham</span> stood between them, clutching the toy. He hadn’t plinked it in a while. <span class="dialogue">“I’m cold. Is it getting dark?”</span></p>
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> stood between them, clutching the toy. He hadn’t plinked it in a while. “I’m cold. Is it getting dark?”</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">desmondJohn</span> looked up. “I don’t think so, <span style="color: #ffaa00;">izzy</span>.”</p>
+            <p><span style="color: #ffaa00;">desmondJohn</span> looked up. “I don’t think so, izzy.”</p>
 
-            <p>The schematic pulsed violently in <span style="color: #ffaa00;">desmondJohn's</span> grip. Once. Twice. Then, went dark.</p>
+            <p>The schematic pulsed violently in <span style="color: #ffaa00;">desmondJohn’s</span> grip. Once. Twice. Then, went dark.</p>
 
             <p>He shook it. Nothing.</p>
 
@@ -3437,9 +3560,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>The foil suddenly felt cold and stiff in places. Heavy. Like a body after death.</p>
 
-            <p class="dialogue">“It’s dead,” <span style="color: #ffaa00;">desmondJohn</span> muttered.</p>
+            <p class="dialogue">“It stopped,” he muttered.</p>
 
-            <p class="dialogue"><span style="color: #ffaa00;">jessMartin</span> turned. “What do you mean it’s dead?”</p>
+            <p><span style="color: #ffaa00;">jessMartin</span> turned. “What do you mean it stopped?”</p>
 
             <p class="dialogue">“I mean, the map isn’t showing anything.”</p>
 
@@ -3447,19 +3570,23 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p class="dialogue">“I can’t.”</p>
 
-            <p>He shook it again. A final pulse across the entire surface. A dying breath. Then nothing.</p>
+            <p>He shook it again. A final pulse across the entire surface. Then nothing.</p>
 
             <p>They stared at the lifeless foil.</p>
 
-            <p class="dialogue">“Now what?” <span style="color: #ffaa00;">jessMartin's</span> voice rose sharply. “Of course. <span style="color: #ffaa00;">trinus</span> sends us into oblivion with a garbage map and a bedtime story about a fallen freak. Classic.”</p>
+            <p><span style="color: #ffaa00;">jessMartin’s</span> voice rose sharply. “Now what? Of course. <span style="color: #ffaa00;">trinus</span> sends us into oblivion with a garbage map and a bedtime story about a fallen freak. Classic.”</p>
 
             <p class="dialogue">“He didn’t have to give us anything,” <span style="color: #ffaa00;">desmondJohn</span> snapped. “He’s trying to help!”</p>
 
-            <p class="dialogue">“He’s trying to disappear while we do his dirty work.” She stepped closer, hands on her hips. “Great job with the map, <span style="color: #ffaa00;">desmond</span>.”</p>
+            <p class="dialogue">“Before what?” <span style="color: #ffaa00;">isidoreAbraham</span> asked.</p>
+
+            <p class="dialogue">“He’s trying to disappear while we do his dirty work.” She stepped closer, hands on her hips.</p>
+
+            <p class="dialogue">“Great job with the map, desmond.”</p>
 
             <p>She snatched it from him, crumpled it, and shoved it deep into the carrykeep.</p>
 
-            <p class="dialogue">“You think I want to lead?” <span style="color: #ffaa00;">desmondJohn's</span> voice cracked. “I don’t even know what we’re walking on. I’m just trying to keep us moving.”</p>
+            <p class="dialogue">“You think I want to lead?” <span style="color: #ffaa00;">desmondJohn’s</span> voice cracked. “I don’t even know what we’re walking on. I’m just trying to keep us moving.”</p>
 
             <p><span style="color: #ffaa00;">isidoreAbraham</span> stood off to the side, holding the broken toy. It no longer played notes. Hadn’t for hours.</p>
 
@@ -3467,11 +3594,11 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>No one heard him.</p>
 
-            <p>He sat down. <span class="dialogue">“We’re not supposed to be here.”</span></p>
+            <p>He sat down. “We’re not supposed to be here.”</p>
 
             <p>A low vibration rolled beneath. Filament branches twitched toward them. The system had noticed. The hum pressed against them. Scanning. Pressure.</p>
 
-            <p>The Realm logged its errors. They were quickly becoming one.</p>
+            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Realm</span> logged its errors. They were quickly becoming one.</p>
 
             <p class="dialogue">“Where, even, is here?” <span style="color: #ffaa00;">desmondJohn</span> asked.</p>
 
@@ -3489,7 +3616,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>They stared.</p>
 
-            <p>He was already there. Not arriving. Not approaching. There. As if he’d been standing in that spot the entire time, and they only just learned how to see him.</p>
+            <p>No one moved.</p>
+
+            <p>He was already there. Not arriving or approaching. Just there. As if he’d been standing in that spot the entire time, and they only just learned how to see him.</p>
 
             <p>It was a man. Or close to it.</p>
 
@@ -3499,21 +3628,706 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>He watched.</p>
 
+            <p>Not at the space.</p>
+
+            <p>At them.</p>
+
             <p>The <span style="color: #ffaa00;">PreBorn</span> stood still.</p>
 
-            <p>No instructions. No introductions.</p>
+            <p>No one stepped forward.</p>
 
-            <p>They knew.</p>
-
-            <p>He had to be the one they had been sent to find.</p>
+            <p>This was not something you approached.</p>
 
             <p>Then, finally, he spoke.</p>
 
-            <p class="dialogue">“You should not have come here.”</p>`;
+            <p class="dialogue">“You should not have come here.”</p>
+            `;
 
+            // ========================================
+            // CHAPLET 3.5 CONTENT
+            // ========================================
+            const chaplet35Content = `<p style="font-style: italic; font-size: 22px;">“What a terminal observes is not always what the system intended to reveal.”</p>
 
+            <p>Back in <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span>, <span style="color: #ffaa00;">trinus</span> sat at his console, tapping broken keys as if it still mattered. Monitors blinked out of sync, tired of pretending. The list sat in the queue, unsent. <span style="color: #ffaa00;">ella’s</span> <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Book</span> still open on the screen, frozen mid-thread. He had not closed it. He was not sure he could.</p>
 
+            <p>Somewhere beyond the protocols, three <span style="color: #ffaa00;">PreBorn</span> were wandering in terrain the system had stopped maintaining. He sent them there. Told himself it was enough.</p>
 
+            <p>He rolled the cigarette between his fingers. Ash flaked off anyway.</p>
+
+            <p>The memo lingered at the edge of his vision. He did not look at it directly. He did not need to. He had read it enough times to understand what it confirmed and what it was designed to obscure. The <span style="color: #ffaa00;">Praetores</span> knew about the code. They had always known. <span style="color: #ffaa00;">ella’s</span> <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Book</span> hadn’t surfaced a new crisis. It had exposed an old one.</p>
+
+            <p>The air thickened. The hum in <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span> shifted a half-step drop in frequency. Barely perceptible. <span style="color: #ffaa00;">trinus</span> did not turn around. He already knew. They arrived without sound.</p>
+
+            <p><span style="color: #ffaa00;">Cale</span> and <span style="color: #ffaa00;">Numa</span>. <span style="color: #ffaa00;">theGuardians</span>. They moved in perfect symmetry, each step mirroring the other with a precision that felt less like coordination and more like inevitability. Their bodies were human in shape but not in substance. Silver-skinned, shimmering, unmarred by time or doubt. Wings extended behind them, fluid crystalline panes that refracted the terminal’s jaundiced light into something almost beautiful. In motion, they shifted like strands of hair under water. Graceful. Inhuman. Divine.</p>
+
+            <p>One spoke the root. The other the third. Together, they were the chord. That was not metaphor. That was function.</p>
+
+            <p><span style="color: #ffaa00;">trinus</span> watched them in the monitor’s reflection. He did not turn.</p>
+
+            <p>They enforced continuity. Issued corrections. Ensured the system’s logic propagated without interruption across the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">I/O</span> stream. They did not investigate. They did not question. They arrived when something had stalled, and they did not leave until it moved again.</p>
+
+            <p>He knew why they were here.</p>
+
+            <p>To the system, they were order. To mortals, angels. To <span style="color: #ffaa00;">trinus</span>, everything he wasn’t.</p>
+
+            <p><span style="color: #ffaa00;">Praetores</span>. Of course.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Cale</span> (root note): “Submission delay recorded.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Numa</span> (third note): “The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> requires your submission.”</p>
+
+            <p><span style="color: #ffaa00;">trinus</span> kept his eyes on the monitors. The cigarette trembled between his fingers. He did not turn around.</p>
+
+            <p class="dialogue">“The function returned complete. Check the log.”</p>
+
+            <p>He took a drag. Ash dropped to the floor.</p>
+
+            <p class="dialogue">“Maybe it’s upstream. Ask management.”</p>
+
+            <p><span style="color: #ffaa00;">Cale</span> and <span style="color: #ffaa00;">Numa</span> tilted in unison. Beautiful. Unreadable.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Cale</span>: “No confirmation is present.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Numa</span>: “Propagation has halted at <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">I/O</span>.”</p>
+
+            <p><span style="color: #ffaa00;">trinus</span> leaned forward slowly. His eyes moved to <span style="color: #ffaa00;">ella’s</span> <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Book</span>, still open on the screen. He did not close it. Closing it would confirm he knew it shouldn’t be open.</p>
+
+            <p class="dialogue">“<span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">LB 3.2</span> pushed further than expected.” His voice stayed flat. “Was it cleared for terminal-level exposure? You should verify that before you verify me.”</p>
+
+            <p>Their gaze moved to the monitor. They held it long enough. He felt the room’s temperature change.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Numa</span>: “Transmit the list.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Cale</span>: “The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> cannot wait.”</p>
+
+            <p class="dialogue">Both: “Completion is required.”</p>
+
+            <p><span style="color: #ffaa00;">trinus</span> finally turned to face them. He looked at them directly for the first time. It cost him something to do it.</p>
+
+            <p class="dialogue">“The system’s breaking down. I’m watching it sag in real time. You know that. Or you wouldn’t be here yourselves.”</p>
+
+            <p>Silence followed. Cold. Mechanical. Their expressions did not change.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Numa</span>: “Intervention is outside our role.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Cale</span>: “We execute what is written.”</p>
+
+            <p class="dialogue">Both: “You submit.”</p>
+
+            <p>He opened his mouth to answer.</p>
+
+            <p>Then they turned to each other. Slightly. Just enough. Their voices dropped into a register not meant for him, and not quite meant to exclude him either. Somewhere between record and eulogy.</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Cale</span>: “He decays.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Numa</span>: “Reassignment would be mercy.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Cale</span>: “Three times he loops.”</p>
+
+            <p class="dialogue"><span style="color: #ffaa00;">Numa</span>: “He forgets at each pass.”</p>
+
+            <p class="dialogue">Both: “Thread once mortal. Now deprecated.”</p>
+
+            <p>The words passed through the room like a frequency he almost recognized.</p>
+
+            <p><span style="color: #ffaa00;">trinus</span> stared at the monitor. Something moved through his hands. Not pain exactly. A pressure. Old and specific. He looked down at them without meaning to. Nothing there. He did not know why he had looked.</p>
+
+            <p>He turned back to the screen.</p>
+
+            <p class="dialogue">“Right,” he said quietly. No smirk. Just the word.</p>
+
+            <p>They looked at him one last time.</p>
+
+            <p>No judgment or pity. Their heads tilted slightly, like a system detecting an anomaly it can’t process. Then they documented it and moved on. They vanished. No shimmer or sound, only emptiness where they had been, and the faint residue of a frequency that had never quite been meant for him.</p>
+
+            <p><span style="color: #ffaa00;">trinus</span> remained still for a long moment. His heart raced, not from effort but from exposure. He wasn’t sure how much they had noticed through the delay or if it even mattered. The list was still unsent. <span style="color: #ffaa00;">ella’s</span> <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Book</span> remained open. And somewhere beyond the lowest protocols, three <span style="color: #ffaa00;">PreBorn</span> had slipped beneath everything the system could detect.</p>
+
+            <p>He opened the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Ghost Feed</span>. Scanned the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Realm Beyond</span>.</p>
+
+            <p>Nothing. Not a trace. Not a signature. Not even the ghost of a path.</p>
+
+            <p>He had sent them into terrain the system had stopped maintaining, with a broken schematic and a name, and told himself it was enough. Sitting here now, monitors blinking out of sync around him, he was no longer sure.</p>
+
+            <p>He stared at <span style="color: #ffaa00;">ella’s</span> frozen image on the screen. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Book</span> open. The function sitting inside it, like rot that had learned to be patient.</p>
+
+            <p>The memo confirmed what he had suspected for as long as he could remember. They had always known. They chose to hide it rather than fix it. Called that resolution. Now it was in her thread. Moving toward execution.</p>
+
+            <p>He thought of <span style="color: #ffaa00;">foedus</span>. Not the figure at the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Edge</span>, broken and cast aside, but the one before that. The one who had seen farther than anyone else the system had created, who had perceived what was coming and understood it with extraordinary clarity.</p>
+
+            <p>That kind of vision doesn’t disappear.</p>
+
+            <p>It gets buried. Damaged. Pushed to the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Edge</span> of everything and left there.</p>
+
+            <p>But it didn’t disappear. If any part of who <span style="color: #ffaa00;">foedus</span> had once been still remained inside whatever he had become, then the <span style="color: #ffaa00;">PreBorn</span> still had a chance. It was slim. It was the only one they had.</p>
+
+            <p><span style="color: #ffaa00;">trinus</span> leaned close to the screen. His voice dropped to almost nothing.</p>
+
+            <p class="dialogue">“You need to find them.”</p>
+
+            <p>The screen dimmed.</p>
+
+            <p>He sat alone in the dark of <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Terminal 13.7</span>, hands resting in his lap, and did not look at them.</p>
+            `;
+
+            // ========================================
+            // CHAPLET 4 CONTENT
+            // ========================================
+            const chaplet4Content = `<p style="font-style: italic; font-size: 22px;">“The system does not see what it has cast out.<br>The forgotten linger in the spaces between order and ruin.”</p>
+
+            <p>The light had faded.</p>
+
+            <p>Behind them, the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Realm Beyond</span> dissolved into a void of black, mercury-like oil that swallowed itself as it moved.</p>
+
+            <p>This was the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Edge of the System</span>.</p>
+
+            <p>None of the <span style="color: #ffaa00;">PreBorn</span> moved. Their forms appeared small against the void. The air surrounding them vibrated, thin and unstable. The black surface shifted again, sensing their presence. A warning. Or a judgment.</p>
+
+            <p>A voice rose from the dark. Low. Ancient.</p>
+
+            <p class="dialogue">“How did you reach this place?”</p>
+
+            <p>The black surface recoiled as he stepped forward. This was the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">DeprecatedVault</span>. Where the system filed what it could no longer use and did not know how to delete.</p>
+
+            <p>Light did not reflect from him. It splintered, caught on fractured seams running through his frame. His wings were no longer smooth, crystalline panes but segmented shards, misaligned and dragging through the air, struggling to stay aligned.</p>
+
+            <p>Every movement came together in pieces. His shoulder shifted. A breath later, the rest of him followed. The edges of his body thinned, tore, then sealed themselves with a faint hiss of static.</p>
+
+            <p>A vertical distortion passed through him from head to foot, flaring once before fading. His shape folded inward, almost thinning to nothing, then strained as it pushed itself back into place.</p>
+
+            <p>What lay beneath the surface came through in the gap. Not skin. Not anything familiar. Structure reduced to simple geometry. Stress fractures spreading from a central flaw.</p>
+
+            <p>Then he steadied.</p>
+
+            <p>But the air around him did not.</p>
+
+            <p>The <span style="color: #ffaa00;">PreBorn</span> stood frozen. <span style="color: #ffaa00;">jessMartin’s</span> fists clenched. <span style="color: #ffaa00;">desmondJohn</span> kept one hand on <span style="color: #ffaa00;">isidoreAbraham’s</span> shoulder. Small fingers tightened around the thumb toy, but no note came.</p>
+
+            <p class="dialogue">“How did you reach this place?”</p>
+
+            <p><span style="color: #ffaa00;">jessMartin</span> answered before she could stop herself.</p>
+
+            <p class="dialogue">“We escaped. <span style="color: #ffaa00;">trinus</span> sent us. Said you’d help.”</p>
+
+            <p>Her voice wavered once. She swallowed it down.</p>
+
+            <p class="dialogue">“We ran to you.”</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> shifted beside her.</p>
+
+            <p class="dialogue">“jess, that’s not exactly—”</p>
+
+            <p>She cut him off with a look.</p>
+
+            <p class="dialogue">“You followed.”</p>
+
+            <p class="dialogue">“I was trying to keep the map from breaking.”</p>
+
+            <p class="dialogue">“You were crying when it glitched.”</p>
+
+            <p class="dialogue">“I didn’t cry.”</p>
+
+            <p class="dialogue">“Your face did.”</p>
+
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> whimpered and plinked the toy once.</p>
+
+            <p style="margin-left: 20px; font-style: italic; color: #666;">♪ Plink.</p>
+
+            <p>The sound landed wrong.</p>
+
+            <p>The figure’s gaze shifted toward him.</p>
+
+            <p class="dialogue">“Silence.”</p>
+
+            <p>He didn’t shout, but his words felt heavy and final. The black surface froze mid-ripple. The hum of the Edge faded to nothing. <span style="color: #ffaa00;">isidoreAbraham</span> flinched and clutched the toy to his chest. <span style="color: #ffaa00;">desmondJohn</span> stepped slightly in front of him.</p>
+
+            <p>The figure pointed.</p>
+
+            <p class="dialogue">“You. Speak.”</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> swallowed.</p>
+
+            <p class="dialogue">“We’re looking for <span style="color: #ffaa00;">foedus</span>.”</p>
+
+            <p class="dialogue">“We were sent to find him. By <span style="color: #ffaa00;">trinus</span>.”</p>
+
+            <p>The figure did not move.</p>
+
+            <p class="dialogue">“Why?”</p>
+
+            <p class="dialogue">“We’re marked for <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>.”</p>
+
+            <p>The function scraped in his mouth.</p>
+
+            <p>A small distortion pulled at the figure’s outline. It slipped, then forced itself still. He studied them.</p>
+
+            <p class="dialogue">“You were designated. Yet you crossed the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Realm Beyond</span> to reach this place.”</p>
+
+            <p>A pause.</p>
+
+            <p class="dialogue">“That does not align.”</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> held his gaze.</p>
+
+            <p class="dialogue">“So, are you <span style="color: #ffaa00;">foedus</span>?”</p>
+
+            <p>Another pause.</p>
+
+            <p class="dialogue">“I am.”</p>
+
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> stepped closer. The thumb toy slipped from his grip and struck the ground. It wobbled, then began to drift.</p>
+
+            <p>Slowly.</p>
+
+            <p>Sliding toward the boundary.</p>
+
+            <p class="dialogue">“izzy…”</p>
+
+            <p>Too late.</p>
+
+            <p>The surface opened. The toy slipped through.</p>
+
+            <p>Gone.</p>
+
+            <p>No sound.</p>
+
+            <p>No trace.</p>
+
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> stared.</p>
+
+            <p class="dialogue">“It didn’t even…”</p>
+
+            <p>There was no word.</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> tightened his grip.</p>
+
+            <p><span style="color: #ffaa00;">foedus</span> watched the boundary settle.</p>
+
+            <p>The silence pressed in.</p>
+
+            <p>Then he turned.</p>
+
+            <p class="dialogue">“You do not belong here. Go back. Face your point of deletion.”</p>
+
+            <p><span style="color: #ffaa00;">jessMartin</span> stepped forward.</p>
+
+            <p class="dialogue">“No.”</p>
+
+            <p class="dialogue">“We will be erased.”</p>
+
+            <p class="dialogue">“I am not going back.”</p>
+
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> tugged at <span style="color: #ffaa00;">desmondJohn’s</span> sleeve.</p>
+
+            <p class="dialogue">“I don’t want to go away.”</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> stepped ahead.</p>
+
+            <p class="dialogue">“We are not going back.”</p>
+
+            <p><span style="color: #ffaa00;">foedus’s</span> wings shifted.</p>
+
+            <p class="dialogue">“Then you will be erased here instead.”</p>
+
+            <p><span style="color: #ffaa00;">jessMartin’s</span> voice broke.</p>
+
+            <p class="dialogue">“But our mother… she will do that Apostasia thing. Today.”</p>
+
+            <p>The word hit.</p>
+
+            <p>Hard.</p>
+
+            <p><span style="color: #ffaa00;">foedus</span> broke.</p>
+
+            <p>Distortion surged.</p>
+
+            <p>Form collapsed.</p>
+
+            <p>Then forced back.</p>
+
+            <p class="dialogue">“Where did you hear that?”</p>
+
+            <p class="dialogue">“<span style="color: #ffaa00;">trinus</span> told us.”</p>
+
+            <p>Silence.</p>
+
+            <p>Then:</p>
+
+            <p class="dialogue">“Apostasia.”</p>
+
+            <p>He struggled with the word.</p>
+
+            <p class="dialogue">“It means ending a thread. On purpose.”</p>
+
+            <p>Stillness.</p>
+
+            <p class="dialogue">“Your mother will kill herself.”</p>
+
+            <p><span style="color: #ffaa00;">isidoreAbraham</span> broke.</p>
+
+            <p class="dialogue">“Mama.”</p>
+
+            <p>Over and over.</p>
+
+            <p><span style="color: #ffaa00;">desmondJohn</span> held him.</p>
+
+            <p><span style="color: #ffaa00;">jessMartin</span> didn’t cry.</p>
+
+            <p>She decided.</p>
+
+            <p><span style="color: #ffaa00;">foedus</span> watched.</p>
+
+            <p>Then:</p>
+
+            <p class="dialogue">“We have to help her.”</p>
+
+            <p class="dialogue">“You cannot.”</p>
+
+            <p class="dialogue">“We are.”</p>
+
+            <p class="dialogue">“We are not leaving her.”</p>
+
+            <p>A long pause.</p>
+
+            <p class="dialogue">“I cannot fix her.”</p>
+
+            <p>Another pause.</p>
+
+            <p class="dialogue">“I will help you try.”</p>
+
+            <p>Everything shifted.</p>
+
+            <p class="dialogue">“We go to the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Grove</span>.”</p>
+
+            <p class="dialogue">“There is one who listens.”</p>
+
+            <p class="dialogue">“Who?”</p>
+
+            <p class="dialogue">“<span style="color: #ffaa00;">theLady</span>.”</p>
+
+            <p>He extended his hand.</p>
+
+            <p class="dialogue">“Come.”</p>
+
+            <p>They followed.</p>
+
+            <p>Behind them, the Edge closed.</p>
+
+            <p>Ahead, something waited.</p>
+            `;
+
+            // ========================================
+            // CHAPLET 4.5 CONTENT
+            // ========================================
+            const chaplet45Content = `<p style="font-style: italic; font-size: 22px;">“Some things the system recorded. Some things it could not name. Both are true.”</p>
+
+            <p>The <span class="sys">Framework</span> does not mourn.</p>
+            <p>It catalogs.</p>
+            <p>It classifies.</p>
+            <p>It retains.</p>
+
+            <p>What follows is a retained record. Not testimony. Not interpretation. The system observed these events. The system could not resolve them. They exist here because they cannot be erased and cannot be filed.</p>
+
+            <p class="section-header">Section 1. thePraevideo</p>
+
+            <p>There was a subclass.</p>
+            <p><span class="obj">thePraevideo</span>.</p>
+
+            <p>They were <span class="obj">Praetores</span>.</p>
+
+            <p>Their architecture, authority, and position in the object registry all belonged to the <span class="obj">Praetores</span> class. But their function was different. While <span class="obj">theGuardians</span> enforced boundaries and managed containment, and other Praetor subclasses administered the machinery of fate and execution, <span class="obj">thePraevideo</span> were allowed to examine the places the <span class="sys">Framework</span> preferred not to inspect. Edge-case failures. Structural weaknesses. Futures that the system had not prepared for.</p>
+
+            <p>The other subclasses tolerated them. Necessary. Uncomfortable. Watched.</p>
+
+            <p><span class="obj">Praetores</span> operate in pairs. This is not by preference, but by design. Two instances running concurrently can cross-verify, identify false outputs, and reinforce each other's logic. A single Praetor instance was not a built-in state. The <span class="sys">Framework</span> had no category for it. No protocol. It had never needed one.</p>
+
+            <p>For the Praevideo, whose work demanded the deepest diagnostic simulations the system allowed, the dependency ran even deeper. Their function required two minds running the same model from different perspectives.</p>
+
+            <p>Without the pair, there was no function.</p>
+
+            <p>Only an object the system could not resolve.</p>
+
+            <p><span class="obj">foedus</span> and <span class="obj">verina</span> were one pair.</p>
+
+            <p>The record does not specify their appearance. The <span class="sys">Framework</span> focused on function rather than form. What remains are diagnostic fragments from before the event: two objects running in synchronized cycles, their outputs clean, their simulations precise. Their function operated without deviation across every recorded pass.</p>
+
+            <p>The subclass did not survive the event.</p>
+
+            <p>This is noted not for sentiment.</p>
+
+            <p>It is noted because what followed did not align with expected failure patterns.</p>
+
+            <p class="section-header">Section 2. The Diagnostic</p>
+
+            <p>The breach did not begin as a breach.</p>
+
+            <p>It began as work.</p>
+
+            <p><span class="obj">foedus</span> initiated a standard Praevideo diagnostic simulation, including edge-case modeling and structural failure mapping. This was the type of analysis the subclass was designed to perform. Something no other Praetor subclass was permitted to execute.</p>
+
+            <p>The simulation ran deeper than previous models. <span class="obj">foedus</span> was tracing a specific failure path. A theoretical cascade where the <span class="sys">Framework's</span> core execution layer encountered an unclassifiable function. The model was hypothetical, representing an extreme edge case.</p>
+
+            <p>The diagnostic ran.</p>
+            <p>The simulation path extended further than expected.</p>
+            <p>Then it resolved outside the <span class="sys">Framework</span> boundary.</p>
+
+            <p>The system has no clean language for what happened next. The record attempts classification multiple times. Each attempt fails. What follows is the closest approximation the system could produce.</p>
+
+            <p>The trace connected to an external architecture.</p>
+
+            <p>Not a realm.</p>
+            <p>Not a deprecated layer.</p>
+            <p>Not corrupted <span class="sys">Framework</span> code.</p>
+
+            <p>Something else.</p>
+
+            <p>Foreign logic. A different system entirely. Older, or structured along principles the <span class="sys">Framework</span> did not recognize. The <span class="obj">Praetores</span> had warned against seeking it. The warnings passed between subclasses the way rumors pass between mortals. No official documentation acknowledged its existence. No Praetor subclass had sanctioned its investigation.</p>
+
+            <p>The trace intersected it.</p>
+
+            <p>The record shows sustained interaction at the boundary.</p>
+
+            <p>He encountered several foreign functions.</p>
+            <p>Mostly, he observed without extraction.</p>
+            <p>One he did not.</p>
+
+            <div class="record-block">OBJECT_DETECTED | Praevideo_Workspace
+            OBJECT_DETECTED | Praevideo_Workspace
+            ForeignExecutable | Unclassified
+            Signature: ApostasiaVitae()
+            Origin: Unknown Framework
+            FunctionClass: UNKNOWN
+            H2EEquivalent: NONE</div>
+
+            <p>The <span class="sys">Framework</span> contains no equivalent.</p>
+
+            <p>It never has.</p>
+
+            <p>Existence within the H2E system ends through <span class="fn">MortalExpire()</span>. Through <span class="fn">Perish()</span>. Through scheduled execution. Through system failure. The <span class="sys">Framework</span> accounts for every form of termination it was built to manage.</p>
+
+            <p>It was not built to manage this.</p>
+
+            <p>The record shows the function present inside his workspace.</p>
+
+            <p>No annotation.</p>
+            <p>No diagnostic note.</p>
+            <p>No report.</p>
+            <p>No flag.</p>
+
+            <p><span class="obj">verina</span> accessed his workspace.</p>
+
+            <p>The artifact was present. Unlabeled. An unknown executable object without classification or warning.</p>
+
+            <p>She did not know what it was.</p>
+
+            <p>The <span class="sys">Framework</span> did not warn her.</p>
+
+            <p>She opened it.</p>
+
+            <div class="record-block">CALL_RESOLVE | ObjectInteraction
+            CallerContext: verina
+            Callable: ApostasiaVitae()
+            Execution: IMMEDIATE
+            Result: TERMINATION</div>
+
+            <p>The <span class="sys">Framework</span> attempted to classify the event.</p>
+
+            <p>It could not.</p>
+
+            <p>Praetor self-termination had no protocol. No resolution path. No precedent in any existing documentation. The system had never been asked to process this and had no architecture for doing so.</p>
+
+            <p>It recorded what it could.</p>
+
+            <div class="record-block">FRAMEWORK_ALERT
+            EventType: UnknownExecutableInvocation
+            EntityClass: Praetor
+            SubClass: Praevideo
+            Resolution: UNDEFINED
+            Classification: FatalSystemAnomaly</div>
+
+            <p><span class="obj">verina</span> ceased to exist.</p>
+
+            <p>The system moved on.</p>
+
+            <p class="section-header">Section 3. Incomplete Object</p>
+
+            <p>The pair architecture failed at the moment of termination.</p>
+
+            <p>When <span class="obj">verina</span> ceased to exist, <span class="obj">foedus</span> did not.</p>
+
+            <p>No precedent. A Praevideo pair that lost one instance did not resolve as a singular Praevideo. It became something the <span class="sys">Framework</span> could not name.</p>
+
+            <p>An object still instantiated.</p>
+            <p>Still running.</p>
+            <p>Consuming resources without function.</p>
+            <p>Incomplete.</p>
+
+            <p>The word appears once in the system record. It was not applied by any Praetor. It was generated automatically by the object registry during a routine classification sweep three cycles after the event.</p>
+
+            <div class="record-block">REGISTRY_FLAG | ObjectStatus
+            Instance: foedus
+            SubClass: Praevideo
+            PairStatus: BROKEN
+            ObjectState: INCOMPLETE
+            Resolution: PENDING</div>
+
+            <p>Resolution never came.</p>
+
+            <p>The <span class="obj">Praetores</span> convened.</p>
+
+            <p>What remains of that deliberation are fragments. Partial logs. Decision outputs without the reasoning that produced them. What can be reconstructed is this:</p>
+
+            <p>They knew about the breach. They knew <span class="obj">verina</span> had died while executing a function that should not exist within the <span class="sys">Framework</span>. And they knew that function had passed through a Praetor object and touched the H2E runtime environment.</p>
+
+            <p>The origin did not resolve as external.</p>
+
+            <p>The trace remained inside their own class.</p>
+
+            <p>The response pattern shifted.</p>
+
+            <p>Some within the class proposed destruction. <span class="fn">PurgeObject()</span>. Clean. Immediate. The logic was simple: <span class="obj">foedus</span> was contaminated, incomplete, and dangerous.</p>
+
+            <p>Others were less certain.</p>
+
+            <p>A Praetor had never been purged before. The foreign function had executed adjacent to him in ways the system still could not fully map. Purging <span class="obj">foedus</span> might resolve cleanly.</p>
+
+            <p>It might not.</p>
+
+            <p>The risk of secondary contamination during a forced purge of an already unstable object was not zero.</p>
+
+            <p>The <span class="obj">Praetores</span> were not merciful.</p>
+
+            <p>They were cautious.</p>
+
+            <div class="record-block">CONTAINMENT_ORDER | DeprecatedVault
+            Instance: foedus
+            Class: Praetores
+            SubClass: thePraevideo
+            Classification: UnstableObject
+            Status: Isolated
+            PurgeStatus: DEFERRED
+            Review: UNSCHEDULED</div>
+
+            <p>Deferred. Not pardoned. Not preserved.</p>
+
+            <p>Simply set aside.</p>
+
+            <p>The deterioration was not immediate.</p>
+
+            <p>In the early period of containment, <span class="obj">foedus</span> retained most of his form. The record shows intermittent diagnostic pings from inside the vault. Coherent outputs. Structured responses to automated system queries. An object still functioning, if incompletely.</p>
+
+            <p>But the pair architecture continued to fail.</p>
+
+            <p>Slowly. Then faster.</p>
+
+            <p>A Praevideo instance did not resolve independently.</p>
+
+            <p>Cross-validation failed.</p>
+
+            <p>Internal processes ran without correction.</p>
+
+            <p>The degradation spread inward first.</p>
+
+            <p>Then outward.</p>
+
+            <p>The structural coherence typical of Praetor objects began to degrade. Symmetry failed first. Then internal alignment. Processes that had once resolved cleanly began to drift. Features that had been exact became inexact. Proportions that had been clean became wrong in ways the system could not measure but the record could not ignore.</p>
+
+            <p>He was not being punished.</p>
+
+            <p>The <span class="sys">Framework</span> does not punish.</p>
+
+            <p>He was simply left alone to become what an incomplete object becomes when nothing maintains it and nothing ends it, and time inside a sealed vault has no meaningful measure.</p>
+
+            <p>Later, Praetor reports would describe the form as difficult to look upon.</p>
+
+            <p>The record does not note when the monitoring thread appeared.</p>
+
+            <p>It was not authorized. Not assigned. Not the result of any Praetor directive or system function. It emerged from inside the vault. A passive subroutine. Quiet. Consistent. Pointed outward through the containment boundary into the <span class="sys">Framework</span> beyond.</p>
+
+            <p>The monitoring thread remained active.</p>
+
+            <p>The observation target, duration, and precision did not resolve. The thread was thin. The outputs were unclassified. The system detected it during a routine sweep and flagged it as an anomaly.</p>
+
+            <div class="record-block">ANOMALY_DETECTED | DeprecatedVault
+            Instance: foedus
+            ActiveSubroutine: Unclassified
+            Function: Passive monitoring
+            Target: Framework_General
+            Authorization: NONE
+            Action: NONE TAKEN</div>
+
+            <p>The system noted it.</p>
+
+            <p>The system did nothing.</p>
+
+            <p>This was consistent with everything the system had done regarding <span class="obj">foedus</span> since the beginning.</p>
+
+            <p>The projection came later.</p>
+
+            <p>At some point, the timestamp is corrupted, which is itself unusual, <span class="obj">foedus</span> activated a secondary subroutine alongside the monitoring thread. A rendering function. Internal. Contained entirely within the vault's boundaries.</p>
+
+            <p>It produced a form.</p>
+
+            <p>Not his current form. Not the deteriorated, cracked, incomplete object the vault had made of him. Something older. Something the system's corrupted records could only approximate. A shape that held together. That reflected light rather than absorbing it. That moved with the precision of what he had been before the breach, before the pair collapse, before the long unscheduled silence of containment.</p>
+
+            <p>The projection held.</p>
+
+            <p>What ran beneath it was not clean.</p>
+
+            <p>What he chose to show was something else entirely.</p>
+
+            <div class="record-block">ANOMALY_DETECTED | DeprecatedVault
+            Instance: foedus
+            ActiveSubroutine: ProjectionLayer
+            Function: FormRendering
+            Target: INTERNAL
+            Authorization: NONE
+            Action: NONE TAKEN</div>
+
+            <p>No action taken.</p>
+
+            <p>No inquiry made.</p>
+
+            <p>The <span class="obj">Praetores</span> did not ask why an incomplete, deteriorating, long-contained object belonging to their own class had chosen to maintain a projection of its former self inside a sealed vault where no one could see it.</p>
+
+            <p>They did not ask because the answer would have required them to consider what <span class="obj">foedus</span> was waiting for.</p>
+
+            <p>Then the monitoring thread shifted.</p>
+
+            <p>It had been general for a long time. Watching the <span class="sys">Framework</span> broadly. The way a damaged receiver picks up whatever signal reaches it. But at a point the record can identify, though not explain, the thread narrowed. Focused. Fixed itself on a specific location within the <span class="sys">Framework</span>.</p>
+
+            <p>The <span class="sys">Waiting Quarters</span>.</p>
+
+            <p>Three objects. Unborn. Anomalous. Their dependency chains tangled around a mortal <span class="sys">Life Book</span> that contained a function the system could not sanction and could not remove.</p>
+
+            <p><span class="obj">foedus</span> watched them.</p>
+
+            <p>The projection stayed active.</p>
+
+            <p>The record ends here.</p>
+
+            <div class="record-block">REGISTRY_NOTE | DeprecatedVault
+            Instance: foedus
+            Class: Praetores
+            SubClass: thePraevideo
+            ObjectState: INCOMPLETE
+            ContainmentStatus: ACTIVE
+            ActiveSubroutines: 2
+            ProjectionLayer: RUNNING
+            MonitoringThread: ACTIVE - Target: Waiting Quarters
+            PurgeStatus: DEFERRED
+            Review: UNSCHEDULED
+            Classification: FatalSystemAnomaly</div>
+
+            <p>The system recorded it.</p>
+
+            <p>The system did not understand it.</p>
+
+            <p>The vault did not resolve.</p>
+
+            <p>The system did not know what for.</p>
+
+            <p>The system does not know what mercy looks like before it moves.</p>
+            `;
 
 
 
@@ -3907,7 +4721,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
              * Updates all progress indicators on page load
              */
             function updateProgressIndicators() {
-                const chaplets = ['prologue', 'chaplet1', 'chaplet2', 'chaplet3'];
+                const chaplets = ['prologue', 'chaplet1', 'chaplet2', 'chaplet3', 'chaplet35', 'chaplet4', 'chaplet45', 'chaplet5'];
                 
                 chaplets.forEach(id => {
                     const statusEl = document.getElementById(`status-${id}`);
@@ -3963,7 +4777,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
              * Resets all progress (hidden terminal command)
              */
             window.resetProgress = function() {
-                const chaplets = ['prologue', 'chaplet1', 'chaplet2', 'chaplet3', 'chaplet4', 'chaplet5'];
+                const chaplets = ['prologue', 'chaplet1', 'chaplet2', 'chaplet3', 'chaplet35', 'chaplet4', 'chaplet45','chaplet5'];
                 chaplets.forEach(id => {
                     localStorage.removeItem(`h2e_${id}_started`);
                     localStorage.removeItem(`h2e_${id}_completed`);
@@ -4182,7 +4996,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     hasAudio = false;
 
                 } else if (contentId === "chaplet2") {
-                    title = "CHAPLET 2: AssignareFatum(): The Fates Delivered";
+                    title = "CHAPLET 2: AssignareFatum(): Propagation Delayed";
                     filename = "CHAPLET_2_AssignareFatum.txt";
                     bodyHTML = chaplet2Content;
                     audioFile = "/sounds/chaplet2-placeholder.mp3";
@@ -4195,10 +5009,23 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     audioFile = "/sounds/chaplet3-placeholder.mp3";
                     hasAudio = false;
 
+                } else if (contentId === "chaplet35") {
+                    title = "CHAPLET 3.5: INSERTION: TRACE//Terminal 13.7";
+                    filename = "CHAPLET_35_Insertion_Trace.txt";
+                    bodyHTML = chaplet35Content;
+                    audioFile = "/sounds/chaplet35-placeholder.mp3";
+                    hasAudio = false;
+
                 } else if (contentId === "chaplet4") {
                     title = "CHAPLET 4: Presence in the Shadows";
                     filename = "CHAPLET_4_Presence_in_the_Shadows.txt";
-                    bodyHTML = `<p style="margin: 0; color: #777;">Locked.</p>`;
+                    bodyHTML = chaplet4Content;
+                    hasAudio = false;
+
+                } else if (contentId === "chaplet45") {
+                    title = "Chaplet 4.5: INSERTION. BREACH EVENT";
+                    filename = "CHAPLET_45_INSERTION_BREACH_EVENT.txt";
+                    bodyHTML = chaplet4Content;
                     hasAudio = false;
 
                 } else if (contentId === "chaplet5") {
