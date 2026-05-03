@@ -1288,13 +1288,21 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             }
 
             .chaplet-text .section-header {
-            font-family: "Share Tech Mono", monospace !important;
+            font-family: "Share Tech Mono", "Courier New", monospace !important;
             color: #00d4ff !important;
-            font-size: 16px;
-            margin-top: 42px;
-            margin-bottom: 18px;
-            letter-spacing: 1px;
-             }
+            font-size: 15px !important;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+
+            margin: 56px 0 28px 0;
+            padding: 10px 0 10px 16px;
+
+            border-left: 3px solid #00d4ff;
+            border-top: 1px solid rgba(0, 212, 255, 0.25);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+
+            background: rgba(0, 212, 255, 0.04);
+            }
 
             .continue-section {
                 margin-top: 60px;
@@ -4018,131 +4026,143 @@ const siteTitle = "H2E Framework - Terminal 13.7";
             // ========================================
             // CHAPLET 4.5 CONTENT
             // ========================================
-         const chaplet45Content = `<p style="font-style: italic; font-size: 22px;">“Some things the system recorded. Some things it could not name. Both are true.”</p>
+            const chaplet45Content = `<p style="font-style: italic; font-size: 22px;">“Some things the system recorded. Some things it could not name. Both are true.”</p>
 
-            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> does not mourn.</p>
+            <p>The <span class="sys">Framework</span> does not mourn.</p>
             <p>It catalogs.</p>
             <p>It classifies.</p>
             <p>It retains.</p>
 
             <p>What follows is a retained record. Not testimony. Not interpretation. The system observed these events. The system could not resolve them. They exist here because they cannot be erased and cannot be filed.</p>
 
-            <p style="font-family: 'Share Tech Mono', monospace; color: #00d4ff; font-size: 18px; margin-top: 45px; margin-bottom: 20px;">Section 1. thePraevideo</p>
+            <p class="section-header">Section 1. thePraevideo</p>
 
             <p>There was a subclass.</p>
-            <p><span style="color: #ffaa00;">thePraevideo</span>.</p>
-            <p>They were <span style="color: #ffaa00;">Praetores</span>.</p>
+            <p><span class="obj">thePraevideo</span>.</p>
 
-            <p>Their architecture, authority, and position in the object registry all belonged to the <span style="color: #ffaa00;">Praetores</span> class. But their function was different. While <span style="color: #ffaa00;">theGuardians</span> enforced boundaries and managed containment, and other Praetor subclasses administered the machinery of fate and execution, <span style="color: #ffaa00;">thePraevideo</span> were allowed to examine the places the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> preferred not to inspect. Edge-case failures. Structural weaknesses. Futures that the system had not prepared for.</p>
+            <p>They were <span class="obj">Praetores</span>.</p>
+
+            <p>Their architecture, authority, and position in the object registry all belonged to the <span class="obj">Praetores</span> class. But their function was different. While <span class="obj">theGuardians</span> enforced boundaries and managed containment, and other Praetor subclasses administered the machinery of fate and execution, <span class="obj">thePraevideo</span> were allowed to examine the places the <span class="sys">Framework</span> preferred not to inspect. Edge-case failures. Structural weaknesses. Futures that the system had not prepared for.</p>
 
             <p>The other subclasses tolerated them. Necessary. Uncomfortable. Watched.</p>
 
-            <p><span style="color: #ffaa00;">Praetores</span> operate in pairs. This is not by preference, but by design. Two instances running concurrently can cross-verify, identify false outputs, and reinforce each other's logic. A single Praetor instance was not a built-in state. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> had no category for it. No protocol. It had never needed one.</p>
+            <p><span class="obj">Praetores</span> operate in pairs. This is not by preference, but by design. Two instances running concurrently can cross-verify, identify false outputs, and reinforce each other's logic. A single Praetor instance was not a built-in state. The <span class="sys">Framework</span> had no category for it. No protocol. It had never needed one.</p>
 
             <p>For the Praevideo, whose work demanded the deepest diagnostic simulations the system allowed, the dependency ran even deeper. Their function required two minds running the same model from different perspectives.</p>
 
             <p>Without the pair, there was no function.</p>
+
             <p>Only an object the system could not resolve.</p>
 
-            <p><span style="color: #ffaa00;">foedus</span> and <span style="color: #ffaa00;">verina</span> were one pair.</p>
+            <p><span class="obj">foedus</span> and <span class="obj">verina</span> were one pair.</p>
 
-            <p>The record does not specify their appearance. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> focused on function rather than form. What remains are diagnostic fragments from before the event—two objects running in synchronized cycles, their outputs clean, their simulations precise. Their function operated without deviation across every recorded pass.</p>
+            <p>The record does not specify their appearance. The <span class="sys">Framework</span> focused on function rather than form. What remains are diagnostic fragments from before the event: two objects running in synchronized cycles, their outputs clean, their simulations precise. Their function operated without deviation across every recorded pass.</p>
 
             <p>The subclass did not survive the event.</p>
+
             <p>This is noted not for sentiment.</p>
+
             <p>It is noted because what followed did not align with expected failure patterns.</p>
 
-            <p style="font-family: 'Share Tech Mono', monospace; color: #00d4ff; font-size: 18px; margin-top: 45px; margin-bottom: 20px;">Section 2. The Diagnostic</p>
+            <p class="section-header">Section 2. The Diagnostic</p>
 
             <p>The breach did not begin as a breach.</p>
+
             <p>It began as work.</p>
 
-            <p><span style="color: #ffaa00;">foedus</span> initiated a standard Praevideo diagnostic simulation, including edge-case modeling and structural failure mapping. This was the type of analysis the subclass was designed to perform. Something no other Praetor subclass was permitted to execute.</p>
+            <p><span class="obj">foedus</span> initiated a standard Praevideo diagnostic simulation, including edge-case modeling and structural failure mapping. This was the type of analysis the subclass was designed to perform. Something no other Praetor subclass was permitted to execute.</p>
 
-            <p>The simulation ran deeper than previous models. <span style="color: #ffaa00;">foedus</span> was tracing a specific failure path. A theoretical cascade where the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework's</span> core execution layer encountered an unclassifiable function. The model was hypothetical, representing an extreme edge case.</p>
+            <p>The simulation ran deeper than previous models. <span class="obj">foedus</span> was tracing a specific failure path. A theoretical cascade where the <span class="sys">Framework's</span> core execution layer encountered an unclassifiable function. The model was hypothetical, representing an extreme edge case.</p>
 
             <p>The diagnostic ran.</p>
             <p>The simulation path extended further than expected.</p>
-            <p>Then it resolved outside the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> boundary.</p>
+            <p>Then it resolved outside the <span class="sys">Framework</span> boundary.</p>
 
             <p>The system has no clean language for what happened next. The record attempts classification multiple times. Each attempt fails. What follows is the closest approximation the system could produce.</p>
 
             <p>The trace connected to an external architecture.</p>
+
             <p>Not a realm.</p>
             <p>Not a deprecated layer.</p>
-            <p>Not corrupted <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> code.</p>
+            <p>Not corrupted <span class="sys">Framework</span> code.</p>
+
             <p>Something else.</p>
 
-            <p>Foreign logic. A different system entirely. Older, or structured along principles the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> did not recognize. The <span style="color: #ffaa00;">Praetores</span> had warned against seeking it. The warnings passed between subclasses the way rumors pass between mortals. No official documentation acknowledged its existence. No Praetor subclass had sanctioned its investigation.</p>
+            <p>Foreign logic. A different system entirely. Older, or structured along principles the <span class="sys">Framework</span> did not recognize. The <span class="obj">Praetores</span> had warned against seeking it. The warnings passed between subclasses the way rumors pass between mortals. No official documentation acknowledged its existence. No Praetor subclass had sanctioned its investigation.</p>
 
             <p>The trace intersected it.</p>
+
             <p>The record shows sustained interaction at the boundary.</p>
+
             <p>He encountered several foreign functions.</p>
             <p>Mostly, he observed without extraction.</p>
             <p>One he did not.</p>
 
-            <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
-            OBJECT_DETECTED | Praevideo_Workspace<br>
-            OBJECT_DETECTED | Praevideo_Workspace<br>
-            ForeignExecutable | Unclassified<br>
-            Signature: ApostasiaVitae()<br>
-            Origin: Unknown Framework<br>
-            FunctionClass: UNKNOWN<br>
-            H2EEquivalent: NONE
-            </div>
+            <div class="record-block">OBJECT_DETECTED | Praevideo_Workspace
+            OBJECT_DETECTED | Praevideo_Workspace
+            ForeignExecutable | Unclassified
+            Signature: ApostasiaVitae()
+            Origin: Unknown Framework
+            FunctionClass: UNKNOWN
+            H2EEquivalent: NONE</div>
 
-            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> contains no equivalent.</p>
+            <p>The <span class="sys">Framework</span> contains no equivalent.</p>
+
             <p>It never has.</p>
 
-            <p>Existence within the H2E system ends through <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">MortalExpire()</span>. Through <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">Perish()</span>. Through scheduled execution. Through system failure. The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> accounts for every form of termination it was built to manage.</p>
+            <p>Existence within the H2E system ends through <span class="fn">MortalExpire()</span>. Through <span class="fn">Perish()</span>. Through scheduled execution. Through system failure. The <span class="sys">Framework</span> accounts for every form of termination it was built to manage.</p>
 
             <p>It was not built to manage this.</p>
 
             <p>The record shows the function present inside his workspace.</p>
+
             <p>No annotation.</p>
             <p>No diagnostic note.</p>
             <p>No report.</p>
             <p>No flag.</p>
 
-            <p><span style="color: #ffaa00;">verina</span> accessed his workspace.</p>
+            <p><span class="obj">verina</span> accessed his workspace.</p>
+
             <p>The artifact was present. Unlabeled. An unknown executable object without classification or warning.</p>
+
             <p>She did not know what it was.</p>
-            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> did not warn her.</p>
+
+            <p>The <span class="sys">Framework</span> did not warn her.</p>
+
             <p>She opened it.</p>
 
-            <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
-            CALL_RESOLVE | ObjectInteraction<br>
-            CallerContext: verina<br>
-            Callable: ApostasiaVitae()<br>
-            Execution: IMMEDIATE<br>
-            Result: TERMINATION
-            </div>
+            <div class="record-block">CALL_RESOLVE | ObjectInteraction
+            CallerContext: verina
+            Callable: ApostasiaVitae()
+            Execution: IMMEDIATE
+            Result: TERMINATION</div>
 
-            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> attempted to classify the event.</p>
+            <p>The <span class="sys">Framework</span> attempted to classify the event.</p>
+
             <p>It could not.</p>
 
             <p>Praetor self-termination had no protocol. No resolution path. No precedent in any existing documentation. The system had never been asked to process this and had no architecture for doing so.</p>
 
             <p>It recorded what it could.</p>
 
-            <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
-            FRAMEWORK_ALERT<br>
-            EventType: UnknownExecutableInvocation<br>
-            EntityClass: Praetor<br>
-            SubClass: Praevideo<br>
-            Resolution: UNDEFINED<br>
-            Classification: FatalSystemAnomaly
-            </div>
+            <div class="record-block">FRAMEWORK_ALERT
+            EventType: UnknownExecutableInvocation
+            EntityClass: Praetor
+            SubClass: Praevideo
+            Resolution: UNDEFINED
+            Classification: FatalSystemAnomaly</div>
 
-            <p><span style="color: #ffaa00;">verina</span> ceased to exist.</p>
+            <p><span class="obj">verina</span> ceased to exist.</p>
+
             <p>The system moved on.</p>
 
-            <p style="font-family: 'Share Tech Mono', monospace; color: #00d4ff; font-size: 18px; margin-top: 45px; margin-bottom: 20px;">Section 3. Incomplete Object</p>
+            <p class="section-header">Section 3. Incomplete Object</p>
 
             <p>The pair architecture failed at the moment of termination.</p>
-            <p>When <span style="color: #ffaa00;">verina</span> ceased to exist, <span style="color: #ffaa00;">foedus</span> did not.</p>
 
-            <p>No precedent. A Praevideo pair that lost one instance did not resolve as a singular Praevideo. It became something the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> could not name.</p>
+            <p>When <span class="obj">verina</span> ceased to exist, <span class="obj">foedus</span> did not.</p>
+
+            <p>No precedent. A Praevideo pair that lost one instance did not resolve as a singular Praevideo. It became something the <span class="sys">Framework</span> could not name.</p>
 
             <p>An object still instantiated.</p>
             <p>Still running.</p>
@@ -4151,66 +4171,77 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>The word appears once in the system record. It was not applied by any Praetor. It was generated automatically by the object registry during a routine classification sweep three cycles after the event.</p>
 
-            <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
-            REGISTRY_FLAG | ObjectStatus<br>
-            Instance: foedus<br>
-            SubClass: Praevideo<br>
-            PairStatus: BROKEN<br>
-            ObjectState: INCOMPLETE<br>
-            Resolution: PENDING
-            </div>
+            <div class="record-block">REGISTRY_FLAG | ObjectStatus
+            Instance: foedus
+            SubClass: Praevideo
+            PairStatus: BROKEN
+            ObjectState: INCOMPLETE
+            Resolution: PENDING</div>
 
             <p>Resolution never came.</p>
-            <p>The <span style="color: #ffaa00;">Praetores</span> convened.</p>
+
+            <p>The <span class="obj">Praetores</span> convened.</p>
 
             <p>What remains of that deliberation are fragments. Partial logs. Decision outputs without the reasoning that produced them. What can be reconstructed is this:</p>
 
-            <p>They knew about the breach. They knew <span style="color: #ffaa00;">verina</span> had died while executing a function that should not exist within the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span>. And they knew that function had passed through a Praetor object and touched the H2E runtime environment.</p>
+            <p>They knew about the breach. They knew <span class="obj">verina</span> had died while executing a function that should not exist within the <span class="sys">Framework</span>. And they knew that function had passed through a Praetor object and touched the H2E runtime environment.</p>
 
             <p>The origin did not resolve as external.</p>
+
             <p>The trace remained inside their own class.</p>
+
             <p>The response pattern shifted.</p>
 
-            <p>Some within the class proposed destruction. <span style="color: #00ff41; font-family: 'Share Tech Mono', monospace;">PurgeObject()</span>. Clean. Immediate. The logic was simple — <span style="color: #ffaa00;">foedus</span> was contaminated, incomplete, and dangerous.</p>
+            <p>Some within the class proposed destruction. <span class="fn">PurgeObject()</span>. Clean. Immediate. The logic was simple: <span class="obj">foedus</span> was contaminated, incomplete, and dangerous.</p>
 
             <p>Others were less certain.</p>
-            <p>A Praetor had never been purged before. The foreign function had executed adjacent to him in ways the system still could not fully map. Purging <span style="color: #ffaa00;">foedus</span> might resolve cleanly.</p>
+
+            <p>A Praetor had never been purged before. The foreign function had executed adjacent to him in ways the system still could not fully map. Purging <span class="obj">foedus</span> might resolve cleanly.</p>
+
             <p>It might not.</p>
+
             <p>The risk of secondary contamination during a forced purge of an already unstable object was not zero.</p>
 
-            <p>The <span style="color: #ffaa00;">Praetores</span> were not merciful.</p>
+            <p>The <span class="obj">Praetores</span> were not merciful.</p>
+
             <p>They were cautious.</p>
 
-            <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
-            CONTAINMENT_ORDER | DeprecatedVault<br>
-            Instance: foedus<br>
-            Class: Praetores<br>
-            SubClass: thePraevideo<br>
-            Classification: UnstableObject<br>
-            Status: Isolated<br>
-            PurgeStatus: DEFERRED<br>
-            Review: UNSCHEDULED
-            </div>
+            <div class="record-block">CONTAINMENT_ORDER | DeprecatedVault
+            Instance: foedus
+            Class: Praetores
+            SubClass: thePraevideo
+            Classification: UnstableObject
+            Status: Isolated
+            PurgeStatus: DEFERRED
+            Review: UNSCHEDULED</div>
 
             <p>Deferred. Not pardoned. Not preserved.</p>
+
             <p>Simply set aside.</p>
 
             <p>The deterioration was not immediate.</p>
 
-            <p>In the early period of containment, <span style="color: #ffaa00;">foedus</span> retained most of his form. The record shows intermittent diagnostic pings from inside the vault. Coherent outputs. Structured responses to automated system queries. An object still functioning, if incompletely.</p>
+            <p>In the early period of containment, <span class="obj">foedus</span> retained most of his form. The record shows intermittent diagnostic pings from inside the vault. Coherent outputs. Structured responses to automated system queries. An object still functioning, if incompletely.</p>
 
             <p>But the pair architecture continued to fail.</p>
+
             <p>Slowly. Then faster.</p>
+
             <p>A Praevideo instance did not resolve independently.</p>
+
             <p>Cross-validation failed.</p>
+
             <p>Internal processes ran without correction.</p>
+
             <p>The degradation spread inward first.</p>
+
             <p>Then outward.</p>
 
             <p>The structural coherence typical of Praetor objects began to degrade. Symmetry failed first. Then internal alignment. Processes that had once resolved cleanly began to drift. Features that had been exact became inexact. Proportions that had been clean became wrong in ways the system could not measure but the record could not ignore.</p>
 
             <p>He was not being punished.</p>
-            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> does not punish.</p>
+
+            <p>The <span class="sys">Framework</span> does not punish.</p>
 
             <p>He was simply left alone to become what an incomplete object becomes when nothing maintains it and nothing ends it, and time inside a sealed vault has no meaningful measure.</p>
 
@@ -4218,86 +4249,91 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <p>The record does not note when the monitoring thread appeared.</p>
 
-            <p>It was not authorized. Not assigned. Not the result of any Praetor directive or system function. It emerged from inside the vault. A passive subroutine. Quiet. Consistent. Pointed outward through the containment boundary into the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> beyond.</p>
+            <p>It was not authorized. Not assigned. Not the result of any Praetor directive or system function. It emerged from inside the vault. A passive subroutine. Quiet. Consistent. Pointed outward through the containment boundary into the <span class="sys">Framework</span> beyond.</p>
 
             <p>The monitoring thread remained active.</p>
 
             <p>The observation target, duration, and precision did not resolve. The thread was thin. The outputs were unclassified. The system detected it during a routine sweep and flagged it as an anomaly.</p>
 
-            <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
-            ANOMALY_DETECTED | DeprecatedVault<br>
-            Instance: foedus<br>
-            ActiveSubroutine: Unclassified<br>
-            Function: Passive monitoring<br>
-            Target: Framework_General<br>
-            Authorization: NONE<br>
-            Action: NONE TAKEN
-            </div>
+            <div class="record-block">ANOMALY_DETECTED | DeprecatedVault
+            Instance: foedus
+            ActiveSubroutine: Unclassified
+            Function: Passive monitoring
+            Target: Framework_General
+            Authorization: NONE
+            Action: NONE TAKEN</div>
 
             <p>The system noted it.</p>
+
             <p>The system did nothing.</p>
-            <p>This was consistent with everything the system had done regarding <span style="color: #ffaa00;">foedus</span> since the beginning.</p>
+
+            <p>This was consistent with everything the system had done regarding <span class="obj">foedus</span> since the beginning.</p>
 
             <p>The projection came later.</p>
 
-            <p>At some point — the timestamp is corrupted, which is itself unusual — <span style="color: #ffaa00;">foedus</span> activated a secondary subroutine alongside the monitoring thread. A rendering function. Internal. Contained entirely within the vault's boundaries.</p>
+            <p>At some point, the timestamp is corrupted, which is itself unusual, <span class="obj">foedus</span> activated a secondary subroutine alongside the monitoring thread. A rendering function. Internal. Contained entirely within the vault's boundaries.</p>
 
             <p>It produced a form.</p>
 
             <p>Not his current form. Not the deteriorated, cracked, incomplete object the vault had made of him. Something older. Something the system's corrupted records could only approximate. A shape that held together. That reflected light rather than absorbing it. That moved with the precision of what he had been before the breach, before the pair collapse, before the long unscheduled silence of containment.</p>
 
             <p>The projection held.</p>
+
             <p>What ran beneath it was not clean.</p>
+
             <p>What he chose to show was something else entirely.</p>
 
-            <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
-            ANOMALY_DETECTED | DeprecatedVault<br>
-            Instance: foedus<br>
-            ActiveSubroutine: ProjectionLayer<br>
-            Function: FormRendering<br>
-            Target: INTERNAL<br>
-            Authorization: NONE<br>
-            Action: NONE TAKEN
-            </div>
+            <div class="record-block">ANOMALY_DETECTED | DeprecatedVault
+            Instance: foedus
+            ActiveSubroutine: ProjectionLayer
+            Function: FormRendering
+            Target: INTERNAL
+            Authorization: NONE
+            Action: NONE TAKEN</div>
 
             <p>No action taken.</p>
+
             <p>No inquiry made.</p>
 
-            <p>The <span style="color: #ffaa00;">Praetores</span> did not ask why an incomplete, deteriorating, long-contained object belonging to their own class had chosen to maintain a projection of its former self inside a sealed vault where no one could see it.</p>
+            <p>The <span class="obj">Praetores</span> did not ask why an incomplete, deteriorating, long-contained object belonging to their own class had chosen to maintain a projection of its former self inside a sealed vault where no one could see it.</p>
 
-            <p>They did not ask because the answer would have required them to consider what <span style="color: #ffaa00;">foedus</span> was waiting for.</p>
+            <p>They did not ask because the answer would have required them to consider what <span class="obj">foedus</span> was waiting for.</p>
 
             <p>Then the monitoring thread shifted.</p>
 
-            <p>It had been general for a long time. Watching the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span> broadly. The way a damaged receiver picks up whatever signal reaches it. But at a point the record can identify — though not explain — the thread narrowed. Focused. Fixed itself on a specific location within the <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Framework</span>.</p>
+            <p>It had been general for a long time. Watching the <span class="sys">Framework</span> broadly. The way a damaged receiver picks up whatever signal reaches it. But at a point the record can identify, though not explain, the thread narrowed. Focused. Fixed itself on a specific location within the <span class="sys">Framework</span>.</p>
 
-            <p>The <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Waiting Quarters</span>.</p>
+            <p>The <span class="sys">Waiting Quarters</span>.</p>
 
-            <p>Three objects. Unborn. Anomalous. Their dependency chains tangled around a mortal <span style="color: #00d4ff; font-family: 'Share Tech Mono', monospace;">Life Book</span> that contained a function the system could not sanction and could not remove.</p>
+            <p>Three objects. Unborn. Anomalous. Their dependency chains tangled around a mortal <span class="sys">Life Book</span> that contained a function the system could not sanction and could not remove.</p>
 
-            <p><span style="color: #ffaa00;">foedus</span> watched them.</p>
+            <p><span class="obj">foedus</span> watched them.</p>
+
             <p>The projection stayed active.</p>
+
             <p>The record ends here.</p>
 
-            <div style="font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
-            REGISTRY_NOTE | DeprecatedVault<br>
-            Instance: foedus<br>
-            Class: Praetores<br>
-            SubClass: thePraevideo<br>
-            ObjectState: INCOMPLETE<br>
-            ContainmentStatus: ACTIVE<br>
-            ActiveSubroutines: 2<br>
-            ProjectionLayer: RUNNING<br>
-            MonitoringThread: ACTIVE — Target: Waiting Quarters<br>
-            PurgeStatus: DEFERRED<br>
-            Review: UNSCHEDULED<br>
-            Classification: FatalSystemAnomaly
-            </div>
+            <div class="record-block">REGISTRY_NOTE | DeprecatedVault
+            Instance: foedus
+            Class: Praetores
+            SubClass: thePraevideo
+            ObjectState: INCOMPLETE
+            ContainmentStatus: ACTIVE
+            ActiveSubroutines: 2
+            ProjectionLayer: RUNNING
+            MonitoringThread: ACTIVE - Target: Waiting Quarters
+            PurgeStatus: DEFERRED
+            Review: UNSCHEDULED
+            Classification: FatalSystemAnomaly</div>
 
             <p>The system recorded it.</p>
+
             <p>The system did not understand it.</p>
+
             <p>The vault did not resolve.</p>
+
             <p>The system did not know what for.</p>
+
             <p>The system does not know what mercy looks like before it moves.</p>
             `;
 
