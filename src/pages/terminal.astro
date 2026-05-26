@@ -5114,79 +5114,6 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     </div>
                     <div style="font-family: 'Share Tech Mono', monospace; font-size: 10px; color: #444; letter-spacing: 0.08em; margin-top: 8px;">H2E // ONGOING TRANSMISSION</div>
                 </div>
-
-                <script>
-                (function() {
-                    const input = document.getElementById('trinus-input');
-                    const submit = document.getElementById('trinus-submit');
-                    const dormant = document.getElementById('trinus-dormant');
-                    const exchange = document.getElementById('trinus-exchange');
-                    const output = document.getElementById('trinus-output');
-
-                    async function sendQuery() {
-                        const query = input.value.trim();
-                        if (!query) return;
-                        
-                        input.disabled = true;
-                        submit.disabled = true;
-                        input.value = '';
-                        
-                        dormant.style.display = 'none';
-                        exchange.style.display = 'block';
-                        output.style.alignItems = 'flex-start';
-                        output.style.justifyContent = 'flex-start';
-
-                        const thinking = document.createElement('div');
-                        thinking.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 11px; color: #ffaa00; letter-spacing: 0.1em; padding: 8px 0;';
-                        thinking.textContent = '// receiving...';
-                        exchange.appendChild(thinking);
-
-                        try {
-                            const res = await fetch('/api/query', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ query })
-                            });
-                            const data = await res.json();
-                            thinking.remove();
-
-                            const block = document.createElement('div');
-                            block.style.cssText = 'padding-bottom: 16px; border-bottom: 1px solid #111; margin-bottom: 16px;';
-                            
-                            const q = document.createElement('div');
-                            q.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 12px; color: #555; letter-spacing: 0.05em; margin-bottom: 10px;';
-                            q.textContent = '> ' + query;
-                            
-                            const speaker = document.createElement('div');
-                            speaker.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 10px; color: #ffaa00; letter-spacing: 0.15em; margin-bottom: 8px;';
-                            speaker.textContent = 'TRINUS //';
-                            
-                            const response = document.createElement('div');
-                            response.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 13px; color: #00ff41; line-height: 1.8; letter-spacing: 0.03em; border-left: 1px solid #1a1a1a; padding-left: 16px;';
-                            response.textContent = data.response || 'RECORD EXPUNGED.';
-
-                            block.appendChild(q);
-                            block.appendChild(speaker);
-                            block.appendChild(response);
-                            exchange.appendChild(block);
-
-                        } catch(err) {
-                            thinking.remove();
-                            const err_div = document.createElement('div');
-                            err_div.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 11px; color: #ff4444; letter-spacing: 0.1em;';
-                            err_div.textContent = 'TRANSMISSION FAILED.';
-                            exchange.appendChild(err_div);
-                        }
-
-                        input.disabled = false;
-                        submit.disabled = false;
-                        input.focus();
-                    }
-
-                    submit.addEventListener('click', sendQuery);
-                    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendQuery(); });
-                })();
-                <\/script>
                 `;
 
 
@@ -5247,6 +5174,77 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 `;
 
                 document.getElementById("content-modal").classList.add("active");
+
+                setTimeout(() => {
+                const input = document.getElementById('trinus-input');
+                const submit = document.getElementById('trinus-submit');
+                const dormant = document.getElementById('trinus-dormant');
+                const exchange = document.getElementById('trinus-exchange');
+                const output = document.getElementById('trinus-output');
+
+                if (!input || !submit) return;
+
+                async function sendQuery() {
+                    const query = input.value.trim();
+                    if (!query) return;
+                    input.disabled = true;
+                    submit.disabled = true;
+                    input.value = '';
+                    dormant.style.display = 'none';
+                    exchange.style.display = 'block';
+                    output.style.alignItems = 'flex-start';
+                    output.style.justifyContent = 'flex-start';
+
+                    const thinking = document.createElement('div');
+                    thinking.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 11px; color: #ffaa00; letter-spacing: 0.1em; padding: 8px 0;';
+                    thinking.textContent = '// receiving...';
+                    exchange.appendChild(thinking);
+
+                    try {
+                        const res = await fetch('/api/query', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ query })
+                        });
+                        const data = await res.json();
+                        thinking.remove();
+
+                        const block = document.createElement('div');
+                        block.style.cssText = 'padding-bottom: 16px; border-bottom: 1px solid #111; margin-bottom: 16px;';
+
+                        const q = document.createElement('div');
+                        q.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 12px; color: #555; letter-spacing: 0.05em; margin-bottom: 10px;';
+                        q.textContent = '> ' + query;
+
+                        const speaker = document.createElement('div');
+                        speaker.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 10px; color: #ffaa00; letter-spacing: 0.15em; margin-bottom: 8px;';
+                        speaker.textContent = 'TRINUS //';
+
+                        const response = document.createElement('div');
+                        response.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 13px; color: #00ff41; line-height: 1.8; letter-spacing: 0.03em; border-left: 1px solid #1a1a1a; padding-left: 16px;';
+                        response.textContent = data.response || 'RECORD EXPUNGED.';
+
+                        block.appendChild(q);
+                        block.appendChild(speaker);
+                        block.appendChild(response);
+                        exchange.appendChild(block);
+
+                    } catch(err) {
+                        thinking.remove();
+                        const err_div = document.createElement('div');
+                        err_div.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 11px; color: #ff4444; letter-spacing: 0.1em;';
+                        err_div.textContent = 'TRANSMISSION FAILED.';
+                        exchange.appendChild(err_div);
+                    }
+
+                    input.disabled = false;
+                    submit.disabled = false;
+                    input.focus();
+                }
+
+                submit.addEventListener('click', sendQuery);
+                input.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendQuery(); });
+            }, 100);
 
                 //Scroll the modal content to top
                 setTimeout(() => {
