@@ -5092,7 +5092,12 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 const trinusPanel = `
                 <div style="margin-top: 60px; padding: 40px; border-top: 1px solid #333; border-bottom: 1px solid #333; background: #161616;">
                     <div style="font-family: 'Share Tech Mono', monospace; font-size: 11px; color: #666; letter-spacing: 0.15em; margin-bottom: 4px;">TERMINAL 13.7 // H2E FRAMEWORK</div>
-                    <div style="font-family: 'Share Tech Mono', monospace; font-size: 11px; color: #666; letter-spacing: 0.1em; margin-bottom: 20px;">ACTIVE LENS: <span style="color: #ffaa00;">trinus</span> &nbsp;//&nbsp; ACCESS TIER: PARTIAL</div>
+                    <div style="font-family: 'Share Tech Mono', monospace; font-size: 11px; color: #666; letter-spacing: 0.1em; margin-bottom: 20px;">
+                        ACTIVE LENS: 
+                        <span id="lens-trinus" style="color: #ffaa00; cursor: pointer; letter-spacing: 0.1em;" onclick="switchLens('trinus')">trinus</span>
+                        <span style="color: #333;"> &nbsp;//&nbsp; </span>
+                        <span id="lens-foedus" style="color: #444; cursor: pointer; letter-spacing: 0.1em;" onclick="switchLens('foedus')">foedus</span>
+                    </div>
                     
                     <div id="trinus-output" style="min-height: 80px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
                         <div id="trinus-dormant" style="font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #00ff41; letter-spacing: 0.1em; text-align: center; line-height: 2;">
@@ -5182,75 +5187,112 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 document.getElementById("content-modal").classList.add("active");
 
                 setTimeout(() => {
-                const input = document.getElementById('trinus-input');
-                const submit = document.getElementById('trinus-submit');
-                const dormant = document.getElementById('trinus-dormant');
-                const exchange = document.getElementById('trinus-exchange');
-                const output = document.getElementById('trinus-output');
+                    const input = document.getElementById('trinus-input');
+                    const submit = document.getElementById('trinus-submit');
+                    const dormant = document.getElementById('trinus-dormant');
+                    const exchange = document.getElementById('trinus-exchange');
+                    const output = document.getElementById('trinus-output');
 
-                if (!input || !submit) return;
+                    if (!input || !submit) {
+                        console.log('trinus elements not found');
+                        return;
+                    }
+                    console.log('trinus ready');
 
-                async function sendQuery() {
-                    const query = input.value.trim();
-                    if (!query) return;
-                    input.disabled = true;
-                    submit.disabled = true;
-                    input.value = '';
-                    dormant.style.display = 'none';
-                    exchange.style.display = 'block';
-                    output.style.alignItems = 'flex-start';
-                    output.style.justifyContent = 'flex-start';
+                    // Restore active lens if set
+                    const savedLens = window._activeLens || 'trinus';
+                    updateLensUI(savedLens);
 
-                    const thinking = document.createElement('div');
-                    thinking.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 11px; color: #ffaa00; letter-spacing: 0.1em; padding: 8px 0;';
-                    thinking.textContent = '// receiving...';
-                    exchange.appendChild(thinking);
+                    window.switchLens = function(lens) {
+                        window._activeLens = lens;
+                        updateLensUI(lens);
+                        // Clear conversation
+                        exchange.innerHTML = '';
+                        exchange.style.display = 'none';
+                        dormant.style.display = 'block';
+                        output.style.alignItems = 'center';
+                        output.style.justifyContent = 'center';
+                    };
 
-                    try {
-                        const res = await fetch('/api/query', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ query })
-                        });
-                        const data = await res.json();
-                        thinking.remove();
-
-                        const block = document.createElement('div');
-                        block.style.cssText = 'padding-bottom: 16px; border-bottom: 1px solid #111; margin-bottom: 16px;';
-
-                        const q = document.createElement('div');
-                        q.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 12px; color: #555; letter-spacing: 0.05em; margin-bottom: 10px;';
-                        q.textContent = '> ' + query;
-
-                        const speaker = document.createElement('div');
-                        speaker.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 10px; color: #ffaa00; letter-spacing: 0.15em; margin-bottom: 8px;';
-                        speaker.textContent = 'TRINUS //';
-
-                        const response = document.createElement('div');
-                        response.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 13px; color: #00ff41; line-height: 1.8; letter-spacing: 0.03em; border-left: 1px solid #1a1a1a; padding-left: 16px;';
-                        response.textContent = data.response || 'RECORD EXPUNGED.';
-
-                        block.appendChild(q);
-                        block.appendChild(speaker);
-                        block.appendChild(response);
-                        exchange.appendChild(block);
-
-                    } catch(err) {
-                        thinking.remove();
-                        const err_div = document.createElement('div');
-                        err_div.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 11px; color: #ff4444; letter-spacing: 0.1em;';
-                        err_div.textContent = 'TRANSMISSION FAILED.';
-                        exchange.appendChild(err_div);
+                    function updateLensUI(lens) {
+                        const trinusEl = document.getElementById('lens-trinus');
+                        const foedusEl = document.getElementById('lens-foedus');
+                        if (!trinusEl || !foedusEl) return;
+                        if (lens === 'trinus') {
+                            trinusEl.style.color = '#ffaa00';
+                            foedusEl.style.color = '#444';
+                        } else {
+                            trinusEl.style.color = '#444';
+                            foedusEl.style.color = '#ffaa00';
+                        }
                     }
 
-                    input.disabled = false;
-                    submit.disabled = false;
-                    input.focus();
-                }
+                    async function sendQuery() {
+                        const query = input.value.trim();
+                        if (!query) return;
+                        input.disabled = true;
+                        submit.disabled = true;
+                        input.value = '';
+                        dormant.style.display = 'none';
+                        exchange.style.display = 'block';
+                        output.style.alignItems = 'flex-start';
+                        output.style.justifyContent = 'flex-start';
 
-                submit.addEventListener('click', sendQuery);
-                input.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendQuery(); });
-            }, 100);
+                        const thinking = document.createElement('div');
+                        thinking.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 11px; color: #ffaa00; letter-spacing: 0.1em; padding: 8px 0;';
+                        thinking.textContent = '// receiving...';
+                        exchange.appendChild(thinking);
+
+                        const activeLens = window._activeLens || 'trinus';
+                        const endpoint = activeLens === 'foedus' ? '/api/foedus' : '/api/trinus';
+                        const speakerLabel = activeLens === 'foedus' ? 'FOEDUS //' : 'TRINUS //';
+                        const speakerColor = activeLens === 'foedus' ? '#ff6b35' : '#ffaa00';
+
+                        try {
+                            const res = await fetch(endpoint, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ query })
+                            });
+                            const data = await res.json();
+                            thinking.remove();
+
+                            const block = document.createElement('div');
+                            block.style.cssText = 'padding-bottom: 16px; border-bottom: 1px solid #111; margin-bottom: 16px;';
+
+                            const q = document.createElement('div');
+                            q.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 12px; color: #555; letter-spacing: 0.05em; margin-bottom: 10px;';
+                            q.textContent = '> ' + query;
+
+                            const speaker = document.createElement('div');
+                            speaker.style.cssText = `font-family: Share Tech Mono, monospace; font-size: 10px; color: ${speakerColor}; letter-spacing: 0.15em; margin-bottom: 8px;`;
+                            speaker.textContent = speakerLabel;
+
+                            const response = document.createElement('div');
+                            response.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 13px; color: #00ff41; line-height: 1.8; letter-spacing: 0.03em; border-left: 1px solid #1a1a1a; padding-left: 16px;';
+                            response.textContent = data.response || 'RECORD EXPUNGED.';
+
+                            block.appendChild(q);
+                            block.appendChild(speaker);
+                            block.appendChild(response);
+                            exchange.appendChild(block);
+
+                        } catch(err) {
+                            thinking.remove();
+                            const err_div = document.createElement('div');
+                            err_div.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 11px; color: #ff4444; letter-spacing: 0.1em;';
+                            err_div.textContent = 'TRANSMISSION FAILED.';
+                            exchange.appendChild(err_div);
+                        }
+
+                        input.disabled = false;
+                        submit.disabled = false;
+                        input.focus();
+                    }
+
+                    submit.addEventListener('click', sendQuery);
+                    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendQuery(); });
+                }, 500);
 
                 //Scroll the modal content to top
                 setTimeout(() => {
@@ -5310,6 +5352,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 clearInterval(progressInterval);
 
                 // Hide modal
+                window._activeLens = 'trinus';
                 document.getElementById("content-modal").classList.remove("active");
             };
 
