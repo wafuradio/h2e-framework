@@ -4453,7 +4453,13 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                         document.getElementById("time-display").textContent =
                             `${currentMin}:${currentSec.toString().padStart(2, "0")} / ${totalMin}:${totalSec.toString().padStart(2, "0")}`;
                     }
-                }, 100);
+                }, 500);
+
+                if (!input || !submit) {
+                console.log('trinus elements not found');
+                return;
+                }
+                 console.log('trinus ready');
 
                 // When narration ends
                 currentNarration.addEventListener("ended", () => {
