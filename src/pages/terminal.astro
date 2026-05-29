@@ -1588,6 +1588,96 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 font-size: 16px;
                 cursor: pointer;
             }
+
+            /* Video modal (trace viewer) */
+            .trace-modal {
+                display: none;
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.85);
+                z-index: 10005;
+                align-items: center;
+                justify-content: center;
+            }
+            .trace-modal.visible { display: flex; }
+            .trace-modal-content {
+                background: #000;
+                border: 2px solid #00ff41;
+                padding: 30px;
+                max-width: 540px;
+                width: 90%;
+                position: relative;
+            }
+            .trace-modal-close {
+                position: absolute;
+                top: 10px; right: 10px;
+                background: transparent;
+                border: 1px solid #00ff41;
+                color: #00ff41;
+                width: 28px; height: 28px;
+                font-size: 22px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+            }
+            .trace-modal-close:hover { background: #00ff41; color: #000; }
+            .trace-video-container { margin: 0 0 15px 0; background: #000; }
+            .trace-video-container video { width: 100%; height: auto; display: block; }
+            .trace-video-container video::-webkit-media-controls { display: none !important; }
+            .trace-controls {
+                background: #000;
+                border: 1px solid #00ff4133;
+                padding: 10px;
+            }
+            .trace-controls-row {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            .trace-play-btn {
+                background: transparent;
+                border: 1px solid #00ff41;
+                color: #00ff41;
+                padding: 8px 16px;
+                font-family: "Share Tech Mono", monospace;
+                font-size: 12px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .trace-play-btn:hover { background: #00ff41; color: #000; }
+            .trace-progress-wrap {
+                flex: 1; height: 6px;
+                background: #111;
+                border: 1px solid #00ff4133;
+                cursor: pointer;
+            }
+            .trace-progress-fill { height: 100%; background: #00ff41; width: 0%; }
+            .trace-time {
+                font-family: "Share Tech Mono", monospace;
+                font-size: 12px;
+                color: #00ff41;
+                min-width: 80px;
+                text-align: right;
+            }
+
+            /* Clickable trace trigger in chaplet text */
+            .trace-trigger {
+                color: #00ffff !important;
+                cursor: pointer;
+                letter-spacing: 0.05em;
+                transition: opacity 0.2s;
+                animation: tracePulse 2.5s ease-in-out infinite;
+            }
+            .trace-trigger:hover { opacity: 0.7; }
+
+            @keyframes tracePulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.4; }
+            }
+        
 </style>
     </head>
     <body>
@@ -2187,6 +2277,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     );
                     console.log("ArrowUp: after:", highlightedRealmIndex);
                     updateHighlight();
+
                 } else if (e.key === "Escape") {
                     e.preventDefault();
                     // Close the entire modal
@@ -2196,8 +2287,47 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             /**
              * Updates the Ghost Feed display with realm content
+
+            /**
+             * Updates the Ghost Feed display with realm content
              * @param {object} realm - Realm data object
              */
+            
+            window.openTraceVideo = function () {
+                const modal = document.getElementById('traceModal');
+                const video = document.getElementById('traceVideo');
+                const btn = document.getElementById('tracePlayBtn');
+                video.load();
+                btn.textContent = '▶ PLAY';
+                modal.classList.add('visible');
+
+                video.ontimeupdate = function () {
+                    const pct = (video.currentTime / video.duration) * 100;
+                    document.getElementById('traceProgressFill').style.width = pct + '%';
+                    const fmt = s => Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0');
+                    document.getElementById('traceTime').textContent = fmt(video.currentTime) + ' / ' + fmt(video.duration);
+                };
+
+                document.getElementById('traceProgressWrap').onclick = function (e) {
+                    const rect = this.getBoundingClientRect();
+                    video.currentTime = ((e.clientX - rect.left) / rect.width) * video.duration;
+                };
+            };
+
+            window.toggleTraceVideo = function () {
+                const video = document.getElementById('traceVideo');
+                const btn = document.getElementById('tracePlayBtn');
+                if (video.paused) { video.play(); btn.textContent = '⏸ PAUSE'; }
+                else { video.pause(); btn.textContent = '▶ PLAY'; }
+            };
+
+            window.closeTraceVideo = function () {
+                const video = document.getElementById('traceVideo');
+                video.pause();
+                document.getElementById('tracePlayBtn').textContent = '▶ PLAY';
+                document.getElementById('traceModal').classList.remove('visible');
+            };
+            
             window.updateGhostFeed = function (realm) {
                 // Build media content based on type
                 let mediaHTML = "";
@@ -2847,7 +2977,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
 
             <div style="display: flex; align-items: center; gap: 12px; font-family: 'Share Tech Mono', monospace; color: #00ff41; font-size: 16px; margin: 30px 0; padding: 15px; border-left: 3px solid #00ff41; background: rgba(0, 255, 65, 0.05);">
                 <img src="/images/chaplet-art/lifebook-icon.png" alt="Life Book" style="width: 65px; height: 65px; filter: brightness(0) invert(1);">
-                <span>NEW! View Life Book (v. LB 3.2)</span>
+                <span class="trace-trigger" onclick="openTraceVideo()" style="color: #00ffff !important; cursor: pointer; animation: tracePulse 2.5s ease-in-out infinite;">NEW! View Life Book (v. LB 3.2)</span>
             </div>
 
             <p>He stares at it. This wasn’t here before. He hesitates. Then taps.</p>
@@ -4964,8 +5094,8 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     title = "CHAPLET 1: THE GRIT OF I/O";
                     filename = "CHAPLET_1_The_Grit_of_IO.txt";
                     bodyHTML = chaplet1Content;
-                    audioFile = "/sounds/chaplet1-placeholder.mp3";
-                    hasAudio = false;
+                    audioFile = "/sounds/chaplet1-narration.mp3";
+                    hasAudio = true;
 
                 } else if (contentId === "chaplet2") {
                     title = "CHAPLET 2: AssignareFatum(): Propagation Delayed";
@@ -5419,6 +5549,28 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                 }, 2000);
             };
         </script>
+
+        <!-- TRACE VIDEO MODAL -->
+        <div class="trace-modal" id="traceModal">
+            <div class="trace-modal-content">
+                <button class="trace-modal-close" onclick="closeTraceVideo()" aria-label="Close">×</button>
+                <div class="trace-video-container">
+                    <video id="traceVideo" playsinline>
+                        <source src="/videos/H2E_TRACE_13_7_V01.mp4" type="video/mp4" />
+                        Your browser does not support video playback.
+                    </video>
+                </div>
+                <div class="trace-controls">
+                    <div class="trace-controls-row">
+                        <button class="trace-play-btn" id="tracePlayBtn" onclick="toggleTraceVideo()">▶ PLAY</button>
+                        <div class="trace-progress-wrap" id="traceProgressWrap">
+                            <div class="trace-progress-fill" id="traceProgressFill"></div>
+                        </div>
+                        <div class="trace-time" id="traceTime">0:00 / 0:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- =================================================================
          EXIT CONFIRMATION MODAL
