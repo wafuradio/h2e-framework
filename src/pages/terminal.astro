@@ -5018,6 +5018,19 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     currentReaderAudio.volume = getReaderVolume();
                     currentReaderContentId = contentId;
 
+                    // Boost via Web Audio API to compensate for Chrome's
+                    // remote-file gain reduction
+                    try {
+                        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                        const source = audioCtx.createMediaElementSource(currentReaderAudio);
+                        const gainNode = audioCtx.createGain();
+                        gainNode.gain.value = 1.8;
+                        source.connect(gainNode);
+                        gainNode.connect(audioCtx.destination);
+                    } catch (e) {
+                        console.warn("Web Audio API boost unavailable:", e);
+                    }
+
                     markAudioStarted(contentId);
 
                     // When audio ends, mark completed and flip UI state.
