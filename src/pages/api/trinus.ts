@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getSystemPrompt } from "../../lib/systemPrompt";
+import { getSystemPrompt } from "./systemPrompt";
 
 export const POST: APIRoute = async ({ request }) => {
   const { query } = await request.json();

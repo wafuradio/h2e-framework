@@ -5269,8 +5269,9 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                             speaker.textContent = speakerLabel;
 
                             const response = document.createElement('div');
-                            response.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 13px; color: #00ff41; line-height: 1.8; letter-spacing: 0.03em; border-left: 1px solid #1a1a1a; padding-left: 16px;';
-                            response.textContent = data.response || 'RECORD EXPUNGED.';
+                            response.style.cssText = 'font-family: Share Tech Mono, monospace; font-size: 13px; color: #00ff41; line-height: 1.9; letter-spacing: 0.03em; border-left: 1px solid #1a1a1a; padding-left: 16px; max-width: 680px;';
+                            const rawText = data.response || 'RECORD EXPUNGED.';
+                            response.innerHTML = rawText.split(/\n\n+/).map(p => `<p style="margin: 0 0 1.2em 0;">${p.trim()}</p>`).join('');
 
                             block.appendChild(q);
                             block.appendChild(speaker);
