@@ -5232,6 +5232,7 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                     nextLabel = "CONTINUE TO CHAPLET 4";
                 }
                 
+                window._activeChaplet = contentId;
                 const trinusPanel = `
                 <div style="margin-top: 60px; padding: 40px; border-top: 1px solid #333; border-bottom: 1px solid #333; background: #161616;">
                     <div style="font-family: 'Share Tech Mono', monospace; font-size: 11px; color: #666; letter-spacing: 0.15em; margin-bottom: 4px;">TERMINAL 13.7 // H2E FRAMEWORK</div>
@@ -5387,17 +5388,20 @@ const siteTitle = "H2E Framework - Terminal 13.7";
                         exchange.appendChild(thinking);
 
                         const activeLens = window._activeLens || 'trinus';
+                        const activeChaplet = window._activeChaplet || 'unknown';
                         const endpoint = activeLens === 'foedus' ? '/api/foedus' : '/api/trinus';
-                        const speakerLabel = activeLens === 'foedus' ? 'FOEDUS //' : 'TRINUS //';
-                        const speakerColor = activeLens === 'foedus' ? '#ff6b35' : '#ffaa00';
+                        let speakerLabel = activeLens === 'foedus' ? 'FOEDUS //' : 'TRINUS //';
+                        let speakerColor = activeLens === 'foedus' ? '#ff6b35' : '#ffaa00';
 
                         try {
                             const res = await fetch(endpoint, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ query })
+                                body: JSON.stringify({ query, chaplet: activeChaplet })
                             });
                             const data = await res.json();
+                            if (data.speakerLabel) speakerLabel = data.speakerLabel;
+                            if (data.speakerColor) speakerColor = data.speakerColor;
                             thinking.remove();
 
                             const block = document.createElement('div');
