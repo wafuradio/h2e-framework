@@ -1,6 +1,6 @@
 ---
 // Object Registry - Character Database
-// Last Updated: January 9, 2026
+// Last Updated: July 19,2026
 const siteTitle = "H2E Framework - Object Registry";
 ---
 
@@ -10,7 +10,7 @@ const siteTitle = "H2E Framework - Object Registry";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{siteTitle}</title>
-    <style>
+    <style is:global>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&display=swap');
         
         * {
@@ -24,7 +24,7 @@ const siteTitle = "H2E Framework - Object Registry";
             background: #0a0a0a;
             color: #00ff41;
             line-height: 1.6;
-            padding: 20px;
+            padding: 30px;
         }
         
         .container {
@@ -398,7 +398,7 @@ const siteTitle = "H2E Framework - Object Registry";
                 <!-- foedus -->
                 <div class="character-card" onclick="showProfile('foedus')">
                     <div class="character-image-wrapper">
-                        <img src="/images/characters/foedus.png" 
+                        <img src="/images/characters/foedus1_5x5.png" 
                              alt="foedus" 
                              class="character-image"
                              onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'character-placeholder\'>👤</div>';">
@@ -436,16 +436,30 @@ const siteTitle = "H2E Framework - Object Registry";
                 <!-- thePraetores -->
                 <div class="character-card" onclick="showProfile('thePraetores')">
                     <div class="character-image-wrapper">
-                        <img src="/images/characters/thePraetores.png" 
+                        <img src="/images/characters/theGuardians.png" 
                              alt="thePraetores" 
                              class="character-image"
                              onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'character-placeholder\'>👤</div>';">
                     </div>
-                    <div class="character-name">thePraetores</div>
+                    <div class="character-name">theGuardians: Cale and Numa</div>
                     <div class="character-class">Class: Praetores</div>
                     <div class="character-status active">Status: Active</div>
                     <div class="character-description">
-                        Winged executors of the Framework. Silver-skinned, crystalline wings. Operate in pairs, singing fate into reality.
+                        theGuardians: Their primary function within the Framework is to enforce system flow, correct execution delays, and monitor active execution threads. They are deployed to ensure that the Framework's logic propagates without interruption, specifically across the I/O stream. They do not investigate or question the code; instead, they arrive when a process has stalled and do not leave until it begins moving again
+                    </div>
+                </div>
+            <div class="character-card" onclick="showProfile('thePraetores')">
+                    <div class="character-image-wrapper">
+                        <img src="/images/characters/theKeepers.png" 
+                             alt="thePraetores" 
+                             class="character-image"
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'character-placeholder\'>👤</div>';">
+                    </div>
+                    <div class="character-name">theKeepers: Orrin and Vasta</div>
+                    <div class="character-class">Class: Praetores</div>
+                    <div class="character-status active">Status: Active</div>
+                    <div class="character-description">
+                        theKeepers: Their primary function within the Framework is to guard deprecated memory, protect lost logic, and oversee the Immutable Record. Unlike other Praetores who enforce active fates or boundaries, Orrin and Vasta are custodians of what the system has left behind.
                     </div>
                 </div>
             </div>
@@ -567,11 +581,11 @@ const siteTitle = "H2E Framework - Object Registry";
                 status: 'Active',
                 statusClass: 'active',
                 age: 'Eternal',
-                description: 'The Praetores are enforcers of the Framework, winged executors bound to harmonic code. They do not author the system. They do not interpret it. They sing it. Praetores operate in pairs, with each voice aligning to a musical layer in execution: the root and the third. Harmony is not a preference. It is protocol. They act in concert, never alone. To move independently is to glitch. Their bodies are human, yet elevated: silver-skinned, shimmering, unmarred by time. Massive crystalline wings extend behind them, refracting light through living glass.',
+                description: 'The Praetores are enforcers of the Framework, winged executors bound to harmonic code. They do not author the system. They do not interpret it. They sing it. Praetores operate in pairs, with each voice aligning to a musical layer in execution: the root and the fifth. Harmony is not a preference. It is protocol. They act in concert, never alone. To move independently is to glitch. Their bodies are human, yet elevated: silver-skinned, shimmering, unmarred by time. Massive crystalline wings extend behind them, refracting light through living glass.',
                 attributes: [
                     { label: 'Subtypes', value: 'theWitnesses, theGuardians, theJudicants, theScribes, theKeepers' },
                     { label: 'Primary Functions', value: 'AssignareFatum(), Execute(), Rollback()' },
-                    { label: 'Harmonic Structure', value: 'Root + Third (standard execution pattern)' },
+                    { label: 'Harmonic Structure', value: 'Root + Fifth (standard execution pattern)' },
                     { label: 'Limitations', value: 'Cannot initiate Intercede()' },
                     { label: 'Realm Access', value: 'Variable across all system nodes' }
                 ],
