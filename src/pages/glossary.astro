@@ -1,7 +1,13 @@
 ---
 // Glossary - System Terminology Database
-// Last Updated: January 9, 2026
+// Entries come from src/data/glossary.ts (built from Lisa's Glossary export in canon/).
+// Entries and locked lines unlock as the reader finishes chaplets. TBD content is
+// stripped on the server and never reaches the browser.
+import { publicGlossary } from "../data/glossary.ts";
+
 const siteTitle = "H2E Framework - Glossary";
+const glossary = publicGlossary();
+const glossaryJson = JSON.stringify(glossary).replace(/</g, "\\u003c");
 ---
 
 <!DOCTYPE html>
@@ -185,16 +191,7 @@ const siteTitle = "H2E Framework - Glossary";
             box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
         }
         
-        .term-card.coming-soon {
-            opacity: 0.5;
-            cursor: default;
-        }
         
-        .term-card.coming-soon:hover {
-            border-color: #333;
-            background: rgba(0, 255, 65, 0.02);
-            box-shadow: none;
-        }
         
         .term-category {
             font-size: 10px;
@@ -225,18 +222,6 @@ const siteTitle = "H2E Framework - Glossary";
             text-overflow: ellipsis;
         }
         
-        .coming-soon-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 9px;
-            color: #666;
-            background: rgba(255, 170, 0, 0.1);
-            border: 1px solid #333;
-            padding: 3px 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
         
         .has-code-badge {
             display: inline-block;
@@ -369,6 +354,80 @@ const siteTitle = "H2E Framework - Glossary";
                 width: 100%;
             }
         }
+
+        /* Locked entries */
+        .term-card.locked {
+            cursor: default;
+            border-style: dashed;
+            opacity: 0.55;
+        }
+
+        .term-card.locked:hover {
+            border-color: #333;
+            background: rgba(0, 255, 65, 0.02);
+            box-shadow: none;
+        }
+
+        .term-card.locked .term-name {
+            color: #555;
+            letter-spacing: 2px;
+        }
+
+        .section-intro {
+            grid-column: 1 / -1;
+            font-size: 13px;
+            color: #aaa;
+            line-height: 1.7;
+            margin: -10px 0 5px 8px;
+            max-width: 900px;
+        }
+
+        /* Entry body */
+        .entry-block {
+            margin-bottom: 18px;
+        }
+
+        .entry-label {
+            color: #ffaa00;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .entry-line + .entry-line {
+            margin-top: 10px;
+        }
+
+        .entry-line strong {
+            color: #00ff41;
+            font-weight: normal;
+        }
+
+        .entry-line em {
+            color: #bbb;
+        }
+
+        .entry-list {
+            list-style: none;
+        }
+
+        .entry-list li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 6px;
+        }
+
+        .entry-list li::before {
+            content: '›';
+            position: absolute;
+            left: 2px;
+            color: #00ff41;
+        }
+
+        .modal-term-definition .code-snippet {
+            margin-bottom: 18px;
+        }
     </style>
 </head>
 <body>
@@ -382,19 +441,18 @@ const siteTitle = "H2E Framework - Glossary";
 
         <!-- Search & Filters -->
         <div class="controls">
-            <input 
-                type="text" 
-                id="search-input" 
-                class="search-bar" 
+            <input
+                type="text"
+                id="search-input"
+                class="search-bar"
                 placeholder="Search terminology, functions, entities..."
                 autocomplete="off"
             >
-            
+
             <div class="filter-buttons">
-                <button class="filter-btn" data-category="function">Functions</button>
-                <button class="filter-btn" data-category="terminology">Terminology</button>
-                <button class="filter-btn" data-category="praetores">Praetores</button>
-                <button class="filter-btn" data-category="concept">Concepts</button>
+                {glossary.sections.map((s) => (
+                    <button class="filter-btn" data-category={s.id}>{s.title}</button>
+                ))}
                 <button class="filter-btn" data-category="all">All</button>
                 <button id="clear-btn" style="background: transparent; border: 1px solid #ff4444; color: #ff4444; padding: 8px 16px; font-family: 'Share Tech Mono', monospace; font-size: 12px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; margin-left: 10px;">CLEAR</button>
             </div>
@@ -404,511 +462,288 @@ const siteTitle = "H2E Framework - Glossary";
         <div class="results-info" id="results-info">
             Showing <span class="count" id="results-count">0</span> entries
         </div>
-        
+
         <!-- Empty State -->
         <div id="empty-state" style="text-align: center; padding: 80px 40px; color: #666; display: block;">
             <div style="font-size: 14px; margin-bottom: 15px; color: #888;">Use search or select a category above to view glossary entries</div>
-            <div style="font-size: 12px;">23 terms available across 4 categories</div>
+            <div style="font-size: 12px;" id="unlock-summary"></div>
         </div>
 
         <!-- Term Grid -->
-        <div class="term-grid" id="term-grid" style="display: none;">
-            <!-- Terms will be rendered here by JavaScript -->
-        </div>
+        <div class="term-grid" id="term-grid" style="display: none;"></div>
 
         <!-- No Results -->
         <div class="no-results" id="no-results" style="display: none;">
             <div class="no-results-icon">🔍</div>
-            <div>No entries found matching your search.</div>
+            <div>No unlocked entries match your search.</div>
         </div>
     </div>
 
     <!-- Term Detail Modal -->
     <div id="term-modal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">✕ CLOSE</button>
+            <button class="modal-close" id="modal-close">✕ CLOSE</button>
             <div id="modal-body"></div>
         </div>
     </div>
 
-    <script is:inline>
-        console.log('Glossary Version: 2026-01-09-19:10:00 - NAV POLISH');
-        console.log('Script loading...');
+    <script type="application/json" id="glossary-data" set:html={glossaryJson}></script>
+
+    <script>
+        import {
+            CHAPLET_ORDER,
+            filterEntry,
+            isUnlockedAt,
+            type Entry,
+            type Line,
+            type Section,
+            type Unlock,
+        } from "../data/glossary-visibility.ts";
+
+        const data = JSON.parse(document.getElementById("glossary-data")!.textContent!) as {
+            sections: Section[];
+            entries: Entry[];
+        };
 
         // ==========================================
-        // GLOSSARY DATA
+        // UNLOCKS
+        // An entry opens once the reader has FINISHED its chaplet
+        // (h2e_<id>_completed, set by the reader's mark-finished button).
         // ==========================================
-        // To add new entries, just add objects to this array!
-        
-        const glossaryData = [
-            // FUNCTIONS
-            {
-                term: 'AssignareFatum()',
-                category: 'function',
-                shortDef: 'System function that assigns each PreBorn to Born() or Perish().',
-                fullDef: 'System-level function that assigns each PreBorn to one of two fates: Born() or Perish(). Once called, the assignment becomes part of the Life Book but does not trigger execution immediately. Fate assignment does not guarantee successful execution—biological, emotional, or systemic instability during gestation may lead to early termination.',
-                codeSnippet: `// Assigns fate to a PreBorn based on mother status
-function AssignareFatum(entity) {
-    if (entity.MotherStatus == "Alive") {
-        return Born(entity); // Mother lives, child is born
-    } else {
-        return Perish(entity); // Mother dies, child perishes
-    }
-}`
-            },
-            {
-                term: 'ApostasiaVitae()',
-                category: 'function',
-                shortDef: 'Forbidden function for mortal self-termination. Cross-framework contamination.',
-                fullDef: 'A rare, anomalous function believed to originate outside the current Framework. It self-terminates a rendered entity and is associated with mortal suicide. Its logic appears incompatible with existing code protocols, suggesting cross-framework contamination. Forbidden. Active. Irreversible. This function was NOT authored by the H2E system.',
-                codeSnippet: `// Handles self-termination (suicide) of a mortal
-// Separate from MortalExpire() which handles natural deaths
-function ApostasiaVitae(entity) {
-    if (entity.isMortal && entity.initiatesSelfTermination) {
-        log("ApostasiaVitae() invoked for " + entity.name);
-        
-        // Check if divine intervention applies
-        if (Intercede(entity)) {
-            return OverrideFate(entity);
-        }
-        
-        deleteFromFramework(entity);
-        return null;
-    }
-}`
-            },
-            {
-                term: 'Born()',
-                category: 'function',
-                shortDef: 'Execution function for PreBorn marked for life. Initiates pregnancy and rendering.',
-                fullDef: 'A function that, when executed, initiates rendering of a construct into mortal form. While the system treats this as the beginning of life on Earth, its invocation may not always succeed - errors, failures, and interruptions are possible. Binds PreBorn to a Mortal Parent via a mother reference, establishing a dependency that strengthens during gestation.',
-                codeSnippet: `// Instantiates a PreBorn entity into the physical world
-// Only executed if AssignareFatum() designates entity as Born
-function Born(entity) {
-    entity.status = "Living";
-    instantiate(entity); // Triggers actual birth event
-    return entity;
-}`
-            },
-            {
-                term: 'Perish()',
-                category: 'function',
-                shortDef: 'Permanently deletes a PreBorn entity before instantiation.',
-                fullDef: 'A function that halts or denies the execution of Born(). It may occur due to miscarriage, stillbirth, system error, override, or cancellation. Perish() does not erase all traces; sometimes fragments remain - ghost threads the system never fully purges.',
-                codeSnippet: `// Permanently deletes a PreBorn entity
-// Executed if AssignareFatum() designates entity for deletion
-function Perish(entity) {
-    log("Perishing entity: " + entity.name);
-    deleteFromFramework(entity);
-    return null;
-}`
-            },
-
-            // TERMINOLOGY
-            {
-                term: 'H2E Framework',
-                category: 'terminology',
-                shortDef: 'The vast inherited codebase through which fate is rendered, executed, or denied.',
-                fullDef: 'A vast, inherited codebase through which fate is rendered, executed, or denied. Its original authorship is unknown. Obeyed by Functionaries. Enforced by the Praetores. Studied by a few and questioned by those who have seen its flaws. The Framework was abandoned by its deprecated Creator and left to decay, now run by the Praetores who enforce code they did not write.',
-                codeSnippet: null
-            },
-            {
-                term: 'PreBorn',
-                category: 'terminology',
-                shortDef: 'Unresolved constructs awaiting designation: Born() or Perish().',
-                fullDef: 'The PreBorn are unresolved constructs, potential mortal threads held within system memory but not yet instantiated. They exist in a suspended state between two possible function calls: Born() or Perish(). Though technically not rendered, PreBorn possess awareness. They think. They choose. They ache. They are close enough to be human, but not close enough to be real.',
-                codeSnippet: null
-            },
-            {
-                term: 'Life Book (LB)',
-                category: 'terminology',
-                shortDef: 'A mortals procedural timeline, written in code.',
-                fullDef: 'A mortals procedural timeline, written in code. Instantiated at the execution of Born(). May be amended by Praetores, monitored by trinus, and - on rare occasions - interrupted. Contains syntax both active and deprecated, including untraceable entries. The current version is LB 3.2, which inadvertently exposed mortal Life Books to lower-tier functionaries.',
-                codeSnippet: null
-            },
-            {
-                term: 'Terminal 13.7',
-                category: 'terminology',
-                shortDef: 'A remote access node at the edge of I/O. trinus workspace.',
-                fullDef: 'A remote access node used by trinus, located on the edge of the I/O plane. The number is symbolic - referencing both the cosmic constant and a point of recursion. Its where decisions stall. Forgotten. Never repaired. Never erased. Ozone hangs heavy, mixing with the stale scent of burnt circuits. This is where fate assignments are processed.',
-                codeSnippet: null
-            },
-
-            // PRAETORES
-            {
-                term: 'theWitnesses',
-                category: 'praetores',
-                shortDef: 'Praetor pair. Execute Born(), Perish(), Obliviate(). Final arbiters.',
-                fullDef: 'theWitnesses are the active executors of fate within the Praetores class. They appear exclusively in pairs, maintaining dual-voice harmony when executing methods such as Born(), Perish(), and Obliviate(). Their presence is unwavering, and their logic unyielding. Vitus (male) initiates fates, from Latin "vita" meaning life. Mora (female) represents the delay before execution, from Latin "mora" meaning pause.',
-                codeSnippet: null
-            },
-            {
-                term: 'theGuardians',
-                category: 'praetores',
-                shortDef: 'Praetor pair. Enforce system flow, correct execution delays.',
-                fullDef: 'Active executors of flow and correction within the Praetores class. They enforce continuity, issue system resets, and ensure function propagation across the I/O stream. Cale (male) derived from "caelum" meaning sky/heaven—implies high authority and untouchable calm. Numa (female) from Numa Pompilius, the Roman king who codified laws and rituals—symbol of sacred law and ritual.',
-                codeSnippet: null
-            },
-
-            // COMING SOON - Functions
-            {
-                term: 'Intercede()',
-                category: 'function',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-            {
-                term: 'Rollback()',
-                category: 'function',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-            {
-                term: 'Obliviate()',
-                category: 'function',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-            {
-                term: 'MortalExpire()',
-                category: 'function',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-
-            // COMING SOON - Terminology
-            {
-                term: 'Glitch',
-                category: 'terminology',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-            {
-                term: 'Deprecated',
-                category: 'terminology',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-            {
-                term: 'Ghost Relays',
-                category: 'terminology',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-
-            // COMING SOON - Praetores
-            {
-                term: 'theScribes',
-                category: 'praetores',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-            {
-                term: 'theJudicants',
-                category: 'praetores',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-            {
-                term: 'theKeepers',
-                category: 'praetores',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-            {
-                term: 'theFell',
-                category: 'praetores',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-
-            // COMING SOON - Concepts
-            {
-                term: 'Origin Logic',
-                category: 'concept',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
-            },
-            {
-                term: 'Cross-Framework Function',
-                category: 'concept',
-                shortDef: 'Coming Soon',
-                fullDef: null,
-                comingSoon: true
+        function furthestFinished(): string {
+            let furthest = "";
+            try {
+                for (const id of CHAPLET_ORDER) {
+                    if (localStorage.getItem(`h2e_${id}_completed`)) furthest = id;
+                }
+            } catch {
+                // Storage blocked: nothing is unlocked.
             }
-        ];
-        
-        console.log('glossaryData loaded:', glossaryData.length, 'entries');
+            return furthest;
+        }
+
+        const reached = furthestFinished();
+        const open = (u?: Unlock) => isUnlockedAt(u, reached);
+        const sectionTitle = new Map(data.sections.map((s) => [s.id, s.title]));
+        const visible = new Map<string, Entry>();
+        for (const e of data.entries) {
+            const v = filterEntry(e, open);
+            if (v) visible.set(e.id, v);
+        }
+
+        const chapletLabel = (u: Unlock) => `Chaplet ${u.replace("chaplet", "").replace(/^(\d)5$/, "$1.5")}`;
+
+        // ==========================================
+        // TEXT
+        // ==========================================
+        const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        const inline = (s: string) =>
+            esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\*(.+?)\*/g, "<em>$1</em>");
+        const lineText = (line: Line) => line.map((s) => s.t).join("");
+        const plain = (s: string) => s.replace(/\*\*|\*/g, "").trim();
+
+        function entryText(e: Entry): string {
+            return e.blocks
+                .flatMap((b) => (b.type === "list" ? b.items : b.lines))
+                .map((l) => plain(lineText(l)))
+                .join(" ");
+        }
+
+        function shortText(e: Entry): string {
+            for (const b of e.blocks) {
+                if (b.type === "pseudo") continue;
+                for (const l of b.type === "list" ? b.items : b.lines) {
+                    const t = lineText(l).trim();
+                    if (!t || t.startsWith("Pronunciation:") || t.startsWith("**")) continue;
+                    return plain(t);
+                }
+            }
+            return "";
+        }
+
+        function entryBody(e: Entry): string {
+            return e.blocks
+                .map((b) => {
+                    if (b.type === "list") {
+                        return `<ul class="entry-block entry-list">${b.items.map((l) => `<li class="entry-line">${inline(lineText(l))}</li>`).join("")}</ul>`;
+                    }
+                    if (b.type === "pseudo") {
+                        const code = b.lines
+                            .map((l) => {
+                                const t = esc(lineText(l));
+                                return t.trim().startsWith("//") ? `<span class="code-comment">${t}</span>` : t;
+                            })
+                            .join("\n");
+                        return `<div class="code-snippet">${code}</div>`;
+                    }
+                    const lines = b.lines
+                        .map((l) => {
+                            const t = lineText(l).trim();
+                            return /^\*\*[^*]+\*\*$/.test(t)
+                                ? `<div class="entry-label">${esc(plain(t))}</div>`
+                                : `<div class="entry-line">${inline(t)}</div>`;
+                        })
+                        .join("");
+                    return `<div class="entry-block">${lines}</div>`;
+                })
+                .join("");
+        }
 
         // ==========================================
         // STATE
         // ==========================================
-        let currentFilter = 'all';
-        let currentSearch = '';
+        let currentFilter = "all";
+        let currentSearch = "";
         let hasInteracted = false; // Track if user has searched or filtered
 
+        const grid = document.getElementById("term-grid")!;
+        const noResults = document.getElementById("no-results")!;
+        const emptyState = document.getElementById("empty-state")!;
+        const resultsCount = document.getElementById("results-count")!;
+
+        document.getElementById("unlock-summary")!.textContent =
+            `${visible.size} of ${data.entries.length} entries unlocked across ${data.sections.length} sections`;
+
         // ==========================================
-        // RENDER FUNCTIONS
+        // RENDER
         // ==========================================
-        function renderTerms() {
-            console.log('renderTerms called');
-            const grid = document.getElementById('term-grid');
-            const noResults = document.getElementById('no-results');
-            const emptyState = document.getElementById('empty-state');
-            
-            console.log('Grid element:', grid);
-            console.log('Current filter:', currentFilter);
-            console.log('Current search:', currentSearch);
-            console.log('Has interacted:', hasInteracted);
-            
-            // Show empty state if no interaction yet
-            if (!hasInteracted) {
-                grid.style.display = 'none';
-                noResults.style.display = 'none';
-                emptyState.style.display = 'block';
-                document.getElementById('results-count').textContent = 0;
-                return;
+        function buildCardHTML(e: Entry): string {
+            const v = visible.get(e.id);
+            const category = esc(sectionTitle.get(e.section) ?? "");
+            if (!v) {
+                return `
+                    <div class="term-card locked">
+                        <div class="term-category">[${category.toUpperCase()}]</div>
+                        <div class="term-name">[REDACTED]</div>
+                        <div class="term-short">Unlocks when you finish ${chapletLabel(e.unlock)}.</div>
+                    </div>`;
             }
-            
-            // Hide empty state once user interacts
-            emptyState.style.display = 'none';
-            
-            // Filter data - keep track of original indices
-            let filtered = glossaryData.map((term, index) => ({ term, index }));
-            console.log('After mapping:', filtered.length);
-            
-            // Apply category filter
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(item => item.term.category === currentFilter);
-            }
-            
-            // Apply search filter
-            if (currentSearch) {
-                const searchLower = currentSearch.toLowerCase();
-                filtered = filtered.filter(item => {
-                    const term = item.term;
-                    return term.term.toLowerCase().includes(searchLower) ||
-                        (term.shortDef && term.shortDef.toLowerCase().includes(searchLower)) ||
-                        (term.fullDef && term.fullDef.toLowerCase().includes(searchLower));
-                });
-            }
-            
-            // Update results count
-            console.log('Filtered count:', filtered.length);
-            document.getElementById('results-count').textContent = filtered.length;
-            
-            // Show/hide no results
-            if (filtered.length === 0) {
-                grid.style.display = 'none';
-                noResults.style.display = 'block';
-                return;
-            } else {
-                grid.removeAttribute('style'); // Completely remove inline style
-                noResults.style.display = 'none';
-                
-                // DEBUG: Log computed styles
-                console.log('📊 Grid display after removing style attribute');
-                const computedStyle = window.getComputedStyle(grid);
-                console.log('📊 Computed display:', computedStyle.display);
-                console.log('📊 Computed grid-template-columns:', computedStyle.gridTemplateColumns);
-                console.log('📊 Window width:', window.innerWidth);
-            }
-            
-            // Group by category if showing ALL
-            if (currentFilter === 'all' && !currentSearch) {
-                renderGroupedSections(filtered);
-            } else {
-                renderCards(filtered);
-            }
-        }
-        
-        // Render with section headers (Registry style)
-        function renderGroupedSections(filtered) {
-            const grid = document.getElementById('term-grid');
-            
-            const categories = {
-                'function': { title: 'FUNCTIONS', items: [] },
-                'terminology': { title: 'TERMINOLOGY', items: [] },
-                'praetores': { title: 'PRAETORES', items: [] },
-                'concept': { title: 'CONCEPTS', items: [] }
-            };
-            
-            // Group items by category
-            filtered.forEach(item => {
-                const cat = item.term.category;
-                if (categories[cat]) {
-                    categories[cat].items.push(item);
-                }
-            });
-            
-            // Build HTML with sections - headers span full row
-            let html = '';
-            Object.keys(categories).forEach(catKey => {
-                const cat = categories[catKey];
-                if (cat.items.length > 0) {
-                    html += `
-                        <div class="section-divider">
-                            <span class="section-title">→ ${cat.title}</span>
-                            <span class="section-count">(${cat.items.length} entries)</span>
-                        </div>
-                    `;
-                    
-                    cat.items.forEach(item => {
-                        html += buildCardHTML(item);
-                    });
-                }
-            });
-            
-            grid.innerHTML = html;
-            attachCardListeners();
-        }
-        
-        // Render flat list of cards
-        function renderCards(filtered) {
-            const grid = document.getElementById('term-grid');
-            grid.innerHTML = filtered.map(item => buildCardHTML(item)).join('');
-            attachCardListeners();
-        }
-        
-        // Build card HTML
-        function buildCardHTML(item) {
-            const term = item.term;
-            const index = item.index;
-            const comingSoonClass = term.comingSoon ? 'coming-soon' : '';
-            const comingSoonBadge = term.comingSoon ? '<div class="coming-soon-badge">Coming Soon</div>' : '';
-            const codeBadge = term.codeSnippet ? '<span class="has-code-badge">Code</span>' : '';
-            const dataIndex = term.comingSoon ? '' : `data-term-index="${index}"`;
-            
+            const codeBadge = v.blocks.some((b) => b.type === "pseudo") ? '<span class="has-code-badge">Code</span>' : "";
             return `
-                <div class="term-card ${comingSoonClass}" ${dataIndex}>
-                    ${comingSoonBadge}
-                    <div class="term-category">[${term.category.toUpperCase()}]</div>
-                    <div class="term-name">${term.term}${codeBadge}</div>
-                    <div class="term-short">${term.shortDef}</div>
-                </div>
-            `;
+                <div class="term-card" data-entry="${e.id}">
+                    <div class="term-category">[${category.toUpperCase()}]</div>
+                    <div class="term-name">${esc(e.title)}${codeBadge}</div>
+                    <div class="term-short">${esc(shortText(v))}</div>
+                </div>`;
         }
-        
-        // Attach event listeners to cards
-        function attachCardListeners() {
-            const grid = document.getElementById('term-grid');
-            grid.querySelectorAll('.term-card[data-term-index]').forEach(card => {
-                card.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-term-index'));
-                    showTermByIndex(index);
+
+        function sectionIntro(s: Section): string {
+            if (!s.intro) return "";
+            return `<div class="section-intro">${s.intro.map((p) => p.map((l) => inline(lineText(l))).join("<br>")).join("<br><br>")}</div>`;
+        }
+
+        function renderTerms() {
+            if (!hasInteracted) {
+                grid.style.display = "none";
+                noResults.style.display = "none";
+                emptyState.style.display = "block";
+                resultsCount.textContent = "0";
+                return;
+            }
+            emptyState.style.display = "none";
+
+            let entries = data.entries.filter((e) => currentFilter === "all" || e.section === currentFilter);
+
+            // Search only looks at unlocked entries and unlocked text.
+            if (currentSearch) {
+                const q = currentSearch.toLowerCase();
+                entries = entries.filter((e) => {
+                    const v = visible.get(e.id);
+                    return v && (v.title.toLowerCase().includes(q) || entryText(v).toLowerCase().includes(q));
                 });
-            });
+            }
+
+            resultsCount.textContent = String(entries.length);
+            if (entries.length === 0) {
+                grid.style.display = "none";
+                noResults.style.display = "block";
+                return;
+            }
+            grid.removeAttribute("style");
+            noResults.style.display = "none";
+
+            if (currentSearch) {
+                grid.innerHTML = entries.map(buildCardHTML).join("");
+                return;
+            }
+            // Group under the Glossary's own section headers.
+            grid.innerHTML = data.sections
+                .map((s) => {
+                    const items = entries.filter((e) => e.section === s.id);
+                    if (!items.length) return "";
+                    const unlocked = items.filter((e) => visible.has(e.id)).length;
+                    return `
+                        <div class="section-divider">
+                            <span class="section-title">→ ${esc(s.title)}</span>
+                            <span class="section-count">(${unlocked} of ${items.length} unlocked)</span>
+                        </div>
+                        ${sectionIntro(s)}
+                        ${items.map(buildCardHTML).join("")}`;
+                })
+                .join("");
         }
 
-        function showTerm(termName) {
-            const term = glossaryData.find(t => t.term === termName);
-            if (!term || term.comingSoon) return;
-
-            const codeSection = term.codeSnippet ? `
-                <div class="code-snippet-section">
-                    <div class="code-snippet-title">Code Example</div>
-                    <div class="code-snippet">${term.codeSnippet}</div>
-                </div>
-            ` : '';
-
-            document.getElementById('modal-body').innerHTML = `
-                <div class="modal-term-name">${term.term}</div>
-                <div class="modal-term-category">${term.category}</div>
-                <div class="modal-term-definition">${term.fullDef}</div>
-                ${codeSection}
-            `;
-
-            document.getElementById('term-modal').classList.add('active');
+        function showEntry(id: string) {
+            const v = visible.get(id);
+            if (!v) return;
+            document.getElementById("modal-body")!.innerHTML = `
+                <div class="modal-term-name">${esc(v.title)}</div>
+                <div class="modal-term-category">${esc(sectionTitle.get(v.section) ?? "")}</div>
+                <div class="modal-term-definition">${entryBody(v)}</div>`;
+            document.getElementById("term-modal")!.classList.add("active");
         }
-
-        // Show term by index (avoids quote escaping issues)
-        window.showTermByIndex = function(index) {
-            const term = glossaryData[index];
-            if (!term || term.comingSoon) return;
-            showTerm(term.term);
-        };
 
         function closeModal() {
-            document.getElementById('term-modal').classList.remove('active');
+            document.getElementById("term-modal")!.classList.remove("active");
         }
 
         // ==========================================
         // EVENT LISTENERS
         // ==========================================
-        
-        // Clear button
-        document.getElementById('clear-btn').addEventListener('click', () => {
-            console.log('🧹 CLEAR clicked');
-            document.getElementById('search-input').value = '';
-            currentSearch = '';
-            currentFilter = 'all';
-            hasInteracted = false;
-            
-            // Remove all button highlighting
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            
-            // Clear grid content
-            document.getElementById('term-grid').innerHTML = '';
-            
-            // Show empty state, hide grid and no-results
-            document.getElementById('empty-state').style.display = 'block';
-            document.getElementById('term-grid').style.display = 'none';
-            document.getElementById('no-results').style.display = 'none';
-            document.getElementById('results-count').textContent = '0';
+        grid.addEventListener("click", (e) => {
+            const card = (e.target as HTMLElement).closest<HTMLElement>(".term-card[data-entry]");
+            if (card) showEntry(card.dataset.entry!);
         });
-        
-        // Search
-        document.getElementById('search-input').addEventListener('input', (e) => {
-            currentSearch = e.target.value;
+
+        document.getElementById("clear-btn")!.addEventListener("click", () => {
+            (document.getElementById("search-input") as HTMLInputElement).value = "";
+            currentSearch = "";
+            currentFilter = "all";
+            hasInteracted = false;
+            document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+            grid.innerHTML = "";
+            renderTerms();
+        });
+
+        document.getElementById("search-input")!.addEventListener("input", (e) => {
+            currentSearch = (e.target as HTMLInputElement).value;
             hasInteracted = true;
             renderTerms();
         });
 
-        // Category filters
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Update active state
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                // Update filter
-                currentFilter = btn.dataset.category;
+        document.querySelectorAll<HTMLButtonElement>(".filter-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+                currentFilter = btn.dataset.category!;
                 hasInteracted = true;
                 renderTerms();
             });
         });
 
-        // Close modal on Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && document.getElementById('term-modal').classList.contains('active')) {
+        document.getElementById("modal-close")!.addEventListener("click", closeModal);
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && document.getElementById("term-modal")!.classList.contains("active")) {
                 closeModal();
             }
         });
 
-        // Close modal when clicking outside
-        document.getElementById('term-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'term-modal') {
-                closeModal();
-            }
+        document.getElementById("term-modal")!.addEventListener("click", (e) => {
+            if ((e.target as HTMLElement).id === "term-modal") closeModal();
         });
 
-        // ==========================================
-        // INITIALIZE
-        // ==========================================
-        // Start with empty state - wait for user interaction
-        renderTerms(); // Will show empty state since hasInteracted = false
+        renderTerms(); // Starts on the empty state until the reader searches or filters.
     </script>
 
 </body>

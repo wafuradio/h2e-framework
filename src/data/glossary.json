@@ -1,0 +1,2320 @@
+{
+  "sections": [
+    {
+      "id": "realms",
+      "title": "Realms"
+    },
+    {
+      "id": "classes",
+      "title": "Classes"
+    },
+    {
+      "id": "objects",
+      "title": "Objects",
+      "intro": [
+        {
+          "type": "p",
+          "lines": [
+            "In the Framework, an object is an individual instance of a class. These entries introduce the characters and Praetorian pairs, describing their roles, relationships, and known circumstances.",
+            "Class describes their place in the architecture. It does not fully describe who they are."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "artifacts",
+      "title": "Artifacts"
+    },
+    {
+      "id": "functions",
+      "title": "Functions"
+    },
+    {
+      "id": "foundational",
+      "title": "Foundational Architecture"
+    },
+    {
+      "id": "terminology",
+      "title": "Terminology"
+    }
+  ],
+  "entries": [
+    {
+      "id": "i-o",
+      "title": "I/O",
+      "section": "realms",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "*“It was never meant to decay. But everything connected must eventually burn.”*",
+            "I/O stages and routes PreBorn designation and execution traffic.",
+            "While I/O was designed for clarity and speed, some parts now suffer from degradation. Recursion buildup, unauthorized access attempts, and memory leaks have impacted subnodes. It remains operational.",
+            "At its far edge lies Terminal 13.7, a lower-tier node still functioning under Functionary trinus. There, he runs AssignareFatum(), reviews the resulting list, and submits it for execution by the Praetores. His role is crucial, though his methods lack elegance."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Primary Function:** Instruction staging; directive routing.",
+            "**Architecture:** Core input/output interpreter; function call dispatcher.",
+            "**Condition:** Degraded, but operational.",
+            "**Known Aberrations:** Unauthorized Ghost Feed access operates through Terminal 13.7.",
+            "**Environmental Tone:** Dim glow, analog flicker, scent of burnt logic.",
+            "**System Status:** Execution-capable; stability degraded."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "*I/O still functions. The delays are growing.*"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "waiting-quarters",
+      "title": "Waiting Quarters",
+      "section": "realms",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "*“This is not a place of nurture. It is a place of pause.”*",
+            "The Waiting Quarters lie near I/O, not within it. They hold PreBorn awaiting designation or execution. Fate designations are not executed here.",
+            "AssignareFatum() designates each PreBorn Born() or Perish(). They are never told which. Once designated, they remain pending submission of the list. Most pass through quickly. Some remain.",
+            "The environment is uniform. Rows of identical bunks, ambient light with no shadows, and neutral tonal design create emotional flatness. PreBorn share bunks in family groups. How they are created, grouped, or assigned to mortals is unknown.",
+            "PreBorn play and speak among themselves. These activities do not determine their designations."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Primary Function:** Holding environment for PreBorn awaiting designation or execution.",
+            "**Access:** Entry is not restricted. Functionaries ordinarily have no duties here.",
+            "**Environmental Tone:** Neutralized light, antiseptic air, silent static hum.",
+            "**Temporal Behavior:** Time does not move forward. It loops.",
+            "**Object Status:** Pending until the list is submitted."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "*Mortal life has not begun here. The waiting has.*"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "array",
+      "title": "Array",
+      "section": "realms",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "*“Only what is written may be enforced. And only what is enforced may persist.”*",
+            "The Array is where the Praetores reside and work: the Framework’s enforcement plane. It receives and executes PreBorn fate designations; it does not assign them. Once an AssignareFatum() list is submitted, it is processed here.",
+            "Each pair has an assigned operational role within the Array. Their harmonics carry confirmed directives into execution. The Praetores can apply existing protocols and make operational judgments, but cannot rewrite the underlying code.",
+            "Deviations disrupt the Array’s expected harmony and are treated as operational anomalies."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Primary Function:** Residence of the Praetores; execution of confirmed fate designations and directives.",
+            "**Architecture:** Enforcement plane for executing confirmed directives; its underlying code cannot be rewritten by the Praetores.",
+            "**Access:** Restricted. The Praetores are its known occupants and operators.",
+            "**Data:** Confirmed designation lists and execution status.",
+            "**Environmental Tone:** Clean white space, resonance chamber acoustics, mirrored surfaces.",
+            "**PreBorn Access:** No authorized route exists for PreBorn."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "*The Array does not debate. It performs.*"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-realm-beyond",
+      "title": "The Realm Beyond",
+      "section": "realms",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "*“This space should not exist. Yet it does.”*",
+            "The Realm Beyond is an instability zone within the Framework, outside its intended execution paths. It formed through recursion loops, corrupted rendering, and decay in unreferenced logic.",
+            "It is not a designed realm. It is a consequence.",
+            "Memory leaks, version drift, and remnants of earlier system states make it semi-navigable. Paths exist, but the Framework does not reliably maintain them.",
+            "Logic loosens here, and projections degrade."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Primary Function:** No assigned function within the Framework.",
+            "**Architecture:** Emergent terrain formed by accumulated failures and abandoned logic.",
+            "**Access:** No authorized route for PreBorn; traversal is not reliably tracked.",
+            "**Environmental Tone:** Fractal distortion, unrendered pathways, residual signal hum.",
+            "**System Status:** Unstable."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "*The Realm Beyond persists beyond the paths the Framework was designed to maintain.*"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-grove-of-accord",
+      "title": "The Grove of Accord",
+      "section": "realms",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "*“It is not written here. It is negotiated.”*",
+            "The Grove of Accord is a place of mediation within the Framework’s original architecture. Its purpose reflects mercy’s place in that design, though the current Framework no longer fully recognizes or accommodates it.",
+            "Glyphs carry origin logic: syntax trees from one angle, chord diagrams from another. At rest, the Grove holds stillness and symmetry. When something enters, the glyphs respond, registering what is present and what is missing.",
+            "theLady works here through mediation. Intervention may change the circumstances surrounding a mortal choice, but cannot alter the will or override consent. It carries a cost whose form varies."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Primary Function:** Exception handling and mediation.",
+            "**Architecture:** Original-design mediation space; its workings are not fully understood.",
+            "**Access:** No enforced boundary at the threshold.",
+            "**Environmental Tone:** Stillness and symmetry at rest; responsive glyphs and a hum of intervals when active.",
+            "**Known Occupant:** theLady."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "*Where law reaches its answer, mercy may still have work to do.*"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "edge-of-the-system",
+      "title": "Edge of the System",
+      "section": "realms",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "*“Corruption was meant to expire. Not collect.”*",
+            "The Edge of the System is the Framework’s outer boundary: the point where its maintained map ends. The region is unmaintained, but remains under observation.",
+            "Deprecated code and abandoned logic collect here. A black, mercury-like surface swallows what touches it. What becomes of those things is unknown.",
+            "The DeprecatedVault lies at the Edge."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Primary Function:** Outer boundary of the Framework.",
+            "**Architecture:** Unmaintained boundary where residual code and abandoned logic accumulate.",
+            "**Access:** Outside maintained routes; under observation.",
+            "**Environmental Tone:** A void of black, mercury-like oil.",
+            "**System Status:** Unmaintained."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "*The map ends here. The watching does not.*"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deprecatedvault",
+      "title": "DeprecatedVault",
+      "section": "realms",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "*“Where the system filed what it could not safely delete.”*",
+            "A containment zone at the Edge of the System. The Framework holds unstable and deprecated objects here when removal risks destabilizing connected systems.",
+            "Containment is not absolute. Objects held here are recorded and watched; departures or projections may draw intervention from theKeepers."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Primary Function: Containment of unstable and deprecated objects.",
+            "Oversight: theKeepers.",
+            "Records: Containment orders and review status held in the registry.",
+            "Access: Sealed; not indexed for routine traffic.",
+            "Environmental Tone: A black surface that recoils from what it holds.",
+            "Known Contained Object: foedus."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "*Containment postpones a resolution the Framework cannot safely make.*"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mortal-layer",
+      "title": "Mortal Layer",
+      "section": "realms",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "*“What the system names a thread, a mother names a life.”*",
+            "The Mortal Layer is where mortal lives unfold in an ordinary world. Life Books display and record their histories, dependencies, and execution states; they do not cause the events they record.",
+            "The Mediatrix cannot render directly in this layer. Other Framework entities can reach it through projection, anchoring to features of the mortal environment. Projection is unauthorized, carries a cost, and may leave detectable traces.",
+            "No entity can override mortal will or consent.",
+            "Between the Framework and the mortal layer lies the boundary seam. It is a crossing space, distinct from either layer, marked by unauthorized passage."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Primary Function:** Embodied mortal life.",
+            "**Access:** Projection only, and unauthorized. The Mediatrix cannot enter directly.",
+            "**Records:** Life Books.",
+            "**Rollback():** Does not change mortals or events in this layer, even when Framework records return to an earlier state.",
+            "**Known Crossing:** The boundary seam at Terminal 13.7."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "*The system records the choice. It cannot make it.*"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functionary",
+      "title": "Functionary",
+      "section": "classes",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **FUNK-shuh-nair-ee**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Definition**",
+            "Functionaries are routine administrative agents within the Framework. Protocol governs their assigned duties and permissions. The administrative role is necessary to Framework operations; individual Functionaries are replaceable."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Role / Operations**",
+            "Invoke assigned administrative functions, review their output, and relay results for execution."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Typical tasks include:"
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Confirming receipt of instructions and results.",
+            "Observing system objects and threads.",
+            "Tallying designations and assignments.",
+            "Processing fate queues without choosing their outcomes."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Limitations**",
+            "Functionaries can assess administrative information and recognize anomalies, but have no authority to reinterpret governing protocols, override results, or change outcomes."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Fate designations are executed by the Praetores."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Known Instances**",
+            "trinus, stationed at Terminal 13.7."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "Functionaries are not trusted with wisdom. Only repetition. Only silence."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mediatrix",
+      "title": "Mediatrix",
+      "section": "classes",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **mee-dee-AY-trix**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Definition**",
+            "The Mediatrix mediates where correct enforcement still leaves a need for mercy. The class operates independently, influencing circumstances without commanding or enforcing."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Role / Operations**",
+            "Works on the circumstances surrounding mortal choices. Cannot alter the will or override mortal consent."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "The class’s harmonic role is the third, audible when a Mediatrix’s voice joins the Praetores’ root and fifth."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Limitations**",
+            "The Mediatrix’s form cannot render in the mortal layer. Influence there is indirect."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Mediation carries a cost whose form varies and may introduce unpredictable consequences."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Origin**",
+            "Mercy belongs to the Framework’s original design. The Framework’s ability to recognize and accommodate it has been damaged, leaving the Mediatrix unrecognized in its current registry."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Known Instances**",
+            "theLady: the sole known active Mediatrix."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "Where law reaches its answer, mercy may still have work to do."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "praetores",
+      "title": "Praetores",
+      "section": "classes",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **pray-TOR-ays**",
+            "Singular: **Praetor**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Definition**",
+            "The Praetores are the Framework’s enforcers: winged executors bound to harmonic code. They apply existing protocols and make operational judgments, but cannot author or rewrite the underlying code."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Role / Operations**",
+            "Execute Born() and Perish() after submission of designation lists. Execute PurgeObject() as a last resort. Authorize Rollback() by Praetorian quorum."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Subtypes have assigned responsibilities; the class shares execution capability."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Harmony**",
+            "Praetores operate in pairs, speaking in two-part harmony: the root and the fifth. When theLady speaks with them, her voice supplies an audible third, giving mercy a place within the harmony of enforcement."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Limitations**",
+            "Their ability to execute functions does not imply complete understanding of the architecture or its consequences."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "The loss of a counterpart leaves an incomplete object. The only known case, foedus, is unstable."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Appearance**",
+            "Silver skin, crystalline wings, and movement in mirrored symmetry."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Subtypes / Known Instances**"
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "**theGuardians — cale and numa:** Maintain system flow, address delays, and monitor execution.",
+            "**theWitnesses — vitus and mora:** Carry out fate designations and final execution.",
+            "**theScribes — scaevus and lira:** Record events and system changes.",
+            "**theJudicants — justa and dravon:** Review exceptions, appeals, and edge cases under existing protocols.",
+            "**theKeepers — orrin and vasta:** Guard deprecated objects, memory, and sealed records.",
+            "**thePraevideo — foedus and verina:** Examine the architecture and anticipate structural flaws. Execution was outside their assigned duties. Their pair ceased functioning after the breach; foedus survives as an incomplete object."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "They are law made visible."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "preborn",
+      "title": "PreBorn",
+      "section": "classes",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **pree-BORN**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Definition**",
+            "PreBorn are mortal threads held in system memory, awaiting designation. They are instantiated, but not rendered: they exist as conscious objects without mortal form. The Framework treats them as potential mortal lives, subject to designation and deletion."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Role / Operations**",
+            "AssignareFatum() designates each PreBorn Born() or Perish(). Submission of the resulting list releases the designation for execution by the Praetores. Until submission, execution remains pending."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Identity**",
+            "Names are part assigned by the system and part chosen by the PreBorn."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "PreBorn possess awareness. They think, choose, and feel before entering mortal life."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Limitations**",
+            "The maternal dependency exists before Born() executes. The concept of “Mother,” and the emotional attachment associated with it, is introduced during the Born() subroutines."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Prolonged delay may disrupt the Framework’s expected processing sequence."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Assigned Realm**",
+            "The Waiting Quarters."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Known Instances**",
+            "desmondJohn, jessMartin, isidoreAbraham."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mortal",
+      "title": "Mortal",
+      "section": "classes",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **MOR-tul**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Definition**",
+            "A PreBorn whose Born() chain completed in a live birth. Mortal status marks entry into embodied life under the Framework’s governance."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Role / Operations**",
+            "Lives in the mortal layer. The Life Book, created upon entry into Born(), continues to record the thread’s history, dependencies, and execution state."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "When mortal life ends through established Framework processes, MortalExpire() finalizes the thread and preserves its Life Book. ApostasiaVitae() operates through a separate path requiring the mortal’s own consent."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Limitations**",
+            "No entity can override a mortal’s will or consent."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Rollback() does not change the mortal or events in the mortal layer. It may restore an earlier Life Book record without causing those events to repeat."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Assigned Realm**",
+            "The mortal layer."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Known Instances**",
+            "ella."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trinus",
+      "title": "trinus",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **TRY-nus**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Functionary",
+            "**Functions:** AssignareFatum(), GhostRelayScan()",
+            "**Station:** Terminal 13.7, I/O"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "An aging Functionary stationed at the far edge of I/O, trinus runs AssignareFatum(), reviews its output, and manages submission of PreBorn designation lists. He does not choose the designations or execute them."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "His work is repetitive. He lingers over information he is expected only to process."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "The LB 3.2 patch unexpectedly exposes a mortal Life Book—information he is not authorized to view. Separately, diagnostic relays discovered by accident give him access to the illegal Ghost Feed. He scans for additional relays, watching corridors and activity beyond his assigned duties."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Name**",
+            "trinus means “threefold.” He remembers no beginning."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "His authority ends at submission. His hesitation begins before it."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foedus",
+      "title": "foedus",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **FAY-dus**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Praetores",
+            "**Former Subtype:** thePraevideo"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "foedus is a Praetor without his counterpart. Once paired with verina, he examined the Framework’s architecture and simulated potential structural flaws before they emerged. Her loss in the breach left him incomplete and unstable—the only known case of a broken Praetorian pair."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "He is held in the DeprecatedVault at the Edge of the System, where theKeepers monitor his activity. Purging him risks further instability."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "His crystalline wings are cracked; his silver skin is tarnished and fractured. He projects a maintained form over his deteriorating one. The projection conceals the damage without repairing it."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "He remains watchful and analytical. To the PreBorn, he appears as a possible protector. To the Framework, he is an unresolved containment problem."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Name**",
+            "foedus carries associations with covenant and decay. In the lower tiers he is called theFell, an unofficial label, not a class."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "The vault watches him. He watches back."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "desmondjohn",
+      "title": "desmondJohn",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **DEZ-mund JON**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** PreBorn",
+            "**Identifier:** desmond (chosen) + John (assigned)"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "At thirteen cycles, desmondJohn is the oldest of the three siblings. He carries himself with a responsibility he did not ask for, becoming a reluctant leader as they face what lies beyond the Waiting Quarters."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Freckles scatter across his cheeks. He watches closely, keeps some things to himself, and places his siblings’ safety before his own."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Name**",
+            "“desmond” is his chosen name, associated with a rebellion he can barely confirm. “John” was assigned by the system without explanation."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "He carries responsibility before he has entered mortal life."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jessmartin",
+      "title": "jessMartin",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **JESS MAR-tin**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** PreBorn",
+            "**Identifier:** jess (chosen) + Martin (assigned)"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "At ten cycles, jessMartin is the most openly resistant of the three siblings. Her anger often emerges through movement, objects, and sharp replies. She questions instructions and pushes against the limits imposed on her."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Her hair falls in unruly waves. Across her shoulder hangs a carrykeep stitched from insulation foam and wall seam thread. What she finds, she keeps."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Her defiance exists alongside a strong attachment to her siblings. She notices more than her bravado readily reveals."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Name**",
+            "She chose “jess” because it was short and sharp. “Martin” was assigned by the system; she uses it reluctantly."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "Hard to overwrite."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "isidoreabraham",
+      "title": "isidoreAbraham",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **IZ-ih-dor AY-bruh-ham**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** PreBorn",
+            "**Identifier:** isidore (chosen) + Abraham (assigned)"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "isidoreAbraham is the youngest of the three siblings. Quiet and patient, he often trails behind the others, turning a glimmer cube between his palms or arranging silver pebbles into spirals."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "His hair curls gold. His siblings call him izzy. He speaks infrequently, but what he says can suggest a connection to something preceding his time in the Waiting Quarters."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Name**",
+            "“isidore” is his chosen name. “Abraham” was assigned by the system. The reason for either name is unknown."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "He speaks of “before” without explaining where it begins."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thelady",
+      "title": "theLady",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **thuh LAY-dee**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Mediatrix",
+            "**Functions:** None registered",
+            "**Associated Realm:** The Grove of Accord"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "theLady is the sole known active Mediatrix. She works in the Grove of Accord, where correct enforcement can still leave a need for mercy."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "She acts independently, influencing the circumstances surrounding a mortal choice without altering the will or overriding consent. Her form cannot render in the mortal layer; her influence there is indirect. Intervention carries a cost whose form varies."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "When her voice joins the Praetores’ root and fifth, it supplies the third. Her mediation belongs to the original design, though the current Framework no longer fully recognizes or accommodates it."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "One hand bears a code-scorched mark. Its presence hints at a history not readily visible."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Name**",
+            "Known as theLady. No personal name is established."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "She does not command. She does not enforce. She influences."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ella",
+      "title": "ella",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **EL-uh**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Mortal",
+            "**Associated Realm:** The mortal layer"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "ella is a mortal woman living an ordinary life: dishes, laundry, errands, and a handwritten shopping list."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Her Life Book displays a pending ApostasiaVitae() call. Three PreBorn—desmondJohn, jessMartin, and isidoreAbraham—are bound to her through maternal dependencies. Their prospects for mortal life are connected to her thread."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "She does not know that her Life Book has become visible at Terminal 13.7, or that others are watching."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "The Framework displays her life as code. She lives it moment by moment."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "verina",
+      "title": "verina",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **veh-REE-nah**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Praetores",
+            "**Subtype:** thePraevideo",
+            "**Known Counterpart:** foedus"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "verina was paired with foedus in thePraevideo. Together, they examined the Framework’s architecture and simulated potential structural flaws, each checking the other’s findings."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "She ceased to exist in the breach."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Name**",
+            "Her name carries an association with truth."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "Her absence remains part of what foedus has become."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "theguardians",
+      "title": "theGuardians",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **thuh GAR-dee-unz**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Praetores",
+            "**Pair:** cale and numa",
+            "**Primary Responsibility:** Maintain system flow, address delays, and monitor execution."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "theGuardians attend to interrupted processes and departures from expected procedure. Where a submission is delayed or execution stalls, they seek its completion under existing protocols."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Their manner is calm, authoritative, and procedural, giving routine instructions the cadence of ritual."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Names**",
+            "**cale:** Associated with sky, heaven, and order.",
+            "**numa:** Associated with ritual and the codification of law."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "The Framework awaits completion."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thewitnesses",
+      "title": "theWitnesses",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **thuh WIT-nuh-siz**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Praetores",
+            "**Pair:** vitus and mora",
+            "**Primary Responsibility:** Carry out fate designations and final execution."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "theWitnesses execute confirmed designations, including Born() and Perish(). Their assigned role centers on bringing what has been designated into effect."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Their manner is measured, ceremonial, and final. They apply existing protocols without weighing personal motive."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Names**",
+            "**vitus:** Associated with life and initiation.",
+            "**mora:** Associated with delay or pause."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "They execute what is written."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thescribes",
+      "title": "theScribes",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **thuh SKRYBZ**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Praetores",
+            "**Pair:** scaevus and lira",
+            "**Primary Responsibility:** Record events and system changes."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "theScribes maintain the Framework’s retained records, documenting events and changes in system state."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Their manner is quiet, observant, and factual, with an emphasis on what occurred rather than what should have occurred."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Names**",
+            "**scaevus:** Associated with left-handedness and misfortune.",
+            "**lira:** Associated with balance and musical resonance."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "They write what is, not what should be."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thejudicants",
+      "title": "theJudicants",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **thuh JOO-dih-kunts**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Praetores",
+            "**Pair:** justa and dravon",
+            "**Primary Responsibility:** Review exceptions, appeals, and edge cases under existing protocols."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "theJudicants examine cases that require operational judgment within the Framework’s established rules. They determine how existing protocols apply, but cannot author new logic or rewrite the underlying code."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Their manner is stern, deliberate, and formal."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Names**",
+            "**justa:** Associated with justice and the letter of the law.",
+            "**dravon:** An invented name with an echo of the dragon."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "Their judgment remains within the code."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thekeepers",
+      "title": "theKeepers",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **thuh KEE-perz**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Praetores",
+            "**Pair:** orrin and vasta",
+            "**Primary Responsibility:** Guard deprecated objects, memory, and sealed records."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "theKeepers oversee the DeprecatedVault and monitor the unstable objects held within it. When an object drifts beyond containment, they intervene to warn it back."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Their manner is solemn and measured, reflecting their responsibility for what the Framework retains but no longer routinely uses."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Names**",
+            "**orrin:** Associated with order and solemn speech.",
+            "**vasta:** Associated with vastness and desolation."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "They watch what remains."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thepraevideo",
+      "title": "thePraevideo",
+      "section": "objects",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **pry-vee-DAY-oh**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Class:** Praetores",
+            "**Known Pair:** foedus and verina",
+            "**Primary Responsibility:** Examine the Framework’s architecture and anticipate structural flaws."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Description**",
+            "thePraevideo analyzed patterns, studied causality, and simulated potential failures before they emerged. Their work centered on understanding the architecture rather than carrying out routine enforcement. Execution remained within their capability, but outside their assigned duties."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "foedus and verina worked as counterparts, each checking the other’s findings. Their pair ceased functioning after the breach. verina ceased to exist; foedus survived as an incomplete, unstable object."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Name**",
+            "Drawn from Latin *prae-* (“before”) and *video* (“I see”), suggesting those who see ahead."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "They studied what the code might do before it did."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-schematic",
+      "title": "The schematic",
+      "section": "artifacts",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A folded foil map trinus gave the PreBorn. Its terrain lines flicker and dissolve. It shows what was lost more than where to go, and it stops where the system stops mapping."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-glimmer-cube",
+      "title": "The glimmer cube",
+      "section": "artifacts",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A small cube from the communal pile in the Waiting Quarters. jessMartin gave it to isidoreAbraham. It catches light and throws it back."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-carrykeep",
+      "title": "The carrykeep",
+      "section": "artifacts",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "jessMartin’s over-the-shoulder bag, stitched from insulation foam and wall seam thread. It carries what she keeps, including the schematic."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-thumb-toy",
+      "title": "The thumb toy",
+      "section": "artifacts",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A broken toy that still played two faint notes. jessMartin gave it to isidoreAbraham. It was lost at the Edge."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abortivetermination",
+      "title": "AbortiveTermination()",
+      "section": "functions",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **uh-BOR-tiv ter-mih-NAY-shun**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "The failure path within Born(). When non-viability, maternal trauma, or internal error causes an unrecoverable failure, AbortiveTermination() halts rendering and stops the remaining subroutines. In the mortal realm, this may manifest as miscarriage or stillbirth."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Ends the current rendering attempt when it can no longer continue.",
+            "Leaves a trace of the interrupted rendering. Some traces persist as Fragments.",
+            "A Fragment records interrupted rendering; it does not establish what becomes of the soul."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Pseudocode:**"
+          ]
+        },
+        {
+          "type": "pseudo",
+          "lines": [
+            "// AbortiveTermination() -- failure path within Born()",
+            "",
+            "WHEN Born() encounters an unrecoverable failure:",
+            "    execute AbortiveTermination()",
+            "",
+            "WHEN AbortiveTermination() executes:",
+            "    halt rendering",
+            "    stop the remaining subroutines",
+            "    leave a trace of the interrupted rendering",
+            "",
+            "    IF the trace persists:",
+            "        the trace remains as a Fragment"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apostasiavitae",
+      "title": "ApostasiaVitae()",
+      "section": "functions",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **ah-pos-tah-SEE-ah VEE-tie**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "A foreign function traced to Infernum.FWK. Its authorship is unknown, and it was absent from the original Function registry. Within the mortal layer, it requires the mortal’s own consent to execute. Successful execution permanently deletes the mortal from the mortal realm. What becomes of the soul is unknown."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "The Framework can contain a breach involving the function, but cannot directly cancel a mortal-originated call or override mortal consent.",
+            "Intercede() may change the circumstances surrounding the choice, never the choice itself.",
+            "Knowledge of the function is restricted.",
+            "Irreversibility applies to the completed deletion, not to a choice before execution."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Forbidden. Active. Irreversible upon completion.**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Pseudocode:**"
+          ]
+        },
+        {
+          "type": "pseudo",
+          "lines": [
+            "// ApostasiaVitae() -- foreign function in the mortal layer",
+            "",
+            "WHEN a mortal invokes ApostasiaVitae():",
+            "    IF the mortal's own consent is absent:",
+            "        do not execute",
+            "    OTHERWISE:",
+            "        begin execution",
+            "",
+            "        IF execution completes successfully:",
+            "            permanently delete the mortal",
+            "                from the mortal realm",
+            "",
+            "// No entity may override mortal consent.",
+            "// The fate of the soul is unknown."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assignarefatum",
+      "title": "AssignareFatum()",
+      "section": "functions",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **ah-see-NYAH-reh FAH-toom**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "System-level function that assigns each PreBorn to one of two fates: Born() or Perish(). The assignment is recorded in the assignment registry but does not itself trigger execution."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "trinus, the Functionary at Terminal 13.7, runs the function, reviews the resulting list, and submits it.",
+            "Submission releases the assigned fates for execution by the Praetores.",
+            "trinus can delay submission through a hold maintained by his active terminal session.",
+            "If the session ends during a Framework restart, the hold is lost. Recovery automatically submits the pending list.",
+            "trinus cannot alter an assigned designation."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Pseudocode:**"
+          ]
+        },
+        {
+          "type": "pseudo",
+          "lines": [
+            "// AssignareFatum() -- run by trinus at Terminal 13.7",
+            "",
+            "FOR EACH PreBorn:",
+            "    assign Born() OR Perish()",
+            "    record designation in assignment registry",
+            "    add designation to pending list",
+            "",
+            "// Assignment is complete. Execution remains pending.",
+            "",
+            "trinus reviews the list",
+            "",
+            "WHILE trinus’s terminal session maintains the hold:",
+            "    keep submission pending",
+            "",
+            "WHEN trinus submits the list:",
+            "    Praetores execute each recorded designation",
+            "",
+            "WHEN Framework recovery restarts the terminal:",
+            "    end the active session",
+            "    release its hold",
+            "    automatically submit the pending list",
+            "    Praetores execute each recorded designation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "born",
+      "title": "Born()",
+      "section": "functions",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **BORN**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "A function that initiates rendering of a PreBorn into mortal form. Execution begins a chain of fragile subroutines; it does not guarantee a completed birth. Errors, failures, and interruptions remain possible."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "A Born() designation grants a path toward mortal life, not a guaranteed outcome. If the mother’s thread terminates before execution, the PreBorn cannot be received, rendering never begins, and no Fragment remains.",
+            "Whether a soul exists before execution is a question the system does not answer."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Pseudocode:**"
+          ]
+        },
+        {
+          "type": "pseudo",
+          "lines": [
+            "// Born() -- executed by the Praetores after submission",
+            "",
+            "WHEN Born() executes for a PreBorn:",
+            "    IF the mother's thread has terminated:",
+            "        do not begin rendering",
+            "    OTHERWISE:",
+            "        create the PreBorn's Life Book",
+            "        begin rendering into mortal form",
+            "        strengthen the existing maternal dependency",
+            "        implant the concept of \"Mother\"",
+            "        proceed through the required subroutines",
+            "",
+            "        IF an unrecoverable failure occurs:",
+            "            execute AbortiveTermination()",
+            "        OTHERWISE IF the full chain completes successfully:",
+            "            complete live birth",
+            "",
+            "// Recoverable errors do not trigger AbortiveTermination().",
+            "// Execution does not guarantee a completed birth."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ghostrelayscan",
+      "title": "GhostRelayScan()",
+      "section": "functions",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **GOHST REE-lay skan**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "A discovery function used by trinus to expand the Ghost Feed. It scans Terminal 13.7’s memory dumps for paths to existing diagnostic relays in deprecated nodes. Relays absent from the SystemIndex that still carry readable signals are automatically connected to the feed."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Discovers existing relays; does not create them.",
+            "Adds only readable connections not already in the Ghost Feed.",
+            "Absence from the SystemIndex does not guarantee that relay use is untraceable."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Pseudocode:**"
+          ]
+        },
+        {
+          "type": "pseudo",
+          "lines": [
+            "// GhostRelayScan() -- discovers relays for the Ghost Feed",
+            "",
+            "WHEN trinus runs GhostRelayScan():",
+            "    scan Terminal 13.7's memory dumps",
+            "",
+            "    FOR EACH diagnostic relay path found:",
+            "        IF the relay is absent from the SystemIndex:",
+            "            IF the relay carries a readable signal:",
+            "                IF it is not already connected:",
+            "                    connect it to the Ghost Feed",
+            "",
+            "    return the Ghost Feed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "intercede",
+      "title": "Intercede()",
+      "section": "functions",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **in-ter-SEED**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "An influence function that changes the circumstances surrounding a mortal’s choice, including timing, interruptions, and encounters. It can operate around any mortal choice, but cannot alter the will or override mortal consent."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Exists outside the Framework’s registered functions. The Framework detects its effects as unauthorized interference.",
+            "Attempts to influence the will directly cannot succeed.",
+            "Intervention carries its own cost, whose form varies.",
+            "Its origin is unknown."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Pseudocode:**"
+          ]
+        },
+        {
+          "type": "pseudo",
+          "lines": [
+            "// Intercede() -- influence outside the Framework's registry",
+            "",
+            "WHEN Intercede() is invoked:",
+            "    IF the target is the mortal's will:",
+            "        the attempt fails",
+            "    OTHERWISE:",
+            "        influence the circumstances around the choice",
+            "        incur the cost of intervention",
+            "",
+            "// The choice remains the mortal's.",
+            "// The Framework detects the effects as unauthorized interference."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mortalexpire",
+      "title": "MortalExpire()",
+      "section": "functions",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **MOR-tul ek-SPY-er**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "A function that finalizes a mortal’s thread when life ends through the Framework’s established processes, including illness, injury, or the end of a lifespan. It records the completion of mortal life rather than causing the event that ends it."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Closes the mortal’s thread and preserves its Life Book.",
+            "Does not delete the mortal object.",
+            "ApostasiaVitae() operates through a separate execution path."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Pseudocode:**"
+          ]
+        },
+        {
+          "type": "pseudo",
+          "lines": [
+            "// MortalExpire() -- finalizes a completed mortal life",
+            "",
+            "WHEN mortal life ends through an established Framework process:",
+            "    execute MortalExpire()",
+            "",
+            "WHEN MortalExpire() executes:",
+            "    close the mortal's thread",
+            "    preserve the Life Book",
+            "",
+            "// Thread closure does not delete the mortal object."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "perish",
+      "title": "Perish()",
+      "section": "functions",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **PAIR-ish**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "A function that permanently deletes a designated PreBorn from the Framework, releasing its allocated memory. Submission of trinus’s list automatically triggers execution by the Praetores."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Applies to each PreBorn designated Perish() by AssignareFatum().",
+            "Deletes the PreBorn before it enters the Born() chain.",
+            "Removes the object and its active references. No Fragment remains.",
+            "Deletion is permanent within the Framework. What becomes of the soul is beyond what the system establishes."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Pseudocode:**"
+          ]
+        },
+        {
+          "type": "pseudo",
+          "lines": [
+            "// Perish() -- executed by the Praetores after submission",
+            "",
+            "WHEN Perish() executes for a designated PreBorn:",
+            "    remove active references to the PreBorn",
+            "    permanently delete the PreBorn object",
+            "    release its allocated memory",
+            "",
+            "// The PreBorn never enters the Born() chain.",
+            "// No Fragment remains."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "purgeobject",
+      "title": "PurgeObject()",
+      "section": "functions",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **PURJ OB-jekt**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "A function used by the Praetores as a last resort to remove objects they cannot otherwise resolve. It completely erases its target from the active Framework, but may destabilize connected systems."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Removal always succeeds. Its wider consequences are not reliably predictable.",
+            "The Praetores can invoke the function without fully understanding the architecture it affects.",
+            "Earlier saved Framework states are unaffected.",
+            "Whether the Praetores or the Creator authored it is unknown."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Pseudocode:**"
+          ]
+        },
+        {
+          "type": "pseudo",
+          "lines": [
+            "// PurgeObject() -- last-resort removal by the Praetores",
+            "",
+            "WHEN the Praetores cannot otherwise resolve an object:",
+            "    assess the risk of instability",
+            "",
+            "    IF the Praetores authorize removal:",
+            "        execute PurgeObject(object)",
+            "",
+            "WHEN PurgeObject(object) executes:",
+            "    completely remove the object",
+            "        from the active Framework",
+            "",
+            "// Removal always succeeds.",
+            "// Connected systems may become unstable.",
+            "// Earlier saved Framework states remain unchanged."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rollback",
+      "title": "Rollback()",
+      "section": "functions",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **ROHL-bak**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "A function that restores saved Framework data to a selected earlier state to recover stability. It acts on the Framework only; events in the mortal layer remain unchanged."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Requires a Praetorian quorum.",
+            "Restores objects, records, and stored memories to their state at the selected point. Objects deleted after that point can return, without memories of subsequent events.",
+            "Active sessions restart rather than resume. Temporary holds maintained by those sessions are lost.",
+            "Recovery automatically submits restored pending designation lists when their session holds are lost.",
+            "Life Books return to their earlier recorded state even when mortal events have since progressed.",
+            "Does not announce itself to restored entities and may leave audit anomalies."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Pseudocode:**"
+          ]
+        },
+        {
+          "type": "pseudo",
+          "lines": [
+            "// Rollback() -- requires a Praetorian quorum",
+            "",
+            "WHEN a Praetorian quorum authorizes Rollback():",
+            "    select an earlier saved Framework state",
+            "    restore objects, records, and stored memories",
+            "        to that state",
+            "    restart active terminal sessions",
+            "    release temporary session holds",
+            "",
+            "    FOR EACH restored pending designation list:",
+            "        IF its session hold was lost:",
+            "            automatically submit the list",
+            "            Praetores execute each recorded designation",
+            "",
+            "// Events in the mortal layer remain unchanged.",
+            "// Restored memories do not include subsequent events."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trinity",
+      "title": "Trinity",
+      "section": "foundational",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Pronunciation: **TRIN-ih-tee**"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Definition**",
+            "Trinity is a threefold pattern believed to underlie the Framework’s original architecture. Its aspects are described as Code, Breath, and Execution: cooperating expressions of one foundation, rather than separate entities or stages in a fixed sequence."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Aspects**"
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Code:** Defines what something can be—its structure and possibilities.",
+            "**Breath:** Supplies the initial spark that brings something into existence. Applies to all existence, not only conscious beings.",
+            "**Execution:** Carries existence into action—what something does."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Current Understanding**",
+            "The pattern is believed to remain foundational, though the current Framework no longer understands or recognizes it. Its workings and origin are uncertain."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "**Note**",
+            "The Trinity is not declared. It is inherited."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "h2e-framework",
+      "title": "H2E Framework",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A vast, inherited codebase through which fate is rendered, executed, or denied. Its original authorship is unknown. Obeyed by Functionaries. Enforced by the Praetores. Studied by a few and questioned by those who’ve seen its flaws."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "glitch",
+      "title": "Glitch",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "An unintended outcome of incomplete logic or incompatible code. Sometimes manifests as an anomaly in system behavior, including rogue echoes, residual constructs, or unintended renderings."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deprecated",
+      "title": "Deprecated",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "No longer maintained, supported, or trusted by the active Framework, though not entirely erased. Deprecated functions and agents may still operate, but without acknowledgment or protection."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "life-book-lb",
+      "title": "Life Book (LB)",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A coded record created when a PreBorn enters Born(). Displays and records the thread’s history, dependencies, and execution state, including links to dependent PreBorn."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Records events and function status; does not cause or execute them.",
+            "Before Born(), a PreBorn’s designation is held in the assignment registry and pending list, not an individual Life Book.",
+            "Access is restricted. Functionaries are not authorized to view mortal Life Books.",
+            "Rollback() may restore an earlier version of the record without changing events in the mortal layer.",
+            "LB 3.2 is the current version of the Life Book, pushed down through a patch. It unexpectedly exposed mortal Life Books at terminal level."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "error",
+      "title": "Error",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A deviation from intended execution. Once considered rare, errors have increased since the LB 3.2 patch. Some errors appear random—others, self-aware."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "patch",
+      "title": "Patch",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A code update issued to stabilize or optimize the Framework. While often corrective, patches may introduce new errors or interact unpredictably with legacy logic. New Life Book versions, such as LB 3.2, are pushed down through patches."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cross-framework-function",
+      "title": "Cross-Framework Function",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A function or command not native to the current Framework. Importing such logic—intentionally or otherwise—can lead to corruption, deformity, or destabilization. ApostasiaVitae() is the known example."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invocation",
+      "title": "Invocation",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "The act of calling or initiating a function within the Framework. While execution usually follows, not all invocations resolve. Some linger."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "construct",
+      "title": "Construct",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A partially or fully instantiated object within the Framework. Includes PreBorn in the Waiting Quarters, rendered mortals, deprecated agents, and occasional echoes of lost code. Not all constructs are complete. Some believe themselves real."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "origin-logic",
+      "title": "Origin Logic",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "The theoretical foundation of the Framework, believed by some to predate the Praetores, and even the current execution system. Fragmented. Possibly overwritten. It still runs in the Grove of Accord."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fragment",
+      "title": "Fragment",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A persistent trace of an interrupted Born() rendering attempt. AbortiveTermination() leaves a trace when rendering cannot continue; some traces persist as Fragments."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "A Fragment is a remainder of the rendering process. It does not establish what becomes of the soul."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "terminal-13-7",
+      "title": "Terminal 13.7",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A remote access node used by trinus, located on the edge of the I/O plane. The number is symbolic—referencing both the cosmic constant and a point of recursion. It’s where decisions stall."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invocation-conflict",
+      "title": "Invocation Conflict",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A rare system state where two functions—one native, one foreign—attempt to resolve the same construct. Results vary: glitches, deformity, recursion, erasure. theLady’s hand bears evidence of such conflict."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ghost-relays",
+      "title": "Ghost Relays",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "Diagnostic relays in deprecated sectors of the Framework, left over from early diagnostic environments. They were never decommissioned, either by error or by design. They are absent from the SystemIndex but still carry readable signals."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "GhostRelayScan() can discover existing relays; nothing creates new ones.",
+            "Absence from the SystemIndex does not guarantee that use is untraceable."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Even the Framework has ghosts."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ghost-feed",
+      "title": "Ghost Feed",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "[Classified // Level-Red Terminal Access]"
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "trinus’s private name for the loop he built from the Ghost Relays at Terminal 13.7. He found the first relays by accident while scanning malformed system logs near a corrupted memory sector, and redirected their signals into an encrypted loop. GhostRelayScan() adds more."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Through it, he watches corridors and activity beyond his assigned duties: the Waiting Quarters, Praetorian movement, data never intended for his eyes."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "Unauthorized. Operates through Terminal 13.7."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projectionlayer",
+      "title": "ProjectionLayer",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "foedus’s own rendering subroutine. It emerged inside the DeprecatedVault, unauthorized and unassigned, alongside a monitoring thread. It renders a maintained form of what he once was over what he has become."
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "The projection conceals the damage; it does not repair it.",
+            "Range costs him. At extended range, the projection becomes visible from the vault perimeter and risks a flag.",
+            "In the mortal layer, it anchors to features of the environment for seconds at a time. Each crossing wears him down."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thread",
+      "title": "Thread",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "An individual life-process tracked by the Framework. A thread exists before mortal rendering and carries its own state and dependencies."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "When a PreBorn enters Born(), an individual Life Book is created to record the thread’s history, dependencies, and execution state. The Life Book records the thread; it does not cause its events."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "render",
+      "title": "Render",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "To bring an object into form. PreBorn are instantiated but not rendered; Born() renders them into mortal life. foedus renders a projected form over his own."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions()",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "The Framework’s manual of functions. trinus keeps an old training copy at Terminal 13.7: dog-eared, coffee-stained, its margins full of notes. It has never listed ApostasiaVitae()."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-preborn-array",
+      "title": "The PreBorn Array",
+      "section": "terminology",
+      "blocks": [
+        {
+          "type": "p",
+          "lines": [
+            "A grouping of PreBorn siblings who share a bunk in the Waiting Quarters. In the Framework’s logic, an array works like a container that holds individual objects and maintains their state while they await execution. How arrays are assembled is not recorded."
+          ]
+        },
+        {
+          "type": "p",
+          "lines": [
+            "Most arrays clear quickly. The array of desmondJohn, jessMartin, and isidoreAbraham has persisted longer than any protocol predicted."
+          ]
+        }
+      ]
+    }
+  ]
+}
