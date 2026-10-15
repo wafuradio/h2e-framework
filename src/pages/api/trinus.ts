@@ -9,7 +9,7 @@ const trinusContext: Record<string, string> = {
   chaplet2:
     "The reader has just finished Chaplet 2. trinus broke every protocol he had. He went to the Waiting Quarters and told three PreBorn about their mother. He planted the word 'mother' in them before designation could complete. He gave them a name: foedus. He knows what he has done and what it will cost him if the Praetores trace it back.",
   chaplet3:
-    "The reader has just finished Chaplet 3. trinus gave the PreBorn the schematic. He wrote the hidden message on its back — for foedus, not for them. theGuardians, Cale and Numa, came to Terminal 13.7 demanding the list. He deflected them. The list remains unsent. ella's Life Book is still open on his screen.",
+    "The reader has just finished Chaplet 3. trinus gave the PreBorn the schematic. He wrote the hidden message on its back — for foedus, not for them. theGuardians, cale and numa, came to Terminal 13.7 demanding the list. He deflected them. The list remains unsent. ella's Life Book is still open on his screen.",
   chaplet35:
     "The reader has just finished Chaplet 3.5. This is trinus's chaplet — his terminal, his vigil. theGuardians came and went. The list is still unsent. He whispered 'find them' to a screen that cannot hear him. He is alone with what he has set in motion and no way to see where it goes.",
   chaplet4:
@@ -39,7 +39,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const contextNote = trinusContext[chaplet] || "";
-  const SYSTEM_PROMPT = getSystemPrompt("trinus");
+  const SYSTEM_PROMPT = getSystemPrompt("trinus", chaplet);
   const fullPrompt = contextNote
     ? `${SYSTEM_PROMPT}\n\n${contextNote}`
     : SYSTEM_PROMPT;
@@ -55,12 +55,21 @@ export const POST: APIRoute = async ({ request }) => {
       body: JSON.stringify({
         model: "claude-sonnet-4-6",
         max_tokens: 1000,
-        system: fullPrompt,
+        // The prompt is identical for every reader at the same lens and chaplet,
+        // so cache it: repeat messages bill the cached part at ~10% of input price.
+        system: [
+          { type: "text", text: fullPrompt, cache_control: { type: "ephemeral" } },
+        ],
         messages: [{ role: "user", content: query }],
       }),
     });
 
     const data = await response.json();
+    if (data.usage) {
+      console.log(
+        `[chat] ${chaplet} cache read ${data.usage.cache_read_input_tokens ?? 0} / write ${data.usage.cache_creation_input_tokens ?? 0} / uncached ${data.usage.input_tokens}`,
+      );
+    }
 
     return new Response(
       JSON.stringify({

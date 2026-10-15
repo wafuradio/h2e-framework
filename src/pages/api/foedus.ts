@@ -47,7 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
     ? trinusChaplet8Context
     : foedusContext[chaplet] || "";
 
-  const SYSTEM_PROMPT = getSystemPrompt(systemPromptLens);
+  const SYSTEM_PROMPT = getSystemPrompt(systemPromptLens, chaplet);
   const fullPrompt = contextNote
     ? `${SYSTEM_PROMPT}\n\n${contextNote}`
     : SYSTEM_PROMPT;
@@ -66,12 +66,21 @@ export const POST: APIRoute = async ({ request }) => {
       body: JSON.stringify({
         model: "claude-sonnet-4-6",
         max_tokens: 1000,
-        system: fullPrompt,
+        // The prompt is identical for every reader at the same lens and chaplet,
+        // so cache it: repeat messages bill the cached part at ~10% of input price.
+        system: [
+          { type: "text", text: fullPrompt, cache_control: { type: "ephemeral" } },
+        ],
         messages: [{ role: "user", content: query }],
       }),
     });
 
     const data = await response.json();
+    if (data.usage) {
+      console.log(
+        `[chat] ${chaplet} cache read ${data.usage.cache_read_input_tokens ?? 0} / write ${data.usage.cache_creation_input_tokens ?? 0} / uncached ${data.usage.input_tokens}`,
+      );
+    }
 
     return new Response(
       JSON.stringify({
